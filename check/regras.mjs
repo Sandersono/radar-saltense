@@ -131,6 +131,14 @@ import { linkCategoriaAno, linksPdfPresenca, mesDoArquivo } from '../src/regras/
   assert.equal(links.length, 2);
   assert.deepEqual(mesDoArquivo(links[0]), { mes: 3, ano: 2025 });
   assert.deepEqual(mesDoArquivo(links[1]), { mes: 8, ano: 2025 });
+  // Caso real (Indicação 1833/2025): coautores separados por </br> no campo Autor(es).
+  const coautoria = lerCard({
+    id: 88569,
+    titulo: '<strong>Categoria:</strong> Indicação</br><strong>Número do Documento:</strong> 1833</br><strong>Autor(es):</strong> Almir de Melo Santos</br> Antonio Moreira Sobrinho</br> Clayton Aparecido dos Santos</br><strong> Data:</strong> 14/10/2025 00:00:00',
+    texto: 'Solicitando algo',
+  });
+  assert.deepEqual(coautoria.autores, ['Almir de Melo Santos', 'Antonio Moreira Sobrinho', 'Clayton Aparecido dos Santos']);
+  assert.equal(coautoria.data, '2025-10-14');
   console.log('ok: leitores html');
 }
 
