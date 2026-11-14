@@ -120,3 +120,56 @@ import { linkCategoriaAno, linksPdfPresenca, mesDoArquivo } from '../src/regras/
   assert.deepEqual(mesDoArquivo(links[1]), { mes: 8, ano: 2025 });
   console.log('ok: leitores html');
 }
+
+import { lerPresenca } from '../src/regras/presenca-pdf.js';
+import { lerVotacoes } from '../src/regras/votacao-pdf.js';
+
+{
+  const itens = [
+    { str: 'PRESENÇA DOS VEREADORES - NOVEMBRO 2026', x: 100, y: 800 },
+    { str: 'VEREADOR', x: 120, y: 780 }, { str: '3/11', x: 262, y: 780 }, { str: '10/11', x: 300, y: 780 },
+    { str: 'Almir de Melo Santos', x: 50, y: 765 }, { str: 'P', x: 268, y: 765 }, { str: 'P', x: 308, y: 765 },
+    { str: 'Arildo Guadagnini', x: 50, y: 750 }, { str: 'AJ', x: 266, y: 750 },
+    { str: 'LEGENDAS', x: 100, y: 700 }, { str: 'P = PRESENÇA', x: 100, y: 690 },
+  ];
+  assert.deepEqual(lerPresenca(itens), {
+    sessoes: ['3/11', '10/11'],
+    linhas: [
+      { nome: 'Almir de Melo Santos', marcas: ['P', 'P'] },
+      { nome: 'Arildo Guadagnini', marcas: ['AJ', null] },
+    ],
+  });
+
+  const pagina = [
+    { str: 'Nº da', x: 34, y: 503 }, { str: 'Propositura', x: 34, y: 492 }, { str: 'Data da Votação', x: 631, y: 503 },
+    { str: 'Projeto de Lei', x: 34, y: 321 }, { str: 'nº 72', x: 34, y: 310 }, { str: '/2025', x: 54, y: 310 },
+    { str: 'Dispõe sobre receitas digitadas', x: 105, y: 321 },
+    { str: 'Graziela Costa', x: 253, y: 321 }, { str: 'Leite', x: 270, y: 310 },
+    { str: '04.11.2025', x: 578, y: 321 },
+    { str: 'Projeto aprovado por maioria de votos.', x: 578, y: 310 },
+    { str: 'Contra: Rogério', x: 578, y: 288 },
+    { str: '15.12.2025', x: 578, y: 277 },
+    { str: 'Veto Total ao', x: 34, y: 244 }, { str: 'Autógrafo nº', x: 34, y: 234 }, { str: '69/2025 do', x: 34, y: 223 },
+    { str: 'Projeto de Lei', x: 34, y: 211 }, { str: 'nº 72/2025', x: 34, y: 201 },
+    { str: 'Prefeitura', x: 261, y: 244 },
+    { str: 'Veto rejeitado por unanimidade de votos.', x: 578, y: 244 },
+    { str: 'Ausente :', x: 578, y: 233 }, { str: 'Antônio', x: 615, y: 233 },
+  ];
+  const pagina2 = [
+    { str: 'Projeto de Emenda', x: 34, y: 500 }, { str: 'à Lei Orgânica 01/2026', x: 34, y: 489 },
+    { str: '31.03.2026', x: 578, y: 500 }, { str: '–', x: 621, y: 500 }, { str: '1º Turno', x: 628, y: 500 },
+    { str: 'Veto aprovado por maioria de votos', x: 578, y: 489 },
+    { str: 'Contrários ao veto : Graziela, Michel, Antônio', x: 578, y: 478 },
+    { str: 'e Arildo', x: 578, y: 467 },
+  ];
+  const r = lerVotacoes([pagina, pagina2]);
+  assert.equal(r.length, 3);
+  assert.equal(r[0].rotulo, 'Projeto de Lei nº 72/2025');
+  assert.equal(r[0].autor, 'Graziela Costa Leite');
+  assert.deepEqual(r[0].eventos.map((e) => [e.data, e.resultado, e.contra, e.ausentes]), [['2025-11-04', 'Projeto aprovado por maioria de votos.', ['Rogério'], []]]);
+  assert.equal(r[1].rotulo, 'Veto Total ao Autógrafo nº 69/2025 do Projeto de Lei nº 72/2025');
+  assert.equal(r[1].autor, 'Prefeitura');
+  assert.deepEqual(r[1].eventos.map((e) => [e.data, e.resultado, e.ausentes]), [['2025-12-15', 'Veto rejeitado por unanimidade de votos.', ['Antônio']]]);
+  assert.deepEqual(r[2].eventos.map((e) => [e.data, e.turno, e.contra]), [['2026-03-31', '1º Turno', ['Graziela', 'Michel', 'Antônio', 'Arildo']]]);
+  console.log('ok: leitores pdf');
+}
