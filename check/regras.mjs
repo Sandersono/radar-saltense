@@ -34,6 +34,8 @@ import { classificar } from '../src/regras/classificar.js';
   assert.equal(casar('Edival Pereira Rosa Preto'), 'edival');
   assert.equal(casar('Antonio'), 'antonio');
   assert.equal(casar('Rogerio dos Santos'), 'rogerio');
+  assert.equal(casar('Rogério Alves Filho'), null);
+  assert.equal(casar('Antônio Moreira'), 'antonio');
   console.log('ok: nomes');
 }
 
@@ -267,5 +269,8 @@ import { conferir } from '../src/conferir.js';
   assert.equal(conferir({ ...base, presencasLidas: [{ arquivo: 'a.pdf', linhas: 10 }] }, null, 11).length, 1);
   assert.equal(conferir({ ...base, vereadores: base.vereadores.slice(1) }, null, 11).length, 1);
   assert.equal(conferir({ ...base, votacoesLidas: [{ ano: 2026, blocos: 0, semEventos: 0 }] }, null, 11).length, 1);
+  assert.equal(conferir({ ...base, presencasLidas: [] }, null, 11).length, 1);
+  assert.equal(conferir({ ...base, votacoesLidas: [] }, null, 11).length, 1);
+  assert.equal(conferir({ ...base, proposituras: [] }, null, 11).length, 1);
   console.log('ok: conferir');
 }

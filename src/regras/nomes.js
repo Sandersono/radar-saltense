@@ -4,11 +4,12 @@ export function primeiroNome(nome) {
   return normalizar(nome).replace(/[^a-z ]/g, ' ').trim().split(/\s+/)[0] || '';
 }
 
-const PARTICULAS = new Set(['de', 'da', 'do', 'das', 'dos']);
+// Partículas e sufixos de geração não contam como sobrenome para casar um nome.
+const NAO_SIGNIFICATIVOS = new Set(['de', 'da', 'do', 'das', 'dos', 'filho', 'filha', 'neto', 'neta', 'junior', 'jr', 'sobrinho', 'sobrinha', 'segundo', 'terceiro']);
 
 const fichas = (nome) => {
   const t = normalizar(nome).replace(/[^a-z ]/g, ' ').trim().split(/\s+/).filter(Boolean);
-  return { primeiro: t[0] || '', extras: t.slice(1).filter((x) => x.length >= 3 && !PARTICULAS.has(x)) };
+  return { primeiro: t[0] || '', extras: t.slice(1).filter((x) => x.length >= 3 && !NAO_SIGNIFICATIVOS.has(x)) };
 };
 
 export function criarCasador(vereadores) {

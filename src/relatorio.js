@@ -18,7 +18,8 @@ export function relatorio(d, problemas) {
   l.push('', '## O que é estimativa', '');
   l.push('- Grupos de propostas: regra automática pela categoria e por palavras da ementa (publicada no site).');
   l.push(`- Ruas e bairros: lidos do texto da ementa. Pedidos de melhoria sem lugar identificado: ${d.meta.semLocal}.`);
-  l.push('- Votações: leitura do PDF oficial; primeiro nome ligado ao vereador. Votos a favor não são deduzidos.');
-  l.push('- Presença: sessões extraordinárias não são separadas das ordinárias.');
+  l.push('- Votações: leitura do PDF oficial. O nome é ligado ao vereador pelo primeiro nome (e por um sobrenome, quando o documento traz o nome completo), e só quando o vereador aparece na tabela de presença daquele mês. Votos a favor não são deduzidos.');
+  l.push('- Nomes completos (presença e autores) exigem primeiro nome e um sobrenome em comum com o vereador.');
+  l.push('- Presença: sessões extraordinárias não são separadas das ordinárias. O total de sessões pode variar entre vereadores quando a tabela oficial de um mês traz outros nomes (veja Avisos); nesse mês só contam os vereadores que aparecem nela.');
   return `${l.join('\n')}\n`;
 }

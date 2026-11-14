@@ -11,7 +11,7 @@ const coleta = usarCache ? JSON.parse(await readFile('data/bruto/coleta.json', '
 const dados = processar(coleta);
 
 let anterior = null;
-try { anterior = JSON.parse(await readFile('data/processado/meta.json', 'utf8')); } catch { /* primeira execução */ }
+try { anterior = JSON.parse(await readFile('data/processado/meta.json', 'utf8')); } catch (e) { if (e.code !== 'ENOENT') throw e; }
 
 const problemas = conferir(dados, anterior, VEREADORES_ESPERADOS);
 await writeFile('conferencia.md', relatorio(dados, problemas));
