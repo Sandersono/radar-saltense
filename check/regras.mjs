@@ -227,5 +227,22 @@ import { lerVotacoes } from '../src/regras/votacao-pdf.js';
     ],
   ]);
   assert.deepEqual(r5.map((b) => [b.rotulo, b.eventos.length]), [['Projeto de Lei nº 72/2025', 1], ['Projeto de Lei nº 73/2025', 1]]);
+  const dez = [
+    { str: 'PRESENÇA DOS VEREADORES - DEZEMBRO 2025', x: 76, y: 774 },
+    { str: '15/12', x: 289, y: 756 }, { str: '15/12', x: 349, y: 756 },
+    { str: 'VEREADOR', x: 96, y: 744 }, { str: '02/12', x: 209, y: 744 }, { str: '09/12', x: 242, y: 744 },
+    { str: '(1ª Reunião do', x: 275, y: 744 }, { str: '(2ª Reunião', x: 341, y: 744 },
+    { str: 'dia)', x: 296, y: 732 }, { str: 'do dia)', x: 350, y: 732 },
+    { str: 'Almir de Melo Santos', x: 39, y: 715 }, { str: 'P', x: 220, y: 715 }, { str: 'P', x: 253, y: 715 }, { str: 'P', x: 300, y: 715 }, { str: 'A', x: 360, y: 715 },
+    { str: 'Arildo Guadagnini', x: 39, y: 701 },
+    { str: 'LEGENDAS', x: 100, y: 600 },
+  ];
+  assert.deepEqual(lerPresenca(dez), {
+    sessoes: ['02/12', '09/12', '15/12', '15/12'],
+    linhas: [
+      { nome: 'Almir de Melo Santos', marcas: ['P', 'P', 'P', 'A'] },
+      { nome: 'Arildo Guadagnini', marcas: [null, null, null, null] },
+    ],
+  });
   console.log('ok: leitores pdf');
 }
