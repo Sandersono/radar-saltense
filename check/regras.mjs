@@ -213,5 +213,16 @@ import { lerVotacoes } from '../src/regras/votacao-pdf.js';
   ]]);
   assert.deepEqual(r4.map((b) => b.rotulo), ['Substitutivo nº 01 ao Projeto de Lei nº 38/2026', 'Veto Parcial ao Autógrafo nº 44/2026']);
   assert.equal(r4[1].eventos.length, 1);
+  const r5 = lerVotacoes([
+    [
+      { str: 'Projeto de Lei', x: 34, y: 120 }, { str: 'nº 72', x: 34, y: 109 }, { str: '/2025', x: 54, y: 109 },
+      { str: '04.11.2025', x: 578, y: 120 }, { str: 'Projeto aprovado por unanimidade de votos.', x: 578, y: 109 },
+    ],
+    [
+      { str: 'Projeto de Lei nº 73/2025', x: 34, y: 500 },
+      { str: '05.11.2025', x: 578, y: 500 }, { str: 'Projeto rejeitado por maioria de votos.', x: 578, y: 489 },
+    ],
+  ]);
+  assert.deepEqual(r5.map((b) => [b.rotulo, b.eventos.length]), [['Projeto de Lei nº 72/2025', 1], ['Projeto de Lei nº 73/2025', 1]]);
   console.log('ok: leitores pdf');
 }
