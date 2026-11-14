@@ -28,6 +28,8 @@ import { classificar } from '../src/regras/classificar.js';
   assert.equal(casar('Frente Parlamentar'), null);
   assert.equal(casar(''), null);
   assert.throws(() => criarCasador([{ id: 'a', nome: 'Ana X' }, { id: 'b', nome: 'Ana Y' }]), /repetido/);
+  assert.equal(casar('Antônio.'), 'antonio');
+  assert.deepEqual(dividirNomes('Graziela, Michel e Arildo.'), ['Graziela', 'Michel', 'Arildo']);
   console.log('ok: nomes');
 }
 
@@ -203,5 +205,13 @@ import { lerVotacoes } from '../src/regras/votacao-pdf.js';
   assert.deepEqual(r3[2].eventos.map((e) => e.contra), [['Michel']]);
   assert.match(r3[2].eventos[0].resultado, /presidente Clayton$/);
   assert.deepEqual(r3[3].eventos, []);
+  const r4 = lerVotacoes([[
+    { str: 'Substitutivo nº 01 ao Projeto de Lei nº 38/2026', x: 34, y: 400 },
+    { str: 'Veto Parcial ao Autógrafo nº 44/2026', x: 34, y: 385 },
+    { str: '10.11.2026', x: 578, y: 385 },
+    { str: 'Veto mantido por maioria de votos', x: 578, y: 374 },
+  ]]);
+  assert.deepEqual(r4.map((b) => b.rotulo), ['Substitutivo nº 01 ao Projeto de Lei nº 38/2026', 'Veto Parcial ao Autógrafo nº 44/2026']);
+  assert.equal(r4[1].eventos.length, 1);
   console.log('ok: leitores pdf');
 }

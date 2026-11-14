@@ -1,7 +1,7 @@
 import { normalizar } from '../util/texto.js';
 
 export function primeiroNome(nome) {
-  return normalizar(nome).split(' ')[0] || '';
+  return normalizar(nome).replace(/[^a-z ]/g, ' ').trim().split(/\s+/)[0] || '';
 }
 
 export function criarCasador(vereadores) {
@@ -18,6 +18,6 @@ export function criarCasador(vereadores) {
 export function dividirNomes(texto) {
   return String(texto ?? '')
     .split(/\s*(?:,|;|\s+e\s+)\s*/)
-    .map((s) => s.trim().replace(/^e\s+/i, '').trim())
+    .map((s) => s.trim().replace(/^e\s+/i, '').trim().replace(/^[^\p{L}]+|[^\p{L}]+$/gu, ''))
     .filter(Boolean);
 }

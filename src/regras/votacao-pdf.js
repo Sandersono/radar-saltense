@@ -39,7 +39,8 @@ export function lerVotacoes(paginas) {
       if (CABECALHO.test(t)) continue;
       const atual = blocos[blocos.length - 1];
       const gap = anteriorY === null ? Infinity : anteriorY - l.y;
-      const novo = anteriorY === null ? !atual || FIM_NUMERO.test(atual.rotulo) : gap > 25;
+      const fechado = atual && FIM_NUMERO.test(atual.rotulo.replace(/\s+\//g, '/'));
+      const novo = anteriorY === null ? !atual || FIM_NUMERO.test(atual.rotulo) : gap > 25 || (INICIO.test(t) && fechado);
       if (INICIO.test(t) && (novo || !atual)) blocos.push({ pagina: p, y: l.y, rotulo: t, ementa: '', autor: '', eventos: [] });
       else if (atual) atual.rotulo += ` ${t}`;
       anteriorY = l.y;
