@@ -7,7 +7,14 @@ const CABECALHO = /^(n[º°o]\.?\s*da|propositura)$/i;
 const INICIO = /^(projeto|veto|emenda|substitutivo|proposta|mo[cç][aã]o|requerimento)/i;
 const DATA = /^(\d{2})\.(\d{2})\.(\d{4})\s*[–-]?\s*(.*)$/;
 const RESULTADO = /(aprovad|rejeitad|retirad|arquivad|adiad|prejudicad|mantid|derrubad)/i;
-const LISTA = /^(contra[^:]*|contr[aá]ri[oa]s?[^:]*|ausentes?[^:]*)\s*:\s*(.*)$/i;
+const ROTULO_LISTA = /\b(contra|contr[aá]ri[oa]s?[^:]*?|ausentes?)\s*:/gi;
+const FIM_NUMERO = /\d+\/\d{4}\s*$/;
+
+// Linha de continuação de lista só vale se todo pedaço parece um nome.
+function soNomes(t) {
+  const nomes = dividirNomes(t);
+  return nomes.length > 0 && nomes.every((n) => n.split(/\s+/).length <= 3 && !/\d/.test(n) && !RESULTADO.test(n));
+}
 
 // Bloco do projeto que contém a altura y: o de menor y que ainda está acima (com folga de 3).
 // Antes do primeiro bloco da página, vale o último bloco da página anterior.
@@ -32,7 +39,8 @@ export function lerVotacoes(paginas) {
       if (CABECALHO.test(t)) continue;
       const atual = blocos[blocos.length - 1];
       const gap = anteriorY === null ? Infinity : anteriorY - l.y;
-      if (INICIO.test(t) && (gap > 25 || !atual)) blocos.push({ pagina: p, y: l.y, rotulo: t, ementa: '', autor: '', eventos: [] });
+      const novo = anteriorY === null ? !atual || FIM_NUMERO.test(atual.rotulo) : gap > 25;
+      if (INICIO.test(t) && (novo || !atual)) blocos.push({ pagina: p, y: l.y, rotulo: t, ementa: '', autor: '', eventos: [] });
       else if (atual) atual.rotulo += ` ${t}`;
       anteriorY = l.y;
     }
@@ -53,26 +61,44 @@ export function lerVotacoes(paginas) {
         continue;
       }
       if (!ev) continue;
-      const li = t.match(LISTA);
-      if (li) {
-        ev.lista = /^aus/i.test(li[1]) ? 'ausentes' : 'contra';
-        ev[ev.lista].push(...dividirNomes(li[2]));
+
+      const texto = (txt) => {
+        txt = txt.trim();
+        if (!txt) return;
+        if (RESULTADO.test(txt)) {
+          if (ev.temResultado) {
+            ev = { data: ev.data, turno: ev.turno, resultado: txt, contra: [], ausentes: [], pagina: p, yRef: l.y, lista: null, temResultado: true };
+            eventos.push(ev);
+          } else {
+            ev.resultado = txt;
+            ev.temResultado = true;
+            ev.pagina = p;
+            ev.yRef = l.y;
+          }
+        } else if (ev.temResultado) ev.resultado = `${ev.resultado} ${txt}`;
+      };
+
+      const marcas = [...t.matchAll(ROTULO_LISTA)];
+      if (!marcas.length) {
+        if (ev.lista && soNomes(t)) ev[ev.lista].push(...dividirNomes(t));
+        else {
+          ev.lista = null;
+          texto(t);
+        }
         continue;
       }
-      if (RESULTADO.test(t) && !ev.temResultado) {
-        ev.resultado = t;
-        ev.temResultado = true;
-        ev.pagina = p;
-        ev.yRef = l.y;
-        ev.lista = null;
-        continue;
-      }
-      if (ev.lista) ev[ev.lista].push(...dividirNomes(t));
-      else if (ev.temResultado) ev.resultado = `${ev.resultado} ${t}`;
+      ev.lista = null;
+      texto(t.slice(0, marcas[0].index));
+      marcas.forEach((m, k) => {
+        ev.lista = /^aus/i.test(m[1]) ? 'ausentes' : 'contra';
+        const fim = k + 1 < marcas.length ? marcas[k + 1].index : t.length;
+        ev[ev.lista].push(...dividirNomes(t.slice(m.index + m[0].length, fim)));
+      });
     }
   });
 
   for (const e of eventos) {
+    if (!e.resultado && !e.contra.length && !e.ausentes.length) continue;
     const b = blocoPara(blocos, e.pagina, e.yRef);
     if (b) b.eventos.push({ data: e.data, turno: e.turno, resultado: e.resultado, contra: e.contra, ausentes: e.ausentes });
   }

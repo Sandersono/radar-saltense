@@ -171,5 +171,37 @@ import { lerVotacoes } from '../src/regras/votacao-pdf.js';
   assert.equal(r[1].autor, 'Prefeitura');
   assert.deepEqual(r[1].eventos.map((e) => [e.data, e.resultado, e.ausentes]), [['2025-12-15', 'Veto rejeitado por unanimidade de votos.', ['Antônio']]]);
   assert.deepEqual(r[2].eventos.map((e) => [e.data, e.turno, e.contra]), [['2026-03-31', '1º Turno', ['Graziela', 'Michel', 'Antônio', 'Arildo']]]);
+  const pagina3 = [
+    { str: 'Projeto de Lei nº 44/2026', x: 34, y: 400 },
+    { str: '13.10.2026', x: 578, y: 400 },
+    { str: 'Artigo 4º rejeitado por maioria de votos.', x: 578, y: 389 },
+    { str: 'Contra: Almir, Graziela,', x: 578, y: 378 },
+    { str: 'Antonio', x: 578, y: 367 },
+    { str: 'Projeto aprovado por maioria de votos.', x: 578, y: 356 },
+    { str: 'Contra: Graziela', x: 578, y: 345 },
+    { str: 'Projeto de Lei nº 43/2026', x: 34, y: 300 },
+    { str: '13.10.2026', x: 578, y: 300 },
+    { str: 'Emenda nº 12 – Aprovada por unanimidade de', x: 578, y: 289 },
+    { str: 'votos . Ausente : Graziela', x: 578, y: 278 },
+    { str: 'Veto Total ao Autógrafo nº 79/2025', x: 34, y: 200 },
+    { str: '24.02.2026', x: 578, y: 200 },
+    { str: 'Veto aprovado por maioria de votos', x: 578, y: 189 },
+    { str: 'Contra: Michel', x: 578, y: 178 },
+    { str: 'Com voto de desempate a favor do veto do', x: 578, y: 167 },
+    { str: 'presidente Clayton', x: 578, y: 156 },
+    { str: 'Projeto de Lei nº 04/2026', x: 34, y: 100 },
+    { str: '26.03.2026 Parecer contrário na Comissão', x: 578, y: 100 },
+  ];
+  const r3 = lerVotacoes([pagina3]);
+  assert.deepEqual(r3.map((b) => b.rotulo), ['Projeto de Lei nº 44/2026', 'Projeto de Lei nº 43/2026', 'Veto Total ao Autógrafo nº 79/2025', 'Projeto de Lei nº 04/2026']);
+  assert.deepEqual(r3[0].eventos.map((e) => [e.data, e.resultado, e.contra]), [
+    ['2026-10-13', 'Artigo 4º rejeitado por maioria de votos.', ['Almir', 'Graziela', 'Antonio']],
+    ['2026-10-13', 'Projeto aprovado por maioria de votos.', ['Graziela']],
+  ]);
+  assert.deepEqual(r3[1].eventos.map((e) => [e.ausentes, e.contra]), [[['Graziela'], []]]);
+  assert.match(r3[1].eventos[0].resultado, /^Emenda nº 12 – Aprovada por unanimidade de votos/);
+  assert.deepEqual(r3[2].eventos.map((e) => e.contra), [['Michel']]);
+  assert.match(r3[2].eventos[0].resultado, /presidente Clayton$/);
+  assert.deepEqual(r3[3].eventos, []);
   console.log('ok: leitores pdf');
 }
