@@ -24,6 +24,10 @@ import { classificar } from '../src/regras/classificar.js';
   assert.deepEqual(dividirNomes('Graziela, Michel, Antônio'), ['Graziela', 'Michel', 'Antônio']);
   assert.deepEqual(dividirNomes('e Arildo'), ['Arildo']);
   assert.deepEqual(dividirNomes('Graziela e Edemilson'), ['Graziela', 'Edemilson']);
+  assert.equal(casar('Mesa da Câmara da Estância Turística de Salto'), null);
+  assert.equal(casar('Frente Parlamentar'), null);
+  assert.equal(casar(''), null);
+  assert.throws(() => criarCasador([{ id: 'a', nome: 'Ana X' }, { id: 'b', nome: 'Ana Y' }]), /repetido/);
   console.log('ok: nomes');
 }
 
@@ -41,5 +45,12 @@ import { classificar } from '../src/regras/classificar.js';
   assert.equal(classificar('Ementa Lei Orgânica', 'Modifica a redação do Art. 73'), 'lei');
   assert.equal(classificar('Portaria', 'Designa servidor'), 'administrativo');
   assert.equal(classificar('Atos da Mesa', 'Ponto facultativo'), 'administrativo');
+  assert.equal(classificar('Moção', 'Moção de repúdio, apesar dos apelos da população'), 'outros');
+  assert.equal(classificar('Decreto Legislativo', 'Recomenda ao Executivo estudo de tráfego'), 'lei');
+  assert.equal(classificar('Lei Ordinária', 'Institui o diagnóstico precoce de autismo'), 'lei');
+  assert.equal(classificar('Lei Complementar', 'Altera o Código Tributário'), 'lei');
+  assert.equal(classificar('Resolução', 'Institui a Semana do Legislativo Jovem'), 'homenagem');
+  assert.equal(classificar('Ato da Presidência', 'Dispõe sobre normas administrativas'), 'administrativo');
+  assert.equal(classificar('Categoria Nova', 'qualquer coisa'), 'outros');
   console.log('ok: classificar');
 }

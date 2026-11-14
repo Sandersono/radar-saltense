@@ -9,9 +9,9 @@ export const GRUPOS = {
   administrativo: 'Atos administrativos (não contam por vereador)',
 };
 
-const HOMENAGEM_MOCAO = /(aplauso|congratula|parabeniza|pesar|homenage|reconhecimento)/;
-const HONRARIA = /(titulo de cidadao|cidadao (salteense|honorario|emerito)|honra ao merito|honraria|medalha|comenda|diploma)/;
-const NOME_OU_DATA = /(denomina|da denominacao|institui (o|a) (dia|semana|mes)|data comemorativa|calendario oficial)/;
+const HOMENAGEM_MOCAO = /\b(aplauso|congratula|parabeniza|pesar\b|homenage|reconhecimento)/;
+const HONRARIA = /\b(titulo de cidadao|cidadao (salteense|honorario|emerito)|honra ao merito|honraria|medalha|comenda\b|diploma\b)/;
+const NOME_OU_DATA = /\b(denomina|institui (o|a) (dia|semana|mes)\b|data comemorativa|calendario oficial)/;
 const ADMINISTRATIVO = ['ato da presidencia', 'atos da mesa', 'portaria'];
 const PODE_SER_HOMENAGEM = ['lei ordinaria', 'lei complementar', 'resolucao', 'decreto legislativo'];
 const LEI = ['lei ordinaria', 'lei complementar', 'ementa lei organica', 'resolucao', 'decreto legislativo', 'iniciativa popular'];
