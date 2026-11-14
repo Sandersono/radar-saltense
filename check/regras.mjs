@@ -106,10 +106,13 @@ import { linkCategoriaAno, linksPdfPresenca, mesDoArquivo } from '../src/regras/
     <img src="https://camarasalto.sp.gov.br/images/legislatura-2024-2028/almir_de_melo_santos.jpg" alt="Almir de Melo Santos (PRD)" class="img-thumbnail img_profile">
     <div class="name_profile">Almir de Melo Santos (PRD)</div></a>
     <a href="/vereador-arildo-guadagnini"><img src="https://camarasalto.sp.gov.br/images/a.jpg" class="img_profile">
-    <div class="name_profile">Arildo Guadagnini (Democracia Cristã)</div></a>`;
+    <div class="name_profile">Arildo Guadagnini (Democracia Cristã)</div></a>
+    <a href="/vereadora-graziela-costa-leite"><img src="https://camarasalto.sp.gov.br/images/g.jpg" class="img_profile">
+    <div class="name_profile">Graziela Costa Leite (PSB)</div></a>`;
   assert.deepEqual(lerVereadores(home, B), [
     { id: 'almir-de-melo-santos', nome: 'Almir de Melo Santos', partido: 'PRD', url: `${B}/vereador-almir-de-melo-santos`, foto: 'https://camarasalto.sp.gov.br/images/legislatura-2024-2028/almir_de_melo_santos.jpg' },
     { id: 'arildo-guadagnini', nome: 'Arildo Guadagnini', partido: 'Democracia Cristã', url: `${B}/vereador-arildo-guadagnini`, foto: 'https://camarasalto.sp.gov.br/images/a.jpg' },
+    { id: 'graziela-costa-leite', nome: 'Graziela Costa Leite', partido: 'PSB', url: `${B}/vereadora-graziela-costa-leite`, foto: 'https://camarasalto.sp.gov.br/images/g.jpg' },
   ]);
 
   const indice = '<a href="/sessoes/presenca-dos-vereadores/category/346-2025">2025</a><a href="/sessoes/presenca-dos-vereadores/category/608-2026">2026</a>';

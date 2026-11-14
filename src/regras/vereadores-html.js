@@ -1,7 +1,7 @@
 import { limparHtml, slug } from '../util/texto.js';
 
 export function lerVereadores(html, base) {
-  const re = /<a href="(\/vereador-[^"]+)">[\s\S]{0,400}?<img src="([^"]+)"[\s\S]{0,400}?<div class="name_profile">([^<]+)<\/div>/g;
+  const re = /<a href="(\/vereadora?-[^"]+)">[\s\S]{0,400}?<img src="([^"]+)"[\s\S]{0,400}?<div class="name_profile">([^<]+)<\/div>/g;
   const lista = [];
   const vistos = new Set();
   for (const m of String(html).matchAll(re)) {
