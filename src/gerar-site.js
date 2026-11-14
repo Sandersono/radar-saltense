@@ -5,7 +5,8 @@ import { TIPOS_NOME } from './regras/local.js';
 import { esc } from './util/texto.js';
 
 const GRUPOS_PUBLICOS = ['melhoria', 'cobranca', 'homenagem', 'lei', 'outros'];
-const dataBR = (d) => (d ? d.split('-').reverse().join('/') : '');
+const dataBR = (d) => (d ? d.split('-').reverse().join('/') : 'sem data');
+const AVISO_NOMES = 'Nomes escritos de outro jeito no PDF (ex.: apelidos) ficam de fora e podem mudar estes números.';
 const link = (url, texto) => `<a href="${esc(url)}" target="_blank" rel="noopener">${texto}</a>`;
 
 function layout({ titulo, corpo, prefixo = '', atualizadoEm }) {
@@ -82,6 +83,7 @@ ${grupos}
 </section>
 <section id="vereadores">
 <h2>Os ${n} vereadores</h2>
+<p class="aviso">${AVISO_NOMES}</p>
 <div class="filtros">
 <input id="filtro-nome" type="search" placeholder="Buscar por nome" aria-label="Buscar vereador por nome">
 <select id="filtro-partido" aria-label="Filtrar por partido"><option value="">Todos os partidos</option>${partidos.map((p) => `<option>${esc(p)}</option>`).join('')}</select>
@@ -126,7 +128,7 @@ ${grupos}
 </section>
 <section>
 <h2>Votações</h2>
-<p class="aviso">Leitura do documento oficial de votações. Ele só cita quem votou contra ou faltou, e o site não deduz votos a favor.</p>
+<p class="aviso">Leitura do documento oficial de votações. Ele só cita quem votou contra ou faltou, e o site não deduz votos a favor. ${AVISO_NOMES}</p>
 <h3>Votou contra</h3><ul class="lista">${votos('contra')}</ul>
 <h3>Ausente na votação</h3><ul class="lista">${votos('ausentes')}</ul>
 </section>`;
@@ -152,6 +154,12 @@ function paginaFontes(d) {
   const avisos = d.avisos && d.avisos.length
     ? `<ul>${d.avisos.map((a) => `<li>${esc(a)}</li>`).join('')}</ul>`
     : '<p>Nenhum aviso.</p>';
+  const contagemNomes = new Map();
+  for (const x of d.naoAtribuidos || []) if (x.fonte.startsWith('votação')) contagemNomes.set(x.nome, (contagemNomes.get(x.nome) || 0) + 1);
+  const nomesSoltos = [...contagemNomes].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'pt-BR'));
+  const nomesHtml = nomesSoltos.length
+    ? `<ul>${nomesSoltos.map(([nome, c]) => `<li>"${esc(nome)}": ${c} ${c === 1 ? 'registro' : 'registros'}</li>`).join('')}</ul>`
+    : '<p>Nenhum.</p>';
   const corpo = `<h1>De onde vêm os números</h1>
 <p>Tudo sai dos sistemas oficiais da Câmara Municipal de Salto. Nada é digitado à mão. O site é refeito todo dia de madrugada.</p>
 <h2>Fontes</h2>
@@ -179,10 +187,13 @@ function paginaFontes(d) {
 <h2>Presença</h2>
 <p>Contamos as marcas P, A e AJ dos PDFs oficiais. "Quem mais faltou" conta só as ausências sem justificativa (A). Dado ausente não é falta: célula vazia não conta. As sessões extraordinárias aparecem junto com as ordinárias.</p>
 <h2>Votações</h2>
-<p>O PDF oficial informa o resultado e cita, às vezes só pelo primeiro nome, quem votou contra ou faltou. O primeiro nome é ligado ao vereador. Se um nome não bater com exatamente um vereador, ele fica de fora. O site não deduz votos a favor.</p>
+<p>O PDF oficial informa o resultado e cita, às vezes só pelo primeiro nome, quem votou contra ou faltou. O primeiro nome é ligado ao vereador. Se um nome não bater com exatamente um vereador, ele fica de fora. Um voto só é ligado ao vereador se ele aparece na tabela de presença daquele mês (quando ela existe). O site não deduz votos a favor.</p>
 <h2 id="avisos">Avisos sobre os dados oficiais</h2>
 <p>Quando um documento oficial traz algo fora do padrão, o site avisa aqui em vez de esconder.</p>
 ${avisos}
+<h3>Nomes nas votações que não deu para ligar a um vereador</h3>
+<p>Estes nomes aparecem nos PDFs de votação, mas não bateram com exatamente um vereador (apelidos, grafias diferentes ou vereador fora da tabela de presença do mês). O site não atribui esses votos a ninguém.</p>
+${nomesHtml}
 ${SALARIO ? `<h2>Salário</h2><p>O contador multiplica o salário mensal oficial pelo número de vereadores, desde 1º de janeiro de ${ANO_INICIO}. É uma estimativa. ${link(SALARIO.fonte, 'Fonte oficial do valor')}.</p>` : ''}
 <h2>Achou um erro?</h2>
 <p>Me chama no Instagram <a href="https://instagram.com/${AUTOR.instagram}">@${AUTOR.instagram}</a>. Se a Câmara corrigir o dado na fonte, o site se corrige sozinho na próxima atualização.</p>`;

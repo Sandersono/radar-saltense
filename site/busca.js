@@ -1,12 +1,12 @@
 (() => {
   const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const norm = (s) => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/\s+/g, ' ').trim();
-  const dataBR = (d) => (d ? d.split('-').reverse().join('/') : '');
-  const ficha = (id) => `https://cmsalto.sisvetor.com.br/ords/cmsalto/f?p=742:78:::::P78_ID_PROJETO:${id}`;
+  const dataBR = (d) => (d ? d.split('-').reverse().join('/') : 'sem data');
+  const ficha = (id) => `https://cmsalto.sisvetor.com.br/ords/cmsalto/f?p=742:78:::::P78_ID_PROJETO:${esc(id)}`;
   let dados = null;
   const carregar = async () => dados || (dados = await (await fetch('dados/busca.json')).json());
   const item = ([id, data, , autores, ementa, doc]) =>
-    `<li><span class="data">${dataBR(data)}</span> <strong>${esc(autores)}</strong> <span class="tag">${esc(doc)}</span> ${esc(ementa)} <a href="${ficha(id)}" target="_blank" rel="noopener">ficha oficial</a></li>`;
+    `<li><span class="data">${esc(dataBR(data))}</span> <strong>${esc(autores)}</strong> <span class="tag">${esc(doc)}</span> ${esc(ementa)} <a href="${ficha(id)}" target="_blank" rel="noopener">ficha oficial</a></li>`;
 
   // Busca por bairro ou rua
   const campo = document.getElementById('busca-bairro');
@@ -26,7 +26,7 @@
         }
         const itens = [...idx].map((i) => d.p[i]).sort((a, b) => b[1].localeCompare(a[1]));
         saida.innerHTML = itens.length
-          ? `<p>${itens.length} pedidos para: ${nomes.slice(0, 8).map(esc).join(', ')}${nomes.length > 8 ? '…' : ''}</p><ul class="lista">${itens.slice(0, 200).map(item).join('')}</ul>${itens.length > 200 ? '<p>Mostrando os 200 mais recentes.</p>' : ''}`
+          ? `<p>${itens.length} ${itens.length === 1 ? 'pedido' : 'pedidos'} para: ${nomes.slice(0, 8).map(esc).join(', ')}${nomes.length > 8 ? '…' : ''}</p><ul class="lista">${itens.slice(0, 200).map(item).join('')}</ul>${itens.length > 200 ? '<p>Mostrando os 200 mais recentes.</p>' : ''}`
           : '<p>Nada encontrado. Tente outro nome ou só uma parte dele.</p>';
       }, 250);
     });

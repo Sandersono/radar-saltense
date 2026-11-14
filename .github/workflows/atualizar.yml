@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '0 6 * * *' # 03:00 em Brasília
   workflow_dispatch:
+    inputs:
+      so_publicar:
+        description: Só publicar os dados já salvos no repositório (plano B)
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -17,6 +22,7 @@ concurrency:
 jobs:
   atualizar:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     environment:
       name: github-pages
       url: ${{ steps.publicar.outputs.page_url }}
@@ -30,7 +36,11 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run checar
       - name: Coletar, conferir e gerar
+        if: ${{ !inputs.so_publicar }}
         run: npm run atualizar
+      - name: Gerar o site com os dados já salvos
+        if: ${{ inputs.so_publicar }}
+        run: npm run gerar
       - name: Guardar relatório de conferência
         if: always()
         uses: actions/upload-artifact@v4
@@ -39,11 +49,13 @@ jobs:
           path: conferencia.md
           if-no-files-found: ignore
       - name: Salvar dados no repositório
+        if: ${{ !inputs.so_publicar }}
         run: |
           git config user.name "radar-saltense-robo"
           git config user.email "radar-saltense-robo@users.noreply.github.com"
           git add data
           git diff --cached --quiet || git commit -m "dados: atualização diária"
+          git pull --rebase origin ${{ github.ref_name }}
           git push
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

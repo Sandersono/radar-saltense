@@ -20,7 +20,7 @@ export async function coletarPresencas(anos, anoAtual) {
       if (!info || info.mes === null || info.ano !== ano) throw new Error(`Arquivo de presença não reconhecido em ${ano}: ${url}`);
       pdfs++;
       const arquivo = decodeURIComponent(url.split('/').pop());
-      const buf = await baixarComCache(url, `data/bruto/presenca/${ano}/${arquivo}`, { renovar: ano === anoAtual });
+      const buf = await baixarComCache(url, `data/bruto/presenca/${ano}/${arquivo}`, { renovar: ano >= anoAtual - 1 });
       let achou = false;
       for (const itens of await itensDoPdf(buf)) {
         const r = lerPresenca(itens);

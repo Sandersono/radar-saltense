@@ -12,7 +12,7 @@ export async function coletarProposituras(anos, anoAtual) {
     const page = await browser.newPage({ userAgent: UA });
     for (const ano of anos) {
       const arquivo = `data/bruto/proposituras-${ano}.json`;
-      if (ano !== anoAtual && (await existe(arquivo))) {
+      if (ano < anoAtual - 1 && (await existe(arquivo))) { // o ano atual e o anterior são sempre renovados
         porAno[ano] = JSON.parse(await readFile(arquivo, 'utf8'));
         continue;
       }

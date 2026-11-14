@@ -9,13 +9,13 @@ export function lerCard({ id, titulo, texto }) {
     if (m) campos[normalizar(m[1])] = limparHtml(m[2]);
   }
   const partes = String(texto ?? '').split(/<strong>\s*Solu[çc][ãa]o Final\s*:?/i);
-  const [d, m, a] = (campos['data'] || '').split(' ')[0].split('/');
+  const dt = (campos['data'] || '').split(' ')[0].match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
   return {
     id: String(id),
     categoria: campos['categoria'] || '',
     numero: campos['numero do documento'] || '',
     autores: dividirNomes(campos['autor(es)'] || ''),
-    data: a ? `${a}-${m}-${d}` : '',
+    data: dt ? `${dt[3]}-${dt[2].padStart(2, '0')}-${dt[1].padStart(2, '0')}` : '',
     ementa: limparHtml(partes[0]),
     solucao: limparHtml(partes[1] || ''),
   };

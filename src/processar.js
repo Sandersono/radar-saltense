@@ -21,7 +21,7 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, coleta
       if (vistos.has(String(c.id))) continue;
       vistos.add(String(c.id));
       const p = lerCard(c);
-      if (!p.data || p.data < inicio) continue;
+      if (p.data && p.data < inicio) continue; // sem data: fica (aparece como "sem data" e no conferencia.md)
       proposituras.push({
         ...p,
         grupo: classificar(p.categoria, p.ementa),
@@ -74,6 +74,11 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, coleta
       const id = casar(l.nome);
       if (id) conhecidos.add(id); else fora.push(l.nome);
     }
+    if (arq.linhas.length && conhecidos.size < vereadores.length / 2) {
+      // Tabela de outro documento: não conta nada e não serve para conferir votações do mês.
+      avisos.push(`${arq.arquivo}: a tabela oficial não corresponde aos vereadores atuais (só ${conhecidos.size} de ${vereadores.length} reconhecidos); o mês ficou fora da contagem de presença.`);
+      continue;
+    }
     if (arq.linhas.length) {
       if (conhecidos.size < vereadores.length) {
         avisos.push(`${arq.arquivo}: só ${conhecidos.size} de ${vereadores.length} vereadores reconhecidos na tabela (nomes de fora: ${fora.join(', ') || 'nenhum'}).`);
@@ -101,17 +106,26 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, coleta
   for (const p of Object.values(presenca)) p.sessoes.sort((a, b) => a.data.localeCompare(b.data));
 
   // Votações (o mesmo projeto pode aparecer nos PDFs de dois anos)
-  const projetos = new Map();
+  // Mesmo rótulo em PDFs diferentes = o mesmo projeto. Mesmo rótulo dentro de um PDF = projetos diferentes.
+  const projetos = new Map(); // rótulo normalizado -> lista de projetos
   for (const v of votacoes) {
     for (const b of v.blocos) {
       const k = normalizar(b.rotulo);
-      if (!projetos.has(k)) projetos.set(k, { rotulo: b.rotulo, ementa: b.ementa, autor: b.autor, url: v.url, eventos: [], chaves: new Set() });
-      const pj = projetos.get(k);
+      if (!projetos.has(k)) projetos.set(k, []);
+      const lista = projetos.get(k);
+      let pj = lista.find((x) => !x.pdfs.has(v.url));
+      if (!pj) {
+        pj = { rotulo: b.rotulo, ementa: b.ementa, autor: b.autor, url: v.url, eventos: [], chaves: new Map(), pdfs: new Set() };
+        lista.push(pj);
+      }
+      pj.pdfs.add(v.url);
       for (const e of b.eventos) {
         if (e.data < inicio) continue;
-        const ek = `${e.data}|${normalizar(e.turno)}|${normalizar(e.resultado)}`;
-        if (pj.chaves.has(ek)) continue;
-        pj.chaves.add(ek);
+        // Só descarta a cópia vinda de OUTRO PDF; linhas parecidas do mesmo PDF são votações distintas.
+        const lado = (l) => l.map(normalizar).sort().join(',');
+        const ek = `${e.data}|${normalizar(e.turno)}|${normalizar(e.resultado)}|${lado(e.contra)}|${lado(e.ausentes)}`;
+        if (pj.chaves.has(ek) && pj.chaves.get(ek) !== v.url) continue;
+        pj.chaves.set(ek, v.url);
         const tabela = presentesNoMes.get(e.data.slice(0, 7)); // sem tabela no mês, não há como conferir
         const contra = [];
         const ausentes = [];
@@ -127,9 +141,9 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, coleta
       }
     }
   }
-  const listaVotacoes = [...projetos.values()]
+  const listaVotacoes = [...projetos.values()].flat()
     .filter((p) => p.eventos.length)
-    .map(({ chaves, ...p }) => ({ ...p, eventos: p.eventos.sort((a, b) => a.data.localeCompare(b.data)) }))
+    .map(({ chaves, pdfs, ...p }) => ({ ...p, eventos: p.eventos.sort((a, b) => a.data.localeCompare(b.data)) }))
     .sort((a, b) => b.eventos[b.eventos.length - 1].data.localeCompare(a.eventos[a.eventos.length - 1].data));
 
   // Resumo por vereador

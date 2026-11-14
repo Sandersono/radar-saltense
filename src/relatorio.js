@@ -1,3 +1,5 @@
+import { fichaOficial } from './config.js';
+
 export function relatorio(d, problemas) {
   const l = [];
   l.push('# Conferência do Radar Saltense', '', `Dados de ${d.meta.atualizadoEm}`, '');
@@ -5,6 +7,9 @@ export function relatorio(d, problemas) {
   l.push(...(problemas.length ? problemas.map((p) => `- ❌ ${p}`) : ['- ✅ Tudo certo. Pode publicar.']), '');
   l.push('## Avisos', '');
   l.push(...(d.avisos.length ? d.avisos.map((a) => `- ${a}`) : ['- nenhum']), '');
+  l.push('## Propostas sem data no portal', '');
+  const semData = d.proposituras.filter((p) => !p.data);
+  l.push(...(semData.length ? semData.map((p) => `- ${p.categoria} ${p.numero} (${p.autoresTexto}): ${fichaOficial(p.id)}`) : ['- nenhuma']), '');
   l.push('## Números por vereador', '', 'Abra a ficha oficial de 2 ou 3 vereadores e compare com esta tabela.', '');
   l.push('| Vereador | Presenças | Faltas | AJ | Sessões | Pedidos | Cobranças | Homenagens | Leis | Outros | Votou contra | Ausente em votação |');
   l.push('|---|---|---|---|---|---|---|---|---|---|---|---|');

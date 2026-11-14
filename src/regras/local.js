@@ -16,7 +16,9 @@ const RUA = /\b(ruas|rua|avenidas|avenida|av|travessa|estrada|alameda|praca|rodo
 const BAIRRO = /\b(bairro|jardim|jd|vila|parque|residencial|chacaras|chacara|condominio|loteamento)\.?\s+(.+?)(?=\s*[,;.()]|\s+(?:e|no|na|nos|nas|em|ate|entre|proximo|especialmente|sentido|onde|para|com|que)\b|$)/g;
 const CENTRO = /\b(no|na) centro\b(?!\s+de\b)/;
 
-const maiuscula = (c) => !!c && c !== c.toLowerCase();
+const TITULO_ABREVIADO = /\b(?:dr|dra|prof|profa|pe|cel|gal|eng|des|ver|sto|sta|mal|cap|ten|maj)\./gi;
+
+const maiuscula =(c) => !!c && c !== c.toLowerCase();
 const digito = (c) => /\d/.test(c || '');
 
 function coletar(re, prefixos, tipo, original, base, achados) {
@@ -28,7 +30,7 @@ function coletar(re, prefixos, tipo, original, base, achados) {
     if (!maiuscula(original[ini]) && !maiuscula(nomeOriginal[0]) && !digito(nomeOriginal[0])) continue;
     const plural = m[1] === 'ruas' || m[1] === 'avenidas';
     for (const parte of plural ? nomeOriginal.split(/\s+e\s+/) : [nomeOriginal]) {
-      const limpo = parte.trim();
+      const limpo = parte.trim().replace(/\s+/g, ' ');
       if (limpo.length < 2) continue;
       const prefixo = prefixos[m[1]];
       const nome = prefixo ? `${prefixo} ${limpo}` : limpo;
@@ -38,8 +40,10 @@ function coletar(re, prefixos, tipo, original, base, achados) {
 }
 
 export function extrairLocais(ementa) {
-  const original = String(ementa ?? '');
-  const base = semAcento(original);
+  // "Rua Dr. Barros": o ponto da abreviação vira espaço (mesmo comprimento) para não cortar o nome.
+  const semPontoDeTitulo = (s) => s.replace(TITULO_ABREVIADO, (m) => `${m.slice(0, -1)} `);
+  const original = semPontoDeTitulo(String(ementa ?? ''));
+  const base = semPontoDeTitulo(semAcento(original));
   const achados = [];
   coletar(RUA, PREFIXO_RUA, 'rua', original, base, achados);
   coletar(BAIRRO, PREFIXO_BAIRRO, 'bairro', original, base, achados);

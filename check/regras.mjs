@@ -87,6 +87,8 @@ import { extrairLocais, tiposPedido } from '../src/regras/local.js';
   assert.deepEqual(tiposPedido('Solicitando o tamponamento de buracos e o nivelamento da Rua Rússia'), ['buraco', 'asfalto']);
   assert.deepEqual(tiposPedido('Solicitando a desobstrução e a manutenção dos bueiros'), ['drenagem']);
   assert.deepEqual(tiposPedido('Solicitando informações sobre o formato do edital'), []);
+  assert.equal(extrairLocais('na Rua Dr. Barros Júnior, no Centro')[0].nome, 'Rua Dr Barros Júnior');
+  assert.equal(extrairLocais('Avenida Prof. Fulano de Tal')[0].nome, 'Avenida Prof Fulano de Tal');
   console.log('ok: local');
 }
 
