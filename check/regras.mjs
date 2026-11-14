@@ -54,3 +54,30 @@ import { classificar } from '../src/regras/classificar.js';
   assert.equal(classificar('Categoria Nova', 'qualquer coisa'), 'outros');
   console.log('ok: classificar');
 }
+
+import { extrairLocais, tiposPedido } from '../src/regras/local.js';
+
+{
+  const fmt = (t) => extrairLocais(t).map((l) => `${l.tipo}:${l.nome}`);
+  assert.deepEqual(
+    fmt('Vereador Edemilson – Solicitando a manutenção da área de lazer no Bairro Santa Lúcia, especialmente nas Ruas Tangará e Melvin Jones.'),
+    ['bairro:Santa Lúcia', 'rua:Rua Tangará', 'rua:Rua Melvin Jones'],
+  );
+  assert.deepEqual(
+    fmt('Solicitando o tamponamento de buracos em toda a extensão das Avenidas Nações Unidas e Valter Nardelli; em toda a extensão da Rua São Felipe, no Bairro Jardim São Judas.'),
+    ['rua:Avenida Nações Unidas', 'rua:Avenida Valter Nardelli', 'rua:Rua São Felipe', 'bairro:Jardim São Judas'],
+  );
+  assert.deepEqual(fmt('Solicitando reparos no Jd. Saltense'), ['bairro:Jardim Saltense']);
+  assert.deepEqual(fmt('na Rua 9 de Julho em frente à Caixa Econômica'), ['rua:Rua 9 de Julho']);
+  assert.deepEqual(
+    fmt('revitalização do parque localizado entre as Ruas Irã e Marechal Deodoro, no Jardim das Nações.'),
+    ['rua:Rua Irã', 'rua:Rua Marechal Deodoro', 'bairro:Jardim das Nações'],
+  );
+  assert.deepEqual(fmt('limpeza no Centro de Convivência José Lisboa'), []);
+  assert.deepEqual(fmt('recape da Rua 9 de Julho, no Centro.'), ['rua:Rua 9 de Julho', 'bairro:Centro']);
+  assert.equal(extrairLocais('na Rua São Felipe')[0].chave, 'rua sao felipe');
+  assert.deepEqual(tiposPedido('Solicitando o tamponamento de buracos e o nivelamento da Rua Rússia'), ['buraco', 'asfalto']);
+  assert.deepEqual(tiposPedido('Solicitando a desobstrução e a manutenção dos bueiros'), ['drenagem']);
+  assert.deepEqual(tiposPedido('Solicitando informações sobre o formato do edital'), []);
+  console.log('ok: local');
+}
