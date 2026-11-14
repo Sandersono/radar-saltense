@@ -1,0 +1,19 @@
+export const CAMARA = 'https://www.camarasalto.sp.gov.br';
+export const APEX = 'https://cmsalto.sisvetor.com.br/ords/cmsalto/f';
+export const UA = 'RadarSaltense/1.0 (projeto civico independente; contato: instagram.com/sandersonoliveira1)';
+export const ANO_INICIO = 2025;
+export const VEREADORES_ESPERADOS = 11;
+export const ESPERA_MS = 2000;
+export const AUTOR = { nome: 'Sanderson Oliveira', instagram: 'sandersonoliveira1' };
+// Só preencher com fonte oficial (lei de fixação do subsídio ou Portal da Transparência):
+// export const SALARIO = { valorMensal: 0, fonte: 'https://...' };
+export const SALARIO = null;
+
+export function anos() {
+  const fim = new Date().getFullYear();
+  const lista = [];
+  for (let a = ANO_INICIO; a <= fim; a++) lista.push(a);
+  return lista;
+}
+
+export const fichaOficial = (id) => `${APEX}?p=742:78:::::P78_ID_PROJETO:${id}`;

@@ -1,0 +1,28 @@
+{
+  "name": "radar-saltense",
+  "version": "1.0.0",
+  "description": "",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "checar": "node check/regras.mjs",
+    "coletar": "node src/coletar.js",
+    "atualizar": "node src/atualizar.js",
+    "processar": "node src/atualizar.js --usar-cache",
+    "gerar": "node src/gerar.js",
+    "ver": "python -m http.server 8080 -d dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "pdfjs-dist": "^6.5.438",
+    "playwright": "^1.65.1"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  }
+}
