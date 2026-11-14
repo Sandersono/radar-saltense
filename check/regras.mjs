@@ -30,6 +30,10 @@ import { classificar } from '../src/regras/classificar.js';
   assert.throws(() => criarCasador([{ id: 'a', nome: 'Ana X' }, { id: 'b', nome: 'Ana Y' }]), /repetido/);
   assert.equal(casar('Antônio.'), 'antonio');
   assert.deepEqual(dividirNomes('Graziela, Michel e Arildo.'), ['Graziela', 'Michel', 'Arildo']);
+  assert.equal(casar('Antônio Cordeiro dos Santos'), null);
+  assert.equal(casar('Edival Pereira Rosa Preto'), 'edival');
+  assert.equal(casar('Antonio'), 'antonio');
+  assert.equal(casar('Rogerio dos Santos'), 'rogerio');
   console.log('ok: nomes');
 }
 
@@ -245,4 +249,23 @@ import { lerVotacoes } from '../src/regras/votacao-pdf.js';
     ],
   });
   console.log('ok: leitores pdf');
+}
+
+import { conferir } from '../src/conferir.js';
+
+{
+  const base = {
+    vereadores: Array.from({ length: 11 }, (_, i) => ({ id: String(i) })),
+    presencasLidas: [{ arquivo: 'a.pdf', linhas: 11 }],
+    votacoesLidas: [{ ano: 2026, blocos: 5, semEventos: 0 }],
+    proposituras: [{}],
+    meta: { totalProposituras: 100 },
+  };
+  assert.deepEqual(conferir(base, { totalProposituras: 90 }, 11), []);
+  assert.deepEqual(conferir(base, null, 11), []);
+  assert.equal(conferir({ ...base, meta: { totalProposituras: 80 } }, { totalProposituras: 90 }, 11).length, 1);
+  assert.equal(conferir({ ...base, presencasLidas: [{ arquivo: 'a.pdf', linhas: 10 }] }, null, 11).length, 1);
+  assert.equal(conferir({ ...base, vereadores: base.vereadores.slice(1) }, null, 11).length, 1);
+  assert.equal(conferir({ ...base, votacoesLidas: [{ ano: 2026, blocos: 0, semEventos: 0 }] }, null, 11).length, 1);
+  console.log('ok: conferir');
 }
