@@ -5,17 +5,28 @@ import { esperar } from '../util/texto.js';
 
 let ultimo = 0;
 
-export async function baixar(url) {
+export async function aguardarVez() {
   const falta = ultimo + ESPERA_MS - Date.now();
   if (falta > 0) await esperar(falta);
+}
+
+export function marcarFim() {
   ultimo = Date.now();
-  const r = await fetch(url, { headers: { 'User-Agent': UA } });
-  if (!r.ok) {
-    const erro = new Error(`HTTP ${r.status} em ${url}`);
-    erro.status = r.status;
-    throw erro;
+}
+
+export async function baixar(url) {
+  await aguardarVez();
+  try {
+    const r = await fetch(url, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(60000) });
+    if (!r.ok) {
+      const erro = new Error(`HTTP ${r.status} em ${url}`);
+      erro.status = r.status;
+      throw erro;
+    }
+    return Buffer.from(await r.arrayBuffer());
+  } finally {
+    marcarFim();
   }
-  return Buffer.from(await r.arrayBuffer());
 }
 
 export async function existe(caminho) {

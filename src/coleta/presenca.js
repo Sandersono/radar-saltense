@@ -14,9 +14,11 @@ export async function coletarPresencas(anos, anoAtual) {
       throw new Error(`Não achei a página de presença de ${ano}`);
     }
     const html = (await baixar(urlAno)).toString('utf8');
+    let pdfs = 0;
     for (const url of linksPdfPresenca(html, CAMARA)) {
       const info = mesDoArquivo(url);
-      if (!info || info.ano !== ano) continue;
+      if (!info || info.mes === null || info.ano !== ano) throw new Error(`Arquivo de presença não reconhecido em ${ano}: ${url}`);
+      pdfs++;
       const arquivo = decodeURIComponent(url.split('/').pop());
       const buf = await baixarComCache(url, `data/bruto/presenca/${ano}/${arquivo}`, { renovar: ano === anoAtual });
       let achou = false;
@@ -28,6 +30,7 @@ export async function coletarPresencas(anos, anoAtual) {
       }
       if (!achou) lidas.push({ arquivo, url, ano, mes: info.mes, sessoes: [], linhas: [] }); // a barreira acusa
     }
+    if (ano !== anoAtual && pdfs === 0) throw new Error(`Nenhum PDF de presença em ${ano}`);
   }
   return lidas;
 }
