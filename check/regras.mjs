@@ -81,3 +81,42 @@ import { extrairLocais, tiposPedido } from '../src/regras/local.js';
   assert.deepEqual(tiposPedido('Solicitando informações sobre o formato do edital'), []);
   console.log('ok: local');
 }
+
+import { lerCard } from '../src/regras/apex.js';
+import { lerVereadores } from '../src/regras/vereadores-html.js';
+import { linkCategoriaAno, linksPdfPresenca, mesDoArquivo } from '../src/regras/presenca-html.js';
+
+{
+  const B = 'https://www.camarasalto.sp.gov.br';
+  assert.deepEqual(
+    lerCard({
+      id: 92700,
+      titulo: '<strong>Categoria:</strong> Indicação</br><strong>Número do Documento:</strong> 2062</br><strong>Autor(es):</strong> Almir de Melo Santos</br><strong> Data:</strong> 10/11/2026 00:00:00',
+      texto: 'Vereador Almir – Solicitando o tamponamento de buracos na Rua São Joaquim.<br><strong> Solução Final: Aprovado</strong>',
+    }),
+    {
+      id: '92700', categoria: 'Indicação', numero: '2062', autores: ['Almir de Melo Santos'], data: '2026-11-10',
+      ementa: 'Vereador Almir – Solicitando o tamponamento de buracos na Rua São Joaquim.', solucao: 'Aprovado',
+    },
+  );
+
+  const home = `<a href="/vereador-almir-de-melo-santos">
+    <img src="https://camarasalto.sp.gov.br/images/legislatura-2024-2028/almir_de_melo_santos.jpg" alt="Almir de Melo Santos (PRD)" class="img-thumbnail img_profile">
+    <div class="name_profile">Almir de Melo Santos (PRD)</div></a>
+    <a href="/vereador-arildo-guadagnini"><img src="https://camarasalto.sp.gov.br/images/a.jpg" class="img_profile">
+    <div class="name_profile">Arildo Guadagnini (Democracia Cristã)</div></a>`;
+  assert.deepEqual(lerVereadores(home, B), [
+    { id: 'almir-de-melo-santos', nome: 'Almir de Melo Santos', partido: 'PRD', url: `${B}/vereador-almir-de-melo-santos`, foto: 'https://camarasalto.sp.gov.br/images/legislatura-2024-2028/almir_de_melo_santos.jpg' },
+    { id: 'arildo-guadagnini', nome: 'Arildo Guadagnini', partido: 'Democracia Cristã', url: `${B}/vereador-arildo-guadagnini`, foto: 'https://camarasalto.sp.gov.br/images/a.jpg' },
+  ]);
+
+  const indice = '<a href="/sessoes/presenca-dos-vereadores/category/346-2025">2025</a><a href="/sessoes/presenca-dos-vereadores/category/608-2026">2026</a>';
+  assert.equal(linkCategoriaAno(indice, 2025, B), `${B}/sessoes/presenca-dos-vereadores/category/346-2025`);
+  assert.equal(linkCategoriaAno(indice, 2019, B), null);
+  const lista = '<a href="/pdf/presenca-dos-vereadores/2025/presenca-reunioes-março-2025.pdf">a</a><a href="/pdf/presenca-dos-vereadores/2025/presenca-reunioes-agosto-2025 II.pdf">b</a><a href="/pdf/presenca-dos-vereadores/2025/presenca-reunioes-março-2025.pdf">a</a>';
+  const links = linksPdfPresenca(lista, B);
+  assert.equal(links.length, 2);
+  assert.deepEqual(mesDoArquivo(links[0]), { mes: 3, ano: 2025 });
+  assert.deepEqual(mesDoArquivo(links[1]), { mes: 8, ano: 2025 });
+  console.log('ok: leitores html');
+}
