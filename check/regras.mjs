@@ -284,3 +284,62 @@ import { conferir } from '../src/conferir.js';
   assert.equal(conferir({ ...base, proposituras: [] }, null, 11).length, 1);
   console.log('ok: conferir');
 }
+
+import { valorBR, grupoReceita, tipoImposto, resumirReceitas, montarImpostometro, valorContador } from '../src/regras/receitas.js';
+
+{
+  const P = 'PREFEITURA MUNICIPAL DE SALTO';
+  const L = (alinea, v = '0,00', orgao = P) => ({ orgao, ds_alinea: alinea, vl_arrecadacao: v });
+  assert.equal(valorBR('1.234,56'), 1234.56);
+  assert.equal(valorBR('-10,00'), -10);
+  assert.throws(() => valorBR('abc'));
+
+  const IPTU = '11125001 - Imposto sobre a Propriedade Predial e Territorial Urbana';
+  assert.deepEqual([grupoReceita(L(IPTU)), tipoImposto(L(IPTU))], ['impostos', 'iptu']);
+  assert.equal(tipoImposto(L('11125300 - Impostos sobre Transmissão &quot;Inter Vivos&quot; de Bens Imóveis')), 'itbi');
+  assert.equal(tipoImposto(L('11145100 - Impostos sobre Serviços de Qualquer Natureza')), 'iss');
+  assert.equal(tipoImposto(L('11130311 - Imposto sobre a Renda - Retido na Fonte - Trabalho')), 'ir');
+  assert.deepEqual([grupoReceita(L('11210400 - Taxa de Controle e Fiscalização Ambiental')), tipoImposto(L('11210400 - Taxa de Controle e Fiscalização Ambiental'))], ['impostos', 'taxas']);
+  assert.equal(grupoReceita(L('17215010 - Cota-Parte do ICMS')), 'estado');
+  assert.equal(grupoReceita(L('17115110 - Cota-Parte do Fundo de Participação dos Municípios')), 'uniao');
+  assert.equal(grupoReceita(L('17515000 - Transferências de Recursos do FUNDEB')), 'fundeb');
+  assert.equal(grupoReceita(L('21120000 - Operações de Crédito Internas')), 'emprestimos');
+  assert.equal(grupoReceita(L('79230000 - Outros Ressarcimentos - Intra OFSS')), 'fora');
+  assert.equal(grupoReceita(L('16990000 - Serviços Sujeitos à Regulação', '1,00', 'SERVICO AUTONOMO DE AGUA E ESGOTO DE SALTO - SAAE SALTO')), 'saae');
+  assert.equal(grupoReceita(L('13210100 - Remuneração de Depósitos Bancários')), 'outras');
+
+  const r1 = resumirReceitas({
+    '2026-09': [L(IPTU, '1.000,00'), L('11145100 - Impostos sobre Serviços', '500,50'), L(IPTU, '-100,00'),
+      L('17215010 - Cota-Parte do ICMS', '2.000,00'), L('79230000 - Intra', '50,00'),
+      L('16990000 - Serviços', '300,00', 'SERVICO AUTONOMO DE AGUA E ESGOTO DE SALTO - SAAE SALTO')],
+    '2026-10': [],
+  });
+  assert.deepEqual(Object.keys(r1.meses), ['2026-09']);
+  assert.deepEqual(r1.meses['2026-09'], { grupos: { impostos: 1400.5, estado: 2000, saae: 300 }, tipos: { iptu: 900, iss: 500.5 }, impostos: 1400.5, fora: 50 });
+
+  // 12 meses publicados (out/2025 a set/2026), R$ 1.000 de IPTU cada; out/2025 a set/2026 somam 365 dias.
+  const porMes = {};
+  for (const m of ['2025-10', '2025-11', '2025-12', '2026-01', '2026-02', '2026-03', '2026-04', '2026-05', '2026-06', '2026-07', '2026-08', '2026-09']) porMes[m] = [L(IPTU, '1.000,00')];
+  const imp = montarImpostometro(resumirReceitas(porMes), 2026);
+  assert.equal(imp.ultimoMesOficial, '2026-09');
+  assert.equal(imp.fimOficial, '2026-09-30');
+  assert.equal(imp.oficialAno, 9000);
+  assert.equal(imp.inicioEstimativa, '2026-10-01');
+  assert.ok(Math.abs(imp.ritmoDiario - 12000 / 365) < 1e-9);
+  assert.deepEqual(imp.anoAnterior, { ano: 2025, mesesPublicados: 3, total: 3000, fechado: false });
+  assert.equal(imp.serie[2026][8], 1000);
+  assert.equal(imp.serie[2026][9], null);
+  assert.deepEqual(imp.tiposAno, { iptu: 9000 });
+  const dia = (s) => Date.parse(`${s}T00:00:00-03:00`);
+  assert.ok(Math.abs(valorContador(imp, dia('2026-10-11')) - (9000 + 10 * 12000 / 365)) < 1e-6);
+  assert.equal(valorContador(imp, dia('2026-09-15')), 9000);
+  // virada do ano: o contador de 2026 para em 31/12 (92 dias de out a dez)
+  assert.ok(Math.abs(valorContador(imp, dia('2027-01-05')) - (9000 + 92 * 12000 / 365)) < 1e-6);
+  // janeiro de 2027 sem mês publicado: a parte oficial é 0 e a estimativa começa em 1º/01
+  const jan = montarImpostometro(resumirReceitas(porMes), 2027);
+  assert.equal(jan.oficialAno, 0);
+  assert.equal(jan.inicioEstimativa, '2027-01-01');
+  assert.deepEqual(jan.anoAnterior, { ano: 2026, mesesPublicados: 9, total: 9000, fechado: false });
+  assert.ok(Math.abs(valorContador(jan, dia('2027-01-11')) - 10 * 12000 / 365) < 1e-6);
+  console.log('ok: receitas');
+}
