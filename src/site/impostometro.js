@@ -1,7 +1,7 @@
 import { POPULACAO } from '../config.js';
 import { esc } from '../util/texto.js';
 import { GRUPOS_RECEITA, TIPOS_IMPOSTO } from '../regras/receitas.js';
-import { layout, dataBR, reais, seloFonte, aviso } from './base.js';
+import { layout, dataBR, reais, reaisCentavos, seloFonte, aviso } from './base.js';
 
 const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
 const NOMES_MES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
@@ -11,13 +11,13 @@ const instanteBR = (dia) => Date.parse(`${dia}T00:00:00-03:00`);
 export function blocoContador(r, prefixo, grande) {
   const ritmo = `estimativa pelo ritmo dos últimos ${r.mesesRitmo} meses publicados`;
   const oficialAte = r.temOficialAno
-    ? `Oficial até ${dataBR(r.fimOficial)}: ${reais(r.oficialAno)} · daqui em diante é ${ritmo}.`
+    ? `Oficial até ${dataBR(r.fimOficial)}: ${reaisCentavos(r.oficialAno)} · daqui em diante é ${ritmo}.`
     : `Ainda não há mês oficial de ${r.anoAtual}: todo o valor é ${ritmo}.`;
   return `<div class="contador-impostos${grande ? ' grande' : ''}" data-oficial="${r.oficialAno}" data-ritmo="${r.ritmoDiario}" data-inicio="${instanteBR(r.inicioEstimativa)}" data-fim="${instanteBR(`${r.anoAtual + 1}-01-01`)}" data-populacao="${POPULACAO.valor}">
 <p class="rotulo">Impostos e taxas pagos à cidade em ${r.anoAtual}</p>
-<p class="valor" aria-live="off">${reais(r.oficialAno)}</p>
+<p class="valor" aria-live="off">${reaisCentavos(r.oficialAno)}</p>
 <p class="nota">(parte oficial + estimativa)</p>
-<p class="por-morador">Dividido pelos ${POPULACAO.valor.toLocaleString('pt-BR')} moradores: <strong>${reais(r.oficialAno / POPULACAO.valor)}</strong> por pessoa</p>
+<p class="por-morador">Dividido pelos ${POPULACAO.valor.toLocaleString('pt-BR')} moradores: <strong>${reaisCentavos(r.oficialAno / POPULACAO.valor)}</strong> por pessoa</p>
 <p class="nota">${esc(oficialAte)}</p>
 <p>${seloFonte('https://transparencia.tce.sp.gov.br/', 'fonte: TCE-SP')}</p>
 ${grande ? '' : `<p><a class="botao" href="${prefixo}impostometro.html">De onde vem o dinheiro de Salto →</a></p>`}

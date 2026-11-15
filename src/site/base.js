@@ -7,6 +7,7 @@ export const AVISO_NOMES = 'Nomes escritos de outro jeito no PDF (ex.: apelidos)
 
 export const dataBR = (d) => (d ? d.split('-').reverse().join('/') : 'sem data');
 export const reais = (v) => Math.round(v).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+export const reaisCentavos = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 });
 export const numero = (v) => Number(v).toLocaleString('pt-BR');
 export const quandoBR = (iso) => new Date(iso).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo', dateStyle: 'short', timeStyle: 'short' });
 export const link = (url, texto) => `<a href="${esc(url)}" target="_blank" rel="noopener">${texto}</a>`;
