@@ -17,10 +17,6 @@ export function conferir(dados, anterior, esperados) {
   if (!r) {
     problemas.push('Receitas do impostômetro não foram coletadas.');
   } else {
-    const mesCalendario = new Date(dados.meta.atualizadoEm || Date.now()).getUTCMonth() + 1;
-    if (mesCalendario >= 3 && r.anoAnterior && r.anoAnterior.mesesPublicados < 12) {
-      problemas.push(`Receitas de ${r.anoAnterior.ano}: só ${r.anoAnterior.mesesPublicados} de 12 meses publicados.`);
-    }
     const novos = dados.meta.receitasMensais || {};
     const desde = `${r.anoAnterior ? r.anoAnterior.ano : r.anoAtual}-01`;
     const reais = (v) => `R$ ${Math.round(v).toLocaleString('pt-BR')}`;

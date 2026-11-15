@@ -3,7 +3,7 @@ import { lerCard } from './regras/apex.js';
 import { classificar, GRUPOS } from './regras/classificar.js';
 import { extrairLocais, tiposPedido } from './regras/local.js';
 import { criarCasador } from './regras/nomes.js';
-import { normalizar } from './util/texto.js';
+import { normalizar, anoMesBR } from './util/texto.js';
 import { resumirReceitas, montarImpostometro } from './regras/receitas.js';
 
 const doisDigitos = (n) => String(n).padStart(2, '0');
@@ -164,7 +164,11 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
   });
 
   const resumoReceitas = receitas ? resumirReceitas(receitas) : null;
-  const anoReceitas = new Date(coletadoEm || Date.now()).getUTCFullYear();
+  const { ano: anoReceitas, mes: mesReceitas } = anoMesBR(coletadoEm ? Date.parse(coletadoEm) : Date.now());
+  const impostometro = resumoReceitas ? montarImpostometro(resumoReceitas, anoReceitas) : null;
+  if (impostometro && mesReceitas >= 3 && impostometro.anoAnterior.mesesPublicados < 12) {
+    avisos.push(`Receitas de ${impostometro.anoAnterior.ano}: só ${impostometro.anoAnterior.mesesPublicados} de 12 meses publicados pelo TCE-SP até agora.`);
+  }
 
   const vistosNA = new Set();
   return {
@@ -181,7 +185,7 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
       return true;
     }),
     avisos: [...new Set(avisos)],
-    receitas: resumoReceitas ? montarImpostometro(resumoReceitas, anoReceitas) : null,
+    receitas: impostometro,
     presencasLidas: presencas.map((p) => ({ arquivo: p.arquivo, linhas: p.linhas.length })),
     votacoesLidas: votacoes.map((v) => ({ ano: v.ano, blocos: v.blocos.length, semEventos: v.blocos.filter((b) => !b.eventos.length).length })),
     meta: {

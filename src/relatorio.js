@@ -37,13 +37,14 @@ export function relatorio(d, problemas) {
       });
     }
     l.push(`- Meses sem dados antes do último mês oficial: ${lacunas.length ? lacunas.join(', ') : 'nenhum'}`);
-    l.push(`- Ritmo diário (últimos 12 meses publicados): ${reais(r.ritmoDiario)} por dia`);
+    l.push(`- Ritmo diário (últimos ${r.mesesRitmo} meses publicados): ${reais(r.ritmoDiario)} por dia`);
     l.push(`- ${r.anoAnterior.ano}: ${r.anoAnterior.mesesPublicados} meses publicados, ${reais(r.anoAnterior.total)}`);
     l.push('', 'Por tipo de imposto (ano atual):', ...Object.entries(r.tiposAno).map(([k, v]) => `- ${TIPOS_IMPOSTO[k] || k}: ${reais(v)}`));
     l.push('', 'Por grupo (ano atual):', ...Object.entries(r.gruposAno).map(([k, v]) => `- ${GRUPOS_RECEITA[k] || k}: ${reais(v)}`));
     l.push(`- Fora do total (receitas intraorçamentárias, dinheiro que só passa de um órgão público para outro): ${reais(r.foraAno)}`);
   }
   l.push('', '## O que é estimativa', '');
+  l.push('- Impostômetro: depois do último mês oficial, o contador soma o ritmo médio diário dos últimos meses publicados; não considera a sazonalidade (o IPTU concentra em jan/fev).');
   l.push('- Grupos de propostas: regra automática pela categoria e por palavras da ementa (publicada no site).');
   l.push(`- Ruas e bairros: lidos do texto da ementa. Pedidos de melhoria sem lugar identificado: ${d.meta.semLocal}.`);
   l.push('- Votações: leitura do PDF oficial. O nome é ligado ao vereador pelo primeiro nome (e por um sobrenome, quando o documento traz o nome completo), e só quando o vereador aparece na tabela de presença daquele mês. Votos a favor não são deduzidos.');

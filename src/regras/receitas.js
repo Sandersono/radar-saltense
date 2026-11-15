@@ -94,6 +94,9 @@ export function montarImpostometro(resumo, anoAtual) {
   const doAno = (ano) => publicados.filter((m) => m.startsWith(`${ano}-`));
   const atuais = doAno(anoAtual);
   const anteriores = doAno(anoAtual - 1);
+  const temOficialAno = atuais.length > 0;
+  const anoPainel = temOficialAno ? anoAtual : anoAtual - 1;
+  const doPainel = temOficialAno ? atuais : anteriores;
 
   let fimOficial = null;
   let inicioEstimativa = `${anoAtual}-01-01`;
@@ -113,6 +116,12 @@ export function montarImpostometro(resumo, anoAtual) {
     fimOficial,
     oficialAno: atuais.reduce((s, m) => s + resumo.meses[m].impostos, 0),
     ritmoDiario,
+    mesesRitmo: ultimos12.length,
+    temOficialAno,
+    anoPainel,
+    tiposPainel: somarObjetos(doPainel.map((m) => resumo.meses[m].tipos)),
+    gruposPainel: somarObjetos(doPainel.map((m) => resumo.meses[m].grupos)),
+    foraPainel: doPainel.reduce((s, m) => s + resumo.meses[m].fora, 0),
     inicioEstimativa,
     gruposAno: somarObjetos(atuais.map((m) => resumo.meses[m].grupos)),
     tiposAno: somarObjetos(atuais.map((m) => resumo.meses[m].tipos)),

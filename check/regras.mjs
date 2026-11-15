@@ -1,9 +1,10 @@
 import assert from 'node:assert/strict';
-import { normalizar, slug, limparHtml } from '../src/util/texto.js';
+import { normalizar, slug, limparHtml, anoMesBR } from '../src/util/texto.js';
 
 assert.equal(normalizar('  Antônio   Moreira '), 'antonio moreira');
 assert.equal(slug('Luzia de Fátima Izidório Vidal'), 'luzia-de-fatima-izidorio-vidal');
 assert.equal(limparHtml('a<br>b &amp; <strong>c</strong>'), 'a b & c');
+assert.deepEqual(anoMesBR(Date.parse('2027-01-01T02:00:00Z')), { ano: 2026, mes: 12 });
 console.log('ok: texto');
 
 import { criarCasador, dividirNomes } from '../src/regras/nomes.js';
@@ -285,7 +286,7 @@ import { conferir } from '../src/conferir.js';
   assert.equal(conferir({ ...base, proposituras: [] }, null, 11).length, 1);
   assert.equal(conferir({ ...base, receitas: null }, null, 11).length, 1);
   const anoIncompleto = { ...base, receitas: { anoAnterior: { ano: 2025, mesesPublicados: 11 } } };
-  assert.equal(conferir(anoIncompleto, null, 11).length, 1);
+  assert.equal(conferir(anoIncompleto, null, 11).length, 0);
   assert.equal(conferir({ ...anoIncompleto, meta: { ...base.meta, atualizadoEm: '2026-02-10T09:00:00Z' } }, null, 11).length, 0);
   assert.equal(conferir({ ...base, meta: { ...base.meta, receitasMensais: {} } }, { totalProposituras: 90, receitasMensais: { '2026-09': 100 } }, 11).length, 1);
   assert.equal(conferir({ ...base, meta: { ...base.meta, receitasMensais: { '2026-09': 90 } } }, { totalProposituras: 90, receitasMensais: { '2026-09': 100 } }, 11).length, 1);
@@ -355,5 +356,24 @@ import { valorBR, grupoReceita, tipoImposto, resumirReceitas, montarImpostometro
   assert.equal(jan.inicioEstimativa, '2027-01-01');
   assert.deepEqual(jan.anoAnterior, { ano: 2026, mesesPublicados: 9, total: 9000, fechado: false });
   assert.ok(Math.abs(valorContador(jan, dia('2027-01-11')) - 10 * 12000 / 365) < 1e-6);
+  assert.equal(jan.temOficialAno, false);
+  assert.equal(jan.anoPainel, 2026);
+  assert.deepEqual(jan.tiposPainel, { iptu: 9000 });
+  assert.equal(jan.mesesRitmo, 12);
+  assert.equal(imp.temOficialAno, true);
+  assert.equal(imp.anoPainel, 2026);
+  // 14 meses publicados: o ritmo usa só os 12 últimos
+  const p14 = {};
+  for (const m of ['2025-08', '2025-09', '2025-10', '2025-11', '2025-12', '2026-01', '2026-02', '2026-03', '2026-04', '2026-05', '2026-06', '2026-07', '2026-08', '2026-09']) p14[m] = [L(IPTU, '1.000,00')];
+  const i14 = montarImpostometro(resumirReceitas(p14), 2026);
+  assert.equal(i14.mesesRitmo, 12);
+  assert.ok(Math.abs(i14.ritmoDiario - 12000 / 365) < 1e-9);
+  // último mês publicado = dezembro: a estimativa começa em 1º/01 e o contador não passa do oficial
+  const pdez = {};
+  for (let m = 1; m <= 12; m++) pdez[`2026-${String(m).padStart(2, '0')}`] = [L(IPTU, '1.000,00')];
+  const idez = montarImpostometro(resumirReceitas(pdez), 2026);
+  assert.equal(idez.inicioEstimativa, '2027-01-01');
+  assert.equal(valorContador(idez, dia('2026-12-31')), idez.oficialAno);
+  assert.equal(valorContador(idez, dia('2027-03-01')), idez.oficialAno);
   console.log('ok: receitas');
 }

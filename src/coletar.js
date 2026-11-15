@@ -6,6 +6,7 @@ import { coletarPresencas } from './coleta/presenca.js';
 import { coletarVotacoes } from './coleta/votacoes.js';
 import { salvar } from './coleta/http.js';
 import { coletarReceitas } from './coleta/receitas.js';
+import { anoMesBR } from './util/texto.js';
 
 export async function coletarTudo() {
   const lista = anos();
@@ -14,8 +15,8 @@ export async function coletarTudo() {
   const cardsPorAno = await coletarProposituras(lista, anoAtual);
   const presencas = await coletarPresencas(lista, anoAtual);
   const votacoes = await coletarVotacoes(lista, anoAtual);
-  const hoje = new Date();
-  const receitas = await coletarReceitas(hoje.getUTCFullYear(), hoje.getUTCMonth() + 1);
+  const hoje = anoMesBR();
+  const receitas = await coletarReceitas(hoje.ano, hoje.mes);
   const coleta = { vereadores, cardsPorAno, presencas, votacoes, receitas, coletadoEm: new Date().toISOString() };
   await salvar('data/bruto/coleta.json', JSON.stringify(coleta));
   return coleta;

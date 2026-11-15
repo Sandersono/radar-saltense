@@ -33,4 +33,10 @@ export function esc(s) {
     .replace(/"/g, '&quot;');
 }
 
+// Ano e mês do calendário em Brasília (o servidor roda em UTC).
+export function anoMesBR(instante = Date.now()) {
+  const [a, m] = new Date(instante).toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' }).split('-').map(Number);
+  return { ano: a, mes: m };
+}
+
 export const esperar = (ms) => new Promise((ok) => setTimeout(ok, ms));
