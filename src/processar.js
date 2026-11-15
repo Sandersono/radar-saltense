@@ -8,7 +8,7 @@ import { resumirReceitas, montarImpostometro } from './regras/receitas.js';
 
 const doisDigitos = (n) => String(n).padStart(2, '0');
 
-export function processar({ vereadores, cardsPorAno, presencas, votacoes, receitas, coletadoEm }) {
+export function processar({ vereadores, cardsPorAno, presencas, votacoes, receitas, fotos, avisosFotos, coletadoEm }) {
   const casar = criarCasador(vereadores);
   const inicio = `${ANO_INICIO}-01-01`;
   const naoAtribuidos = [];
@@ -155,6 +155,7 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
     const pr = presenca[v.id];
     return {
       ...v,
+      fotoLocal: (fotos && fotos[v.id]) || null,
       porGrupo,
       totalPropostas: props.length,
       presenca: { P: pr.P, A: pr.A, AJ: pr.AJ, total: pr.sessoes.length },
@@ -185,6 +186,7 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
       return true;
     }),
     avisos: [...new Set(avisos)],
+    avisosFotos: avisosFotos || [],
     receitas: impostometro,
     presencasLidas: presencas.map((p) => ({ arquivo: p.arquivo, linhas: p.linhas.length })),
     votacoesLidas: votacoes.map((v) => ({ ano: v.ano, blocos: v.blocos.length, semEventos: v.blocos.filter((b) => !b.eventos.length).length })),

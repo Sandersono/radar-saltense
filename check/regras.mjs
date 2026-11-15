@@ -377,3 +377,25 @@ import { valorBR, grupoReceita, tipoImposto, resumirReceitas, montarImpostometro
   assert.equal(valorContador(idez, dia('2027-03-01')), idez.oficialAno);
   console.log('ok: receitas');
 }
+
+import { iniciais, percentual, sugestoesBairros } from '../src/site/util.js';
+
+{
+  assert.equal(iniciais('Almir de Melo Santos'), 'AS');
+  assert.equal(iniciais('Arildo Guadagnini'), 'AG');
+  assert.equal(iniciais('Luzia de Fátima Izidório Vidal'), 'LV');
+  assert.equal(iniciais('Clayton'), 'C');
+  assert.equal(iniciais(''), '?');
+  assert.equal(percentual(79, 84), 94);
+  assert.equal(percentual(0, 0), 0);
+  assert.equal(percentual(199, 200), 99);
+  const locais = [
+    { tipo: 'bairro', nome: 'Centro', idx: [1, 2, 3] },
+    { tipo: 'rua', nome: 'Rua X', idx: [1, 2, 3, 4] },
+    { tipo: 'bairro', nome: 'Jardim B', idx: [1] },
+    { tipo: 'bairro', nome: 'Jardim A', idx: [5] },
+  ];
+  assert.deepEqual(sugestoesBairros(locais, 2), ['Centro', 'Jardim A']);
+  assert.deepEqual(sugestoesBairros(locais), ['Centro', 'Jardim A', 'Jardim B']);
+  console.log('ok: site util');
+}
