@@ -1,7 +1,7 @@
 import { ANO_INICIO, fichaOficial } from '../config.js';
 import { GRUPOS } from '../regras/classificar.js';
 import { esc } from '../util/texto.js';
-import { layout, dataBR, link, aviso, foto, seloFonte, barraProporcao, cartaoNumero, GRUPOS_PUBLICOS, AVISO_NOMES } from './base.js';
+import { layout, dataBR, link, aviso, foto, seloFonte, barraProporcao, cartaoNumero, GRUPOS_PUBLICOS, AVISO_NOMES, apelidoHtml } from './base.js';
 import { percentual } from './util.js';
 
 const ROTULO_MARCA = { P: 'presente', A: 'falta', AJ: 'falta justificada', vazio: 'sem registro' };
@@ -33,7 +33,7 @@ export function paginaVereador(v, d) {
   const corpo = `<section class="perfil cartao">
 ${foto(v, '../', 120)}
 <div>
-<h1>${esc(v.nome)}</h1>
+<h1>${esc(v.nome)}${apelidoHtml(v)}</h1>
 <p class="partido">${esc(v.partido)}</p>
 <p>${seloFonte(v.url, 'página oficial na Câmara')}</p>
 ${v.fotoLocal ? '<p class="credito">Foto: Câmara Municipal de Salto</p>' : ''}

@@ -1,5 +1,13 @@
 import { limparHtml, slug } from '../util/texto.js';
 
+// Página oficial do vereador: "Nome Completo – “Apelido”".
+export function lerApelido(html, nome) {
+  const texto = limparHtml(String(html ?? '').replace(/&(ldquo|#8220);/g, '“').replace(/&(rdquo|#8221);/g, '”').replace(/&(ndash|#8211);/g, '–'));
+  const nomeRe = String(nome).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const m = texto.match(new RegExp(`${nomeRe}\\s*[–—-]\\s*[“"]([^”"]{2,40})[”"]`));
+  return m ? m[1].trim() : null;
+}
+
 export function lerVereadores(html, base) {
   const re = /<a href="(\/vereadora?-[^"]+)">[\s\S]{0,400}?<img src="([^"]+)"[\s\S]{0,400}?<div class="name_profile">([^<]+)<\/div>/g;
   const lista = [];

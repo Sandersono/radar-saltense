@@ -6,7 +6,7 @@ const ENDERECO = 'https://sandersono.github.io/radar-saltense/';
 const DESCRICAO = 'O que cada vereador de Salto/SP fez desde a posse e quanto a cidade arrecada em impostos, só com dados oficiais.';
 
 export const GRUPOS_PUBLICOS = ['melhoria', 'cobranca', 'homenagem', 'lei', 'outros'];
-export const AVISO_NOMES = 'Nomes escritos de outro jeito no PDF (ex.: apelidos) ficam de fora e podem mudar estes números.';
+export const AVISO_NOMES = 'Nomes escritos de outro jeito no PDF, que não são nem o nome nem o apelido oficial, ficam de fora e podem mudar estes números.';
 
 export const dataBR = (d) => (d ? d.split('-').reverse().join('/') : 'sem data');
 export const reais = (v) => Math.round(v).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
@@ -17,6 +17,8 @@ export const link = (url, texto) => `<a href="${esc(url)}" target="_blank" rel="
 export const seloFonte = (url, texto = 'fonte oficial') =>
   `<a class="selo-fonte" href="${esc(url)}" target="_blank" rel="noopener">${esc(texto)} <span aria-hidden="true">↗</span></a>`;
 export const aviso = (html) => `<p class="aviso"><span class="aviso-icone" aria-hidden="true">i</span><span>${html}</span></p>`;
+
+export const apelidoHtml = (v) => (v.apelido ? ` <span class="apelido">“${esc(v.apelido)}”</span>` : '');
 
 export function foto(v, prefixo, tamanho) {
   return v.fotoLocal

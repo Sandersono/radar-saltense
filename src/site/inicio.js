@@ -2,7 +2,7 @@ import { SALARIO, ANO_INICIO, AUTOR, fichaOficial } from '../config.js';
 import { GRUPOS } from '../regras/classificar.js';
 import { TIPOS_NOME } from '../regras/local.js';
 import { esc } from '../util/texto.js';
-import { layout, dataBR, link, numero, aviso, foto, barraProporcao, cartaoNumero, quandoBR, GRUPOS_PUBLICOS, AVISO_NOMES } from './base.js';
+import { layout, dataBR, link, numero, aviso, foto, barraProporcao, cartaoNumero, quandoBR, GRUPOS_PUBLICOS, AVISO_NOMES, apelidoHtml } from './base.js';
 import { percentual, sugestoesBairros } from './util.js';
 import { blocoContador } from './impostometro.js';
 
@@ -17,8 +17,8 @@ const ORDENS = [
 
 function cartaoVereador(v) {
   const pr = v.presenca;
-  return `<li class="cartao cartao-vereador" data-nome="${esc(v.nome)}" data-partido="${esc(v.partido)}" data-faltas="${pr.A}" data-lei="${v.porGrupo.lei}" data-homenagem="${v.porGrupo.homenagem}" data-melhoria="${v.porGrupo.melhoria}" data-contra="${v.votosContra}">
-<a class="cartao-vereador-topo" href="vereador/${esc(v.id)}.html">${foto(v, '', 64)}<span><strong>${esc(v.nome)}</strong><span class="partido">${esc(v.partido)}</span></span></a>
+  return `<li class="cartao cartao-vereador" data-nome="${esc(v.nome)}" data-apelido="${esc(v.apelido || '')}" data-partido="${esc(v.partido)}" data-faltas="${pr.A}" data-lei="${v.porGrupo.lei}" data-homenagem="${v.porGrupo.homenagem}" data-melhoria="${v.porGrupo.melhoria}" data-contra="${v.votosContra}">
+<a class="cartao-vereador-topo" href="vereador/${esc(v.id)}.html">${foto(v, '', 64)}<span><strong>${esc(v.nome)}${apelidoHtml(v)}</strong><span class="partido">${esc(v.partido)}</span></span></a>
 <div class="presenca-resumo"><span>Presença: <strong>${pr.P} de ${pr.total}</strong> sessões</span><span class="presenca-barra" aria-hidden="true"><span class="presenca-preenchida" style="width:${percentual(pr.P, pr.total)}%"></span></span></div>
 <dl class="cartao-dados"><dt>Faltas</dt><dd>${pr.A}</dd><dt>Pedidos para os bairros</dt><dd>${v.porGrupo.melhoria}</dd><dt>Perguntas e cobranças</dt><dd>${v.porGrupo.cobranca}</dd><dt>Propostas de lei</dt><dd>${v.porGrupo.lei}</dd><dt>Homenagens</dt><dd>${v.porGrupo.homenagem}</dd><dt>Votou contra</dt><dd>${v.votosContra}</dd></dl>
 </li>`;

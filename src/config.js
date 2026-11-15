@@ -8,6 +8,13 @@ export const AUTOR = { nome: 'Sanderson Oliveira', instagram: 'sandersonoliveira
 // Só preencher com fonte oficial (lei de fixação do subsídio ou Portal da Transparência):
 // export const SALARIO = { valorMensal: 0, fonte: 'https://...' };
 export const SALARIO = null;
+// Grafias erradas nos PDFs de votação, ligadas ao vereador após conferência com o autor do site (2026-11-15).
+// O apelido oficial vem sozinho da página de cada vereador; aqui ficam só os erros de digitação.
+export const OUTROS_NOMES = {
+  'edival-pereira-rosa': ['Preo'],
+  'arildo-guadagnini': ['Rildo'],
+  'michel-oliveira-rodrigues-da-silva': ['Chel'],
+};
 export const TCE_RECEITAS = 'https://transparencia.tce.sp.gov.br/api/json/receitas/salto';
 export const POPULACAO = { valor: 141988, fonte: 'IBGE, informada pela Prefeitura ao Tesouro Nacional (RREO 2025)' };
 

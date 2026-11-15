@@ -50,14 +50,14 @@ ${aviso('Pedido repetido não prova que a Prefeitura ignorou. Pedido não é obr
 </section>
 <section id="votacoes" class="secao cartao">
 <h2>Votações</h2>
-<p>O PDF oficial informa o resultado e cita, às vezes só pelo primeiro nome, quem votou contra ou faltou. O primeiro nome é ligado ao vereador. Se um nome não bater com exatamente um vereador, ele fica de fora. Um voto só é ligado ao vereador se ele aparece na tabela de presença daquele mês (quando ela existe). O site não deduz votos a favor.</p>
+<p>O PDF oficial informa o resultado e cita, às vezes só pelo primeiro nome, quem votou contra ou faltou. O primeiro nome ou o apelido oficial (o que aparece na página do vereador no site da Câmara) é ligado ao vereador; alguns erros de digitação conferidos à mão também (ex.: “Preo” por “Preto”). Se um nome não bater com exatamente um vereador, ele fica de fora. Um voto só é ligado ao vereador se ele aparece na tabela de presença daquele mês (quando ela existe). O site não deduz votos a favor.</p>
 </section>
 <section id="avisos" class="secao cartao">
 <h2>Avisos sobre os dados oficiais</h2>
 <p>Quando um documento oficial traz algo fora do padrão, o site avisa aqui em vez de esconder.</p>
 ${avisos}
 <h3>Nomes nas votações que não deu para ligar a um vereador</h3>
-<p>Estes nomes aparecem nos PDFs de votação, mas não bateram com exatamente um vereador (apelidos, grafias diferentes ou vereador fora da tabela de presença do mês). O site não atribui esses votos a ninguém.</p>
+<p>Estes nomes aparecem nos PDFs de votação, mas não bateram com exatamente um vereador (grafias diferentes ou vereador fora da tabela de presença do mês). O site não atribui esses votos a ninguém.</p>
 ${nomesHtml}
 </section>
 <section id="creditos" class="secao cartao">

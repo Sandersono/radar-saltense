@@ -408,3 +408,28 @@ import { geometriaRecorte, fotoSite } from '../src/site/util.js';
   assert.equal(fotoSite('fotos/almir.jpg'), 'fotos/almir.webp');
   console.log('ok: recorte das fotos');
 }
+
+import { lerApelido } from '../src/regras/vereadores-html.js';
+
+{
+  const casar = criarCasador([
+    { id: 'edival', nome: 'Edival Pereira Rosa', apelido: 'Preto' },
+    { id: 'rogerio', nome: 'Rogério dos Santos Filho', apelido: 'Dr. Rogério Pinheiro' },
+    { id: 'arildo', nome: 'Arildo Guadagnini', apelido: null },
+  ], { arildo: ['Rildo'], edival: ['Preo'] });
+  assert.equal(casar('Preto'), 'edival');
+  assert.equal(casar('preto'), 'edival');
+  assert.equal(casar('Preto e'), 'edival');
+  assert.equal(casar('Preo'), 'edival');
+  assert.equal(casar('Rogério Pinheiro'), 'rogerio');
+  assert.equal(casar('Dr. Rogério Pinheiro'), 'rogerio');
+  assert.equal(casar('Rogério'), 'rogerio');
+  assert.equal(casar('Rildo'), 'arildo');
+  assert.equal(casar('Pedro Preto'), null);
+  const ambiguo = criarCasador([{ id: 'a', nome: 'Ana X', apelido: 'Nina' }, { id: 'b', nome: 'Bia Y', apelido: 'Nina' }]);
+  assert.equal(ambiguo('Nina'), null);
+  assert.equal(lerApelido('<p>Edival Pereira Rosa &#8211; &#8220;Preto&#8221;</p><p>Partido: União</p>', 'Edival Pereira Rosa'), 'Preto');
+  assert.equal(lerApelido('<h2>Graziela Costa Leite – “Dra. Grazi”</h2>', 'Graziela Costa Leite'), 'Dra. Grazi');
+  assert.equal(lerApelido('<p>Arildo Guadagnini (1º Vice-Secretário)</p>', 'Arildo Guadagnini'), null);
+  console.log('ok: apelidos');
+}

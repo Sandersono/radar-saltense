@@ -87,7 +87,7 @@
       const cartoes = [...lista.children];
       cartoes.sort((a, b) => (ordem === 'nome' ? 0 : Number(b.dataset[ordem]) - Number(a.dataset[ordem])) || a.dataset.nome.localeCompare(b.dataset.nome, 'pt-BR'));
       for (const c of cartoes) {
-        c.hidden = Boolean((q && !norm(c.dataset.nome).includes(q)) || (pt && c.dataset.partido !== pt));
+        c.hidden = Boolean((q && !norm(`${c.dataset.nome} ${c.dataset.apelido || ''}`).includes(q)) || (pt && c.dataset.partido !== pt));
         lista.appendChild(c);
       }
     };

@@ -1,4 +1,4 @@
-import { ANO_INICIO } from './config.js';
+import { ANO_INICIO, OUTROS_NOMES } from './config.js';
 import { lerCard } from './regras/apex.js';
 import { classificar, GRUPOS } from './regras/classificar.js';
 import { extrairLocais, tiposPedido } from './regras/local.js';
@@ -9,7 +9,7 @@ import { resumirReceitas, montarImpostometro } from './regras/receitas.js';
 const doisDigitos = (n) => String(n).padStart(2, '0');
 
 export function processar({ vereadores, cardsPorAno, presencas, votacoes, receitas, fotos, avisosFotos, coletadoEm }) {
-  const casar = criarCasador(vereadores);
+  const casar = criarCasador(vereadores, OUTROS_NOMES);
   const inicio = `${ANO_INICIO}-01-01`;
   const naoAtribuidos = [];
   const avisos = [];
