@@ -8,7 +8,18 @@
   const item = ([id, data, , autores, ementa, doc]) =>
     `<li><span class="data">${esc(dataBR(data))}</span> <strong>${esc(autores)}</strong> <span class="tag">${esc(doc)}</span> ${esc(ementa)} <a href="${ficha(id)}" target="_blank" rel="noopener">ficha oficial</a></li>`;
 
-  // Busca por bairro ou rua
+  // Menu do celular
+  const botaoMenu = document.querySelector('.menu-botao');
+  const menu = document.getElementById('menu-principal');
+  if (botaoMenu && menu) {
+    botaoMenu.addEventListener('click', () => {
+      const aberto = botaoMenu.getAttribute('aria-expanded') === 'true';
+      botaoMenu.setAttribute('aria-expanded', String(!aberto));
+      menu.classList.toggle('aberto', !aberto);
+    });
+  }
+
+  // Busca por bairro ou rua (+ sugestões tocáveis)
   const campo = document.getElementById('busca-bairro');
   if (campo) {
     const saida = document.getElementById('resultado-busca');
@@ -30,6 +41,13 @@
           : '<p>Nada encontrado. Tente outro nome ou só uma parte dele.</p>';
       }, 250);
     });
+    for (const chip of document.querySelectorAll('[data-busca]')) {
+      chip.addEventListener('click', () => {
+        campo.value = chip.dataset.busca;
+        campo.dispatchEvent(new Event('input'));
+        campo.focus();
+      });
+    }
   }
 
   // Grupos "Homenagem ou trabalho?" carregam ao abrir
@@ -44,24 +62,43 @@
     });
   }
 
-  // Filtro e ordem dos vereadores
+  // "O problema que não some": mostra 10 e um botão "ver mais"
+  const verMais = document.getElementById('ver-mais-repetidos');
+  if (verMais) {
+    const extras = [...document.querySelectorAll('#repetidos [data-extra]')];
+    extras.forEach((li) => { li.hidden = true; });
+    verMais.hidden = false;
+    verMais.addEventListener('click', () => {
+      extras.forEach((li) => { li.hidden = false; });
+      verMais.hidden = true;
+    });
+  }
+
+  // Filtro e ordem dos vereadores (ordem por botões)
   const lista = document.getElementById('lista-vereadores');
   if (lista) {
     const nome = document.getElementById('filtro-nome');
     const partido = document.getElementById('filtro-partido');
-    const ordem = document.getElementById('ordem');
+    const botoesOrdem = [...document.querySelectorAll('[data-ordem]')];
+    let ordem = 'nome';
     const aplicar = () => {
-      const q = norm(nome.value);
-      const pt = partido.value;
-      const o = ordem.value;
+      const q = norm(nome ? nome.value : '');
+      const pt = partido ? partido.value : '';
       const cartoes = [...lista.children];
-      cartoes.sort((a, b) => (o === 'nome' ? 0 : Number(b.dataset[o]) - Number(a.dataset[o])) || a.dataset.nome.localeCompare(b.dataset.nome, 'pt-BR'));
+      cartoes.sort((a, b) => (ordem === 'nome' ? 0 : Number(b.dataset[ordem]) - Number(a.dataset[ordem])) || a.dataset.nome.localeCompare(b.dataset.nome, 'pt-BR'));
       for (const c of cartoes) {
         c.hidden = Boolean((q && !norm(c.dataset.nome).includes(q)) || (pt && c.dataset.partido !== pt));
         lista.appendChild(c);
       }
     };
-    [nome, partido, ordem].forEach((el) => el.addEventListener('input', aplicar));
+    for (const b of botoesOrdem) {
+      b.addEventListener('click', () => {
+        ordem = b.dataset.ordem;
+        botoesOrdem.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+        aplicar();
+      });
+    }
+    [nome, partido].filter(Boolean).forEach((el) => el.addEventListener('input', aplicar));
     aplicar();
   }
 

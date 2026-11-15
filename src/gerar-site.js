@@ -4,13 +4,8 @@ import { GRUPOS } from './regras/classificar.js';
 import { TIPOS_NOME } from './regras/local.js';
 import { esc } from './util/texto.js';
 import { GRUPOS_RECEITA, TIPOS_IMPOSTO, valorContador } from './regras/receitas.js';
+import { layout, dataBR, link, reais, GRUPOS_PUBLICOS, AVISO_NOMES } from './site/base.js';
 
-const GRUPOS_PUBLICOS = ['melhoria', 'cobranca', 'homenagem', 'lei', 'outros'];
-const dataBR = (d) => (d ? d.split('-').reverse().join('/') : 'sem data');
-const AVISO_NOMES = 'Nomes escritos de outro jeito no PDF (ex.: apelidos) ficam de fora e podem mudar estes números.';
-const link = (url, texto) => `<a href="${esc(url)}" target="_blank" rel="noopener">${texto}</a>`;
-
-const reais = (v) => Math.round(v).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
 const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
 const instanteBR = (dia) => Date.parse(`${dia}T00:00:00-03:00`);
 
@@ -34,36 +29,6 @@ ${grande ? '' : `<p><a class="botao" href="${prefixo}impostometro.html">De onde 
 }
 
 const barras = (pares, total) => `<ul class="barras">${pares.map(([rotulo, v]) => `<li><span class="rotulo">${esc(rotulo)}</span><span class="trilho"><span class="barra" style="width:${total > 0 ? Math.max(0, (v / total) * 100).toFixed(1) : 0}%"></span></span><span class="num">${reais(v)}${total > 0 ? ` <small>(${((v / total) * 100).toFixed(1).replace('.', ',')}%)</small>` : ''}</span></li>`).join('')}</ul>`;
-
-function layout({ titulo, corpo, prefixo = '', atualizadoEm }) {
-  const quando = new Date(atualizadoEm).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo', dateStyle: 'short', timeStyle: 'short' });
-  return `<!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(titulo)}</title>
-<meta name="description" content="O que cada vereador de Salto/SP fez desde a posse e quanto a cidade arrecada em impostos, só com dados oficiais.">
-<link rel="stylesheet" href="${prefixo}estilo.css">
-</head>
-<body>
-<header class="topo">
-  <a class="marca" href="${prefixo}index.html">Radar Saltense</a>
-  <nav aria-label="Principal"><a href="${prefixo}index.html#bairro">Seu bairro</a><a href="${prefixo}index.html#vereadores">Vereadores</a><a href="${prefixo}votacoes.html">Votações</a><a href="${prefixo}impostometro.html">Impostômetro</a><a href="${prefixo}fontes.html">De onde vêm os números</a></nav>
-</header>
-<main>
-${corpo}
-</main>
-<footer>
-  <p>Atualizado em ${esc(quando)}. Tudo sai de fontes oficiais: Câmara Municipal de Salto, Tribunal de Contas do Estado (TCE-SP) e IBGE.</p>
-  <p>Radar Saltense é um projeto independente de ${esc(AUTOR.nome)}, feito por morador, sem vínculo com a Câmara, com a Prefeitura ou com partido.</p>
-  <p>Achou um erro? Me chama no Instagram: <a href="https://instagram.com/${AUTOR.instagram}">@${AUTOR.instagram}</a>.</p>
-</footer>
-<script src="${prefixo}busca.js" defer></script>
-</body>
-</html>
-`;
-}
 
 const itemProposta = (p) =>
   `<li><span class="data">${dataBR(p.data)}</span> <span class="tag">${esc(p.categoria)} ${esc(p.numero)}</span> ${esc(p.ementa)} ${link(fichaOficial(p.id), 'ficha oficial')}</li>`;
@@ -284,9 +249,14 @@ ${SALARIO ? `<h2>Salário</h2><p>O contador multiplica o salário mensal oficial
   return layout({ titulo: 'De onde vêm os números: Radar Saltense', corpo, atualizadoEm: d.meta.atualizadoEm });
 }
 
+const FONTES = [
+  ['node_modules/@fontsource/nunito/files/nunito-latin-800-normal.woff2', 'nunito-800.woff2'],
+  ['node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2', 'inter-400.woff2'],
+  ['node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2', 'inter-600.woff2'],
+];
+
 export async function gerarSite(d, destino) {
-  await mkdir(`${destino}/vereador`, { recursive: true });
-  await mkdir(`${destino}/dados`, { recursive: true });
+  for (const pasta of ['vereador', 'dados', 'fontes', 'fotos']) await mkdir(`${destino}/${pasta}`, { recursive: true });
   await writeFile(`${destino}/index.html`, paginaInicial(d));
   for (const v of d.vereadores) await writeFile(`${destino}/vereador/${v.id}.html`, paginaVereador(v, d));
   await writeFile(`${destino}/votacoes.html`, paginaVotacoes(d));
@@ -299,5 +269,7 @@ export async function gerarSite(d, destino) {
   await writeFile(`${destino}/dados/busca.json`, JSON.stringify(busca));
   await copyFile('site/estilo.css', `${destino}/estilo.css`);
   await copyFile('site/busca.js', `${destino}/busca.js`);
+  for (const [origem, nome] of FONTES) await copyFile(origem, `${destino}/fontes/${nome}`);
+  for (const v of d.vereadores) if (v.fotoLocal) await copyFile(`data/bruto/${v.fotoLocal}`, `${destino}/${v.fotoLocal}`);
   await writeFile(`${destino}/.nojekyll`, '');
 }
