@@ -293,6 +293,10 @@ import { valorBR, grupoReceita, tipoImposto, resumirReceitas, montarImpostometro
   assert.equal(valorBR('1.234,56'), 1234.56);
   assert.equal(valorBR('-10,00'), -10);
   assert.throws(() => valorBR('abc'));
+  assert.throws(() => valorBR(''));
+  assert.throws(() => valorBR(undefined));
+  assert.equal(valorBR('-1.234,56'), -1234.56);
+  assert.equal(valorBR('2994,49'), 2994.49);
 
   const IPTU = '11125001 - Imposto sobre a Propriedade Predial e Territorial Urbana';
   assert.deepEqual([grupoReceita(L(IPTU)), tipoImposto(L(IPTU))], ['impostos', 'iptu']);

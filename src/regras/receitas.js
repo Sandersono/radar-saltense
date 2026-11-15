@@ -18,9 +18,9 @@ export const TIPOS_IMPOSTO = {
 };
 
 export function valorBR(s) {
-  const n = Number(String(s ?? '').trim().replace(/\./g, '').replace(',', '.'));
-  if (!Number.isFinite(n)) throw new Error(`Valor de receita inválido: "${s}"`);
-  return n;
+  const t = String(s ?? '').trim();
+  if (!/^-?[\d.]*\d(,\d+)?$/.test(t)) throw new Error(`Valor de receita inválido: "${s}"`);
+  return Number(t.replace(/\./g, '').replace(',', '.'));
 }
 
 const codigo = (linha) => (String(linha.ds_alinea ?? '').match(/^\s*(\d{8})/) || [])[1] || '';
