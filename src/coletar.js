@@ -15,7 +15,7 @@ export async function coletarTudo() {
   const presencas = await coletarPresencas(lista, anoAtual);
   const votacoes = await coletarVotacoes(lista, anoAtual);
   const hoje = new Date();
-  const receitas = await coletarReceitas(hoje.getFullYear(), hoje.getMonth() + 1);
+  const receitas = await coletarReceitas(hoje.getUTCFullYear(), hoje.getUTCMonth() + 1);
   const coleta = { vereadores, cardsPorAno, presencas, votacoes, receitas, coletadoEm: new Date().toISOString() };
   await salvar('data/bruto/coleta.json', JSON.stringify(coleta));
   return coleta;

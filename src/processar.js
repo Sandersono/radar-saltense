@@ -164,7 +164,7 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
   });
 
   const resumoReceitas = receitas ? resumirReceitas(receitas) : null;
-  const anoReceitas = new Date(coletadoEm || Date.now()).getFullYear();
+  const anoReceitas = new Date(coletadoEm || Date.now()).getUTCFullYear();
 
   const vistosNA = new Set();
   return {

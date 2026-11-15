@@ -17,14 +17,18 @@ export function conferir(dados, anterior, esperados) {
   if (!r) {
     problemas.push('Receitas do impostômetro não foram coletadas.');
   } else {
-    const mesCalendario = new Date(dados.meta.atualizadoEm || Date.now()).getMonth() + 1;
+    const mesCalendario = new Date(dados.meta.atualizadoEm || Date.now()).getUTCMonth() + 1;
     if (mesCalendario >= 3 && r.anoAnterior && r.anoAnterior.mesesPublicados < 12) {
       problemas.push(`Receitas de ${r.anoAnterior.ano}: só ${r.anoAnterior.mesesPublicados} de 12 meses publicados.`);
     }
     const novos = dados.meta.receitasMensais || {};
+    const desde = `${r.anoAnterior ? r.anoAnterior.ano : r.anoAtual}-01`;
+    const reais = (v) => `R$ ${Math.round(v).toLocaleString('pt-BR')}`;
+    const dica = 'Confira o mês no Portal da Transparência do TCE-SP; se a mudança for real, ajuste receitasMensais em data/processado/meta.json e rode o robô de novo.';
     for (const [mes, valor] of Object.entries((anterior && anterior.receitasMensais) || {})) {
-      if (!(mes in novos)) problemas.push(`Receitas de ${mes} sumiram da fonte.`);
-      else if (novos[mes] < valor * 0.95) problemas.push(`Impostos de ${mes} caíram mais de 5% (de ${valor} para ${novos[mes]}).`);
+      if (mes < desde) continue; // fora da janela coletada
+      if (!(mes in novos)) problemas.push(`Receitas de ${mes} sumiram da fonte. ${dica}`);
+      else if (novos[mes] < valor * 0.95) problemas.push(`Impostos de ${mes} caíram mais de 5% (de ${reais(valor)} para ${reais(novos[mes])}). ${dica}`);
     }
   }
   return problemas;

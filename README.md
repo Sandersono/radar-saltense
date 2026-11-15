@@ -50,6 +50,7 @@ Domínio próprio (opcional): em Settings → Pages → Custom domain, e cadastr
 2. Leia a seção "Barreira automática".
 3. Se a Câmara realmente removeu propostas (o total caiu de forma legítima), edite `data/processado/meta.json` no github.com, baixando `totalProposituras` para o novo número, e rode o workflow de novo.
 4. Se não for isso, espere (muitas vezes o site da Câmara está fora do ar por uns instantes) ou peça ajuda.
+5. Se a barreira disser "Receitas de AAAA-MM sumiram da fonte" ou "Impostos de AAAA-MM caíram mais de 5%", abra o Portal da Transparência do TCE-SP (https://transparencia.tce.sp.gov.br/) e confira esse mês para Salto. Se a mudança for real, edite `data/processado/meta.json` no github.com, troque o valor desse mês em `receitasMensais` pelo novo valor (ou apague a linha, se o mês realmente sumiu) e rode o workflow de novo.
 
 ## Plano B: a Câmara bloqueou o GitHub
 

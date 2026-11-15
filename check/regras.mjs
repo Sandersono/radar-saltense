@@ -290,6 +290,8 @@ import { conferir } from '../src/conferir.js';
   assert.equal(conferir({ ...base, meta: { ...base.meta, receitasMensais: {} } }, { totalProposituras: 90, receitasMensais: { '2026-09': 100 } }, 11).length, 1);
   assert.equal(conferir({ ...base, meta: { ...base.meta, receitasMensais: { '2026-09': 90 } } }, { totalProposituras: 90, receitasMensais: { '2026-09': 100 } }, 11).length, 1);
   assert.equal(conferir({ ...base, meta: { ...base.meta, receitasMensais: { '2026-09': 96 } } }, { totalProposituras: 90, receitasMensais: { '2026-09': 100 } }, 11).length, 0);
+  assert.equal(conferir({ ...base, receitas: { anoAtual: 2027, anoAnterior: { ano: 2026, mesesPublicados: 12 } } }, { totalProposituras: 90, receitasMensais: { '2025-05': 100 } }, 11).length, 0);
+  assert.match(conferir({ ...base, meta: { ...base.meta, receitasMensais: { '2026-09': 90 } } }, { totalProposituras: 90, receitasMensais: { '2026-09': 100 } }, 11)[0], /R\$ 100.*R\$ 90.*meta\.json/);
   console.log('ok: conferir');
 }
 
