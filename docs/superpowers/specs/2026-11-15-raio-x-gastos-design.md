@@ -74,7 +74,7 @@ Ficou de fora: empenhos logo abaixo do limite de dispensa (nos dados aparecem qu
 
 ## 4. Telas
 
-**Home:** um cartão "Raio-X dos gastos" na grade de números (total pago no ano mais recente e "até <mês>"), com link para a página.
+**Home:** logo abaixo do impostômetro, um cartão "Raio-X dos gastos" (total pago no ano mais recente e "até <mês>"), com link para a página. Fora da grade "A Câmara em números", que é só da Câmara.
 
 **`gastos.html`** (menu: "Gastos"):
 - Seletor de ano no topo (botões 2025, 2026, …; abre no ano mais recente). Sem JS, todos os anos aparecem um abaixo do outro.
@@ -93,7 +93,7 @@ Mesmo visual do site (cartões, barras em HTML/CSS, `reais()` sem centavos). Cel
 - **`src/coleta/despesas.js`:** para cada ano de `ANO_INICIO` até o atual, baixa os meses (no ano atual, até o mês anterior ao corrente) com `baixar()`. Salva em `data/bruto/despesas/<ano>-<mm>.json`. `[]` = não publicado. HTTP com erro ou JSON inválido para o robô (o site não publica).
 - **`src/coleta/siconfi.js`:** para cada ano do mandato, acha o último bimestre com itens e guarda as linhas filtradas (2.2). Erro de rede para o robô, como no TCE-SP.
 - **Regras puras em `src/regras/despesas.js`:** `grupoFornecedor(linha)`, `cnpjDe(id)`, `resumirDespesas(porMes, cnpjs2024)`, `areasSiconfi(itens)`, `formatarCnpj(cnpj)`. `valorBR` vem de `receitas.js`.
-- **`processar`:** ganha `dados.gastos = { anos: { <ano>: { ultimoMes, total, porOrgao, porGrupo, pessoasFisicas: {total, quantidade}, topEmpresas[20], concentracao, anulado: {total, top[5]}, novas[], areas: {bimestre, total, lista[]} } }, mandato: {...} }`.
+- **`processar`:** ganha `dados.gastos = { anos: { <ano>: { ultimoMes, total, porOrgao, porGrupo, pessoasFisicas: {total, quantidade}, topEmpresas[20], concentracao, anulado: {total, top[5]}, areas: {bimestre, total, somaAreas, lista[]} | null } }, novas: [{cnpj, nome, total, primeiroMes}], empresas: [{cnpj, nome, porMes, porOrgao}] }`.
 - **`gerar-site`:** escreve `dist/gastos.html` e `dist/dados/empresas.json` (`[cnpj, nome, {ano: {mes: valor}}, {orgao: valor}]`, só CNPJ, só valor pago > 0), carregado pela busca quando o campo é usado.
 - **`meta.json`:** ganha `despesasMensais: { "AAAA-MM": totalPago }`.
 
