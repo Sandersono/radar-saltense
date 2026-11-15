@@ -8,11 +8,12 @@ import { resumirReceitas, montarImpostometro } from './regras/receitas.js';
 
 const doisDigitos = (n) => String(n).padStart(2, '0');
 
-export function processar({ vereadores, cardsPorAno, presencas, votacoes, receitas, coletadoEm }) {
+export function processar({ vereadores, cardsPorAno, presencas, votacoes, receitas, fotos, avisosFotos, coletadoEm }) {
   const casar = criarCasador(vereadores);
   const inicio = `${ANO_INICIO}-01-01`;
   const naoAtribuidos = [];
   const avisos = [];
+  avisos.push(...(avisosFotos || []));
 
   // Proposituras
   const vistos = new Set();
@@ -155,6 +156,7 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
     const pr = presenca[v.id];
     return {
       ...v,
+      fotoLocal: (fotos && fotos[v.id]) || null,
       porGrupo,
       totalPropostas: props.length,
       presenca: { P: pr.P, A: pr.A, AJ: pr.AJ, total: pr.sessoes.length },
