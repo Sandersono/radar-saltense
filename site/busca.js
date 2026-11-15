@@ -74,4 +74,23 @@
     tique();
     setInterval(tique, 1000);
   }
+
+  // Impostômetro: oficial + ritmo diário × dias desde o início da estimativa (para em 31/12).
+  const moeda = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+  for (const el of document.querySelectorAll('.contador-impostos')) {
+    const oficial = Number(el.dataset.oficial);
+    const ritmo = Number(el.dataset.ritmo);
+    const inicio = Number(el.dataset.inicio);
+    const fim = Number(el.dataset.fim);
+    const pop = Number(el.dataset.populacao);
+    const valor = el.querySelector('.valor');
+    const porMorador = el.querySelector('.por-morador strong');
+    const tique = () => {
+      const v = oficial + ritmo * Math.max(0, (Math.min(Date.now(), fim) - inicio) / 86400000);
+      valor.textContent = moeda(v);
+      if (porMorador && pop) porMorador.textContent = moeda(v / pop);
+    };
+    tique();
+    setInterval(tique, 1000);
+  }
 })();

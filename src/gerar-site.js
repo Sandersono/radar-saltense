@@ -3,11 +3,32 @@ import { AUTOR, SALARIO, ANO_INICIO, fichaOficial } from './config.js';
 import { GRUPOS } from './regras/classificar.js';
 import { TIPOS_NOME } from './regras/local.js';
 import { esc } from './util/texto.js';
+import { POPULACAO } from './config.js';
+import { GRUPOS_RECEITA, TIPOS_IMPOSTO, valorContador } from './regras/receitas.js';
 
 const GRUPOS_PUBLICOS = ['melhoria', 'cobranca', 'homenagem', 'lei', 'outros'];
 const dataBR = (d) => (d ? d.split('-').reverse().join('/') : 'sem data');
 const AVISO_NOMES = 'Nomes escritos de outro jeito no PDF (ex.: apelidos) ficam de fora e podem mudar estes números.';
 const link = (url, texto) => `<a href="${esc(url)}" target="_blank" rel="noopener">${texto}</a>`;
+
+const reais = (v) => Math.round(v).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+const instanteBR = (dia) => Date.parse(`${dia}T00:00:00-03:00`);
+
+// Contador: o HTML já traz o valor do momento da geração; busca.js faz ele rodar.
+function blocoContador(r, prefixo, grande) {
+  const agora = valorContador(r, Date.now());
+  const oficialAte = r.fimOficial ? `Oficial até ${dataBR(r.fimOficial)}: ${reais(r.oficialAno)}` : `Ainda não há mês oficial de ${r.anoAtual}`;
+  return `<div class="contador-impostos${grande ? ' grande' : ''}" data-oficial="${r.oficialAno}" data-ritmo="${r.ritmoDiario}" data-inicio="${instanteBR(r.inicioEstimativa)}" data-fim="${instanteBR(`${r.anoAtual + 1}-01-01`)}" data-populacao="${POPULACAO.valor}">
+<p class="rotulo">Salto já arrecadou em impostos em ${r.anoAtual}</p>
+<p class="valor" aria-live="off">${reais(agora)}</p>
+<p class="por-morador">Cada saltense, em média: <strong>${reais(agora / POPULACAO.valor)}</strong></p>
+<p class="nota">${esc(oficialAte)} · daqui em diante é estimativa pelo ritmo dos últimos 12 meses.</p>
+${grande ? '' : `<p><a class="botao" href="${prefixo}impostometro.html">De onde vem o dinheiro de Salto →</a></p>`}
+</div>`;
+}
+
+const barras = (pares, total) => `<ul class="barras">${pares.map(([rotulo, v]) => `<li><span class="rotulo">${esc(rotulo)}</span><span class="trilho"><span class="barra" style="width:${total > 0 ? Math.max(0, (v / total) * 100).toFixed(1) : 0}%"></span></span><span class="num">${reais(v)}${total > 0 ? ` <small>(${((v / total) * 100).toFixed(1).replace('.', ',')}%)</small>` : ''}</span></li>`).join('')}</ul>`;
 
 function layout({ titulo, corpo, prefixo = '', atualizadoEm }) {
   const quando = new Date(atualizadoEm).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo', dateStyle: 'short', timeStyle: 'short' });
@@ -23,7 +44,7 @@ function layout({ titulo, corpo, prefixo = '', atualizadoEm }) {
 <body>
 <header class="topo">
   <a class="marca" href="${prefixo}index.html">Radar Saltense</a>
-  <nav aria-label="Principal"><a href="${prefixo}index.html#bairro">Seu bairro</a><a href="${prefixo}index.html#vereadores">Vereadores</a><a href="${prefixo}votacoes.html">Votações</a><a href="${prefixo}fontes.html">De onde vêm os números</a></nav>
+  <nav aria-label="Principal"><a href="${prefixo}index.html#bairro">Seu bairro</a><a href="${prefixo}index.html#vereadores">Vereadores</a><a href="${prefixo}votacoes.html">Votações</a><a href="${prefixo}impostometro.html">Impostômetro</a><a href="${prefixo}fontes.html">De onde vêm os números</a></nav>
 </header>
 <main>
 ${corpo}
@@ -63,6 +84,7 @@ function paginaInicial(d) {
 <h1>Radar Saltense</h1>
 <p>O que cada vereador de Salto fez desde a posse, atualizado todo dia. Só dado oficial, com link para a fonte.</p>
 ${salario}
+${d.receitas ? blocoContador(d.receitas, '', false) : ''}
 </section>
 <section id="bairro">
 <h2>O que pediram pro seu bairro?</h2>
@@ -150,6 +172,53 @@ ${artigos}`;
   return layout({ titulo: 'Votações: Radar Saltense', corpo, atualizadoEm: d.meta.atualizadoEm });
 }
 
+function paginaImpostometro(d) {
+  const r = d.receitas;
+  const tipos = Object.entries(r.tiposAno).sort((a, b) => b[1] - a[1]).map(([k, v]) => [TIPOS_IMPOSTO[k] || k, v]);
+  const grupos = Object.entries(r.gruposAno).sort((a, b) => b[1] - a[1]).map(([k, v]) => [GRUPOS_RECEITA[k] || k, v]);
+  const totalGrupos = grupos.reduce((s, [, v]) => s + v, 0);
+  const anoAnt = r.anoAnterior;
+  const serieAtual = r.serie[r.anoAtual];
+  const serieAnt = r.serie[anoAnt.ano];
+  const maiorMes = Math.max(1, ...serieAtual.filter((v) => v !== null), ...serieAnt.filter((v) => v !== null));
+  const linhaMes = (ano, v) => v === null
+    ? `<span class="trilho"><span class="vazio">ainda não publicado</span></span>`
+    : `<span class="trilho"><span class="barra${ano === r.anoAtual ? '' : ' anterior'}" style="width:${((v / maiorMes) * 100).toFixed(1)}%"></span></span><span class="num">${reais(v)}</span>`;
+  const meses = MESES.map((nome, i) => `<li><span class="rotulo">${nome}</span><div class="par"><div>${anoAnt.ano}: ${linhaMes(anoAnt.ano, serieAnt[i])}</div><div>${r.anoAtual}: ${linhaMes(r.anoAtual, serieAtual[i])}</div></div></li>`).join('');
+  const fechamento = anoAnt.fechado
+    ? `${anoAnt.ano} fechado em ${reais(anoAnt.total)} (oficial).`
+    : `${anoAnt.ano}: ${reais(anoAnt.total)} oficial até ${anoAnt.mesesPublicados} ${anoAnt.mesesPublicados === 1 ? 'mês publicado' : 'meses publicados'}.`;
+
+  const corpo = `<h1>Impostômetro de Salto</h1>
+${blocoContador(r, '', true)}
+<p>A parte oficial é o que a Prefeitura registrou no Tribunal de Contas do Estado (TCE-SP), que publica os números com cerca de um mês e meio de atraso. Depois do último mês oficial, o contador sobe no ritmo médio dos últimos 12 meses: é uma estimativa e se corrige sozinha quando sai um mês novo.</p>
+<p class="aviso">${esc(fechamento)}</p>
+<section>
+<h2>Os impostos da cidade em ${r.anoAtual}</h2>
+<p>Impostos e taxas que o morador e as empresas pagam direto à Prefeitura. O Imposto de Renda retido é o que a Prefeitura desconta dos salários que paga e, por lei, fica com a cidade.</p>
+${barras(tipos, r.oficialAno)}
+</section>
+<section>
+<h2>Mês a mês</h2>
+<ul class="meses">${meses}</ul>
+</section>
+<section>
+<h2>De onde vem o dinheiro de Salto</h2>
+<p>Toda a arrecadação oficial de ${r.anoAtual}, até o último mês publicado. Os repasses do Estado e da União também são impostos pagos pela população, arrecadados por eles e devolvidos à cidade.</p>
+${barras(grupos, totalGrupos)}
+<p class="nota">Ficaram fora do total ${reais(r.foraAno)} que só passaram de um órgão público da cidade para outro (receitas intraorçamentárias), para não contar o mesmo dinheiro duas vezes.</p>
+</section>
+<section id="fontes-impostometro">
+<h2>De onde vêm os números</h2>
+<ul>
+<li><a href="https://transparencia.tce.sp.gov.br/">Portal da Transparência Municipal do TCE-SP</a>, receitas de Salto mês a mês. Último mês oficial: ${r.ultimoMesOficial ? esc(r.ultimoMesOficial.split('-').reverse().join('/')) : 'nenhum'}.</li>
+<li>População: ${POPULACAO.valor.toLocaleString('pt-BR')} habitantes (${esc(POPULACAO.fonte)}).</li>
+<li>Grupos: impostos da cidade (códigos 111 e 112), repasses do Estado (172 e 242), repasses da União (171 e 241), FUNDEB (175), empréstimos (21), água e esgoto (tudo o que entra no SAAE) e outras receitas (o resto).</li>
+</ul>
+</section>`;
+  return layout({ titulo: 'Impostômetro de Salto: Radar Saltense', corpo, atualizadoEm: d.meta.atualizadoEm });
+}
+
 function paginaFontes(d) {
   const avisos = d.avisos && d.avisos.length
     ? `<ul>${d.avisos.map((a) => `<li>${esc(a)}</li>`).join('')}</ul>`
@@ -167,6 +236,7 @@ function paginaFontes(d) {
 <li><strong>Propostas:</strong> <a href="https://cmsalto.sisvetor.com.br/ords/cmsalto/f?p=742:92">portal de proposituras da Câmara</a>. Cada proposta tem link para a ficha oficial.</li>
 <li><strong>Presença:</strong> <a href="https://www.camarasalto.sp.gov.br/sessoes/presenca-dos-vereadores">PDFs mensais de presença</a>. P = presença, A = ausência, AJ = ausência justificada.</li>
 <li><strong>Votações:</strong> <a href="https://www.camarasalto.sp.gov.br/sessoes/votacao-tramitacao-dos-projetos">PDF anual "Resultado das votações"</a>.</li>
+<li><strong>Impostos e receitas:</strong> <a href="impostometro.html#fontes-impostometro">API de receitas do TCE-SP</a>, usada no impostômetro.</li>
 <li><strong>Vereadores e partidos:</strong> <a href="https://www.camarasalto.sp.gov.br/">página inicial da Câmara</a>.</li>
 </ul>
 <h2 id="regras">Homenagem ou trabalho: a regra</h2>
@@ -207,6 +277,7 @@ export async function gerarSite(d, destino) {
   for (const v of d.vereadores) await writeFile(`${destino}/vereador/${v.id}.html`, paginaVereador(v, d));
   await writeFile(`${destino}/votacoes.html`, paginaVotacoes(d));
   await writeFile(`${destino}/fontes.html`, paginaFontes(d));
+  if (d.receitas) await writeFile(`${destino}/impostometro.html`, paginaImpostometro(d));
   const busca = {
     p: d.proposituras.map((p) => [p.id, p.data, p.grupo, p.autoresTexto, p.ementa, `${p.categoria} ${p.numero}`]),
     l: d.locais.map((l) => [l.nome, l.idx]),

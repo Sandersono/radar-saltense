@@ -37,6 +37,22 @@ th, td { text-align: left; padding: .35rem; border-bottom: 1px solid var(--linha
 .votacao { border-bottom: 1px solid var(--linha); padding: .75rem 0; }
 .votacao h3 { margin: .25rem 0; }
 footer { border-top: 1px solid var(--linha); padding: 1rem; color: var(--suave); font-size: .9rem; max-width: 860px; margin: 2rem auto 0; }
+.contador-impostos { border: 2px solid var(--link); border-radius: 12px; padding: 1rem; margin: 1rem 0; text-align: center; }
+.contador-impostos .rotulo { margin: 0; color: var(--suave); }
+.contador-impostos .valor { font-size: 2rem; font-weight: 800; margin: .25rem 0; font-variant-numeric: tabular-nums; }
+.contador-impostos.grande .valor { font-size: 2.6rem; }
+.contador-impostos .por-morador { margin: .25rem 0; }
+.nota { font-size: .85rem; color: var(--suave); }
+.botao { display: inline-block; padding: .55rem 1rem; border-radius: 8px; background: var(--link); color: #fff; text-decoration: none; font-weight: 600; }
+.barras, .meses { list-style: none; padding: 0; }
+.barras li { display: grid; grid-template-columns: 1fr; gap: .2rem; margin: .6rem 0; }
+.trilho { display: block; background: #eef3fa; border-radius: 6px; height: .9rem; overflow: hidden; }
+.barra { display: block; height: 100%; background: var(--link); border-radius: 6px; }
+.barra.anterior { background: #9bb7d8; }
+.vazio { font-size: .75rem; color: var(--suave); padding-left: .3rem; }
+.meses li { margin: .6rem 0; }
+.meses .par div { display: grid; grid-template-columns: 3.2rem 1fr 7rem; gap: .4rem; align-items: center; font-size: .85rem; }
+.meses .par .num { text-align: right; }
 @media (min-width: 640px) {
   .filtros { grid-template-columns: 2fr 1fr 1.5fr; }
   .cartoes { grid-template-columns: 1fr 1fr; }
