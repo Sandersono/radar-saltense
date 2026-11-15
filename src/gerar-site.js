@@ -1,34 +1,12 @@
 import { mkdir, writeFile, copyFile } from 'node:fs/promises';
-import { AUTOR, SALARIO, ANO_INICIO, POPULACAO, fichaOficial } from './config.js';
+import { SALARIO, ANO_INICIO, fichaOficial } from './config.js';
 import { GRUPOS } from './regras/classificar.js';
 import { TIPOS_NOME } from './regras/local.js';
 import { esc } from './util/texto.js';
-import { GRUPOS_RECEITA, TIPOS_IMPOSTO, valorContador } from './regras/receitas.js';
-import { layout, dataBR, link, reais, GRUPOS_PUBLICOS, AVISO_NOMES } from './site/base.js';
-
-const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
-const instanteBR = (dia) => Date.parse(`${dia}T00:00:00-03:00`);
-
-const NOMES_MES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
-
-// Contador: o HTML traz o valor OFICIAL (sem JavaScript, nada é estimado); busca.js troca pelo valor correndo.
-function blocoContador(r, prefixo, grande) {
-  const agora = r.oficialAno;
-  const ritmo = `estimativa pelo ritmo dos últimos ${r.mesesRitmo} meses publicados`;
-  const oficialAte = r.temOficialAno
-    ? `Oficial até ${dataBR(r.fimOficial)}: ${reais(r.oficialAno)} · daqui em diante é ${ritmo}.`
-    : `Ainda não há mês oficial de ${r.anoAtual}: todo o valor é ${ritmo}.`;
-  return `<div class="contador-impostos${grande ? ' grande' : ''}" data-oficial="${r.oficialAno}" data-ritmo="${r.ritmoDiario}" data-inicio="${instanteBR(r.inicioEstimativa)}" data-fim="${instanteBR(`${r.anoAtual + 1}-01-01`)}" data-populacao="${POPULACAO.valor}">
-<p class="rotulo">Impostos e taxas pagos à cidade em ${r.anoAtual}</p>
-<p class="valor" aria-live="off">${reais(agora)}</p>
-<p class="nota">(parte oficial + estimativa)</p>
-<p class="por-morador">Dividido pelos ${POPULACAO.valor.toLocaleString('pt-BR')} moradores: <strong>${reais(agora / POPULACAO.valor)}</strong> por pessoa</p>
-<p class="nota">${esc(oficialAte)}</p>
-${grande ? '' : `<p><a class="botao" href="${prefixo}impostometro.html">De onde vem o dinheiro de Salto →</a></p>`}
-</div>`;
-}
-
-const barras = (pares, total) => `<ul class="barras">${pares.map(([rotulo, v]) => `<li><span class="rotulo">${esc(rotulo)}</span><span class="trilho"><span class="barra" style="width:${total > 0 ? Math.max(0, (v / total) * 100).toFixed(1) : 0}%"></span></span><span class="num">${reais(v)}${total > 0 ? ` <small>(${((v / total) * 100).toFixed(1).replace('.', ',')}%)</small>` : ''}</span></li>`).join('')}</ul>`;
+import { layout, dataBR, link, GRUPOS_PUBLICOS, AVISO_NOMES } from './site/base.js';
+import { blocoContador, paginaImpostometro } from './site/impostometro.js';
+import { paginaVotacoes } from './site/votacoes.js';
+import { paginaFontes } from './site/fontes.js';
 
 const itemProposta = (p) =>
   `<li><span class="data">${dataBR(p.data)}</span> <span class="tag">${esc(p.categoria)} ${esc(p.numero)}</span> ${esc(p.ementa)} ${link(fichaOficial(p.id), 'ficha oficial')}</li>`;
@@ -125,128 +103,6 @@ ${grupos}
 <h3>Ausente na votação</h3><ul class="lista">${votos('ausentes')}</ul>
 </section>`;
   return layout({ titulo: `${v.nome}: Radar Saltense`, corpo, prefixo: '../', atualizadoEm: d.meta.atualizadoEm });
-}
-
-function paginaVotacoes(d) {
-  const nome = Object.fromEntries(d.vereadores.map((v) => [v.id, v.nome]));
-  const nomes = (ids) => ids.map((id) => esc(nome[id])).join(', ');
-  const artigos = d.votacoes.map((pj) => `<article class="votacao">
-<h3>${esc(pj.rotulo)}</h3>
-<p>${esc(pj.ementa)}</p>
-<p class="partido">Autor: ${esc(pj.autor)}</p>
-<ul class="lista">${pj.eventos.map((e) => `<li><span class="data">${dataBR(e.data)}</span> ${e.turno ? `${esc(e.turno)}: ` : ''}${esc(e.resultado)}${e.contra.length ? `<br>Contra: ${nomes(e.contra)}` : ''}${e.ausentes.length ? `<br>Ausentes: ${nomes(e.ausentes)}` : ''} ${link(e.url, 'PDF')}</li>`).join('')}</ul>
-</article>`).join('\n');
-  const corpo = `<h1>Votações</h1>
-<p class="aviso">Leitura do documento oficial "Resultado das votações", publicado pela Câmara. Ele só cita quem votou contra ou faltou, às vezes só pelo primeiro nome. Nome que não deu para identificar com certeza fica de fora.</p>
-${artigos}`;
-  return layout({ titulo: 'Votações: Radar Saltense', corpo, atualizadoEm: d.meta.atualizadoEm });
-}
-
-function paginaImpostometro(d) {
-  const r = d.receitas;
-  const tipos = Object.entries(r.tiposPainel).sort((a, b) => b[1] - a[1]).map(([k, v]) => [TIPOS_IMPOSTO[k] || k, v]);
-  const totalTipos = tipos.reduce((s, [, v]) => s + v, 0);
-  const grupos = Object.entries(r.gruposPainel).sort((a, b) => b[1] - a[1]).map(([k, v]) => [GRUPOS_RECEITA[k] || k, v]);
-  const totalGrupos = grupos.reduce((s, [, v]) => s + v, 0);
-  const anoAnt = r.anoAnterior;
-  const serieAtual = r.serie[r.anoAtual];
-  const serieAnt = r.serie[anoAnt.ano];
-  const maiorMes = Math.max(1, ...serieAtual.filter((v) => v !== null), ...serieAnt.filter((v) => v !== null));
-  const linhaMes = (ano, v) => v === null
-    ? `<span class="trilho"><span class="vazio">ainda não publicado</span></span>`
-    : `<span class="trilho"><span class="barra${ano === r.anoAtual ? '' : ' anterior'}" style="width:${((v / maiorMes) * 100).toFixed(1)}%"></span></span><span class="num">${reais(v)}</span>`;
-  const meses = MESES.map((nome, i) => `<li><span class="rotulo">${nome}</span><div class="par"><div>${anoAnt.ano}: ${linhaMes(anoAnt.ano, serieAnt[i])}</div><div>${r.anoAtual}: ${linhaMes(r.anoAtual, serieAtual[i])}</div></div></li>`).join('');
-  const ultimoIdx = serieAnt.reduce((acc, v, i) => (v === null ? acc : i), -1);
-  const fechamento = anoAnt.fechado
-    ? `${anoAnt.ano} fechado em ${reais(anoAnt.total)} (oficial).`
-    : ultimoIdx < 0
-      ? `${anoAnt.ano}: nenhum mês publicado.`
-      : `${anoAnt.ano}: ${reais(anoAnt.total)} oficial até ${NOMES_MES[ultimoIdx]}.`;
-  const avisoPainel = r.anoPainel !== r.anoAtual
-    ? `<p class="aviso">Ainda não há mês oficial de ${r.anoAtual}; os quadros abaixo mostram ${r.anoPainel}.</p>`
-    : '';
-
-  const corpo = `<h1>Impostômetro de Salto</h1>
-${blocoContador(r, '', true)}
-<p>A parte oficial é o que a Prefeitura registrou no Tribunal de Contas do Estado (TCE-SP), que publica os números com cerca de um mês e meio de atraso. Depois do último mês oficial, o contador sobe no ritmo médio dos últimos ${r.mesesRitmo} meses publicados: é uma estimativa e se corrige sozinha quando sai um mês novo.</p>
-<p class="aviso">${esc(fechamento)}</p>
-${avisoPainel}
-<section>
-<h2>Os impostos da cidade em ${r.anoPainel}</h2>
-<p>Impostos e taxas que o morador e as empresas pagam direto à Prefeitura. O Imposto de Renda retido é o que a Prefeitura desconta dos salários e de outros pagamentos que faz e, por lei, fica com a cidade.</p>
-${barras(tipos, totalTipos)}
-</section>
-<section>
-<h2>Mês a mês</h2>
-<ul class="meses">${meses}</ul>
-</section>
-<section>
-<h2>De onde vem o dinheiro de Salto</h2>
-<p>Toda a arrecadação oficial de ${r.anoPainel}, até o último mês publicado. Os repasses do Estado e da União vêm, em boa parte, de impostos que eles arrecadam (como ICMS, IPVA e Imposto de Renda) e dividem com as cidades por regras da lei.</p>
-${barras(grupos, totalGrupos)}
-<p class="nota">Ficaram fora do total ${reais(r.foraPainel)} que só passaram de um órgão público da cidade para outro (receitas intraorçamentárias), para não contar o mesmo dinheiro duas vezes.</p>
-</section>
-<section id="fontes-impostometro">
-<h2>De onde vêm os números</h2>
-<ul>
-<li><a href="https://transparencia.tce.sp.gov.br/">Portal da Transparência Municipal do TCE-SP</a>, receitas de Salto mês a mês. Os dados vêm da API pública https://transparencia.tce.sp.gov.br/api/json/receitas/salto/&lt;ano&gt;/&lt;mês&gt;. Último mês oficial: ${r.ultimoMesOficial ? esc(r.ultimoMesOficial.split('-').reverse().join('/')) : 'nenhum'}.</li>
-<li>População: ${POPULACAO.valor.toLocaleString('pt-BR')} habitantes. Fonte: ${esc(POPULACAO.fonte)}.</li>
-<li>Tipos de imposto: IPTU e ITBI (códigos 1112), Imposto de Renda retido (1113), ISS (1114) e Taxas (112).</li>
-<li>Grupos: impostos da cidade (códigos 111 e 112), repasses do Estado (172 e 242), repasses da União (171 e 241), FUNDEB (175), empréstimos (21), água e esgoto (tudo o que entra no SAAE) e outras receitas (o resto).</li>
-</ul>
-</section>`;
-  return layout({ titulo: 'Impostômetro de Salto: Radar Saltense', corpo, atualizadoEm: d.meta.atualizadoEm });
-}
-
-function paginaFontes(d) {
-  const avisos = d.avisos && d.avisos.length
-    ? `<ul>${d.avisos.map((a) => `<li>${esc(a)}</li>`).join('')}</ul>`
-    : '<p>Nenhum aviso.</p>';
-  const contagemNomes = new Map();
-  for (const x of d.naoAtribuidos || []) if (x.fonte.startsWith('votação')) contagemNomes.set(x.nome, (contagemNomes.get(x.nome) || 0) + 1);
-  const nomesSoltos = [...contagemNomes].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'pt-BR'));
-  const nomesHtml = nomesSoltos.length
-    ? `<ul>${nomesSoltos.map(([nome, c]) => `<li>"${esc(nome)}": ${c} ${c === 1 ? 'registro' : 'registros'}</li>`).join('')}</ul>`
-    : '<p>Nenhum.</p>';
-  const corpo = `<h1>De onde vêm os números</h1>
-<p>Tudo sai de fontes oficiais. Nada é digitado à mão, exceto a população do IBGE, que fica registrada no código com a fonte. O site é refeito todo dia de madrugada.</p>
-<h2>Fontes</h2>
-<ul>
-<li><strong>Propostas:</strong> <a href="https://cmsalto.sisvetor.com.br/ords/cmsalto/f?p=742:92">portal de proposituras da Câmara</a>. Cada proposta tem link para a ficha oficial.</li>
-<li><strong>Presença:</strong> <a href="https://www.camarasalto.sp.gov.br/sessoes/presenca-dos-vereadores">PDFs mensais de presença</a>. P = presença, A = ausência, AJ = ausência justificada.</li>
-<li><strong>Votações:</strong> <a href="https://www.camarasalto.sp.gov.br/sessoes/votacao-tramitacao-dos-projetos">PDF anual "Resultado das votações"</a>.</li>
-<li><strong>Impostos e receitas:</strong> <a href="impostometro.html#fontes-impostometro">API de receitas do TCE-SP</a>, usada no impostômetro.</li>
-<li><strong>Vereadores e partidos:</strong> <a href="https://www.camarasalto.sp.gov.br/">página inicial da Câmara</a>.</li>
-</ul>
-<h2 id="regras">Homenagem ou trabalho: a regra</h2>
-<table><thead><tr><th>Tipo de documento</th><th>Grupo</th></tr></thead><tbody>
-<tr><td>Indicação</td><td>Pedidos de melhoria nos bairros</td></tr>
-<tr><td>Requerimento</td><td>Perguntas e cobranças</td></tr>
-<tr><td>Moção de aplauso, congratulação, parabéns, pesar, homenagem ou reconhecimento</td><td>Homenagens</td></tr>
-<tr><td>Moção de apelo, repúdio ou apoio</td><td>Outros</td></tr>
-<tr><td>Decreto Legislativo de título de cidadão, honra ao mérito, honraria, medalha, comenda ou diploma</td><td>Homenagens</td></tr>
-<tr><td>Lei ou resolução que dá nome a rua ou prédio, ou cria dia, semana ou data comemorativa</td><td>Homenagens</td></tr>
-<tr><td>Demais leis, resoluções, decretos legislativos, emendas à Lei Orgânica e iniciativa popular</td><td>Propostas de lei</td></tr>
-<tr><td>Ato da Presidência, Atos da Mesa e Portaria</td><td>Não contam para nenhum vereador</td></tr>
-</tbody></table>
-<p>Proposta com mais de um autor conta para cada autor. Propostas de comissões, da Mesa, de frentes parlamentares e da Prefeitura não contam para nenhum vereador.</p>
-<h2>Ruas e bairros</h2>
-<p>O nome da rua e do bairro é lido do próprio texto do pedido. Quando o texto não deixa claro o lugar, o pedido continua no site, mas fica fora da busca por bairro. "O problema que não some" junta pedidos do mesmo tipo (buraco, asfalto, iluminação, limpeza, bueiro, sinalização, poda, lixo) para a mesma rua, a partir de 2 pedidos.</p>
-<p class="aviso">Pedido repetido não prova que a Prefeitura ignorou. Pedido não é obra feita.</p>
-<h2>Presença</h2>
-<p>Contamos as marcas P, A e AJ dos PDFs oficiais. "Quem mais faltou" conta só as ausências sem justificativa (A). Dado ausente não é falta: célula vazia não conta. As sessões extraordinárias aparecem junto com as ordinárias.</p>
-<h2>Votações</h2>
-<p>O PDF oficial informa o resultado e cita, às vezes só pelo primeiro nome, quem votou contra ou faltou. O primeiro nome é ligado ao vereador. Se um nome não bater com exatamente um vereador, ele fica de fora. Um voto só é ligado ao vereador se ele aparece na tabela de presença daquele mês (quando ela existe). O site não deduz votos a favor.</p>
-<h2 id="avisos">Avisos sobre os dados oficiais</h2>
-<p>Quando um documento oficial traz algo fora do padrão, o site avisa aqui em vez de esconder.</p>
-${avisos}
-<h3>Nomes nas votações que não deu para ligar a um vereador</h3>
-<p>Estes nomes aparecem nos PDFs de votação, mas não bateram com exatamente um vereador (apelidos, grafias diferentes ou vereador fora da tabela de presença do mês). O site não atribui esses votos a ninguém.</p>
-${nomesHtml}
-${SALARIO ? `<h2>Salário</h2><p>O contador multiplica o salário mensal oficial pelo número de vereadores, desde 1º de janeiro de ${ANO_INICIO}. É uma estimativa. ${link(SALARIO.fonte, 'Fonte oficial do valor')}.</p>` : ''}
-<h2>Achou um erro?</h2>
-<p>Me chama no Instagram <a href="https://instagram.com/${AUTOR.instagram}">@${AUTOR.instagram}</a>. Se a Câmara corrigir o dado na fonte, o site se corrige sozinho na próxima atualização.</p>`;
-  return layout({ titulo: 'De onde vêm os números: Radar Saltense', corpo, atualizadoEm: d.meta.atualizadoEm });
 }
 
 const FONTES = [
