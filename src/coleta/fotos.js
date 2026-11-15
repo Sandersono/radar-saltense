@@ -1,4 +1,4 @@
-import { readFile } from 'node:fs/promises';
+import { readFile, rm } from 'node:fs/promises';
 import { baixar, salvar, existe } from './http.js';
 
 const PASTA = 'data/bruto/fotos';
@@ -17,7 +17,8 @@ export async function coletarFotos(vereadores) {
   try {
     origem = JSON.parse(await readFile(`${PASTA}/origem.json`, 'utf8'));
   } catch (e) {
-    if (e.code !== 'ENOENT') throw e;
+    if (e.code !== 'ENOENT' && !(e instanceof SyntaxError)) throw e;
+    origem = {};
   }
   const fotos = {};
   const avisos = [];
@@ -37,6 +38,7 @@ export async function coletarFotos(vereadores) {
       if (!ext) throw new Error('o arquivo não é uma imagem JPG ou PNG');
       const arquivo = `${v.id}.${ext}`;
       await salvar(`${PASTA}/${arquivo}`, buf);
+      if (anterior && anterior.arquivo && anterior.arquivo !== arquivo) await rm(`${PASTA}/${anterior.arquivo}`, { force: true });
       origem[v.id] = { url: v.foto, arquivo };
       fotos[v.id] = `fotos/${arquivo}`;
     } catch (e) {

@@ -63,6 +63,7 @@ ${nomesHtml}
 <section id="creditos" class="secao cartao">
 <h2>Fotos e fontes</h2>
 <p>Fotos dos vereadores: Câmara Municipal de Salto (site oficial).</p>
+${d.avisosFotos && d.avisosFotos.length ? `<ul>${d.avisosFotos.map((a) => `<li>${esc(a)}</li>`).join('')}</ul>` : ''}
 <p>Fontes tipográficas: Nunito e Inter, sob a licença SIL Open Font License.</p>
 </section>
 ${SALARIO ? `<section class="secao cartao"><h2>Salário</h2><p>O contador multiplica o salário mensal oficial pelo número de vereadores, desde 1º de janeiro de ${ANO_INICIO}. É uma estimativa. ${link(SALARIO.fonte, 'Fonte oficial do valor')}.</p></section>` : ''}

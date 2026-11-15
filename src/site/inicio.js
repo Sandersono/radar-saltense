@@ -44,7 +44,7 @@ export function paginaInicial(d) {
 
   const heroi = `<p class="heroi-sobre">Salto · SP</p>
 <h1>Salto de olho na Câmara</h1>
-<p>O que cada vereador fez desde a posse, atualizado todo dia. Só dado oficial.</p>
+<p>O que cada vereador fez desde a posse, atualizado todo dia. Só dado oficial, com link para a fonte.</p>
 <p class="atualizado">Atualizado em ${esc(quandoBR(d.meta.atualizadoEm))}</p>`;
 
   const corpo = `${salario}
@@ -54,14 +54,14 @@ ${d.receitas ? blocoContador(d.receitas, '', false) : ''}
 <p>Veja tudo o que os vereadores pediram para a sua rua ou o seu bairro, com link para o documento oficial.</p>
 <label class="sr-only" for="busca-bairro">Nome do bairro ou da rua</label>
 <input id="busca-bairro" class="busca" type="search" placeholder="Digite o bairro ou a rua" autocomplete="off">
-${sugestoes.length ? `<div class="sugestoes" aria-label="Bairros com mais pedidos">${sugestoes.map((s) => `<button type="button" class="chip" data-busca="${esc(s)}">${esc(s)}</button>`).join('')}</div>` : ''}
+${sugestoes.length ? `<div class="sugestoes" role="group" aria-label="Bairros com mais pedidos">${sugestoes.map((s) => `<button type="button" class="chip" data-busca="${esc(s)}">${esc(s)}</button>`).join('')}</div>` : ''}
 <div id="resultado-busca" aria-live="polite"></div>
 </section>
 <section class="secao" aria-labelledby="t-numeros">
 <h2 id="t-numeros">A Câmara em números</h2>
 <div class="grade-numeros">
 ${cartaoNumero({ valor: numero(d.proposituras.length), rotulo: `propostas desde ${ANO_INICIO}`, href: '#trabalho' })}
-${cartaoNumero({ valor: numero(d.repetidos.length), rotulo: 'ruas com pedido repetido', href: '#repetidos' })}
+${cartaoNumero({ valor: numero(new Set(d.repetidos.map((r) => r.rua)).size), rotulo: 'ruas com pedido repetido', href: '#repetidos' })}
 ${cartaoNumero({ valor: numero(sessoes), rotulo: 'sessões com presença registrada', href: '#vereadores' })}
 ${cartaoNumero({ valor: numero(totalVotacoes), rotulo: 'votações registradas', href: 'votacoes.html' })}
 </div>
@@ -83,7 +83,7 @@ ${d.vereadores.map(cartaoVereador).join('\n')}
 <p>Pedidos do mesmo tipo que voltaram mais de uma vez para a mesma rua. No site da Câmara, cada pedido aparece sozinho. Aqui eles são cruzados.</p>
 ${aviso('Pedido repetido não prova que a Prefeitura ignorou. Pedido não é obra feita.')}
 <ol class="lista cartao">${repetidos}</ol>
-${extras ? `<p><button type="button" class="botao-secundario" id="ver-mais-repetidos" hidden>Ver mais ${extras} ruas</button></p>` : ''}
+${extras ? `<p><button type="button" class="botao-secundario" id="ver-mais-repetidos" hidden>Ver mais ${extras} casos</button></p>` : ''}
 </section>
 <section id="trabalho" class="secao">
 <h2>Homenagem ou trabalho?</h2>

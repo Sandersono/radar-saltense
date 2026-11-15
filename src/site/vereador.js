@@ -17,8 +17,9 @@ export function paginaVereador(v, d) {
   const bolinhas = pres.sessoes.map((s) => {
     const marca = s.marca || 'vazio';
     const texto = `${dataBR(s.data)}: ${ROTULO_MARCA[marca]}`;
-    return `<li class="bolinha b-${marca}" title="${texto}"><span class="sr-only">${texto}</span></li>`;
+    return `<li class="bolinha b-${marca}" title="${esc(texto)}"><span class="sr-only">${esc(texto)}</span></li>`;
   }).join('');
+  const registradas = pres.P + pres.A + pres.AJ;
   const contagem = Object.fromEntries(GRUPOS_PUBLICOS.map((g) => [g, props.filter((p) => p.grupo === g).length]));
   const grupos = GRUPOS_PUBLICOS.map((g) => {
     const lista = props.filter((p) => p.grupo === g);
@@ -40,7 +41,7 @@ ${v.fotoLocal ? '<p class="credito">Foto: Câmara Municipal de Salto</p>' : ''}
 </section>
 <section class="secao">
 <div class="grade-numeros">
-${cartaoNumero({ valor: `${percentual(pres.P, pres.sessoes.length)}%`, rotulo: `de presença (${pres.P} de ${pres.sessoes.length} sessões)` })}
+${cartaoNumero({ valor: `${percentual(pres.P, registradas)}%`, rotulo: `de presença (${pres.P} de ${registradas} sessões com registro)` })}
 ${cartaoNumero({ valor: String(props.length), rotulo: `propostas desde ${ANO_INICIO}` })}
 ${cartaoNumero({ valor: String(v.votosContra), rotulo: 'vezes votou contra' })}
 </div>

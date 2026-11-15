@@ -10,7 +10,7 @@ export function iniciais(nome) {
 }
 
 export function percentual(parte, total) {
-  return total > 0 ? Math.round((parte / total) * 100) : 0;
+  return total > 0 ? Math.floor((parte / total) * 100) : 0;
 }
 
 export function sugestoesBairros(locais, n = 6) {

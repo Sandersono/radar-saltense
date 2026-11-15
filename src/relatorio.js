@@ -8,6 +8,7 @@ export function relatorio(d, problemas) {
   l.push(...(problemas.length ? problemas.map((p) => `- ❌ ${p}`) : ['- ✅ Tudo certo. Pode publicar.']), '');
   l.push('## Avisos', '');
   l.push(...(d.avisos.length ? d.avisos.map((a) => `- ${a}`) : ['- nenhum']), '');
+  if (d.avisosFotos?.length) l.push(...d.avisosFotos.map((a) => `- Fotos: ${a}`), '');
   l.push('## Propostas sem data no portal', '');
   const semData = d.proposituras.filter((p) => !p.data);
   l.push(...(semData.length ? semData.map((p) => `- ${p.categoria} ${p.numero} (${p.autoresTexto}): ${fichaOficial(p.id)}`) : ['- nenhuma']), '');

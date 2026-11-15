@@ -388,6 +388,7 @@ import { iniciais, percentual, sugestoesBairros } from '../src/site/util.js';
   assert.equal(iniciais(''), '?');
   assert.equal(percentual(79, 84), 94);
   assert.equal(percentual(0, 0), 0);
+  assert.equal(percentual(199, 200), 99);
   const locais = [
     { tipo: 'bairro', nome: 'Centro', idx: [1, 2, 3] },
     { tipo: 'rua', nome: 'Rua X', idx: [1, 2, 3, 4] },

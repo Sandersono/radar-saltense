@@ -13,7 +13,6 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
   const inicio = `${ANO_INICIO}-01-01`;
   const naoAtribuidos = [];
   const avisos = [];
-  avisos.push(...(avisosFotos || []));
 
   // Proposituras
   const vistos = new Set();
@@ -187,6 +186,7 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
       return true;
     }),
     avisos: [...new Set(avisos)],
+    avisosFotos: avisosFotos || [],
     receitas: impostometro,
     presencasLidas: presencas.map((p) => ({ arquivo: p.arquivo, linhas: p.linhas.length })),
     votacoesLidas: votacoes.map((v) => ({ ano: v.ano, blocos: v.blocos.length, semEventos: v.blocos.filter((b) => !b.eventos.length).length })),

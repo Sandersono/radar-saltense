@@ -113,7 +113,9 @@
   }
 
   // Impostômetro: oficial + ritmo diário × dias desde o início da estimativa (para em 31/12).
-  const moeda = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const fmt = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const moeda = (v) => fmt.format(v);
+  const reduzido = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   for (const el of document.querySelectorAll('.contador-impostos')) {
     const oficial = Number(el.dataset.oficial);
     const ritmo = Number(el.dataset.ritmo);
@@ -122,12 +124,32 @@
     const pop = Number(el.dataset.populacao);
     const valor = el.querySelector('.valor');
     const porMorador = el.querySelector('.por-morador strong');
+    let timer = null;
+    let visivel = true;
+    let ultimoPessoa = '';
+    const parar = () => { if (timer) { clearInterval(timer); timer = null; } };
     const tique = () => {
-      const v = oficial + ritmo * Math.max(0, (Math.min(Date.now(), fim) - inicio) / 86400000);
+      const agora = Date.now();
+      const v = oficial + ritmo * Math.max(0, (Math.min(agora, fim) - inicio) / 86400000);
       valor.textContent = moeda(v);
-      if (porMorador && pop) porMorador.textContent = moeda(v / pop);
+      if (porMorador && pop) {
+        const t = moeda(v / pop);
+        if (t !== ultimoPessoa) { ultimoPessoa = t; porMorador.textContent = t; }
+      }
+      if (agora >= fim) { parar(); finalizado = true; }
     };
+    let finalizado = false;
+    const atualizar = () => {
+      if (finalizado) return;
+      if (visivel && !document.hidden) {
+        if (!timer) { tique(); if (!finalizado) timer = setInterval(tique, reduzido ? 1000 : 100); }
+      } else parar();
+    };
+    document.addEventListener('visibilitychange', atualizar);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((es) => { visivel = es[es.length - 1].isIntersecting; atualizar(); }).observe(el);
+    }
     tique();
-    setInterval(tique, 100);
+    atualizar();
   }
 })();
