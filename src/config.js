@@ -8,6 +8,8 @@ export const AUTOR = { nome: 'Sanderson Oliveira', instagram: 'sandersonoliveira
 // Só preencher com fonte oficial (lei de fixação do subsídio ou Portal da Transparência):
 // export const SALARIO = { valorMensal: 0, fonte: 'https://...' };
 export const SALARIO = null;
+export const TCE_RECEITAS = 'https://transparencia.tce.sp.gov.br/api/json/receitas/salto';
+export const POPULACAO = { valor: 141988, fonte: 'IBGE, informada pela Prefeitura ao Tesouro Nacional (RREO 2025)' };
 
 export function anos() {
   const fim = new Date().getFullYear();

@@ -1,4 +1,5 @@
 import { fichaOficial } from './config.js';
+import { GRUPOS_RECEITA, TIPOS_IMPOSTO } from './regras/receitas.js';
 
 export function relatorio(d, problemas) {
   const l = [];
@@ -20,6 +21,20 @@ export function relatorio(d, problemas) {
   l.push('', '## PDFs de votação lidos', '', ...d.votacoesLidas.map((v) => `- ${v.ano}: ${v.blocos} projetos (${v.semEventos} sem votação lida)`));
   l.push('', '## Nomes não atribuídos (ficaram de fora do site)', '');
   l.push(...(d.naoAtribuidos.length ? d.naoAtribuidos.map((n) => `- ${n.fonte}: "${n.nome}"`) : ['- nenhum']));
+  const r = d.receitas;
+  const reais = (v) => `R$ ${Math.round(v).toLocaleString('pt-BR')}`;
+  l.push('', '## Impostômetro', '');
+  if (!r) {
+    l.push('- Receitas não coletadas.');
+  } else {
+    l.push(`- Último mês oficial: ${r.ultimoMesOficial || 'nenhum'} (fim ${r.fimOficial || '-'})`);
+    l.push(`- Impostos da cidade em ${r.anoAtual}, oficial: ${reais(r.oficialAno)}`);
+    l.push(`- Ritmo diário (últimos 12 meses publicados): ${reais(r.ritmoDiario)} por dia`);
+    l.push(`- ${r.anoAnterior.ano}: ${r.anoAnterior.mesesPublicados} meses publicados, ${reais(r.anoAnterior.total)}`);
+    l.push('', 'Por tipo de imposto (ano atual):', ...Object.entries(r.tiposAno).map(([k, v]) => `- ${TIPOS_IMPOSTO[k] || k}: ${reais(v)}`));
+    l.push('', 'Por grupo (ano atual):', ...Object.entries(r.gruposAno).map(([k, v]) => `- ${GRUPOS_RECEITA[k] || k}: ${reais(v)}`));
+    l.push(`- Fora do total (intraorçamentárias): ${reais(r.foraAno)}`);
+  }
   l.push('', '## O que é estimativa', '');
   l.push('- Grupos de propostas: regra automática pela categoria e por palavras da ementa (publicada no site).');
   l.push(`- Ruas e bairros: lidos do texto da ementa. Pedidos de melhoria sem lugar identificado: ${d.meta.semLocal}.`);

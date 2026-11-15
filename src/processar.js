@@ -4,10 +4,11 @@ import { classificar, GRUPOS } from './regras/classificar.js';
 import { extrairLocais, tiposPedido } from './regras/local.js';
 import { criarCasador } from './regras/nomes.js';
 import { normalizar } from './util/texto.js';
+import { resumirReceitas, montarImpostometro } from './regras/receitas.js';
 
 const doisDigitos = (n) => String(n).padStart(2, '0');
 
-export function processar({ vereadores, cardsPorAno, presencas, votacoes, coletadoEm }) {
+export function processar({ vereadores, cardsPorAno, presencas, votacoes, receitas, coletadoEm }) {
   const casar = criarCasador(vereadores);
   const inicio = `${ANO_INICIO}-01-01`;
   const naoAtribuidos = [];
@@ -162,6 +163,9 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, coleta
     };
   });
 
+  const resumoReceitas = receitas ? resumirReceitas(receitas) : null;
+  const anoReceitas = new Date(coletadoEm || Date.now()).getFullYear();
+
   const vistosNA = new Set();
   return {
     vereadores: resumo,
@@ -177,12 +181,16 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, coleta
       return true;
     }),
     avisos: [...new Set(avisos)],
+    receitas: resumoReceitas ? montarImpostometro(resumoReceitas, anoReceitas) : null,
     presencasLidas: presencas.map((p) => ({ arquivo: p.arquivo, linhas: p.linhas.length })),
     votacoesLidas: votacoes.map((v) => ({ ano: v.ano, blocos: v.blocos.length, semEventos: v.blocos.filter((b) => !b.eventos.length).length })),
     meta: {
       atualizadoEm: coletadoEm || new Date().toISOString(),
       totalProposituras: proposituras.length,
       semLocal: proposituras.filter((p) => p.grupo === 'melhoria' && !p.locais.length).length,
+      receitasMensais: resumoReceitas
+        ? Object.fromEntries(Object.entries(resumoReceitas.meses).map(([m, x]) => [m, Math.round(x.impostos * 100) / 100]))
+        : {},
     },
   };
 }

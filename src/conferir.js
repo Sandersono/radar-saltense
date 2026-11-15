@@ -13,5 +13,19 @@ export function conferir(dados, anterior, esperados) {
   if (anterior && dados.meta.totalProposituras < anterior.totalProposituras) {
     problemas.push(`O total de proposituras caiu de ${anterior.totalProposituras} para ${dados.meta.totalProposituras}.`);
   }
+  const r = dados.receitas;
+  if (!r) {
+    problemas.push('Receitas do impostômetro não foram coletadas.');
+  } else {
+    const mesCalendario = new Date(dados.meta.atualizadoEm || Date.now()).getMonth() + 1;
+    if (mesCalendario >= 3 && r.anoAnterior && r.anoAnterior.mesesPublicados < 12) {
+      problemas.push(`Receitas de ${r.anoAnterior.ano}: só ${r.anoAnterior.mesesPublicados} de 12 meses publicados.`);
+    }
+    const novos = dados.meta.receitasMensais || {};
+    for (const [mes, valor] of Object.entries((anterior && anterior.receitasMensais) || {})) {
+      if (!(mes in novos)) problemas.push(`Receitas de ${mes} sumiram da fonte.`);
+      else if (novos[mes] < valor * 0.95) problemas.push(`Impostos de ${mes} caíram mais de 5% (de ${valor} para ${novos[mes]}).`);
+    }
+  }
   return problemas;
 }

@@ -271,7 +271,8 @@ import { conferir } from '../src/conferir.js';
     presencasLidas: [{ arquivo: 'a.pdf', linhas: 11 }],
     votacoesLidas: [{ ano: 2026, blocos: 5, semEventos: 0 }],
     proposituras: [{}],
-    meta: { totalProposituras: 100 },
+    receitas: { anoAnterior: { ano: 2025, mesesPublicados: 12 } },
+    meta: { totalProposituras: 100, atualizadoEm: '2026-11-14T09:00:00Z', receitasMensais: { '2026-09': 100 } },
   };
   assert.deepEqual(conferir(base, { totalProposituras: 90 }, 11), []);
   assert.deepEqual(conferir(base, null, 11), []);
@@ -282,6 +283,13 @@ import { conferir } from '../src/conferir.js';
   assert.equal(conferir({ ...base, presencasLidas: [] }, null, 11).length, 1);
   assert.equal(conferir({ ...base, votacoesLidas: [] }, null, 11).length, 1);
   assert.equal(conferir({ ...base, proposituras: [] }, null, 11).length, 1);
+  assert.equal(conferir({ ...base, receitas: null }, null, 11).length, 1);
+  const anoIncompleto = { ...base, receitas: { anoAnterior: { ano: 2025, mesesPublicados: 11 } } };
+  assert.equal(conferir(anoIncompleto, null, 11).length, 1);
+  assert.equal(conferir({ ...anoIncompleto, meta: { ...base.meta, atualizadoEm: '2026-02-10T09:00:00Z' } }, null, 11).length, 0);
+  assert.equal(conferir({ ...base, meta: { ...base.meta, receitasMensais: {} } }, { totalProposituras: 90, receitasMensais: { '2026-09': 100 } }, 11).length, 1);
+  assert.equal(conferir({ ...base, meta: { ...base.meta, receitasMensais: { '2026-09': 90 } } }, { totalProposituras: 90, receitasMensais: { '2026-09': 100 } }, 11).length, 1);
+  assert.equal(conferir({ ...base, meta: { ...base.meta, receitasMensais: { '2026-09': 96 } } }, { totalProposituras: 90, receitasMensais: { '2026-09': 100 } }, 11).length, 0);
   console.log('ok: conferir');
 }
 
