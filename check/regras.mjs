@@ -399,3 +399,12 @@ import { iniciais, percentual, sugestoesBairros } from '../src/site/util.js';
   assert.deepEqual(sugestoesBairros(locais), ['Centro', 'Jardim A', 'Jardim B']);
   console.log('ok: site util');
 }
+
+import { geometriaRecorte, fotoSite } from '../src/site/util.js';
+
+{
+  assert.deepEqual(geometriaRecorte(527, 800), { esquerda: 0, lado: 527, folga: 53, alturaCorpo: 474 });
+  assert.deepEqual(geometriaRecorte(800, 600), { esquerda: 100, lado: 600, folga: 60, alturaCorpo: 540 });
+  assert.equal(fotoSite('fotos/almir.jpg'), 'fotos/almir.webp');
+  console.log('ok: recorte das fotos');
+}

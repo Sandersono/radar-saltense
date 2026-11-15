@@ -20,3 +20,13 @@ export function sugestoesBairros(locais, n = 6) {
     .slice(0, n)
     .map((l) => l.nome);
 }
+
+// Recorte quadrado das fotos oficiais: largura inteira, colado no topo (a cabeça
+// fica perto da borda de cima) e com uma folga acima, preenchida esticando a 1ª linha.
+export function geometriaRecorte(largura, altura, respiro = 0.1) {
+  const lado = Math.min(largura, altura);
+  const folga = Math.round(lado * respiro);
+  return { esquerda: Math.floor((largura - lado) / 2), lado, folga, alturaCorpo: lado - folga };
+}
+
+export const fotoSite = (fotoLocal) => fotoLocal.replace(/\.[^./]+$/, '.webp');

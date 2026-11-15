@@ -3,10 +3,10 @@
 @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url('fontes/inter-600.woff2') format('woff2'); }
 
 :root {
-  --rio: #0E6BA8; --rio-escuro: #10324A; --areia: #FFF7EA; --areia-escura: #F6E7CC;
-  --ambar: #F2A541; --ambar-escuro: #7A4A00; --branco: #FFFFFF; --suave: #5B6472; --linha: #E8DCC6;
+  --rio: #0E6BA8; --rio-escuro: #0B2545; --areia: #FFF7EA; --areia-escura: #F6E7CC;
+  --ambar: #FFC20E; --ambar-escuro: #7A4A00; --branco: #FFFFFF; --suave: #5B6472; --linha: #E8DCC6;
   --falta: #B3261E; --justificada: #B26A00; --presente: #1E7A46;
-  --sombra: 0 2px 8px rgb(16 50 74 / 6%); --raio: 18px;
+  --sombra: 0 2px 8px rgb(11 37 69 / 6%); --raio: 18px;
   --titulo: 'Nunito', system-ui, sans-serif;
   --texto: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 }
@@ -21,24 +21,26 @@ h1 { font-size: clamp(1.8rem, 6vw, 2.6rem); margin: .25rem 0 .5rem; }
 h2 { font-size: clamp(1.35rem, 4.5vw, 1.8rem); margin: 0 0 .75rem; }
 h3 { font-size: 1.15rem; margin: 1.25rem 0 .5rem; }
 :focus-visible { outline: 3px solid var(--rio-escuro); outline-offset: 2px; box-shadow: 0 0 0 5px var(--ambar); border-radius: 6px; }
-.topo :focus-visible { outline-color: #FFFFFF; box-shadow: none; }
+.heroi :focus-visible { outline-color: #FFFFFF; box-shadow: none; }
 .rodape :focus-visible { outline-color: var(--ambar); box-shadow: none; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .pular { position: absolute; left: -999px; top: .5rem; background: var(--ambar); color: var(--rio-escuro); padding: .5rem 1rem; border-radius: 999px; z-index: 10; font-weight: 600; }
 .pular:focus { left: .5rem; }
 
-.topo { background: var(--rio); color: #fff; }
+.topo { background: var(--rio-escuro); color: #fff; }
+.topo-faixa { background: #fff; border-bottom: 4px solid var(--ambar); }
 .topo-barra { max-width: 1040px; margin: 0 auto; padding: .75rem 1rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; }
-.marca { font-family: var(--titulo); font-weight: 800; font-size: 1.3rem; color: #fff; text-decoration: none; }
-.menu-botao { display: none; align-items: center; gap: .4rem; min-height: 44px; padding: .4rem .9rem; border: 2px solid rgb(255 255 255 / 70%); border-radius: 999px; background: transparent; color: #fff; font: 600 .95rem var(--texto); cursor: pointer; }
+.marca { display: inline-flex; border-radius: 6px; }
+.marca img { display: block; height: 48px; width: auto; }
+.menu-botao { display: none; align-items: center; gap: .4rem; min-height: 44px; padding: .4rem .9rem; border: 2px solid var(--rio-escuro); border-radius: 999px; background: transparent; color: var(--rio-escuro); font: 600 .95rem var(--texto); cursor: pointer; }
 .menu-botao::before { content: '☰' / ''; font-size: 1.1rem; }
 .menu { display: flex; flex-wrap: wrap; gap: .25rem 1.1rem; width: 100%; }
-.menu a { color: #fff; text-decoration: none; padding: .55rem 0; font-weight: 600; }
+.menu a { color: var(--rio-escuro); text-decoration: none; padding: .55rem 0; font-weight: 600; }
 .menu a:hover { text-decoration: underline; }
-.heroi { max-width: 1040px; margin: 0 auto; padding: .5rem 1rem 1.25rem; }
+.heroi { max-width: 1040px; margin: 0 auto; padding: 1.25rem 1rem 1.25rem; }
 .heroi h1 { color: #fff; }
 .heroi p { margin: .25rem 0; color: #E3F1FB; font-size: 1.05rem; }
-.heroi .heroi-sobre { text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; font-weight: 600; color: #FFE7C2; }
+.heroi .heroi-sobre { text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; font-weight: 600; color: var(--ambar); }
 .heroi .atualizado { font-size: .88rem; }
 .onda { display: block; width: 100%; height: 36px; fill: var(--areia); margin-top: -1px; }
 
@@ -83,7 +85,7 @@ th, td { text-align: left; padding: .4rem; border-bottom: 1px solid var(--linha)
 .fatia { display: block; height: 100%; }
 .g-melhoria { background: #0E6BA8; }
 .g-cobranca { background: #5AB0DE; }
-.g-homenagem { background: #F2A541; }
+.g-homenagem { background: var(--ambar); }
 .g-lei { background: #1E7A46; }
 .g-outros { background: #9AA5B1; }
 .legenda { list-style: none; padding: 0; margin: 0 0 1rem; display: flex; flex-wrap: wrap; gap: .35rem 1rem; font-size: .9rem; }
@@ -99,7 +101,7 @@ a.cartao-numero:hover { border-color: var(--rio); }
 .cartoes { list-style: none; padding: 0; display: grid; gap: .9rem; grid-template-columns: minmax(0, 1fr); }
 .cartao-vereador-topo { display: flex; gap: .8rem; align-items: center; text-decoration: none; color: var(--rio-escuro); }
 .cartao-vereador-topo strong { display: block; font-family: var(--titulo); font-size: 1.1rem; }
-.foto { border-radius: 50%; object-fit: cover; object-position: 50% 20%; flex: 0 0 auto; background: #D6ECFA; }
+.foto { border-radius: 50%; object-fit: cover; flex: 0 0 auto; background: #D6ECFA; }
 .foto-iniciais { display: inline-flex; align-items: center; justify-content: center; font: 800 1.1rem var(--titulo); color: var(--rio); }
 .presenca-resumo { margin: .8rem 0 .4rem; font-size: .9rem; }
 .presenca-barra { display: block; height: 8px; border-radius: 999px; background: #F4E3E1; margin-top: .3rem; overflow: hidden; }
@@ -153,17 +155,18 @@ a.cartao-numero:hover { border-color: var(--rio); }
 
 .rodape { background: var(--rio-escuro); color: #E7EEF5; margin-top: 3rem; }
 .rodape-dentro { max-width: 1040px; margin: 0 auto; padding: 1.75rem 1rem; font-size: .92rem; }
-.rodape a { color: #FFD79A; }
+.rodape a { color: var(--ambar); }
 .rodape-marca { font-family: var(--titulo); font-weight: 800; font-size: 1.2rem; color: #fff; }
 
 @media (max-width: 767px) {
   .js .menu-botao { display: inline-flex; }
   .js .menu { display: none; flex-direction: column; gap: 0; padding: .25rem 0 .5rem; }
   .js .menu.aberto { display: flex; }
-  .js .menu a { padding: .7rem 0; border-top: 1px solid rgb(255 255 255 / 20%); }
+  .js .menu a { padding: .7rem 0; border-top: 1px solid var(--linha); }
 }
 @media (min-width: 768px) {
   .menu { width: auto; }
+  .marca img { height: 56px; }
   .filtros { grid-template-columns: 2fr 1fr; }
   .cartoes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .grade-numeros { grid-template-columns: repeat(4, minmax(0, 1fr)); }

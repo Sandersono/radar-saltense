@@ -1,6 +1,9 @@
 import { AUTOR } from '../config.js';
 import { esc } from '../util/texto.js';
-import { iniciais } from './util.js';
+import { iniciais, fotoSite } from './util.js';
+
+const ENDERECO = 'https://sandersono.github.io/radar-saltense/';
+const DESCRICAO = 'O que cada vereador de Salto/SP fez desde a posse e quanto a cidade arrecada em impostos, só com dados oficiais.';
 
 export const GRUPOS_PUBLICOS = ['melhoria', 'cobranca', 'homenagem', 'lei', 'outros'];
 export const AVISO_NOMES = 'Nomes escritos de outro jeito no PDF (ex.: apelidos) ficam de fora e podem mudar estes números.';
@@ -17,7 +20,7 @@ export const aviso = (html) => `<p class="aviso"><span class="aviso-icone" aria-
 
 export function foto(v, prefixo, tamanho) {
   return v.fotoLocal
-    ? `<img class="foto" src="${prefixo}${esc(v.fotoLocal)}" alt="Foto de ${esc(v.nome)}" width="${tamanho}" height="${tamanho}" loading="lazy">`
+    ? `<img class="foto" src="${prefixo}${esc(fotoSite(v.fotoLocal))}" alt="Foto de ${esc(v.nome)}" width="${tamanho}" height="${tamanho}" loading="lazy">`
     : `<span class="foto foto-iniciais" style="width:${tamanho}px;height:${tamanho}px" aria-hidden="true">${esc(iniciais(v.nome))}</span>`;
 }
 
@@ -44,19 +47,31 @@ export function layout({ titulo, corpo, prefixo = '', atualizadoEm, heroi = '' }
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(titulo)}</title>
-<meta name="description" content="O que cada vereador de Salto/SP fez desde a posse e quanto a cidade arrecada em impostos, só com dados oficiais.">
-<meta name="theme-color" content="#0E6BA8">
+<meta name="description" content="${DESCRICAO}">
+<meta name="theme-color" content="#0B2545">
+<link rel="icon" type="image/png" sizes="32x32" href="${prefixo}marca/icone-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="${prefixo}marca/icone-192.png">
+<link rel="apple-touch-icon" href="${prefixo}marca/icone-180.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Radar Saltense">
+<meta property="og:title" content="${esc(titulo)}">
+<meta property="og:description" content="${DESCRICAO}">
+<meta property="og:image" content="${ENDERECO}marca/previa.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Logo do Radar Saltense">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="${prefixo}estilo.css">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo">
-<div class="topo-barra">
-<a class="marca" href="${prefixo}index.html">Radar Saltense</a>
+<div class="topo-faixa"><div class="topo-barra">
+<a class="marca" href="${prefixo}index.html"><img src="${prefixo}marca/logo.png" alt="Radar Saltense, página inicial" width="140" height="56"></a>
 <button class="menu-botao" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
 <nav id="menu-principal" class="menu" aria-label="Principal"><a href="${prefixo}index.html#bairro">Seu bairro</a><a href="${prefixo}index.html#vereadores">Vereadores</a><a href="${prefixo}votacoes.html">Votações</a><a href="${prefixo}impostometro.html">Impostômetro</a><a href="${prefixo}fontes.html">De onde vêm os números</a></nav>
-</div>
+</div></div>
 ${heroi ? `<div class="heroi">${heroi}</div>` : ''}
 <svg class="onda" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 30C240 60 480 0 720 22S1200 50 1440 18V60H0Z"/></svg>
 </header>
