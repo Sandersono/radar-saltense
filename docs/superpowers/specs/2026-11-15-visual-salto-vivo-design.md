@@ -70,7 +70,7 @@ Todo par de texto e fundo precisa de contraste de pelo menos 4,5:1 (WCAG AA). O 
    - tocar numa sugestão preenche o campo e roda a busca.
 4. **"A Câmara em números":** quatro cartões.
    - Propostas desde 2025: `d.proposituras.length`.
-   - Ruas com pedido repetido: `d.repetidos.length`.
+   - Ruas com pedido repetido: quantidade de ruas diferentes em `d.repetidos`.
    - Sessões com presença registrada: o maior `presenca.total` entre os vereadores.
    - Votações registradas: soma dos eventos em `d.votacoes`.
    - Cada cartão tem link para a seção correspondente.
