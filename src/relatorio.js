@@ -89,16 +89,17 @@ export function relatorio(d, problemas, aumentos = []) {
   if (!pf) {
     l.push('- Dados da Prefeitura não coletados.');
   } else {
-    const anosIegm = pf.iegm ? Object.keys(pf.iegm.anos).sort() : [];
+    const anosIegm = pf.iegm ? Object.keys(pf.iegm.anos).filter((a) => pf.iegm.anos[a].Salto && pf.iegm.anos[a].Salto.iegm).sort() : [];
     const anoI = anosIegm[anosIegm.length - 1];
     const faixa = anoI && pf.iegm.anos[anoI].Salto && pf.iegm.anos[anoI].Salto.iegm;
     l.push(`- IEGM de Salto: ${anoI ? `ano-base ${anoI}, faixa ${faixa || 'sem nota'}${faixa ? ` (${FAIXAS_IEGM[faixa] || '?'})` : ''}; ${anosIegm.length} anos guardados (${anosIegm[0]} a ${anoI})` : 'sem dado'}`);
     l.push(`- Obras no painel do TCE: ${pf.obras ? `${pf.obras.obras.length} (data-base ${pf.obras.dataBase}), ${pf.obras.obras.filter((o) => o.paralisada).length} paralisadas` : 'sem dado'}`);
     for (const [ano, x] of Object.entries(pf.contratos)) {
       const cd = x.contratacoes;
-      l.push(`- Contratações ${ano}: ${cd.total.quantidade}; ${cd.semDisputa.pctQuantidade}% sem disputa (dispensa ou inexigibilidade, ${cd.semDisputa.quantidade}); sem valor homologado no PNCP: ${cd.semHomologado.quantidade}; contratos assinados: ${x.contratos.quantidade} (${reais(x.contratos.valor)}), empenhos à parte: ${x.contratos.empenhos.quantidade}; coletado em ${x.coletadoEm}`);
+      l.push(`- Contratações ${ano}: ${cd.total.quantidade}; ${cd.semDisputa.pctQuantidade}% sem licitação (dispensa ou inexigibilidade, ${cd.semDisputa.quantidade}); sem valor homologado no PNCP: ${cd.semHomologado.quantidade}; contratos assinados: ${x.contratos.quantidade} (${reais(x.contratos.valor)}), empenhos à parte: ${x.contratos.empenhos.quantidade}; coletado em ${x.coletadoEm}`);
     }
     if (!Object.keys(pf.contratos).length) l.push('- Contratações: sem dado');
+    if (d.meta.duracaoPncpMs != null) l.push(`- Coleta do PNCP: levou ${Math.round(d.meta.duracaoPncpMs / 1000)} s nesta atualização (prazo de 360 s).`);
   }
   l.push('', '## O que é estimativa', '');
   l.push('- Impostômetro: depois do último mês oficial, o contador soma o ritmo médio diário dos últimos meses publicados; não considera a sazonalidade (o IPTU concentra em jan/fev).');

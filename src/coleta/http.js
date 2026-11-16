@@ -14,10 +14,17 @@ export function marcarFim() {
   ultimo = Date.now();
 }
 
-export async function baixar(url) {
+// Tempo de cada pedido: no máximo 60 s e nunca além do limite (instante absoluto em ms). Esgotado, lança erro com "prazo".
+export function tempoDoPedido(limite, rotulo = 'coleta') {
+  const resta = limite === undefined ? 60000 : limite - Date.now();
+  if (resta <= 0) throw new Error(`${rotulo}: prazo de coleta esgotado.`);
+  return Math.min(60000, resta);
+}
+
+export async function baixar(url, { limite, rotulo } = {}) {
   await aguardarVez();
   try {
-    const r = await fetch(url, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(60000) });
+    const r = await fetch(url, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(tempoDoPedido(limite, rotulo)) });
     if (!r.ok) {
       const erro = new Error(`HTTP ${r.status} em ${url}`);
       erro.status = r.status;

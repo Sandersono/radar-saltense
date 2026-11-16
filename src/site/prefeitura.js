@@ -31,7 +31,7 @@ const barraFaixa = (rotulo, f, destaque) => (NIVEL[f]
 
 function secaoNota(p) {
   if (!p.iegm) return '';
-  const anos = Object.keys(p.iegm.anos).filter((a) => p.iegm.anos[a].Salto).sort();
+  const anos = Object.keys(p.iegm.anos).filter((a) => p.iegm.anos[a].Salto && p.iegm.anos[a].Salto.iegm).sort();
   if (!anos.length) return '';
   const ult = anos[anos.length - 1];
   const s = p.iegm.anos[ult].Salto;
@@ -46,15 +46,15 @@ function secaoNota(p) {
 <h2>A nota do Tribunal de Contas</h2>
 <p>O Tribunal de Contas do Estado (TCE-SP) dá uma nota à gestão de cada cidade, o IEG-M. A nota vai de C (baixo nível de adequação) até A (altamente efetiva).</p>
 <div class="grade-numeros">
-${cartaoNumero({ valor: s.iegm || '—', rotulo: `${s.iegm ? `${significado(s.iegm)}; ` : ''}ano-base ${ult}, divulgado em ${Number(ult) + 1}` })}
+${cartaoNumero({ valor: s.iegm || '—', rotulo: `${s.iegm ? `${significado(s.iegm)}; ` : ''}ano-base ${esc(ult)}, divulgado em ${Number(ult) + 1}` })}
 </div>
 <h3>Ano a ano</h3>
 <ul class="barras">${linhaTempo}</ul>
-<h3>Por área, em ${ult}</h3>
+<h3>Por área, em ${esc(ult)}</h3>
 <ul class="barras">${areas}</ul>
-<h3>Salto e cidades vizinhas, em ${ult}</h3>
+<h3>Salto e cidades vizinhas, em ${esc(ult)}</h3>
 <table class="tabela-empilha"><thead><tr><th>Cidade</th><th>Nota geral</th><th>O que significa</th></tr></thead><tbody>${tabela}</tbody></table>
-<p class="nota">O ano-base ${ult} é o IEG-M divulgado em ${Number(ult) + 1}. A nota mede a gestão em cada área a partir de questionários e dados enviados ao TCE.</p>
+<p class="nota">O ano-base ${esc(ult)} é o IEG-M divulgado em ${Number(ult) + 1}. A nota mede a gestão em cada área a partir de questionários e dados enviados ao TCE.</p>
 <p>${seloFonte(URL_IEGM, 'painel do IEG-M (TCE-SP)')}</p>
 </section>`;
 }
@@ -81,28 +81,31 @@ function blocoAno(ano, x) {
   const ct = x.contratos;
   const mods = Object.values(cd.porModalidade).sort((a, b) => b.quantidade - a.quantidade).map((m) => [m.nome, m.quantidade]);
   const top = ct.top.map((e) => `<tr><td data-rotulo="Empresa">${esc(e.nome)}<br><small>CNPJ ${cnpjBR(e.cnpj)}</small></td><td data-rotulo="Contratos">${numero(e.contratos)}</td><td data-rotulo="Valor">${reais(e.valor)}</td></tr>`).join('');
-  return `<h3>Compras em ${ano}</h3>
-<p>Em ${ano}, <strong>${cd.semDisputa.pctQuantidade}%</strong> das contratações (${numero(cd.semDisputa.quantidade)} de ${numero(cd.total.quantidade)}) foram por dispensa ou inexigibilidade, sem disputa entre empresas.</p>
-<p class="nota">A lei permite comprar sem licitação em casos como valor baixo, emergência ou fornecedor único. Isto é um fato, não uma acusação.</p>
+  return `<h3>Compras em ${esc(ano)}</h3>
+<p>Em ${esc(ano)}, <strong>${cd.semDisputa.pctQuantidade}%</strong> das contratações (${numero(cd.semDisputa.quantidade)} de ${numero(cd.total.quantidade)}) foram feitas sem licitação (por dispensa ou inexigibilidade).</p>
+<p class="nota">A lei permite comprar sem licitação em casos como valor baixo, emergência ou fornecedor único. Isto é um fato, não uma acusação. Parte das dispensas eletrônicas tem disputa de preço entre fornecedores.</p>
 ${barrasQuantidade(mods, cd.total.quantidade)}
 <p class="nota">O PNCP não traz o valor final de ${numero(cd.semHomologado.quantidade)} das ${numero(cd.total.quantidade)} contratações; por isso aqui contamos quantas foram, não quanto custaram.</p>
-<h3>Contratos assinados em ${ano}</h3>
+<h3>Contratos assinados em ${esc(ano)}</h3>
 <p><strong>${numero(ct.quantidade)}</strong> contratos, somando <strong>${reais(ct.valor)}</strong>.${ct.empenhos.quantidade ? ` Outros ${numero(ct.empenhos.quantidade)} registros são empenhos (${reais(ct.empenhos.valor)}) e ficam fora dessa soma.` : ''}</p>
-${top ? `<h3>As 10 empresas com mais valor contratado em ${ano}</h3>
+${top ? `<h3>As 10 empresas com mais valor contratado em ${esc(ano)}</h3>
 <table class="tabela-empilha"><thead><tr><th>Empresa</th><th>Contratos</th><th>Valor</th></tr></thead><tbody>${top}</tbody></table>
 <p class="nota">Valor total dos contratos publicados no ano, que pode valer por mais de um ano. Só empresas com CNPJ aparecem pelo nome.</p>` : ''}
 <p class="nota">Dados coletados em ${esc(quandoBR(x.coletadoEm))}.</p>`;
 }
 
+// Anos com contratações já registradas, do mais novo ao mais velho (ano recém-aberto, sem nada, não aparece).
+const anosComCompras = (p) => Object.keys(p.contratos).filter((a) => p.contratos[a].contratacoes && p.contratos[a].contratacoes.total && p.contratos[a].contratacoes.total.quantidade > 0).sort().reverse();
+
 function secaoCompras(p) {
-  const anos = Object.keys(p.contratos).sort().reverse();
+  const anos = anosComCompras(p);
   if (!anos.length) return '';
   const [recente, ...outros] = anos;
   return `<section id="compras" class="secao cartao">
 <h2>Como a Prefeitura compra</h2>
 <p>Toda compra ou contratação da Prefeitura vai para o Portal Nacional de Contratações Públicas (PNCP). Aqui estão as contratações, por modalidade, e as empresas com contratos assinados.</p>
 ${blocoAno(recente, p.contratos[recente])}
-${outros.map((a) => `<details><summary>Compras em ${a}</summary>${blocoAno(a, p.contratos[a])}</details>`).join('\n')}
+${outros.map((a) => `<details><summary>Compras em ${esc(a)}</summary>${blocoAno(a, p.contratos[a])}</details>`).join('\n')}
 <p>${seloFonte(URL_PNCP, 'PNCP, página da Prefeitura')}</p>
 </section>`;
 }
@@ -110,19 +113,19 @@ ${outros.map((a) => `<details><summary>Compras em ${a}</summary>${blocoAno(a, p.
 function atalhos(d, p) {
   const c = [];
   if (p.iegm) {
-    const anos = Object.keys(p.iegm.anos).filter((a) => p.iegm.anos[a].Salto).sort();
+    const anos = Object.keys(p.iegm.anos).filter((a) => p.iegm.anos[a].Salto && p.iegm.anos[a].Salto.iegm).sort();
     const ult = anos[anos.length - 1];
     const f = ult && p.iegm.anos[ult].Salto.iegm;
-    if (f) c.push(cartaoNumero({ valor: f, rotulo: `nota do TCE à gestão (ano-base ${ult})`, href: '#nota' }));
+    if (f) c.push(cartaoNumero({ valor: f, rotulo: `nota do TCE à gestão (ano-base ${esc(ult)})`, href: '#nota' }));
   }
   if (p.obras) {
     const par = p.obras.obras.filter((x) => x.paralisada).length;
     c.push(cartaoNumero({ valor: numero(p.obras.obras.length), rotulo: `obras no painel do TCE${par ? ` (${numero(par)} ${par === 1 ? 'paralisada' : 'paralisadas'})` : ''}`, href: '#obras' }));
   }
-  const anosC = Object.keys(p.contratos).sort();
+  const anosC = anosComCompras(p);
   if (anosC.length) {
-    const a = anosC[anosC.length - 1];
-    c.push(cartaoNumero({ valor: numero(p.contratos[a].contratacoes.total.quantidade), rotulo: `contratações em ${a}`, href: '#compras' }));
+    const a = anosC[0];
+    c.push(cartaoNumero({ valor: numero(p.contratos[a].contratacoes.total.quantidade), rotulo: `contratações em ${esc(a)}`, href: '#compras' }));
   }
   if (p.campanhaPrefeito) c.push(cartaoNumero({ valor: reais(p.campanhaPrefeito.total), rotulo: 'de campanha do prefeito em 2024', href: '#campanha' }));
   if (d.gastos) {
@@ -137,7 +140,7 @@ function atalhos(d, p) {
 
 export function paginaPrefeitura(d) {
   const p = d.prefeitura || { iegm: null, obras: null, contratos: {}, campanhaPrefeito: null };
-  const vazio = !p.iegm && !p.obras && !Object.keys(p.contratos).length
+  const vazio = !p.iegm && !p.obras && !anosComCompras(p).length
     ? aviso('Os dados da Prefeitura ainda não foram coletados.')
     : '';
   const corpo = `<h1>A Prefeitura de Salto</h1>

@@ -10,7 +10,7 @@ import { resumoRespostas } from './regras/respostas.js';
 
 const doisDigitos = (n) => String(n).padStart(2, '0');
 
-export function processar({ vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, folhaCamara, respostas, campanha, iegm, obras, contratos, avisosFontes, coletadoEm }) {
+export function processar({ vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, folhaCamara, respostas, campanha, iegm, obras, contratos, duracaoPncpMs, avisosFontes, coletadoEm }) {
   const casar = criarCasador(vereadores, OUTROS_NOMES);
   const inicio = `${ANO_INICIO}-01-01`;
   const naoAtribuidos = [];
@@ -237,6 +237,7 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
     },
     meta: {
       atualizadoEm: coletadoEm || new Date().toISOString(),
+      duracaoPncpMs: Number.isFinite(duracaoPncpMs) ? duracaoPncpMs : null,
       totalProposituras: proposituras.length,
       semLocal: proposituras.filter((p) => p.grupo === 'melhoria' && !p.locais.length).length,
       receitasMensais: resumoReceitas

@@ -19,7 +19,7 @@ if (Object.keys(novos).length) await salvar(ARQ, `${JSON.stringify(dados, null, 
 
 for (const [ano, d] of Object.entries(novos)) {
   const { total, semDisputa, porModalidade, semHomologado } = d.contratacoes;
-  console.log(`${ano}: ${total.quantidade} contratações (homologado R$ ${total.valor}; ${semHomologado.quantidade} sem valor homologado); sem disputa ${semDisputa.pctQuantidade}% da qtd, ${semDisputa.pctValor}% do valor`);
+  console.log(`${ano}: ${total.quantidade} contratações (homologado R$ ${total.valor}; ${semHomologado.quantidade} sem valor homologado); sem licitação ${semDisputa.pctQuantidade}% da qtd, ${semDisputa.pctValor}% do valor`);
   console.log(`  ${d.contratos.quantidade} contratos (R$ ${d.contratos.valor}) + ${d.contratos.empenhos.quantidade} empenhos (R$ ${d.contratos.empenhos.valor})`);
   console.log('  ', Object.values(porModalidade).map((m) => `${m.nome} ${m.quantidade}`).join(', '));
 }

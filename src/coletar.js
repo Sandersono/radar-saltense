@@ -15,7 +15,7 @@ import { coletarRespostas } from './coleta/respostas.js';
 import { coletarIegm, listarAnosIegm } from './coleta/iegm.js';
 import { coletarObras } from './coleta/obras.js';
 import { coletarContratos } from './coleta/contratos.js';
-import { mesclarIegm, mesclarContratos, escolherObras, dataBaseMaisVelha, anosParaColetar } from './regras/prefeitura.js';
+import { mesclarIegm, mesclarContratos, escolherObras, dataBaseMaisVelha, anosParaColetar, decidirAnoContratos } from './regras/prefeitura.js';
 import { lerCard } from './regras/apex.js';
 import { mesclarFolha } from './regras/folha.js';
 import { filaRespostas } from './regras/respostas.js';
@@ -23,6 +23,7 @@ import { anoMesBR } from './util/texto.js';
 
 const ORCAMENTO_RESPOSTAS = 150;
 const PRAZO_CONTRATOS_MS = 6 * 60 * 1000;
+const PRAZO_PENTAHO_MS = 3 * 60 * 1000;
 // Mensagens do Playwright trazem o registro de chamadas em várias linhas; só a primeira vai para o site.
 const primeiraLinha = (m) => String(m).split('\n')[0].trim();
 const doisDigitos = (n) => String(n).padStart(2, '0');
@@ -82,9 +83,9 @@ async function respostasDaCamara(cardsPorAno, salvo, avisos) {
 // Nota do TCE: o robô só refaz a lista de anos e o ano-base mais novo; os anos antigos ficam como estão.
 async function iegmDoTce(salvo, avisos) {
   try {
-    const anos = await listarAnosIegm();
+    const anos = await listarAnosIegm({ prazoMs: PRAZO_PENTAHO_MS });
     if (!anos.length) throw new Error('lista de anos vazia');
-    return mesclarIegm(salvo, await coletarIegm([anos[0]]));
+    return mesclarIegm(salvo, await coletarIegm([anos[0]], { prazoMs: PRAZO_PENTAHO_MS }));
   } catch (e) {
     avisos.push(`Nota do TCE (IEGM): ${primeiraLinha(e.message)}; mantido o último dado salvo.`);
     return salvo;
@@ -93,7 +94,7 @@ async function iegmDoTce(salvo, avisos) {
 
 async function obrasDoTce(salvo, avisos) {
   try {
-    const novo = await coletarObras();
+    const novo = await coletarObras({ prazoMs: PRAZO_PENTAHO_MS });
     if (dataBaseMaisVelha(novo, salvo)) {
       avisos.push(`Obras do TCE: o painel veio com data-base ${novo.dataBase}, mais velha que a salva (${salvo.dataBase}); mantido o último dado salvo.`);
       return salvo;
@@ -108,7 +109,8 @@ async function obrasDoTce(salvo, avisos) {
 // Compras no PNCP: o ano corrente a cada 7 dias (leva minutos); o anterior só se ainda não estiver salvo.
 async function contratosDoPncp(salvo, hoje, avisos) {
   const anos = anosParaColetar(salvo, hoje.ano);
-  if (!anos.length) return salvo || {};
+  if (!anos.length) return { contratos: salvo || {}, duracaoMs: null };
+  const inicio = Date.now();
   let novos = {};
   try {
     novos = await coletarContratos(anos, { prazoMs: PRAZO_CONTRATOS_MS });
@@ -116,13 +118,14 @@ async function contratosDoPncp(salvo, hoje, avisos) {
     novos = e.anosCompletos || {};
     avisos.push(`Compras da Prefeitura (PNCP): ${primeiraLinha(e.message)}; mantido o último dado salvo${Object.keys(novos).length ? ` (anos atualizados: ${Object.keys(novos).join(', ')})` : ''}.`);
   }
-  const atual = novos[hoje.ano];
-  if (atual && atual.contratos.quantidade === 0) avisos.push(`Compras da Prefeitura (PNCP): nenhum contrato de ${hoje.ano} veio da consulta; confira se o PNCP mudou.`);
-  const antes = salvo && salvo[hoje.ano];
-  if (atual && antes && atual.contratos.quantidade < antes.contratos.quantidade) {
-    avisos.push(`Compras da Prefeitura (PNCP): os contratos de ${hoje.ano} caíram de ${antes.contratos.quantidade} para ${atual.contratos.quantidade}; o PNCP não costuma perder registros.`);
+  // Ano vazio (ou com menos da metade) não troca um ano salvo com dados: fica o salvo, sem renovar coletadoEm.
+  for (const ano of Object.keys(novos)) {
+    const d = decidirAnoContratos(salvo && salvo[ano], novos[ano]);
+    if (!d.manter) continue;
+    avisos.push(`Compras da Prefeitura (PNCP): em ${ano}, ${d.motivo}; o PNCP não costuma perder registros. Mantido o ano salvo.`);
+    delete novos[ano];
   }
-  return mesclarContratos(salvo, novos);
+  return { contratos: mesclarContratos(salvo, novos), duracaoMs: Date.now() - inicio };
 }
 
 export async function coletarTudo() {
@@ -147,10 +150,10 @@ export async function coletarTudo() {
   const contratosSalvos = await lerJson('data/processado/contratos.json', {}, avisosFontes);
   const iegm = await iegmDoTce(iegmSalvo, avisosFontes);
   const obras = await obrasDoTce(obrasSalvas, avisosFontes);
-  const contratos = await contratosDoPncp(contratosSalvos, hoje, avisosFontes);
+  const { contratos, duracaoMs: duracaoPncpMs } = await contratosDoPncp(contratosSalvos, hoje, avisosFontes);
   const folhaCamara = await folhaDaCamara(vereadores.map(({ id, nome, apelido }) => ({ id, nome, apelido })), hoje, folhaSalva, avisosFontes);
   const respostas = await respostasDaCamara(cardsPorAno, respostasSalvas, avisosFontes);
-  const coleta = { vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, folhaCamara, respostas, campanha, iegm, obras, contratos, avisosFontes, coletadoEm: new Date().toISOString() };
+  const coleta = { vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, folhaCamara, respostas, campanha, iegm, obras, contratos, duracaoPncpMs, avisosFontes, coletadoEm: new Date().toISOString() };
   await salvar('data/bruto/coleta.json', JSON.stringify(coleta));
   return coleta;
 }

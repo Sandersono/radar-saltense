@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { resumirContratacoes, resumirContratos, MODALIDADES } from '../src/regras/contratos.js';
+import { decidirAnoContratos, anosParaColetar } from '../src/regras/prefeitura.js';
 
 assert.equal(MODALIDADES[8], 'Dispensa');
 assert.equal(MODALIDADES[9], 'Inexigibilidade');
@@ -34,4 +35,19 @@ assert.deepEqual(k.top, [
   { cnpj: '22222222000122', nome: 'B SA', valor: 120, contratos: 1 },
 ]);
 assert.ok(!JSON.stringify(k).includes('FULANO') && !JSON.stringify(k).includes('12345678901'));
+const ano = (ct, cd) => ({ contratos: { quantidade: ct }, contratacoes: { total: { quantidade: cd } }, coletadoEm: 'x' });
+assert.equal(decidirAnoContratos(ano(100, 200), ano(0, 0)).manter, true);
+assert.equal(decidirAnoContratos(ano(100, 200), ano(100, 0)).manter, true);
+assert.equal(decidirAnoContratos(ano(100, 200), ano(40, 200)).manter, true);
+assert.equal(decidirAnoContratos(ano(100, 200), ano(50, 100)).manter, false);
+assert.equal(decidirAnoContratos(ano(100, 200), ano(120, 210)).manter, false);
+assert.equal(decidirAnoContratos(ano(0, 0), ano(0, 0)).manter, false);
+assert.equal(decidirAnoContratos(undefined, ano(0, 0)).manter, false);
+
+const em = (iso) => Date.parse(iso);
+assert.deepEqual(anosParaColetar({ 2026: { coletadoEm: '2026-12-28T12:00:00Z' } }, 2027, em('2027-01-05T12:00:00Z')), [2027, 2026]);
+assert.deepEqual(anosParaColetar({ 2027: { coletadoEm: '2027-01-18T12:00:00Z' }, 2026: { coletadoEm: '2027-01-10T12:00:00Z' } }, 2027, em('2027-01-20T12:00:00Z')), [2026]);
+assert.deepEqual(anosParaColetar({ 2026: { coletadoEm: '2027-01-16T12:00:00Z' } }, 2027, em('2027-01-20T12:00:00Z')), [2027]);
+assert.deepEqual(anosParaColetar({ 2026: { coletadoEm: '2027-01-16T12:00:00Z' }, 2027: { coletadoEm: '2027-01-19T12:00:00Z' } }, 2027, em('2027-01-20T12:00:00Z')), []);
+assert.deepEqual(anosParaColetar({}, 2027, em('2027-03-01T12:00:00Z')), [2027, 2026]);
 console.log('ok: contratos');
