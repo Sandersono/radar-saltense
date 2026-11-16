@@ -433,3 +433,73 @@ import { lerApelido } from '../src/regras/vereadores-html.js';
   assert.equal(lerApelido('<p>Arildo Guadagnini (1º Vice-Secretário)</p>', 'Arildo Guadagnini'), null);
   console.log('ok: apelidos');
 }
+
+import { grupoFornecedor, cnpjDe, formatarCnpj, orgaoChave, resumirDespesas, areasSiconfi } from '../src/regras/despesas.js';
+
+{
+  const L = (orgao, evento, id, nome, valor, mes = 'Janeiro') => ({ orgao, mes, evento, nr_empenho: '1-2025', id_fornecedor: id, nm_fornecedor: nome, dt_emissao_despesa: '01/01/2025', vl_despesa: valor });
+  const PREF = 'PREFEITURA MUNICIPAL DE SALTO';
+  const CAM = 'CÂMARA MUNICIPAL DE SALTO';
+  const SAAE = 'SERVICO AUTONOMO DE AGUA E ESGOTO DE SALTO - SAAE SALTO';
+  const pj = (n) => `CNPJ - PESSOA JURÍDICA - ${n}`;
+
+  assert.equal(grupoFornecedor(L(PREF, 'Valor Pago', 'PESSOA FÍSICA - 121458', 'FULANO DE TAL', '10,00')), 'pessoas');
+  assert.equal(grupoFornecedor(L(PREF, 'Valor Pago', pj('46634507000106'), 'MUNICIPIO DE SALTO', '10,00')), 'publicos');
+  assert.equal(grupoFornecedor(L(PREF, 'Valor Pago', pj('29979036000140'), 'INSTITUTO NACIONAL DO SEGURO SOCIAL', '10,00')), 'publicos');
+  assert.equal(grupoFornecedor(L(PREF, 'Valor Pago', pj('00360305000104'), 'CAIXA ECONOMICA FEDERAL S/A', '10,00')), 'publicos');
+  assert.equal(grupoFornecedor(L(PREF, 'Valor Pago', pj('30681633000173'), 'CSO AMBIENTAL DE SALTO SPE SA', '10,00')), 'empresas');
+  assert.equal(grupoFornecedor(L(PREF, 'Valor Pago', pj('58645656000141'), 'ANTONIO CARLOS BRUNI JUNIOR', '10,00')), 'empresas');
+  assert.equal(cnpjDe('CNPJ - PESSOA JURÍDICA - 30681633000173'), '30681633000173');
+  assert.equal(cnpjDe('PESSOA FÍSICA - 121458'), null);
+  assert.equal(formatarCnpj('30681633000173'), '30.681.633/0001-73');
+  assert.equal(orgaoChave(PREF), 'prefeitura');
+  assert.equal(orgaoChave(CAM), 'camara');
+  assert.equal(orgaoChave(SAAE), 'saae');
+
+  const porMes = {
+    '2025-01': [
+      L(PREF, 'Valor Pago', pj('11111111000111'), 'EMPRESA A LTDA', '1.500.000,00'),
+      L(CAM, 'Valor Pago', pj('22222222000122'), 'EMPRESA B LTDA', '100,00'),
+      L(PREF, 'Valor Pago', pj('46634507000106'), 'MUNICIPIO DE SALTO', '900,00'),
+      L(SAAE, 'Valor Pago', 'PESSOA FÍSICA - 121458', 'FULANO DE TAL', '50,00'),
+      L(PREF, 'Valor Pago', 'PESSOA FÍSICA - 999999', 'BELTRANO', '25,00'),
+      L(PREF, 'Empenhado', pj('22222222000122'), 'EMPRESA B LTDA', '5.000,00'),
+      L(PREF, 'Anulação', pj('22222222000122'), 'EMPRESA B LTDA', '300,00'),
+    ],
+    '2026-02': [
+      L(PREF, 'Valor Pago', pj('22222222000122'), 'EMPRESA B LTDA', '2.000.000,00', 'Fevereiro'),
+      L(PREF, 'Valor Pago', pj('33333333000133'), 'EMPRESA C LTDA', '999.999,99', 'Fevereiro'),
+    ],
+  };
+  const r = resumirDespesas(porMes, ['22222222000122']);
+  const a25 = r.anos['2025'];
+  assert.equal(a25.total, 1501075);
+  assert.equal(a25.ultimoMes, '2025-01');
+  assert.equal(a25.mesesPublicados, 1);
+  assert.deepEqual(a25.porOrgao, { prefeitura: 1500925, camara: 100, saae: 50 });
+  assert.deepEqual(a25.porGrupo, { empresas: 1500100, publicos: 900, pessoas: 75 });
+  assert.deepEqual(a25.pessoasFisicas, { total: 75, quantidade: 2 });
+  assert.deepEqual(a25.topEmpresas.map((e) => e.cnpj), ['11111111000111', '22222222000122']);
+  assert.equal(a25.topEmpresas[0].nome, 'EMPRESA A LTDA');
+  assert.deepEqual(a25.concentracao, { top10: 1500100, totalEmpresas: 1500100, percentual: 100 });
+  assert.equal(a25.anulado.total, 300);
+  assert.deepEqual(a25.anulado.top, [{ cnpj: '22222222000122', nome: 'EMPRESA B LTDA', total: 300 }]);
+  assert.equal(r.anos['2026'].total, 2999999.99);
+  // novas: A (fora de 2024, R$ 1,5 mi) entra; B (pagou em 2024) e C (abaixo de R$ 1 mi) não
+  assert.deepEqual(r.novas, [{ cnpj: '11111111000111', nome: 'EMPRESA A LTDA', total: 1500000, primeiroMes: '2025-01' }]);
+  assert.deepEqual(r.mensal, { '2025-01': 1501075, '2026-02': 2999999.99 });
+  // empresas: todos os CNPJs com pago > 0 (inclui órgão público), maior primeiro; nunca pessoa física
+  assert.deepEqual(r.empresas.map((e) => e.cnpj), ['22222222000122', '11111111000111', '33333333000133', '46634507000106']);
+  assert.deepEqual(r.empresas[0], { cnpj: '22222222000122', nome: 'EMPRESA B LTDA', porMes: { '2025-01': 100, '2026-02': 2000000 }, porOrgao: { camara: 100, prefeitura: 2000000 } });
+
+  const COL = 'DESPESAS LIQUIDADAS ATÉ O BIMESTRE (d)';
+  const ROT = 'Total das Despesas Exceto Intra-Orçamentárias';
+  const it = (conta, valor, coluna = COL) => ({ rotulo: ROT, coluna, conta, valor });
+  const areas = areasSiconfi([
+    it('DESPESAS (EXCETO INTRA-ORÇAMENTÁRIAS) (I)', 300),
+    it('Saúde', 200), it('Atenção Básica', 150), it('Educação', 100), it('Habitação', 0),
+    it('Saúde', 999, 'DOTAÇÃO INICIAL'),
+  ]);
+  assert.deepEqual(areas, { total: 300, somaAreas: 300, lista: [{ area: 'Saúde', valor: 200 }, { area: 'Educação', valor: 100 }] });
+  console.log('ok: despesas');
+}
