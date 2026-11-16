@@ -11,9 +11,13 @@ export function resumirContratacoes(lista) {
   const porModalidade = {};
   const total = { quantidade: 0, valor: 0 };
   const semDisputa = { quantidade: 0, valor: 0 };
+  let semHomologado = 0;
   for (const c of lista) {
     const id = Number(c.modalidadeId);
-    const valor = Number(c.valorTotalHomologado) > 0 ? Number(c.valorTotalHomologado) : Number(c.valorTotalEstimado) || 0;
+    // Só o valor homologado entra nos valores; sem homologação conta apenas na quantidade.
+    const homologado = Number(c.valorTotalHomologado) > 0;
+    const valor = homologado ? Number(c.valorTotalHomologado) : 0;
+    if (!homologado) semHomologado++;
     const m = (porModalidade[id] ??= { nome: MODALIDADES[id] || c.modalidadeNome || `Modalidade ${id}`, quantidade: 0, valor: 0 });
     m.quantidade++; m.valor += valor;
     total.quantidade++; total.valor += valor;
@@ -24,6 +28,7 @@ export function resumirContratacoes(lista) {
     porModalidade,
     total: { quantidade: total.quantidade, valor: centavos(total.valor) },
     semDisputa: { quantidade: semDisputa.quantidade, valor: centavos(semDisputa.valor), pctQuantidade: pct(semDisputa.quantidade, total.quantidade), pctValor: pct(semDisputa.valor, total.valor) },
+    semHomologado: { quantidade: semHomologado },
   };
 }
 
@@ -31,8 +36,13 @@ export function resumirContratacoes(lista) {
 export function resumirContratos(lista, n = 10) {
   const por = new Map();
   let valor = 0;
+  let quantidade = 0;
+  const empenhos = { quantidade: 0, valor: 0 };
   for (const c of lista) {
     const v = Number(c.valorGlobal) || 0;
+    // Empenho não é contrato: fica fora do total e do ranking, em campo próprio.
+    if (c.tipoContrato?.nome === 'Empenho') { empenhos.quantidade++; empenhos.valor += v; continue; }
+    quantidade++;
     valor += v;
     const doc = String(c.niFornecedor ?? '').replace(/\D/g, '');
     if (doc.length !== 14) continue;
@@ -41,5 +51,5 @@ export function resumirContratos(lista, n = 10) {
     por.set(doc, e);
   }
   const top = [...por.values()].sort((a, b) => b.valor - a.valor).slice(0, n).map((e) => ({ ...e, valor: centavos(e.valor) }));
-  return { quantidade: lista.length, valor: centavos(valor), top };
+  return { quantidade, valor: centavos(valor), empenhos: { quantidade: empenhos.quantidade, valor: centavos(empenhos.valor) }, top };
 }

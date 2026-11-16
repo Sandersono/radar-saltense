@@ -5,43 +5,50 @@
         "4": {
           "nome": "Concorrência eletrônica",
           "quantidade": 26,
-          "valor": 87807846.4
+          "valor": 21985259.26
         },
         "6": {
           "nome": "Pregão eletrônico",
           "quantidade": 97,
-          "valor": 84707591.14
+          "valor": 34348284.25
         },
         "8": {
           "nome": "Dispensa",
           "quantidade": 629,
-          "valor": 25368184.16
+          "valor": 1594115.59
         },
         "9": {
           "nome": "Inexigibilidade",
           "quantidade": 35,
-          "valor": 5239603.67
+          "valor": 79200
         },
         "12": {
           "nome": "Credenciamento",
           "quantidade": 9,
-          "valor": 18453093.38
+          "valor": 14965871.52
         }
       },
       "total": {
         "quantidade": 796,
-        "valor": 221576318.75
+        "valor": 72972730.62
       },
       "semDisputa": {
         "quantidade": 664,
-        "valor": 30607787.83,
+        "valor": 1673315.59,
         "pctQuantidade": 83,
-        "pctValor": 14
+        "pctValor": 2
+      },
+      "semHomologado": {
+        "quantidade": 696
       }
     },
     "contratos": {
       "quantidade": 975,
       "valor": 68902715.82,
+      "empenhos": {
+        "quantidade": 0,
+        "valor": 0
+      },
       "top": [
         {
           "cnpj": "24281268000107",
@@ -105,7 +112,7 @@
         }
       ]
     },
-    "coletadoEm": "2026-11-16T14:50:40.968Z"
+    "coletadoEm": "2026-11-16T16:44:50.883Z"
   },
   "2026": {
     "contratacoes": {
@@ -113,53 +120,60 @@
         "1": {
           "nome": "Leilão eletrônico",
           "quantidade": 2,
-          "valor": 350300
+          "valor": 0
         },
         "4": {
           "nome": "Concorrência eletrônica",
           "quantidade": 20,
-          "valor": 50614497.65
+          "valor": 37361679.6
         },
         "5": {
           "nome": "Concorrência presencial",
           "quantidade": 1,
-          "valor": 1500000
+          "valor": 0
         },
         "6": {
           "nome": "Pregão eletrônico",
           "quantidade": 80,
-          "valor": 206403009.31
+          "valor": 105910753.19
         },
         "8": {
           "nome": "Dispensa",
-          "quantidade": 590,
-          "valor": 37671411.68
+          "quantidade": 591,
+          "valor": 1257828.71
         },
         "9": {
           "nome": "Inexigibilidade",
           "quantidade": 50,
-          "valor": 2198214.5
+          "valor": 334902.7
         },
         "12": {
           "nome": "Credenciamento",
           "quantidade": 6,
-          "valor": 598539902.13
+          "valor": 1461543.06
         }
       },
       "total": {
-        "quantidade": 749,
-        "valor": 897277335.27
+        "quantidade": 750,
+        "valor": 146326707.26
       },
       "semDisputa": {
-        "quantidade": 640,
-        "valor": 39869626.18,
+        "quantidade": 641,
+        "valor": 1592731.41,
         "pctQuantidade": 85,
-        "pctValor": 4
+        "pctValor": 1
+      },
+      "semHomologado": {
+        "quantidade": 560
       }
     },
     "contratos": {
-      "quantidade": 1096,
-      "valor": 118551246.64,
+      "quantidade": 854,
+      "valor": 116794459.29,
+      "empenhos": {
+        "quantidade": 246,
+        "valor": 1764446.35
+      },
       "top": [
         {
           "cnpj": "03992945000125",
@@ -223,6 +237,6 @@
         }
       ]
     },
-    "coletadoEm": "2026-11-16T14:50:40.968Z"
+    "coletadoEm": "2026-11-16T16:44:50.883Z"
   }
 }
