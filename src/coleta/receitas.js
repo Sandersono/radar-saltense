@@ -3,14 +3,15 @@ import { baixar, salvar } from './http.js';
 
 // Baixa as receitas do ano anterior (12 meses) e do ano atual (até o mês anterior ao corrente: o corrente nunca está publicado).
 // Sempre baixa de novo: o TCE-SP corrige meses passados. Resposta [] = mês ainda não publicado.
-export async function coletarReceitas(anoAtual, mesAtual) {
+export async function coletarReceitas(anoAtual, mesAtual, { prazoMs } = {}) {
+  const limite = prazoMs === undefined ? undefined : Date.now() + prazoMs;
   const porMes = {};
   for (const ano of [anoAtual - 1, anoAtual]) {
     if (ano < ANO_INICIO) continue;
     const ultimoMes = ano === anoAtual ? mesAtual - 1 : 12;
     for (let mes = 1; mes <= ultimoMes; mes++) {
       const chave = `${ano}-${String(mes).padStart(2, '0')}`;
-      const texto = (await baixar(`${TCE_RECEITAS}/${ano}/${mes}`)).toString('utf8');
+      const texto = (await baixar(`${TCE_RECEITAS}/${ano}/${mes}`, { limite, rotulo: 'Receitas do TCE-SP' })).toString('utf8');
       let linhas;
       try { linhas = JSON.parse(texto); } catch { throw new Error(`Receitas ${chave}: a resposta do TCE-SP não é JSON.`); }
       if (!Array.isArray(linhas)) throw new Error(`Receitas ${chave}: formato inesperado da API do TCE-SP.`);

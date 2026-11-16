@@ -7,6 +7,7 @@ import { relatorio } from './relatorio.js';
 import { gerarSite } from './gerar-site.js';
 import { mesclarFolha } from './regras/folha.js';
 import { serializarRespostas } from './regras/respostas.js';
+import { reaproveitarTce } from './regras/tce-anterior.js';
 import { mesclarIegm, mesclarContratos, escolherObras } from './regras/prefeitura.js';
 
 const usarCache = process.argv.includes('--usar-cache');
@@ -34,10 +35,11 @@ const obrasSalvas = obrasDisco.obras ? obrasDisco : null;
 coleta.obras = usarCache ? escolherObras(coleta.obras, obrasSalvas) : escolherObras(obrasSalvas, coleta.obras);
 const contratosDisco = await doDisco('data/processado/contratos.json');
 coleta.contratos = usarCache ? mesclarContratos(coleta.contratos, contratosDisco) : mesclarContratos(contratosDisco, coleta.contratos);
-const dados = processar(coleta);
-
 let anterior = null;
 try { anterior = JSON.parse(await readFile('data/processado/meta.json', 'utf8')); } catch (e) { if (e.code !== 'ENOENT') throw e; }
+// TCE-SP fora do ar: receitas/gastos não coletados repetem o último resultado publicado.
+const tceFora = coleta.receitas === null || coleta.despesas === null || coleta.siconfi === null;
+const dados = reaproveitarTce(processar(coleta), coleta, tceFora ? await doDisco('data/processado/dados.json') : null, anterior);
 
 const problemas = conferir(dados, anterior, VEREADORES_ESPERADOS);
 const aumentos = aumentosDespesas(dados.meta, anterior);

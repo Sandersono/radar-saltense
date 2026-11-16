@@ -576,5 +576,24 @@
       "rogerio-dos-santos-filho": 10000
     },
     "indenizacoes": 0
+  },
+  "2026-11": {
+    "grupos": {
+      "vereadores": {
+        "total": 0,
+        "pessoas": 0
+      },
+      "assessores": {
+        "total": 8683.28,
+        "pessoas": 1
+      },
+      "servidores": {
+        "total": 38666.37,
+        "pessoas": 2
+      }
+    },
+    "porVereador": {},
+    "indenizacoes": 0,
+    "parcial": true
   }
 }

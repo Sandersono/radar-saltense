@@ -24,6 +24,9 @@ import { anoMesBR } from './util/texto.js';
 const ORCAMENTO_RESPOSTAS = 150;
 const PRAZO_CONTRATOS_MS = 6 * 60 * 1000;
 const PRAZO_PENTAHO_MS = 3 * 60 * 1000;
+const PRAZO_RECEITAS_MS = 4 * 60 * 1000;
+const PRAZO_DESPESAS_MS = 6 * 60 * 1000;
+const PRAZO_SICONFI_MS = 3 * 60 * 1000;
 // Mensagens do Playwright trazem o registro de chamadas em várias linhas; só a primeira vai para o site.
 const primeiraLinha = (m) => String(m).split('\n')[0].trim();
 const doisDigitos = (n) => String(n).padStart(2, '0');
@@ -33,6 +36,13 @@ async function lerJson(caminho, padrao, avisos) {
     if (e.code === 'ENOENT') return padrao;
     avisos.push(`${caminho} não pôde ser lido (${primeiraLinha(e.message)}); seguindo sem ele.`);
     return padrao;
+  }
+}
+
+async function fonteTce(nome, coletar, avisos) {
+  try { return await coletar(); } catch (e) {
+    avisos.push(`${nome}: ${primeiraLinha(e.message)}; mantidos os dados da última atualização.`);
+    return null;
   }
 }
 
@@ -137,11 +147,12 @@ export async function coletarTudo() {
   const presencas = await coletarPresencas(lista, anoAtual);
   const votacoes = await coletarVotacoes(lista, anoAtual);
   const hoje = anoMesBR();
-  const receitas = await coletarReceitas(hoje.ano, hoje.mes);
-  const despesas = await coletarDespesas(hoje.ano, hoje.mes);
-  const siconfi = await coletarSiconfi(hoje.ano);
-  const cnpjs2024 = JSON.parse(await readFile('data/referencia/cnpjs-pagos-2024.json', 'utf8'));
   const avisosFontes = [];
+  // TCE-SP e SICONFI fora do ar não param o robô: fonte não coletada vira null e o último resultado é mantido (src/regras/tce-anterior.js).
+  const receitas = await fonteTce('Receitas do TCE-SP', () => coletarReceitas(hoje.ano, hoje.mes, { prazoMs: PRAZO_RECEITAS_MS }), avisosFontes);
+  const despesas = await fonteTce('Despesas do TCE-SP', () => coletarDespesas(hoje.ano, hoje.mes, { prazoMs: PRAZO_DESPESAS_MS }), avisosFontes);
+  const siconfi = await fonteTce('SICONFI', () => coletarSiconfi(hoje.ano, { prazoMs: PRAZO_SICONFI_MS }), avisosFontes);
+  const cnpjs2024 = JSON.parse(await readFile('data/referencia/cnpjs-pagos-2024.json', 'utf8'));
   const folhaSalva = await lerJson('data/processado/folha-camara.json', {}, avisosFontes);
   const respostasSalvas = await lerJson('data/processado/respostas.json', {}, avisosFontes);
   const campanha = await lerJson('data/referencia/campanha-2024.json', null, avisosFontes);
@@ -164,9 +175,9 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   for (const [ano, l] of Object.entries(c.cardsPorAno)) console.log(`Proposituras ${ano}: ${l.length}`);
   console.log(`Tabelas de presença: ${c.presencas.length} (linhas: ${[...new Set(c.presencas.map((p) => p.linhas.length))].join(', ')})`);
   for (const v of c.votacoes) console.log(`Votações ${v.ano}: ${v.blocos.length} projetos`);
-  console.log(`Receitas: ${Object.keys(c.receitas).length} meses publicados`);
-  console.log(`Despesas: ${Object.keys(c.despesas).length} meses publicados`);
-  console.log(`SICONFI: ${Object.entries(c.siconfi).map(([a, s]) => `${a} bimestre ${s.bimestre}`).join(', ') || 'nada'}`);
+  console.log(`Receitas: ${c.receitas ? `${Object.keys(c.receitas).length} meses publicados` : 'não coletadas'}`);
+  console.log(`Despesas: ${c.despesas ? `${Object.keys(c.despesas).length} meses publicados` : 'não coletadas'}`);
+  console.log(`SICONFI: ${c.siconfi ? Object.entries(c.siconfi).map(([a, s]) => `${a} bimestre ${s.bimestre}`).join(', ') || 'nada' : 'não coletado'}`);
   console.log(`Fotos: ${Object.keys(c.fotos).length} de ${c.vereadores.length}`);
   console.log(`Folha da Câmara: ${Object.keys(c.folhaCamara).length} meses; respostas conferidas: ${Object.keys(c.respostas).length}`);
   console.log(`Prefeitura: IEGM ${c.iegm ? Object.keys(c.iegm.anos).length : 0} anos; obras ${c.obras ? c.obras.obras.length : 0}; contratos ${Object.keys(c.contratos).join(', ') || 'nenhum'}`);

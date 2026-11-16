@@ -31,6 +31,10 @@ export async function baixar(url, { limite, rotulo } = {}) {
       throw erro;
     }
     return Buffer.from(await r.arrayBuffer());
+  } catch (e) {
+    // Pedido cortado porque o prazo da coleta acabou: o erro diz "prazo" (e não só "timeout").
+    if (limite !== undefined && !e.status && Date.now() >= limite - 50) throw new Error(`${rotulo || 'coleta'}: prazo de coleta esgotado.`);
+    throw e;
   } finally {
     marcarFim();
   }
