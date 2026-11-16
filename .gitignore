@@ -5,3 +5,6 @@ data/bruto/coleta.json
 data/bruto/despesas/
 .claude/
 .superpowers/
+
+# Texto bruto das proposições: o oficial cita CPF/RG de nomeados. O site mascara ao ler; a cópia bruta não vai para o repositório público.
+data/bruto/proposituras-*.json
