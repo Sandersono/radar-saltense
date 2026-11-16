@@ -315,7 +315,8 @@ import { conferir, aumentosDespesas } from '../src/conferir.js';
   assert.equal(conferir(comF({ '2026-09': 750 }), antF, 11).length, 1);
   assert.match(conferir(comF({ '2026-09': 750 }), antF, 11)[0], /Folha da Câmara.*20%/);
   assert.equal(conferir(comF({ '2026-09': 900 }), antF, 11).length, 0);
-  assert.equal(conferir(comF({}), antF, 11).length, 0);
+  assert.equal(conferir(comF({}), antF, 11).length, 1);
+  assert.match(conferir(comF({}), antF, 11)[0], /sumiu/);
   assert.equal(conferir(comF({ '2026-09': 750 }), null, 11).length, 0);
   console.log('ok: conferir');
 }

@@ -32,7 +32,7 @@ function cartaoRespostas(v, d) {
   const espera = x.feitos - x.conferidos;
   return `<section class="secao cartao">
 <h2>Requerimentos respondidos</h2>
-<p><strong>${numero(x.respondidos)} de ${numero(x.conferidos)}</strong> requerimentos conferidos foram respondidos (${x.percentual}%).${x.medianaDias === null ? '' : ` A resposta leva em média ${x.medianaDias} dias.`}</p>
+<p><strong>${numero(x.respondidos)} de ${numero(x.conferidos)}</strong> requerimentos conferidos foram respondidos (${x.percentual}%).${x.medianaDias === null ? '' : ` A resposta costuma levar ${x.medianaDias} dias.`}</p>
 ${espera > 0 ? `<p class="nota">Ainda faltam conferir ${numero(espera)} de ${numero(x.feitos)} requerimentos.</p>` : ''}
 <p class="nota">Resposta = documento anexado na ficha oficial. Indicações não entram: o portal não registra resposta a elas.</p>
 </section>`;

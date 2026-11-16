@@ -73,7 +73,7 @@ function secaoRespostas(d) {
   const g = r.geral;
   if (!g.feitos) return '';
   const linhas = d.vereadores.map((v) => ({ v, x: r.porVereador[v.id] })).filter(({ x }) => x)
-    .map(({ v, x }) => `<tr><td><a href="vereador/${esc(v.id)}.html">${esc(v.nome)}</a></td><td>${numero(x.feitos)}</td><td>${numero(x.conferidos)}</td><td>${numero(x.respondidos)}</td><td>${x.conferidos ? `${x.percentual}%` : '—'}</td><td>${x.medianaDias === null ? '—' : `${x.medianaDias} dias`}</td></tr>`).join('');
+    .map(({ v, x }) => `<tr><td data-rotulo="Vereador"><a href="vereador/${esc(v.id)}.html">${esc(v.nome)}</a></td><td data-rotulo="Feitos">${numero(x.feitos)}</td><td data-rotulo="Conferidos">${numero(x.conferidos)}</td><td data-rotulo="Respondidos">${numero(x.respondidos)}</td><td data-rotulo="%">${x.conferidos ? `${x.percentual}%` : '—'}</td><td data-rotulo="Tempo típico">${x.medianaDias === null ? '—' : `${x.medianaDias} dias`}</td></tr>`).join('');
   return `<section id="respostas" class="secao cartao">
 <h2>Requerimentos respondidos</h2>
 <p>Requerimento é uma pergunta ou cobrança do vereador à Prefeitura. Aqui contamos quantos tiveram resposta anexada no portal da Câmara.</p>
@@ -82,7 +82,7 @@ ${cartaoNumero({ valor: g.conferidos ? `${g.percentual}%` : '—', rotulo: `resp
 ${cartaoNumero({ valor: g.medianaDias === null ? '—' : `${g.medianaDias} dias`, rotulo: 'tempo típico até a resposta' })}
 </div>
 ${r.pendentes > 0 ? aviso(`Ainda faltam conferir ${numero(r.pendentes)} de ${numero(g.feitos)} requerimentos. Eles ficam de fora da conta até o robô conferir.`) : ''}
-<table><thead><tr><th>Vereador</th><th>Feitos</th><th>Conferidos</th><th>Respondidos</th><th>%</th><th>Tempo típico</th></tr></thead><tbody>${linhas}</tbody></table>
+<table class="tabela-empilha"><thead><tr><th>Vereador</th><th>Feitos</th><th>Conferidos</th><th>Respondidos</th><th>%</th><th>Tempo típico</th></tr></thead><tbody>${linhas}</tbody></table>
 <p class="nota">Resposta = documento "Resposta Requerimento" anexado no portal da Câmara. O percentual é sobre os requerimentos já conferidos. Indicações não entram: o portal não registra resposta a elas. Requerimento com mais de um autor conta para cada autor.</p>
 <p>${seloFonte(URL_PROPOSITURAS, 'portal de proposituras')}</p>
 </section>`;
@@ -94,12 +94,12 @@ function secaoCampanha(d) {
   if (!lista.length) return '';
   const linhas = lista.map(({ v, c }) => {
     const m = origemMaior(c);
-    return `<tr><td><a href="vereador/${esc(v.id)}.html">${esc(v.nome)}</a></td><td>${reais(c.total)}</td><td>${m ? `${esc(m.nome)} <small>(${Math.round((m.valor / c.total) * 100)}%)</small>` : '—'}</td><td>${link(c.link, 'TSE')}</td></tr>`;
+    return `<tr><td data-rotulo="Vereador"><a href="vereador/${esc(v.id)}.html">${esc(v.nome)}</a></td><td data-rotulo="Total">${reais(c.total)}</td><td data-rotulo="Maior origem">${m ? `${esc(m.nome)} <small>(${Math.round((m.valor / c.total) * 100)}%)</small>` : '—'}</td><td data-rotulo="Fonte">${link(c.link, 'TSE')}</td></tr>`;
   }).join('');
   return `<section id="campanha" class="secao cartao">
 <h2>Campanha de 2024</h2>
 <p>Dinheiro que cada vereador declarou ter recebido na campanha de 2024, em ordem do maior para o menor.</p>
-<table><thead><tr><th>Vereador</th><th>Total</th><th>Maior origem</th><th>Fonte</th></tr></thead><tbody>${linhas}</tbody></table>
+<table class="tabela-empilha"><thead><tr><th>Vereador</th><th>Total</th><th>Maior origem</th><th>Fonte</th></tr></thead><tbody>${linhas}</tbody></table>
 <p class="nota">Desde 2015 empresas não podem doar. Os nomes dos doadores estão no site do TSE.</p>
 <p>${seloFonte('https://divulgacandcontas.tse.jus.br/divulga/', 'DivulgaCandContas (TSE)')}</p>
 </section>`;

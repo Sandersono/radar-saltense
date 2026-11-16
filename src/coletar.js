@@ -20,8 +20,12 @@ import { anoMesBR } from './util/texto.js';
 const ORCAMENTO_RESPOSTAS = 150;
 const doisDigitos = (n) => String(n).padStart(2, '0');
 
-async function lerJson(caminho, padrao) {
-  try { return JSON.parse(await readFile(caminho, 'utf8')); } catch (e) { if (e.code === 'ENOENT') return padrao; throw e; }
+async function lerJson(caminho, padrao, avisos) {
+  try { return JSON.parse(await readFile(caminho, 'utf8')); } catch (e) {
+    if (e.code === 'ENOENT') return padrao;
+    avisos.push(`${caminho} não pôde ser lido (${e.message}); seguindo sem ele.`);
+    return padrao;
+  }
 }
 
 // Fonte secundária: se falhar, o robô segue com o último dado salvo e deixa um aviso (spec, seção 2).
@@ -80,9 +84,9 @@ export async function coletarTudo() {
   const siconfi = await coletarSiconfi(hoje.ano);
   const cnpjs2024 = JSON.parse(await readFile('data/referencia/cnpjs-pagos-2024.json', 'utf8'));
   const avisosFontes = [];
-  const folhaSalva = await lerJson('data/processado/folha-camara.json', {});
-  const respostasSalvas = await lerJson('data/processado/respostas.json', {});
-  const campanha = await lerJson('data/referencia/campanha-2024.json', {});
+  const folhaSalva = await lerJson('data/processado/folha-camara.json', {}, avisosFontes);
+  const respostasSalvas = await lerJson('data/processado/respostas.json', {}, avisosFontes);
+  const campanha = await lerJson('data/referencia/campanha-2024.json', null, avisosFontes);
   const folhaCamara = await folhaDaCamara(vereadores.map(({ id, nome, apelido }) => ({ id, nome, apelido })), hoje, folhaSalva, avisosFontes);
   const respostas = await respostasDaCamara(cardsPorAno, respostasSalvas, avisosFontes);
   const coleta = { vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, folhaCamara, respostas, campanha, avisosFontes, coletadoEm: new Date().toISOString() };
