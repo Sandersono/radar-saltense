@@ -2,6 +2,7 @@ import { esc } from '../util/texto.js';
 import { FAIXAS_IEGM, DIMENSOES_IEGM, MUNICIPIOS_IEGM } from '../regras/iegm.js';
 import { layout, reais, numero, quandoBR, seloFonte, aviso, cartaoNumero } from './base.js';
 import { cartaoCampanha } from './campanha.js';
+import { NOMES_MES } from './impostometro.js';
 
 export const URL_IEGM = 'https://iegm.tce.sp.gov.br/';
 export const URL_OBRAS = 'https://paineldeobras.tce.sp.gov.br/';
@@ -9,7 +10,15 @@ export const URL_PNCP = 'https://pncp.gov.br/app/orgaos/46634507000106';
 
 const NIVEL = { C: 1, 'C+': 2, B: 3, 'B+': 4, A: 5 };
 const significado = (f) => (FAIXAS_IEGM[f] || '').toLowerCase();
-const cnpjBR = (c) => String(c).replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, '$1.$2.$3/$4-$5');
+const cnpjBR = (c) => esc(String(c).replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, '$1.$2.$3/$4-$5'));
+const MAX_OBJETO = 140;
+function objetoHtml(txt) {
+  if (txt.length <= MAX_OBJETO) return esc(txt);
+  const corte = txt.slice(0, MAX_OBJETO);
+  const curto = corte.slice(0, Math.max(corte.lastIndexOf(' '), 1)).replace(/[\s,;.\-]+$/, '');
+  return `${esc(curto)}…<details><summary>ver descrição completa</summary>${esc(txt)}</details>`;
+}
+const nomeMes = (aaaamm) => { const m = Number(aaaamm.split("-")[1]); return `${NOMES_MES[m - 1]}`; };
 const pct = (v, total) => `${Math.round((v / total) * 1000) / 10}`.replace('.', ',');
 
 // Linha de barra com um texto no lugar do número (faixa do IEGM) ou um número de contratações.
@@ -55,7 +64,7 @@ function secaoObras(p) {
   if (!o) return '';
   const paralisadas = o.obras.filter((x) => x.paralisada).length;
   const total = o.obras.reduce((s, x) => s + x.valor, 0);
-  const linhas = o.obras.map((x) => `<tr><td data-rotulo="Obra">${esc(x.objeto)}${x.contratante ? `<br><small>${esc(x.contratante)}</small>` : ''}</td><td data-rotulo="Situação">${x.paralisada ? `<strong class="situacao-paralisada">${esc(x.situacao)}</strong>` : esc(x.situacao) || '—'}</td><td data-rotulo="Empresa">${esc(x.contratado)}${x.cnpj ? `<br><small>CNPJ ${cnpjBR(x.cnpj)}</small>` : ''}</td><td data-rotulo="Valor">${x.valor ? reais(x.valor) : '—'}</td><td data-rotulo="Ano">${x.ano || '—'}</td></tr>`).join('');
+  const linhas = o.obras.map((x) => `<tr><td data-rotulo="Obra">${objetoHtml(x.objeto)}${x.contratante ? `<br><small>${esc(x.contratante)}</small>` : ''}</td><td data-rotulo="Situação">${x.paralisada ? `<strong class="situacao-paralisada">${esc(x.situacao)}</strong>` : esc(x.situacao) || '—'}</td><td data-rotulo="Empresa">${esc(x.contratado)}${x.cnpj ? `<br><small>CNPJ ${cnpjBR(x.cnpj)}</small>` : ''}</td><td data-rotulo="Valor">${x.valor ? reais(x.valor) : '—'}</td><td data-rotulo="Ano">${x.ano || '—'}</td></tr>`).join('');
   return `<section id="obras" class="secao cartao">
 <h2>Obras no painel do TCE-SP</h2>
 <p>${numero(o.obras.length)} ${o.obras.length === 1 ? 'obra cadastrada' : 'obras cadastradas'}, somando <strong>${reais(total)}</strong>. ${paralisadas ? `${numero(paralisadas)} ${paralisadas === 1 ? 'está paralisada' : 'estão paralisadas'}` : 'Nenhuma está paralisada'}. Data-base do painel: ${esc(o.dataBase)}.</p>
@@ -118,9 +127,11 @@ function atalhos(d, p) {
   if (p.campanhaPrefeito) c.push(cartaoNumero({ valor: reais(p.campanhaPrefeito.total), rotulo: 'de campanha do prefeito em 2024', href: '#campanha' }));
   if (d.gastos) {
     const ano = Object.keys(d.gastos.anos).sort().pop();
-    c.push(cartaoNumero({ valor: reais(d.gastos.anos[ano].total), rotulo: `pagos em ${ano} (Raio-X dos gastos)`, href: 'gastos.html' }));
+    const g = d.gastos.anos[ano];
+    const ate = g.ultimoMes && g.mesesPublicados < 12 ? ` até ${nomeMes(g.ultimoMes)}` : '';
+    c.push(cartaoNumero({ valor: reais(g.total), rotulo: `pagos em ${ano}${ate} (Raio-X dos gastos)`, href: 'gastos.html' }));
   }
-  if (d.receitas) c.push(cartaoNumero({ valor: reais(d.receitas.oficialAno), rotulo: `de impostos da cidade em ${d.receitas.anoAtual} (Impostômetro)`, href: 'impostometro.html' }));
+  if (d.receitas && d.receitas.temOficialAno) c.push(cartaoNumero({ valor: reais(d.receitas.oficialAno), rotulo: `de impostos da cidade em ${d.receitas.anoAtual}, dado oficial${d.receitas.ultimoMesOficial ? ` até ${nomeMes(d.receitas.ultimoMesOficial)}` : ''} (Impostômetro)`, href: 'impostometro.html' }));
   return c.length ? `<section class="secao"><div class="grade-numeros">\n${c.join('\n')}\n</div></section>` : '';
 }
 

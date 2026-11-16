@@ -1,4 +1,4 @@
-import { normalizar } from '../util/texto.js';
+import { normalizar, limparNomeEmpresa } from '../util/texto.js';
 import { valorBR } from './receitas.js';
 
 export const ORGAOS = { prefeitura: 'Prefeitura', camara: 'Câmara', saae: 'SAAE (água e esgoto)' };
@@ -61,7 +61,7 @@ export function resumirDespesas(porMes, cnpjs2024 = []) {
   for (const chave of Object.keys(porMes).sort()) {
     for (const l of porMes[chave]) {
       const cnpj = cnpjDe(l.id_fornecedor);
-      const nome = String(l.nm_fornecedor ?? '').trim();
+      const nome = limparNomeEmpresa(l.nm_fornecedor);
       if (cnpj && nome) nomes.set(cnpj, nome);
     }
   }

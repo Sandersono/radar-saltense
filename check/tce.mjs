@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { linhasCda } from '../src/regras/pentaho.js';
 import { resumirIegm, FAIXAS_IEGM } from '../src/regras/iegm.js';
-import { normalizarObras } from '../src/regras/obras.js';
+import { normalizarObras, frase } from '../src/regras/obras.js';
+import { limparNomeEmpresa } from '../src/util/texto.js';
 
 assert.deepEqual(linhasCda({ metadata: [{ colName: 'a' }, { colName: 'b' }], resultset: [[1, 'x'], [2, 'y']] }), [{ a: 1, b: 'x' }, { a: 2, b: 'y' }]);
 assert.deepEqual(linhasCda({ metadata: [{ colName: 'a' }], resultset: [] }), []);
@@ -37,4 +38,12 @@ const o2 = normalizarObras([
 assert.equal(o2[0].contratado, 'Pessoa física');
 assert.equal(o2[1].contratado, 'Não informado');
 assert.ok(!JSON.stringify(o2).includes('MARIA') && !JSON.stringify(o2).includes('EMPRESA'));
+assert.equal(frase('CONTRATACAO DE EMPRESA EM SALTO SP CONFORME ABNT'), 'Contratacao de empresa em salto SP conforme ABNT');
+assert.equal(frase('  '), '');
+assert.equal(limparNomeEmpresa('FULANO DA SILVA 123.456.789-01'), 'FULANO DA SILVA');
+assert.equal(limparNomeEmpresa('12345678901 - FULANO ME'), 'FULANO ME');
+assert.equal(limparNomeEmpresa('CHRONOS LTDA'), 'CHRONOS LTDA');
+assert.equal(limparNomeEmpresa('30 565 924 FULANA'), '30 565 924 FULANA');
+assert.equal(limparNomeEmpresa('30565924 FULANA 111.222.333-44'), '30565924 FULANA');
+assert.equal(normalizarObras([{ nome: 'X 123.456.789-01 LTDA', doc: '12345678000190', objeto_ajuste: 'REFORMA' }])[0].contratado, 'X LTDA');
 console.log('ok: tce');

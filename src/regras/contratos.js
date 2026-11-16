@@ -1,3 +1,5 @@
+import { limparNomeEmpresa } from '../util/texto.js';
+
 export const MODALIDADES = {
   1: 'Leilão eletrônico', 2: 'Diálogo competitivo', 3: 'Concurso', 4: 'Concorrência eletrônica', 5: 'Concorrência presencial',
   6: 'Pregão eletrônico', 7: 'Pregão presencial', 8: 'Dispensa', 9: 'Inexigibilidade', 10: 'Manifestação de interesse',
@@ -46,7 +48,7 @@ export function resumirContratos(lista, n = 10) {
     valor += v;
     const doc = String(c.niFornecedor ?? '').replace(/\D/g, '');
     if (doc.length !== 14) continue;
-    const e = por.get(doc) ?? { cnpj: doc, nome: String(c.nomeRazaoSocialFornecedor ?? '').trim(), valor: 0, contratos: 0 };
+    const e = por.get(doc) ?? { cnpj: doc, nome: limparNomeEmpresa(c.nomeRazaoSocialFornecedor), valor: 0, contratos: 0 };
     e.valor += v; e.contratos++;
     por.set(doc, e);
   }

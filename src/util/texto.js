@@ -1,3 +1,12 @@
+// Tira de um nome de empresa qualquer trecho com cara de CPF (11 dígitos, com ou sem pontuação).
+export function limparNomeEmpresa(nome) {
+  return String(nome ?? '')
+    .replace(/(?<!\d)\d{3}\.?\d{3}\.?\d{3}-?\d{2}(?!\d)/g, ' ')
+    .replace(/\s{2,}/g, ' ')
+    .replace(/^[\s\-–]+|[\s\-–]+$/g, '')
+    .trim();
+}
+
 export function normalizar(s) {
   return String(s ?? '')
     .normalize('NFD')

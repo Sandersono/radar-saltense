@@ -27,8 +27,9 @@ export const dataBaseMaisVelha = (nova, salva) => Boolean(nova && salva && isoDa
 export function anosParaColetar(salvo, anoAtual, agora = Date.now()) {
   const s = salvo || {};
   const anos = [];
-  if (!s[anoAtual - 1]) anos.push(anoAtual - 1);
+  // O ano corrente vem primeiro: se o prazo de 6 minutos acabar, ele não fica sem vez.
   const feito = Date.parse(s[anoAtual] && s[anoAtual].coletadoEm);
   if (!Number.isFinite(feito) || agora - feito > 7 * 24 * 3600 * 1000) anos.push(anoAtual);
+  if (!s[anoAtual - 1]) anos.push(anoAtual - 1);
   return anos;
 }
