@@ -264,7 +264,7 @@ import { lerVotacoes } from '../src/regras/votacao-pdf.js';
   console.log('ok: leitores pdf');
 }
 
-import { conferir } from '../src/conferir.js';
+import { conferir, aumentosDespesas } from '../src/conferir.js';
 
 {
   const base = {
@@ -299,9 +299,15 @@ import { conferir } from '../src/conferir.js';
   assert.equal(conferir({ ...base, gastos: null }, null, 11).length, 1);
   assert.equal(conferir(comD({ '2026-09': 1000 }), antD, 11).length, 0);
   assert.equal(conferir(comD({}), antD, 11).length, 1);
-  assert.equal(conferir(comD({ '2026-09': 1060 }), antD, 11).length, 1);
+  assert.equal(conferir(comD({ '2026-09': 1060 }), antD, 11).length, 0);
   assert.equal(conferir(comD({ '2026-09': 940 }), antD, 11).length, 1);
   assert.equal(conferir(comD({ '2026-09': 1040 }), antD, 11).length, 0);
+  assert.equal(conferir(comD({ '2026-09': 500 }), { totalProposituras: 90, despesasMensais: { '2026-09': 0 } }, 11).length, 0);
+  const sobe = aumentosDespesas({ despesasMensais: { '2026-09': 1060 } }, antD);
+  assert.equal(sobe.length, 1);
+  assert.match(sobe[0], /subiu mais de 5%/);
+  assert.deepEqual(aumentosDespesas({ despesasMensais: { '2026-09': 1040 } }, antD), []);
+  assert.deepEqual(aumentosDespesas({ despesasMensais: { '2026-09': 1060 } }, null), []);
   assert.equal(conferir({ ...base, gastos: { anos: { 2026: { areas: { bimestre: 4, total: 300, somaAreas: 290, lista: [] } } }, novas: [], empresas: [] } }, null, 11).length, 1);
   assert.equal(conferir({ ...base, gastos: { anos: { 2026: { areas: null } }, novas: [], empresas: [] } }, null, 11).length, 0);
   console.log('ok: conferir');
@@ -519,5 +525,10 @@ import { grupoFornecedor, cnpjDe, formatarCnpj, orgaoChave, resumirDespesas, are
   assert.deepEqual(flip.anos['2025'].porGrupo, { empresas: 500, publicos: 0, pessoas: 0 });
   assert.deepEqual(flip.anos['2025'].topEmpresas, [{ cnpj: '44444444000144', nome: 'EMPRESA X LTDA', total: 400 }]);
   assert.deepEqual(flip.anos['2025'].concentracao, { top10: 400, totalEmpresas: 500, percentual: 80 });
+  const vazio = resumirDespesas({
+    '2025-01': [L(PREF, 'Valor Pago', pj('55555555000155'), 'EMPRESA Y LTDA', '100,00')],
+    '2025-02': [L(PREF, 'Valor Pago', pj('55555555000155'), '', '200,00', 'Fevereiro')],
+  });
+  assert.equal(vazio.anos['2025'].topEmpresas[0].nome, 'EMPRESA Y LTDA');
   console.log('ok: despesas');
 }

@@ -2,7 +2,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { VEREADORES_ESPERADOS } from './config.js';
 import { coletarTudo } from './coletar.js';
 import { processar } from './processar.js';
-import { conferir } from './conferir.js';
+import { conferir, aumentosDespesas } from './conferir.js';
 import { relatorio } from './relatorio.js';
 import { gerarSite } from './gerar-site.js';
 
@@ -14,7 +14,8 @@ let anterior = null;
 try { anterior = JSON.parse(await readFile('data/processado/meta.json', 'utf8')); } catch (e) { if (e.code !== 'ENOENT') throw e; }
 
 const problemas = conferir(dados, anterior, VEREADORES_ESPERADOS);
-await writeFile('conferencia.md', relatorio(dados, problemas));
+const aumentos = aumentosDespesas(dados.meta, anterior);
+await writeFile('conferencia.md', relatorio(dados, problemas, aumentos));
 if (problemas.length) {
   console.error(`NÃO PUBLICADO. O site continua na última versão boa.\n- ${problemas.join('\n- ')}`);
   process.exit(1);

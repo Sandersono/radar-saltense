@@ -121,7 +121,8 @@
     const ORG = { prefeitura: 'Prefeitura', camara: 'Câmara', saae: 'SAAE' };
     const MES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
     const fmtCnpj = (c) => c.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, '$1.$2.$3/$4-$5');
-    let empresas = null;
+    const contagemEmpresa = document.getElementById('contagem-empresa');
+    let carregando = null;
     let esperaEmpresa;
     const itemEmpresa = ([cnpj, nome, porMes, porOrgao]) => {
       const porAno = {};
@@ -134,14 +135,30 @@
     campoEmpresa.addEventListener('input', () => {
       clearTimeout(esperaEmpresa);
       esperaEmpresa = setTimeout(async () => {
-        const q = norm(campoEmpresa.value);
+        const valorDigitado = campoEmpresa.value;
+        const q = norm(valorDigitado);
         const digitos = campoEmpresa.value.replace(/\D/g, '');
-        if (q.length < 3) { saidaEmpresa.innerHTML = ''; return; }
-        empresas = empresas || await (await fetch('dados/empresas.json')).json();
+        if (q.length < 3) { contagemEmpresa.textContent = ''; saidaEmpresa.innerHTML = ''; return; }
+        carregando = carregando || fetch('dados/empresas.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))));
+        let empresas;
+        try {
+          empresas = await carregando;
+        } catch {
+          carregando = null;
+          if (campoEmpresa.value !== valorDigitado) return;
+          contagemEmpresa.textContent = 'Não foi possível carregar a lista de empresas. Tente de novo.';
+          saidaEmpresa.innerHTML = '';
+          return;
+        }
+        if (campoEmpresa.value !== valorDigitado) return;
         const achadas = empresas.filter(([cnpj, nome]) => norm(nome).includes(q) || (digitos.length >= 3 && cnpj.includes(digitos)));
-        saidaEmpresa.innerHTML = achadas.length
-          ? `<p>${achadas.length} ${achadas.length === 1 ? 'resultado' : 'resultados'}${achadas.length > 30 ? ' (mostrando os 30 que mais receberam)' : ''}.</p><ul class="lista">${achadas.slice(0, 30).map(itemEmpresa).join('')}</ul>`
-          : '<p>Nenhuma empresa encontrada. Tente outra parte do nome ou o CNPJ.</p>';
+        if (!achadas.length) {
+          contagemEmpresa.textContent = 'Nenhuma empresa encontrada. Tente outra parte do nome ou o CNPJ.';
+          saidaEmpresa.innerHTML = '';
+          return;
+        }
+        contagemEmpresa.textContent = `${achadas.length} ${achadas.length === 1 ? 'resultado' : 'resultados'}${achadas.length > 30 ? ' (mostrando os 30 que mais receberam)' : ''}.`;
+        saidaEmpresa.innerHTML = `<ul class="lista">${achadas.slice(0, 30).map(itemEmpresa).join('')}</ul>`;
       }, 250);
     });
   }

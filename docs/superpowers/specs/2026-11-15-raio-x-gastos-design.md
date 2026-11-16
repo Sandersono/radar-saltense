@@ -94,14 +94,14 @@ Mesmo visual do site (cartões, barras em HTML/CSS, `reais()` sem centavos). Cel
 - **`src/coleta/siconfi.js`:** para cada ano do mandato, acha o último bimestre com itens e guarda as linhas filtradas (2.2). Erro de rede para o robô, como no TCE-SP.
 - **Regras puras em `src/regras/despesas.js`:** `grupoFornecedor(linha)`, `cnpjDe(id)`, `resumirDespesas(porMes, cnpjs2024)`, `areasSiconfi(itens)`, `formatarCnpj(cnpj)`. `valorBR` vem de `receitas.js`.
 - **`processar`:** ganha `dados.gastos = { anos: { <ano>: { ultimoMes, total, porOrgao, porGrupo, pessoasFisicas: {total, quantidade}, topEmpresas[20], concentracao, anulado: {total, top[5]}, areas: {bimestre, total, somaAreas, lista[]} | null } }, novas: [{cnpj, nome, total, primeiroMes}], empresas: [{cnpj, nome, porMes, porOrgao}] }`.
-- **`gerar-site`:** escreve `dist/gastos.html` e `dist/dados/empresas.json` (`[cnpj, nome, {ano: {mes: valor}}, {orgao: valor}]`, só CNPJ, só valor pago > 0), carregado pela busca quando o campo é usado.
+- **`gerar-site`:** escreve `dist/gastos.html` e `dist/dados/empresas.json` (`[cnpj, nome, {"AAAA-MM": valor}, {orgao: valor}]`, só CNPJ, só valor pago > 0), carregado pela busca quando o campo é usado.
 - **`meta.json`:** ganha `despesasMensais: { "AAAA-MM": totalPago }`.
 
 ## 6. Barreira (acrescenta ao `conferir`)
 
 Não publica se:
 - um mês com pagamento no `meta.json` anterior agora volta vazio;
-- o total pago de um mês já publicado muda mais de 5% em relação ao `meta.json` anterior;
+- o total pago de um mês já publicado cai mais de 5% em relação ao `meta.json` anterior (aumento acima de 5% publica e fica anotado no `conferencia.md`);
 - a soma das áreas do SICONFI difere do total do anexo em mais de R$ 1,00.
 
 O `conferencia.md` ganha a seção "Raio-X dos gastos": por ano, último mês, total pago, grupos, top 5 empresas, anulado, bimestre do SICONFI.

@@ -7,7 +7,7 @@ import { barras, NOMES_MES } from './impostometro.js';
 const ATENCAO = 'Isto é um fato tirado dos dados oficiais, não uma acusação. Há explicações comuns para cada caso.';
 const linkTce = (cnpj) => `${LINKS_CREDOR.tce}?nr_identificador_despesa=${encodeURIComponent(cnpj)}`;
 const mesBR = (chave) => `${NOMES_MES[Number(chave.slice(5, 7)) - 1]} de ${chave.slice(0, 4)}`;
-const periodo = (a) => (a.mesesPublicados === 12 ? 'ano fechado' : `até ${mesBR(a.ultimoMes)}`);
+const periodo = (a) => (!a.ultimoMes ? 'sem pagamento publicado ainda' : a.mesesPublicados === 12 ? 'ano fechado' : `até ${mesBR(a.ultimoMes)}`);
 const anosOrdenados = (g) => Object.keys(g.anos).sort();
 
 const listaEmpresas = (lista) => (lista.length
@@ -82,7 +82,8 @@ ${g.novas.length ? `<ol class="lista lista-empresas">${g.novas.map((e) => `<li><
 <p>Digite parte do nome ou o CNPJ (com ou sem pontos). Pessoas físicas não entram na busca.</p>
 <label class="sr-only" for="busca-empresa">Nome ou CNPJ da empresa</label>
 <input id="busca-empresa" class="busca" type="search" placeholder="Ex.: nome da empresa ou CNPJ" autocomplete="off">
-<div id="resultado-empresa" aria-live="polite"></div>
+<p id="contagem-empresa" class="nota" aria-live="polite"></p>
+<div id="resultado-empresa"></div>
 <noscript><p>A busca precisa de JavaScript. Sem ele, use a ${link(LINKS_CREDOR.tce, 'consulta do TCE-SP')}.</p></noscript>
 </section>
 <section id="fontes-gastos" class="secao">

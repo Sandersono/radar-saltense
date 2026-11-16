@@ -2,7 +2,7 @@ import { fichaOficial } from './config.js';
 import { GRUPOS_RECEITA, TIPOS_IMPOSTO } from './regras/receitas.js';
 import { GRUPOS_GASTO } from './regras/despesas.js';
 
-export function relatorio(d, problemas) {
+export function relatorio(d, problemas, aumentos = []) {
   const l = [];
   l.push('# Conferência do Radar Saltense', '', `Dados de ${d.meta.atualizadoEm}`, '');
   l.push('## Barreira automática', '');
@@ -47,6 +47,7 @@ export function relatorio(d, problemas) {
   }
   const g = d.gastos;
   l.push('', '## Raio-X dos gastos', '');
+  l.push(...(aumentos.length ? aumentos.map((a) => `- ${a}`) : ['- Meses com aumento de mais de 5%: nenhum']), '');
   if (!g) {
     l.push('- Despesas não coletadas.');
   } else {

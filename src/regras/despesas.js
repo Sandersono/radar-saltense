@@ -55,7 +55,8 @@ export function resumirDespesas(porMes, cnpjs2024 = []) {
   for (const chave of Object.keys(porMes).sort()) {
     for (const l of porMes[chave]) {
       const cnpj = cnpjDe(l.id_fornecedor);
-      if (cnpj) nomes.set(cnpj, String(l.nm_fornecedor ?? '').trim());
+      const nome = String(l.nm_fornecedor ?? '').trim();
+      if (cnpj && nome) nomes.set(cnpj, nome);
     }
   }
   for (const chave of Object.keys(porMes).sort()) {

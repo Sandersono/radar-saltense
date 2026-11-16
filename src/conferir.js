@@ -35,7 +35,7 @@ export function conferir(dados, anterior, esperados) {
     const dicaD = 'Confira o mês no Portal da Transparência do TCE-SP; se a mudança for real, ajuste despesasMensais em data/processado/meta.json e rode o robô de novo.';
     for (const [mes, valor] of Object.entries((anterior && anterior.despesasMensais) || {})) {
       if (!(mes in novosD)) problemas.push(`Despesas de ${mes} sumiram da fonte. ${dicaD}`);
-      else if (Math.abs(novosD[mes] - valor) > Math.abs(valor) * 0.05) problemas.push(`Total pago em ${mes} mudou mais de 5% (de ${reais(valor)} para ${reais(novosD[mes])}). ${dicaD}`);
+      else if (novosD[mes] < valor * 0.95) problemas.push(`Total pago em ${mes} caiu mais de 5% (de ${reais(valor)} para ${reais(novosD[mes])}). ${dicaD}`);
     }
     for (const [ano, a] of Object.entries(g.anos)) {
       if (a.areas && a.areas.total !== null && Math.abs(a.areas.somaAreas - a.areas.total) > 1) {
@@ -44,4 +44,16 @@ export function conferir(dados, anterior, esperados) {
     }
   }
   return problemas;
+}
+
+export function aumentosDespesas(meta, anterior) {
+  const reais = (v) => `R$ ${Math.round(v).toLocaleString('pt-BR')}`;
+  const novos = (meta && meta.despesasMensais) || {};
+  const avisos = [];
+  for (const [mes, valor] of Object.entries((anterior && anterior.despesasMensais) || {})) {
+    if (mes in novos && valor > 0 && novos[mes] > valor * 1.05) {
+      avisos.push(`Total pago em ${mes} subiu mais de 5% (de ${reais(valor)} para ${reais(novos[mes])}); publicado mesmo assim.`);
+    }
+  }
+  return avisos;
 }
