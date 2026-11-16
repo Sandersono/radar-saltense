@@ -16,7 +16,9 @@ export async function coletarSiconfi(anoAtual) {
       const itens = Array.isArray(json.items) ? json.items : null;
       if (!itens) throw new Error(`SICONFI ${ano}/${bimestre}: formato inesperado.`);
       if (!itens.length) continue;
-      porAno[ano] = { bimestre, itens: itens.filter((i) => i.coluna === COLUNA && i.rotulo === ROTULO) };
+      const filtrados = itens.filter((i) => i.coluna === COLUNA && i.rotulo === ROTULO);
+      if (filtrados.length === 0) throw new Error(`SICONFI ${ano}/${bimestre}: nenhuma linha de "${ROTULO}" / "${COLUNA}" (o formato mudou?).`);
+      porAno[ano] = { bimestre, itens: filtrados };
       break;
     }
   }

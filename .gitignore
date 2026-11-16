@@ -2,5 +2,6 @@ node_modules/
 dist/
 conferencia.md
 data/bruto/coleta.json
+data/bruto/despesas/
 .claude/
 .superpowers/
