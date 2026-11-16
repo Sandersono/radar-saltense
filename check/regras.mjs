@@ -501,5 +501,12 @@ import { grupoFornecedor, cnpjDe, formatarCnpj, orgaoChave, resumirDespesas, are
     it('Saúde', 999, 'DOTAÇÃO INICIAL'),
   ]);
   assert.deepEqual(areas, { total: 300, somaAreas: 300, lista: [{ area: 'Saúde', valor: 200 }, { area: 'Educação', valor: 100 }] });
+  const flip = resumirDespesas({
+    '2025-01': [L(PREF, 'Valor Pago', pj('44444444000144'), 'FUNDO X', '100,00')],
+    '2025-02': [L(PREF, 'Valor Pago', pj('44444444000144'), 'EMPRESA X LTDA', '300,00', 'Fevereiro'), L(PREF, 'Valor Pago', 'OUTRO - 1', 'SEM CNPJ LTDA', '100,00', 'Fevereiro')],
+  });
+  assert.deepEqual(flip.anos['2025'].porGrupo, { empresas: 500, publicos: 0, pessoas: 0 });
+  assert.deepEqual(flip.anos['2025'].topEmpresas, [{ cnpj: '44444444000144', nome: 'EMPRESA X LTDA', total: 400 }]);
+  assert.deepEqual(flip.anos['2025'].concentracao, { top10: 400, totalEmpresas: 500, percentual: 80 });
   console.log('ok: despesas');
 }

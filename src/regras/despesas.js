@@ -53,6 +53,12 @@ export function resumirDespesas(porMes, cnpjs2024 = []) {
   const empresas = new Map(); // cnpj -> { cnpj, nome, grupo, porMes, porOrgao }
   const mensal = {};
   for (const chave of Object.keys(porMes).sort()) {
+    for (const l of porMes[chave]) {
+      const cnpj = cnpjDe(l.id_fornecedor);
+      if (cnpj) nomes.set(cnpj, String(l.nm_fornecedor ?? '').trim());
+    }
+  }
+  for (const chave of Object.keys(porMes).sort()) {
     const ano = chave.slice(0, 4);
     const a = acc[ano] ??= {
       meses: new Set(), total: 0, anulado: 0,
@@ -63,9 +69,10 @@ export function resumirDespesas(porMes, cnpjs2024 = []) {
     mensal[chave] = 0;
     for (const l of porMes[chave]) {
       const v = valorBR(l.vl_despesa);
-      const grupo = grupoFornecedor(l);
       const cnpj = cnpjDe(l.id_fornecedor);
-      if (cnpj) nomes.set(cnpj, String(l.nm_fornecedor ?? '').trim());
+      const grupo = cnpj
+        ? grupoFornecedor({ id_fornecedor: l.id_fornecedor, nm_fornecedor: nomes.get(cnpj) })
+        : grupoFornecedor(l);
       if (l.evento === 'Anulação') {
         a.anulado += v;
         if (grupo === 'empresas' && cnpj) soma(a.anuladoEmp, cnpj, v);
@@ -93,7 +100,7 @@ export function resumirDespesas(porMes, cnpjs2024 = []) {
   const anos = {};
   for (const [ano, a] of Object.entries(acc)) {
     const valores = [...a.pagoEmp.values()].sort((x, y) => y - x);
-    const totalEmp = valores.reduce((s, v) => s + v, 0);
+    const totalEmp = a.porGrupo.empresas;
     const top10 = valores.slice(0, 10).reduce((s, v) => s + v, 0);
     const meses = [...a.meses].sort();
     anos[ano] = {
