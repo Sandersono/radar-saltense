@@ -102,6 +102,51 @@
     aplicar();
   }
 
+  // Raio-X: seletor de ano (sem JS todos os anos aparecem)
+  const botoesAno = [...document.querySelectorAll('[data-ano-botao]')];
+  if (botoesAno.length) {
+    const mostrarAno = (ano) => {
+      botoesAno.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.anoBotao === ano)));
+      document.querySelectorAll('.ano-gastos').forEach((s) => { s.hidden = s.dataset.ano !== ano; });
+    };
+    botoesAno.forEach((b) => b.addEventListener('click', () => mostrarAno(b.dataset.anoBotao)));
+    mostrarAno(botoesAno[botoesAno.length - 1].dataset.anoBotao);
+  }
+
+  // Raio-X: busca por empresa (carrega dados/empresas.json no primeiro uso)
+  const campoEmpresa = document.getElementById('busca-empresa');
+  if (campoEmpresa) {
+    const saidaEmpresa = document.getElementById('resultado-empresa');
+    const real = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+    const ORG = { prefeitura: 'Prefeitura', camara: 'Câmara', saae: 'SAAE' };
+    const MES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+    const fmtCnpj = (c) => c.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, '$1.$2.$3/$4-$5');
+    let empresas = null;
+    let esperaEmpresa;
+    const itemEmpresa = ([cnpj, nome, porMes, porOrgao]) => {
+      const porAno = {};
+      for (const [k, v] of Object.entries(porMes)) porAno[k.slice(0, 4)] = (porAno[k.slice(0, 4)] || 0) + v;
+      const anos = Object.entries(porAno).sort().map(([a, v]) => `${a}: ${real.format(v)}`).join(' · ');
+      const meses = Object.entries(porMes).sort().map(([k, v]) => `${MES[Number(k.slice(5, 7)) - 1]}/${k.slice(0, 4)}: ${real.format(v)}`).join(' · ');
+      const orgaos = Object.entries(porOrgao).map(([k, v]) => `${ORG[k] || k}: ${real.format(v)}`).join(' · ');
+      return `<li><strong>${esc(nome)}</strong> <span class="nota">CNPJ ${esc(fmtCnpj(cnpj))}</span><br>Por ano: ${esc(anos)}<br>Por órgão: ${esc(orgaos)}<details><summary>Mês a mês</summary><p>${esc(meses)}</p></details><a href="https://transparencia.tce.sp.gov.br/despesas-fornecedor?nr_identificador_despesa=${esc(cnpj)}" target="_blank" rel="noopener">ver no TCE-SP</a></li>`;
+    };
+    campoEmpresa.addEventListener('input', () => {
+      clearTimeout(esperaEmpresa);
+      esperaEmpresa = setTimeout(async () => {
+        const q = norm(campoEmpresa.value);
+        const digitos = campoEmpresa.value.replace(/\D/g, '');
+        if (q.length < 3) { saidaEmpresa.innerHTML = ''; return; }
+        empresas = empresas || await (await fetch('dados/empresas.json')).json();
+        const achadas = empresas.filter(([cnpj, nome]) => norm(nome).includes(q) || (digitos.length >= 3 && cnpj.includes(digitos)));
+        saidaEmpresa.innerHTML = achadas.length
+          ? `<p>${achadas.length} ${achadas.length === 1 ? 'resultado' : 'resultados'}${achadas.length > 30 ? ' (mostrando os 30 que mais receberam)' : ''}.</p><ul class="lista">${achadas.slice(0, 30).map(itemEmpresa).join('')}</ul>`
+          : '<p>Nenhuma empresa encontrada. Tente outra parte do nome ou o CNPJ.</p>';
+      }, 250);
+    });
+  }
+
+
   // Contador de salário (só existe na página se houver fonte oficial)
   const sal = document.getElementById('contador-salario');
   if (sal) {

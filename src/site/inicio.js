@@ -5,6 +5,7 @@ import { esc } from '../util/texto.js';
 import { layout, dataBR, link, numero, aviso, foto, barraProporcao, cartaoNumero, quandoBR, GRUPOS_PUBLICOS, AVISO_NOMES, apelidoHtml } from './base.js';
 import { percentual, sugestoesBairros } from './util.js';
 import { blocoContador } from './impostometro.js';
+import { chamadaGastos } from './gastos.js';
 
 const ORDENS = [
   ['nome', 'Nome (A–Z)'],
@@ -49,6 +50,7 @@ export function paginaInicial(d) {
 
   const corpo = `${salario}
 ${d.receitas ? blocoContador(d.receitas, '', false) : ''}
+${d.gastos ? chamadaGastos(d.gastos) : ''}
 <section id="bairro" class="secao">
 <h2>O que pediram pro seu bairro?</h2>
 <p>Veja tudo o que os vereadores pediram para a sua rua ou o seu bairro, com link para o documento oficial.</p>

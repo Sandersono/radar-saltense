@@ -5,6 +5,7 @@ import { paginaInicial } from './site/inicio.js';
 import { paginaVereador } from './site/vereador.js';
 import { paginaVotacoes } from './site/votacoes.js';
 import { paginaImpostometro } from './site/impostometro.js';
+import { paginaGastos } from './site/gastos.js';
 import { paginaFontes } from './site/fontes.js';
 
 // Foto quadrada pequena (240 px, WebP), sem cortar a cabeça.
@@ -32,6 +33,10 @@ export async function gerarSite(d, destino) {
   await writeFile(`${destino}/votacoes.html`, paginaVotacoes(d));
   await writeFile(`${destino}/fontes.html`, paginaFontes(d));
   if (d.receitas) await writeFile(`${destino}/impostometro.html`, paginaImpostometro(d));
+  if (d.gastos) {
+    await writeFile(`${destino}/gastos.html`, paginaGastos(d));
+    await writeFile(`${destino}/dados/empresas.json`, JSON.stringify(d.gastos.empresas.map((e) => [e.cnpj, e.nome, e.porMes, e.porOrgao])));
+  }
   const busca = {
     p: d.proposituras.map((p) => [p.id, p.data, p.grupo, p.autoresTexto, p.ementa, `${p.categoria} ${p.numero}`]),
     l: d.locais.map((l) => [l.nome, l.idx]),

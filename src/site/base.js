@@ -72,7 +72,7 @@ export function layout({ titulo, corpo, prefixo = '', atualizadoEm, heroi = '' }
 <div class="topo-faixa"><div class="topo-barra">
 <a class="marca" href="${prefixo}index.html"><img src="${prefixo}marca/logo.png" alt="Radar Saltense, página inicial" width="140" height="56"></a>
 <button class="menu-botao" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
-<nav id="menu-principal" class="menu" aria-label="Principal"><a href="${prefixo}index.html#bairro">Seu bairro</a><a href="${prefixo}index.html#vereadores">Vereadores</a><a href="${prefixo}votacoes.html">Votações</a><a href="${prefixo}impostometro.html">Impostômetro</a><a href="${prefixo}fontes.html">De onde vêm os números</a></nav>
+<nav id="menu-principal" class="menu" aria-label="Principal"><a href="${prefixo}index.html#bairro">Seu bairro</a><a href="${prefixo}index.html#vereadores">Vereadores</a><a href="${prefixo}votacoes.html">Votações</a><a href="${prefixo}impostometro.html">Impostômetro</a><a href="${prefixo}gastos.html">Gastos</a><a href="${prefixo}fontes.html">De onde vêm os números</a></nav>
 </div></div>
 ${heroi ? `<div class="heroi">${heroi}</div>` : ''}
 <svg class="onda" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 30C240 60 480 0 720 22S1200 50 1440 18V60H0Z"/></svg>
@@ -82,7 +82,7 @@ ${corpo}
 </main>
 <footer class="rodape"><div class="rodape-dentro">
 <p class="rodape-marca">Radar Saltense</p>
-<p>Atualizado em ${esc(quandoBR(atualizadoEm))}. Tudo sai de fontes oficiais: Câmara Municipal de Salto, Tribunal de Contas do Estado (TCE-SP) e IBGE. <a href="${prefixo}fontes.html">Veja de onde vêm os números</a>.</p>
+<p>Atualizado em ${esc(quandoBR(atualizadoEm))}. Tudo sai de fontes oficiais: Câmara Municipal de Salto, Tribunal de Contas do Estado (TCE-SP), Tesouro Nacional e IBGE. <a href="${prefixo}fontes.html">Veja de onde vêm os números</a>.</p>
 <p>Radar Saltense é um projeto independente de ${esc(AUTOR.nome)}, feito por morador, sem vínculo com a Câmara, com a Prefeitura ou com partido.</p>
 <p>Achou um erro? Me chama no Instagram: <a href="https://instagram.com/${AUTOR.instagram}">@${AUTOR.instagram}</a>.</p>
 </div></footer>

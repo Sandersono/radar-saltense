@@ -59,9 +59,9 @@ main p, main li, main td { overflow-wrap: anywhere; }
 .busca { width: 100%; min-height: 52px; padding: .7rem 1.2rem; border: 2px solid var(--rio); border-radius: 999px; font: 400 1.05rem var(--texto); background: var(--branco); color: var(--rio-escuro); }
 .busca-pequena { min-height: 46px; font-size: 1rem; }
 select { min-height: 46px; padding: .5rem 1rem; border: 2px solid var(--linha); border-radius: 999px; font: 400 1rem var(--texto); background: var(--branco); color: var(--rio-escuro); }
-.sugestoes, .ordens { display: flex; flex-wrap: wrap; gap: .5rem; margin: .75rem 0; }
+.sugestoes, .ordens, .anos { display: flex; flex-wrap: wrap; gap: .5rem; margin: .75rem 0; }
 .chip { min-height: 44px; padding: .45rem 1rem; border-radius: 999px; border: 1px solid var(--linha); background: var(--branco); color: var(--rio-escuro); font: 600 .9rem var(--texto); cursor: pointer; }
-html:not(.js) .ordens, html:not(.js) .sugestoes, html:not(.js) .filtros { display: none; }
+html:not(.js) .ordens, html:not(.js) .sugestoes, html:not(.js) .filtros, html:not(.js) .anos { display: none; }
 .chip:hover { border-color: var(--rio); }
 .chip[aria-pressed="true"] { background: var(--rio); border-color: var(--rio); color: #fff; }
 
@@ -182,3 +182,7 @@ a.cartao-numero:hover { border-color: var(--rio); }
   html { scroll-behavior: auto; }
   * { transition: none !important; animation: none !important; }
 }
+.chamada-gastos { margin: 1rem 0; }
+.ano-gastos h2 small { font-size: .9rem; font-weight: 600; color: var(--suave); }
+.lista-empresas .valor-linha { font-weight: 600; color: var(--rio-escuro); margin-right: .4rem; }
+#resultado-empresa details { margin: .4rem 0; }
