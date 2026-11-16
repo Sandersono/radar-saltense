@@ -530,5 +530,8 @@ import { grupoFornecedor, cnpjDe, formatarCnpj, orgaoChave, resumirDespesas, are
     '2025-02': [L(PREF, 'Valor Pago', pj('55555555000155'), '', '200,00', 'Fevereiro')],
   });
   assert.equal(vazio.anos['2025'].topEmpresas[0].nome, 'EMPRESA Y LTDA');
+  assert.equal(grupoFornecedor(L(PREF, 'Valor Pago', pj('11111111000199'), 'ASSOCIACAO FUNDO DE INCENTIVO A PESQUISA', '10,00')), 'empresas');
+  assert.equal(grupoFornecedor(L(PREF, 'Valor Pago', pj('11111111000188'), 'MONGERAL AEGON SEGUROS E PREVIDENCIA S/A', '10,00')), 'empresas');
+  assert.equal(grupoFornecedor(L(PREF, 'Valor Pago', pj('11111111000177'), 'FUNDO NACIONAL DE DESENVOLVIMENTO DA EDUCACAO', '10,00')), 'publicos');
   console.log('ok: despesas');
 }

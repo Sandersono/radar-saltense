@@ -54,7 +54,7 @@ Mostrar ao morador quanto a cidade pagou, para quais áreas e para quais empresa
 | 2 | `nm_fornecedor` casa com a lista de órgãos públicos, impostos e folha (abaixo) | Órgãos públicos, impostos e folha |
 | 3 | qualquer outro CNPJ | Empresas e entidades |
 
-Lista do grupo 2 (normalizada, sem acento, maiúsculas): MUNICIPIO, PREFEITURA, CAMARA MUNICIPAL, SERVICO AUTONOMO, FUNDO, FUNDEB, INSTITUTO NACIONAL DO SEGURO SOCIAL, PREVIDENCIA, RECEITA FEDERAL, SECRETARIA, MINISTERIO, TRIBUNAL, CAIXA ECONOMICA FEDERAL, BANCO DO BRASIL, BANCO SANTANDER, BANCO BRADESCO, ITAU UNIBANCO, DESENVOLVE SP, PRODESP, CETESB, COMPANHIA DE PROCESSAMENTO DE DADOS. Fica em `src/regras/despesas.js` e aparece na seção "De onde vêm os números".
+Lista do grupo 2 (normalizada, sem acento, maiúsculas): MUNICIPIO, PREFEITURA, CAMARA MUNICIPAL, SERVICO AUTONOMO, FUNDO, FUNDEB, INSTITUTO NACIONAL DO SEGURO SOCIAL, PREVIDENCIA, RECEITA FEDERAL, SECRETARIA, MINISTERIO, TRIBUNAL, CAIXA ECONOMICA FEDERAL, BANCO DO BRASIL, BANCO SANTANDER, BANCO BRADESCO, ITAU UNIBANCO, DESENVOLVE SP, PRODESP, CETESB, COMPANHIA DE PROCESSAMENTO DE DADOS. Exceção (2026-11-15): nome que também tem ASSOCIACAO, SEGUROS, LTDA ou EIRELI fica em "Empresas e entidades" (ex.: AFIP, Mongeral). Fica em `src/regras/despesas.js` e aparece na seção "De onde vêm os números".
 
 MEI e empresa individual (CNPJ com nome de pessoa) ficam em "Empresas e entidades", com nome, como o próprio TCE-SP mostra.
 

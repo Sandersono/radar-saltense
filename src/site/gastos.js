@@ -1,6 +1,6 @@
 import { esc } from '../util/texto.js';
 import { LINKS_CREDOR, TCE_DESPESAS, SICONFI_RREO } from '../config.js';
-import { ORGAOS, GRUPOS_GASTO, LISTA_PUBLICOS, formatarCnpj, NOVA_LIMITE } from '../regras/despesas.js';
+import { ORGAOS, GRUPOS_GASTO, LISTA_PUBLICOS, LISTA_NAO_PUBLICOS, formatarCnpj, NOVA_LIMITE } from '../regras/despesas.js';
 import { layout, reais, numero, aviso, link } from './base.js';
 import { barras, NOMES_MES } from './impostometro.js';
 
@@ -91,7 +91,7 @@ ${g.novas.length ? `<ol class="lista lista-empresas">${g.novas.map((e) => `<li><
 <ul>
 <li>Pagamentos: API pública de despesas do TCE-SP, ${esc(TCE_DESPESAS)}/&lt;ano&gt;/&lt;mês&gt; (Prefeitura, Câmara e SAAE). Conta o evento "Valor Pago". Último mês publicado: ${esc(ultimos)}.</li>
 <li>Por área: Tesouro Nacional (SICONFI), Relatório Resumido da Execução Orçamentária, Anexo 2, despesa liquidada por função (${esc(SICONFI_RREO)}). Último bimestre: ${esc(sic)}.</li>
-<li>"Órgãos públicos, impostos e folha" junta quem recebe e tem no nome: ${esc(LISTA_PUBLICOS.join(', '))}. O resto com CNPJ é "Empresas e entidades" (inclui MEI e organizações sociais).</li>
+<li>"Órgãos públicos, impostos e folha" junta quem recebe e tem no nome: ${esc(LISTA_PUBLICOS.join(', '))}, a não ser que o nome também tenha ${esc(LISTA_NAO_PUBLICOS.join(', '))}. O resto com CNPJ é "Empresas e entidades" (inclui MEI e organizações sociais).</li>
 <li>Para conferir nomes de quem recebeu: ${link(LINKS_CREDOR.prefeitura, 'Portal da Transparência da Prefeitura')} e ${link(LINKS_CREDOR.tce, 'TCE-SP, Despesas por Fornecedor')}.</li>
 </ul>
 </section>`;

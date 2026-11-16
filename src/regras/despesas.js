@@ -12,6 +12,10 @@ export const LISTA_PUBLICOS = [
   'ITAU UNIBANCO', 'DESENVOLVE SP', 'PRODESP', 'CETESB', 'COMPANHIA DE PROCESSAMENTO DE DADOS',
 ];
 
+// Nome com estes termos é sempre empresa ou entidade, mesmo com um termo da lista acima
+// (ex.: 'ASSOCIACAO FUNDO DE INCENTIVO A PESQUISA', 'MONGERAL AEGON SEGUROS E PREVIDENCIA S/A').
+export const LISTA_NAO_PUBLICOS = ['ASSOCIACAO', 'SEGUROS', 'LTDA', 'EIRELI'];
+
 // Funções de governo (Portaria 42/1999), como aparecem no RREO Anexo 02.
 export const FUNCOES = [
   'Legislativa', 'Judiciária', 'Essencial à Justiça', 'Administração', 'Defesa Nacional', 'Segurança Pública',
@@ -26,10 +30,12 @@ export const NOVA_LIMITE = 1000000;
 const maiusculo = (s) => normalizar(s).toUpperCase();
 const centavos = (v) => Math.round(v * 100) / 100;
 const RE_PUBLICOS = new RegExp(`\\b(${LISTA_PUBLICOS.join('|')})\\b`);
+const RE_NAO_PUBLICOS = new RegExp(`\\b(${LISTA_NAO_PUBLICOS.join('|')})\\b`);
 
 export function grupoFornecedor(linha) {
   if (/^PESSOA FISICA/.test(maiusculo(linha.id_fornecedor))) return 'pessoas';
-  if (RE_PUBLICOS.test(maiusculo(linha.nm_fornecedor))) return 'publicos';
+  const nome = maiusculo(linha.nm_fornecedor);
+  if (RE_PUBLICOS.test(nome) && !RE_NAO_PUBLICOS.test(nome)) return 'publicos';
   return 'empresas';
 }
 
