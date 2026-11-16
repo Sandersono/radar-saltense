@@ -80,8 +80,8 @@ export function relatorio(d, problemas, aumentos = []) {
     const g = c.respostas.geral;
     l.push(`- Requerimentos: ${g.feitos} feitos, ${g.conferidos} conferidos, ${g.respondidos} respondidos (${g.percentual}% dos conferidos), ${c.respostas.pendentes} ainda por conferir, ${c.respostas.conferidosHoje} conferidos hoje; mediana ${g.medianaDias ?? '-'} dias`);
     const cand = c.campanha.candidatos;
-    const doze = d.vereadores.reduce((s, v) => s + ((cand[v.id] && cand[v.id].total) || 0), 0);
-    l.push(`- Campanha 2024: os ${d.vereadores.length} vereadores somam ${brl(doze)}; prefeito ${cand.prefeito ? brl(cand.prefeito.total) : 'sem dado'}`);
+    const somaVereadores = d.vereadores.reduce((s, v) => s + ((cand[v.id] && cand[v.id].total) || 0), 0);
+    l.push(`- Campanha 2024: os ${d.vereadores.length} vereadores somam ${brl(somaVereadores)}; prefeito ${cand.prefeito ? brl(cand.prefeito.total) : 'sem dado'}`);
   }
   l.push('', '## O que é estimativa', '');
   l.push('- Impostômetro: depois do último mês oficial, o contador soma o ritmo médio diário dos últimos meses publicados; não considera a sazonalidade (o IPTU concentra em jan/fev).');

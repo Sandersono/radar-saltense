@@ -5,6 +5,7 @@ import { layout, dataBR, link, aviso, foto, seloFonte, barraProporcao, cartaoNum
 import { ORIGENS_CAMPANHA } from '../regras/campanha.js';
 import { URL_RH_CAMARA, mesAno } from './camara.js';
 import { percentual } from './util.js';
+import { amostraBoa } from '../regras/respostas.js';
 
 const ROTULO_MARCA = { P: 'presente', A: 'falta', AJ: 'falta justificada', vazio: 'sem registro' };
 
@@ -32,8 +33,8 @@ function cartaoRespostas(v, d) {
   const espera = x.feitos - x.conferidos;
   return `<section class="secao cartao">
 <h2>Requerimentos respondidos</h2>
-<p><strong>${numero(x.respondidos)} de ${numero(x.conferidos)}</strong> requerimentos conferidos foram respondidos (${x.percentual}%).${x.medianaDias === null ? '' : ` A resposta costuma levar ${x.medianaDias} dias.`}</p>
-${espera > 0 ? `<p class="nota">Ainda faltam conferir ${numero(espera)} de ${numero(x.feitos)} requerimentos.</p>` : ''}
+${amostraBoa(x) ? `<p><strong>${numero(x.respondidos)} de ${numero(x.conferidos)}</strong> requerimentos conferidos foram respondidos (${x.percentual}%).${x.medianaDias === null ? '' : ` A resposta costuma levar ${x.medianaDias} dias.`}</p>` : `<p>${numero(x.conferidos)} de ${numero(x.feitos)} conferidos até agora; o percentual aparece quando o robô terminar de conferir.</p>`}
+${espera > 0 && amostraBoa(x) ? `<p class="nota">Ainda faltam conferir ${numero(espera)} de ${numero(x.feitos)} requerimentos.</p>` : ''}
 <p class="nota">Resposta = documento anexado na ficha oficial. Indicações não entram: o portal não registra resposta a elas.</p>
 </section>`;
 }

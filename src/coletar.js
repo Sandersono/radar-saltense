@@ -18,12 +18,14 @@ import { filaRespostas } from './regras/respostas.js';
 import { anoMesBR } from './util/texto.js';
 
 const ORCAMENTO_RESPOSTAS = 150;
+// Mensagens do Playwright trazem o registro de chamadas em várias linhas; só a primeira vai para o site.
+const primeiraLinha = (m) => String(m).split('\n')[0].trim();
 const doisDigitos = (n) => String(n).padStart(2, '0');
 
 async function lerJson(caminho, padrao, avisos) {
   try { return JSON.parse(await readFile(caminho, 'utf8')); } catch (e) {
     if (e.code === 'ENOENT') return padrao;
-    avisos.push(`${caminho} não pôde ser lido (${e.message}); seguindo sem ele.`);
+    avisos.push(`${caminho} não pôde ser lido (${primeiraLinha(e.message)}); seguindo sem ele.`);
     return padrao;
   }
 }
@@ -41,7 +43,7 @@ async function folhaDaCamara(vereadores, hoje, salvo, avisos) {
     }
     return mesclarFolha(salvo, novos);
   } catch (e) {
-    avisos.push(`Folha da Câmara: ${e.message}; mantido o último dado salvo.`);
+    avisos.push(`Folha da Câmara: ${primeiraLinha(e.message)}; mantido o último dado salvo.`);
     return salvo;
   }
 }
@@ -61,11 +63,13 @@ async function respostasDaCamara(cardsPorAno, salvo, avisos) {
       }
     }
     const fila = filaRespostas(salvo, reqs, hoje, ORCAMENTO_RESPOSTAS);
-    const { estado, falhas } = await coletarRespostas(fila, hoje);
+    const { estado, falhas, interrompido } = await coletarRespostas(fila, hoje);
+    if (interrompido === 'tempo') avisos.push('Respostas a requerimentos: o tempo reservado acabou; o resto fica para a próxima atualização.');
+    if (interrompido === 'falhas') avisos.push('Respostas a requerimentos: 5 páginas seguidas falharam; conferência interrompida (o portal está fora do ar ou mudou?).');
     if (falhas.length) avisos.push(`Respostas a requerimentos: ${falhas.length} de ${fila.length} páginas não puderam ser lidas; ficam para a próxima atualização.`);
     return { ...salvo, ...estado };
   } catch (e) {
-    avisos.push(`Respostas a requerimentos: ${e.message}; mantido o último dado salvo.`);
+    avisos.push(`Respostas a requerimentos: ${primeiraLinha(e.message)}; mantido o último dado salvo.`);
     return salvo;
   }
 }

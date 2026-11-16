@@ -6,6 +6,7 @@ import { conferir, aumentosDespesas } from './conferir.js';
 import { relatorio } from './relatorio.js';
 import { gerarSite } from './gerar-site.js';
 import { mesclarFolha } from './regras/folha.js';
+import { serializarRespostas } from './regras/respostas.js';
 
 const usarCache = process.argv.includes('--usar-cache');
 const coleta = usarCache ? JSON.parse(await readFile('data/bruto/coleta.json', 'utf8')) : await coletarTudo();
@@ -41,6 +42,6 @@ await mkdir('data/processado', { recursive: true });
 await writeFile('data/processado/dados.json', JSON.stringify(dados));
 await writeFile('data/processado/meta.json', `${JSON.stringify(dados.meta, null, 2)}\n`);
 await writeFile('data/processado/folha-camara.json', `${JSON.stringify(coleta.folhaCamara || {}, null, 2)}\n`);
-await writeFile('data/processado/respostas.json', JSON.stringify(coleta.respostas));
+await writeFile('data/processado/respostas.json', serializarRespostas(coleta.respostas));
 await gerarSite(dados, 'dist');
 console.log('Pronto. Veja conferencia.md e a pasta dist/.');

@@ -30,6 +30,10 @@ for (const r of Object.values(novos)) if (r && r.grupos.vereadores.pessoas === 0
 
 let salvo = {};
 try { salvo = JSON.parse(await readFile(SAIDA, 'utf8')); } catch { /* primeira carga */ }
+// Mesma trava do robô: nunca troca um mês completo salvo por um incompleto.
+for (const [mes, r] of Object.entries(novos)) {
+  if (r && r.parcial && salvo[mes] && !salvo[mes].parcial) { console.log(`${mes}: portal publicou incompleto; mantido o mês completo salvo`); delete novos[mes]; }
+}
 const final = mesclarFolha(salvo, novos);
 await mkdir(dirname(SAIDA), { recursive: true });
 await writeFile(SAIDA, JSON.stringify(final, null, 2) + '\n');

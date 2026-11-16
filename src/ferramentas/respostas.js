@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { salvar } from '../coleta/http.js';
 import { coletarRespostas } from '../coleta/respostas.js';
-import { filaRespostas, resumoRespostas } from '../regras/respostas.js';
+import { filaRespostas, resumoRespostas, serializarRespostas } from '../regras/respostas.js';
 
 const ARQ = 'data/processado/respostas.json';
 const i = process.argv.indexOf('--limite');
@@ -16,9 +16,10 @@ const hoje = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' })
 const fila = filaRespostas(estado, reqs, hoje, limite);
 console.log(`Fila: ${fila.length} requerimentos`);
 for (let k = 0; k < fila.length; k += 50) {
-  const { estado: novos, falhas } = await coletarRespostas(fila.slice(k, k + 50), hoje);
+  const { estado: novos, falhas, interrompido } = await coletarRespostas(fila.slice(k, k + 50), hoje, Infinity);
   estado = { ...estado, ...novos };
-  await salvar(ARQ, JSON.stringify(estado));
-  console.log(`${Math.min(k + 50, fila.length)}/${fila.length} (falhas no lote: ${falhas.length})`);
+  await salvar(ARQ, serializarRespostas(estado));
+  console.log(`${Math.min(k + 50, fila.length)}/${fila.length} (falhas no lote: ${falhas.length}${falhas.length ? `; ids: ${falhas.join(', ')}` : ''})`);
+  if (interrompido) { console.log(`Interrompido (${interrompido}); rode de novo para continuar.`); break; }
 }
 console.log(resumoRespostas(estado, reqs).geral);

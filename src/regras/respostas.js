@@ -33,6 +33,16 @@ export function filaRespostas(estado, requerimentos, hoje, limite = 150) {
   return [...nunca, ...pendentes].slice(0, limite).map((r) => r.id);
 }
 
+// Percentual e tempo típico só valem quando quase todos os requerimentos já foram conferidos.
+export const amostraBoa = (x) => x.conferidos > 0 && x.conferidos >= 0.8 * x.feitos;
+
+// Um registro por linha, na ordem dos ids, para o git não brigar numa linha gigante.
+export function serializarRespostas(estado) {
+  const ids = Object.keys(estado).sort((a, b) => a.localeCompare(b, 'en', { numeric: true }));
+  if (!ids.length) return '{}\n';
+  return `{\n${ids.map((id) => `${JSON.stringify(id)}:${JSON.stringify(estado[id])}`).join(',\n')}\n}\n`;
+}
+
 export function resumoRespostas(estado, requerimentos) {
   const novo = () => ({ feitos: 0, conferidos: 0, respondidos: 0, dias: [] });
   const geral = novo();

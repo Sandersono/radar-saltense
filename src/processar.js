@@ -1,4 +1,4 @@
-import { ANO_INICIO, OUTROS_NOMES } from './config.js';
+import { ANO_INICIO, OUTROS_NOMES, VEREADORES_ESPERADOS } from './config.js';
 import { lerCard } from './regras/apex.js';
 import { classificar, GRUPOS } from './regras/classificar.js';
 import { extrairLocais, tiposPedido } from './regras/local.js';
@@ -53,7 +53,7 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
   const totalFolha = (r) => Math.round(Object.values(r.grupos).reduce((s, g) => s + g.total, 0) * 100) / 100;
   for (const [mes, r] of Object.entries(mesesFolha)) {
     if (r.parcial) avisos.push(`Folha da Câmara de ${mes}: o portal publicou o mês incompleto (sem os vereadores); fica de fora dos totais.`);
-    else if (r.grupos.vereadores.pessoas !== 11) avisos.push(`Folha da Câmara de ${mes}: ${r.grupos.vereadores.pessoas} vereadores na folha (esperado 11); pode haver suplente ou licença.`);
+    else if (r.grupos.vereadores.pessoas !== VEREADORES_ESPERADOS) avisos.push(`Folha da Câmara de ${mes}: ${r.grupos.vereadores.pessoas} vereadores na folha (esperado ${VEREADORES_ESPERADOS}); pode haver suplente ou licença.`);
   }
   avisos.push(...(avisosFontes || []));
 

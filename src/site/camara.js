@@ -1,4 +1,5 @@
 import { esc } from '../util/texto.js';
+import { amostraBoa } from '../regras/respostas.js';
 import { ORIGENS_CAMPANHA } from '../regras/campanha.js';
 import { GRUPOS_FOLHA } from '../regras/folha.js';
 import { layout, reais, numero, link, seloFonte, aviso, cartaoNumero } from './base.js';
@@ -73,15 +74,15 @@ function secaoRespostas(d) {
   const g = r.geral;
   if (!g.feitos) return '';
   const linhas = d.vereadores.map((v) => ({ v, x: r.porVereador[v.id] })).filter(({ x }) => x)
-    .map(({ v, x }) => `<tr><td data-rotulo="Vereador"><a href="vereador/${esc(v.id)}.html">${esc(v.nome)}</a></td><td data-rotulo="Feitos">${numero(x.feitos)}</td><td data-rotulo="Conferidos">${numero(x.conferidos)}</td><td data-rotulo="Respondidos">${numero(x.respondidos)}</td><td data-rotulo="%">${x.conferidos ? `${x.percentual}%` : '—'}</td><td data-rotulo="Tempo típico">${x.medianaDias === null ? '—' : `${x.medianaDias} dias`}</td></tr>`).join('');
+    .map(({ v, x }) => `<tr><td data-rotulo="Vereador"><a href="vereador/${esc(v.id)}.html">${esc(v.nome)}</a></td><td data-rotulo="Feitos">${numero(x.feitos)}</td><td data-rotulo="Conferidos">${numero(x.conferidos)}</td><td data-rotulo="Respondidos">${numero(x.respondidos)}</td><td data-rotulo="%">${amostraBoa(x) ? `${x.percentual}%` : '—'}</td><td data-rotulo="Tempo típico">${amostraBoa(x) && x.medianaDias !== null ? `${x.medianaDias} dias` : '—'}</td></tr>`).join('');
   return `<section id="respostas" class="secao cartao">
 <h2>Requerimentos respondidos</h2>
 <p>Requerimento é uma pergunta ou cobrança do vereador à Prefeitura. Aqui contamos quantos tiveram resposta anexada no portal da Câmara.</p>
-<div class="grade-numeros">
-${cartaoNumero({ valor: g.conferidos ? `${g.percentual}%` : '—', rotulo: `respondidos (${numero(g.respondidos)} de ${numero(g.conferidos)} conferidos)` })}
+${amostraBoa(g) ? `<div class="grade-numeros">
+${cartaoNumero({ valor: `${g.percentual}%`, rotulo: `respondidos (${numero(g.respondidos)} de ${numero(g.conferidos)} conferidos)` })}
 ${cartaoNumero({ valor: g.medianaDias === null ? '—' : `${g.medianaDias} dias`, rotulo: 'tempo típico até a resposta' })}
-</div>
-${r.pendentes > 0 ? aviso(`Ainda faltam conferir ${numero(r.pendentes)} de ${numero(g.feitos)} requerimentos. Eles ficam de fora da conta até o robô conferir.`) : ''}
+</div>` : `<p>${numero(g.conferidos)} de ${numero(g.feitos)} conferidos até agora; o percentual aparece quando o robô terminar de conferir.</p>`}
+${amostraBoa(g) && r.pendentes > 0 ? aviso(`Ainda faltam conferir ${numero(r.pendentes)} de ${numero(g.feitos)} requerimentos. Eles ficam de fora da conta até o robô conferir.`) : ''}
 <table class="tabela-empilha"><thead><tr><th>Vereador</th><th>Feitos</th><th>Conferidos</th><th>Respondidos</th><th>%</th><th>Tempo típico</th></tr></thead><tbody>${linhas}</tbody></table>
 <p class="nota">Resposta = documento "Resposta Requerimento" anexado no portal da Câmara. O percentual é sobre os requerimentos já conferidos. Indicações não entram: o portal não registra resposta a elas. Requerimento com mais de um autor conta para cada autor.</p>
 <p>${seloFonte(URL_PROPOSITURAS, 'portal de proposituras')}</p>

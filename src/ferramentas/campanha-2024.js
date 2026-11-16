@@ -4,7 +4,8 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { inflateRawSync } from 'node:zlib';
 import { UA } from '../config.js';
 import { normalizar } from '../util/texto.js';
-import { resumirCampanha } from '../regras/campanha.js';
+import { resumirCampanha, origemCampanha } from '../regras/campanha.js';
+import { valorBR } from '../regras/receitas.js';
 
 const ZIP = 'https://cdn.tse.jus.br/estatistica/sead/odsele/prestacao_contas/prestacao_de_contas_eleitorais_candidatos_2024.zip';
 const ENTRADA = 'receitas_candidatos_2024_SP.csv';
@@ -99,6 +100,15 @@ if (faltou.length) {
   const parecidos = (n) => [...new Set(salto.map((l) => l.NM_CANDIDATO))].filter((c) => normalizar(c).split(' ').some((w) => w.length > 3 && normalizar(n).includes(w)));
   throw new Error(faltou.map((n) => `Não casou: ${n}. Parecidos: ${parecidos(n).join(' | ')}`).join('\n'));
 }
+// Dinheiro que o resumo ignoraria em silêncio: origem sem mapeamento e valor positivo.
+const interesse = [...Object.values(candidatos).map((c) => c.sq), SQ_PREFEITO];
+const sem = new Map();
+for (const l of salto.filter((x) => interesse.includes(x.SQ_CANDIDATO))) {
+  if (origemCampanha(l.DS_ORIGEM_RECEITA) !== null) continue;
+  const v = valorBR(l.VR_RECEITA);
+  if (v > 0) sem.set(l.DS_ORIGEM_RECEITA, (sem.get(l.DS_ORIGEM_RECEITA) || 0) + v);
+}
+if (sem.size) throw new Error(`Origens sem mapeamento (ficariam fora do total): ${[...sem].map(([o, v]) => `"${o}" = ${v.toFixed(2)}`).join('; ')}`);
 const pref = salto.filter((l) => l.SQ_CANDIDATO === SQ_PREFEITO);
 if (!pref.length) throw new Error('Prefeito (SQ_CANDIDATO) sem linhas.');
 candidatos.prefeito = { nome: 'José Geraldo Garcia', partido: pref[0].SG_PARTIDO, sq: SQ_PREFEITO, ...resumirCampanha(pref), link: LINK(SQ_PREFEITO) };

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { lerRespostas, filaRespostas, resumoRespostas } from '../src/regras/respostas.js';
+import { lerRespostas, filaRespostas, resumoRespostas, serializarRespostas, amostraBoa } from '../src/regras/respostas.js';
 
 const com = 'Anexos\nNome: Resp. Req. 752-25 - X.pdf\nTipo Documento: Resposta Requerimento\nData Documento: 03/02/2026\nDownload\nNome: Req. 752-25 - X.pdf\nTipo Documento: Requerimento\nData Documento: 10/12/2025\nDownload\nTotal 2';
 const sem = 'Anexos\nNome: Req. 1-26.pdf\nTipo Documento: Requerimento\nData Documento: 05/01/2026\nTotal 1';
@@ -34,4 +34,11 @@ const r = resumoRespostas(est2, reqs);
 assert.deepEqual(r.geral, { feitos: 5, conferidos: 3, respondidos: 2, percentual: 67, medianaDias: 20 });
 assert.deepEqual(r.porVereador.a, { feitos: 3, conferidos: 2, respondidos: 2, percentual: 100, medianaDias: 20 });
 assert.deepEqual(r.porVereador.b, { feitos: 3, conferidos: 2, respondidos: 1, percentual: 50, medianaDias: 30 });
+const ser = serializarRespostas({ '10': { respondido: false, data: null, conferidoEm: 'x' }, '2': { respondido: true, data: '2026-01-01', conferidoEm: 'x' } });
+assert.equal(ser, '{\n"2":{"respondido":true,"data":"2026-01-01","conferidoEm":"x"},\n"10":{"respondido":false,"data":null,"conferidoEm":"x"}\n}\n');
+assert.deepEqual(JSON.parse(ser)['2'].data, '2026-01-01');
+assert.equal(serializarRespostas({}), '{}\n');
+assert.equal(amostraBoa({ feitos: 10, conferidos: 8 }), true);
+assert.equal(amostraBoa({ feitos: 10, conferidos: 7 }), false);
+assert.equal(amostraBoa({ feitos: 0, conferidos: 0 }), false);
 console.log('ok: respostas');
