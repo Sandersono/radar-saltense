@@ -1,0 +1,580 @@
+{
+  "2025-01": {
+    "grupos": {
+      "vereadores": {
+        "total": 112500,
+        "pessoas": 11
+      },
+      "assessores": {
+        "total": 14689.8,
+        "pessoas": 3
+      },
+      "servidores": {
+        "total": 256646.78,
+        "pessoas": 21
+      }
+    },
+    "porVereador": {
+      "almir-de-melo-santos": 10000,
+      "antonio-moreira-sobrinho": 10000,
+      "arildo-guadagnini": 10000,
+      "clayton-aparecido-dos-santos": 12500,
+      "edemilson-pereira-dos-santos": 10000,
+      "edival-pereira-rosa": 10000,
+      "graziela-costa-leite": 10000,
+      "henrique-balseiros-chamosa-neto": 10000,
+      "luzia-de-fatima-izidorio-vidal": 10000,
+      "michel-oliveira-rodrigues-da-silva": 10000,
+      "rogerio-dos-santos-filho": 10000
+    },
+    "indenizacoes": 0
+  },
+  "2025-02": {
+    "grupos": {
+      "vereadores": {
+        "total": 112500,
+        "pessoas": 11
+      },
+      "assessores": {
+        "total": 69888.46,
+        "pessoas": 12
+      },
+      "servidores": {
+        "total": 238958.97,
+        "pessoas": 22
+      }
+    },
+    "porVereador": {
+      "almir-de-melo-santos": 10000,
+      "antonio-moreira-sobrinho": 10000,
+      "arildo-guadagnini": 10000,
+      "clayton-aparecido-dos-santos": 12500,
+      "edemilson-pereira-dos-santos": 10000,
+      "edival-pereira-rosa": 10000,
+      "graziela-costa-leite": 10000,
+      "henrique-balseiros-chamosa-neto": 10000,
+      "luzia-de-fatima-izidorio-vidal": 10000,
+      "michel-oliveira-rodrigues-da-silva": 10000,
+      "rogerio-dos-santos-filho": 10000
+    },
+    "indenizacoes": 0
+  },
+  "2025-03": {
+    "grupos": {
+      "vereadores": {
+        "total": 112500,
+        "pessoas": 11
+      },
+      "assessores": {
+        "total": 103563.09,
+        "pessoas": 12
+      },
+      "servidores": {
+        "total": 375161.52,
+        "pessoas": 22
+      }
+    },
+    "porVereador": {
+      "almir-de-melo-santos": 10000,
+      "antonio-moreira-sobrinho": 10000,
+      "arildo-guadagnini": 10000,
+      "clayton-aparecido-dos-santos": 12500,
+      "edemilson-pereira-dos-santos": 10000,
+      "edival-pereira-rosa": 10000,
+      "graziela-costa-leite": 10000,
+      "henrique-balseiros-chamosa-neto": 10000,
+      "luzia-de-fatima-izidorio-vidal": 10000,
+      "michel-oliveira-rodrigues-da-silva": 10000,
+      "rogerio-dos-santos-filho": 10000
+    },
+    "indenizacoes": 0
+  },
+  "2025-04": {
+    "grupos": {
+      "vereadores": {
+        "total": 112500,
+        "pessoas": 11
+      },
+      "assessores": {
+        "total": 72372.96,
+        "pessoas": 12
+      },
+      "servidores": {
+        "total": 323621.88,
+        "pessoas": 23
+      }
+    },
+    "porVereador": {
+      "almir-de-melo-santos": 10000,
+      "antonio-moreira-sobrinho": 10000,
+      "arildo-guadagnini": 10000,
+      "clayton-aparecido-dos-santos": 12500,
+      "edemilson-pereira-dos-santos": 10000,
+      "edival-pereira-rosa": 10000,
+      "graziela-costa-leite": 10000,
+      "henrique-balseiros-chamosa-neto": 10000,
+      "luzia-de-fatima-izidorio-vidal": 10000,
+      "michel-oliveira-rodrigues-da-silva": 10000,
+      "rogerio-dos-santos-filho": 10000
+    },
+    "indenizacoes": 0
+  },
+  "2025-05": {
+    "grupos": {
+      "vereadores": {
+        "total": 112500,
+        "pessoas": 11
+      },
+      "assessores": {
+        "total": 73726.32,
+        "pessoas": 12
+      },
+      "servidores": {
+        "total": 269633.92,
+        "pessoas": 23
+      }
+    },
+    "porVereador": {
+      "almir-de-melo-santos": 10000,
+      "antonio-moreira-sobrinho": 10000,
+      "arildo-guadagnini": 10000,
+      "clayton-aparecido-dos-santos": 12500,
+      "edemilson-pereira-dos-santos": 10000,
+      "edival-pereira-rosa": 10000,
+      "graziela-costa-leite": 10000,
+      "henrique-balseiros-chamosa-neto": 10000,
+      "luzia-de-fatima-izidorio-vidal": 10000,
+      "michel-oliveira-rodrigues-da-silva": 10000,
+      "rogerio-dos-santos-filho": 10000
+    },
+    "indenizacoes": 0
+  },
+  "2025-06": {
+    "grupos": {
+      "vereadores": {
+        "total": 112500,
+        "pessoas": 11
+      },
+      "assessores": {
+        "total": 71917.29,
+        "pessoas": 12
+      },
+      "servidores": {
+        "total": 282583.49,
+        "pessoas": 23
+      }
+    },
+    "porVereador": {
+      "almir-de-melo-santos": 10000,
+      "antonio-moreira-sobrinho": 10000,
+      "arildo-guadagnini": 10000,
+      "clayton-aparecido-dos-santos": 12500,
+      "edemilson-pereira-dos-santos": 10000,
+      "edival-pereira-rosa": 10000,
+      "graziela-costa-leite": 10000,
+      "henrique-balseiros-chamosa-neto": 10000,
+      "luzia-de-fatima-izidorio-vidal": 10000,
+      "michel-oliveira-rodrigues-da-silva": 10000,
+      "rogerio-dos-santos-filho": 10000
+    },
+    "indenizacoes": 0
+  },
+  "2025-07": {
+    "grupos": {
+      "vereadores": {
+        "total": 112500,
+        "pessoas": 11
+      },
+      "assessores": {
+        "total": 73726.32,
+        "pessoas": 12
+      },
+      "servidores": {
+        "total": 269525.3,
+        "pessoas": 23
+      }
+    },
+    "porVereador": {
+      "almir-de-melo-santos": 10000,
+      "antonio-moreira-sobrinho": 10000,
+      "arildo-guadagnini": 10000,
+      "clayton-aparecido-dos-santos": 12500,
+      "edemilson-pereira-dos-santos": 10000,
+      "edival-pereira-rosa": 10000,
+      "graziela-costa-leite": 10000,
+      "henrique-balseiros-chamosa-neto": 10000,
+      "luzia-de-fatima-izidorio-vidal": 10000,
+      "michel-oliveira-rodrigues-da-silva": 10000,
+      "rogerio-dos-santos-filho": 10000
+    },
+    "indenizacoes": 0
+  },
+  "2025-08": {
+    "grupos": {
+      "vereadores": {
+        "total": 112500,
+        "pessoas": 11
+      },
+      "assessores": {
+        "total": 73726.32,
+        "pessoas": 12
+      },
+      "servidores": {
+        "total": 280445.4,
+        "pessoas": 23
+      }
+    },
+    "porVereador": {
+      "almir-de-melo-santos": 10000,
+      "antonio-moreira-sobrinho": 10000,
+      "arildo-guadagnini": 10000,
+      "clayton-aparecido-dos-santos": 12500,
+      "edemilson-pereira-dos-santos": 10000,
+      "edival-pereira-rosa": 10000,
+      "graziela-costa-leite": 10000,
+      "henrique-balseiros-chamosa-neto": 10000,
+      "luzia-de-fatima-izidorio-vidal": 10000,
+      "michel-oliveira-rodrigues-da-silva": 10000,
+      "rogerio-dos-santos-filho": 10000
+    },
+    "indenizacoes": 0
+  },
+  "2025-09": {
+    "grupos": {
+      "vereadores": {
+        "total": 0,
+        "pessoas": 0
+      },
+      "assessores": {
+        "total": 16383.81,
+        "pessoas": 2
+      },
+      "servidores": {
+        "total": 44859.05,
+        "pessoas": 3
+      }
+    },
+    "porVereador": {},
+    "indenizacoes": 0,
+    "parcial": true
+  },
+  "2025-11": {
+    "grupos": {
+      "vereadores": {
+        "total": 112500,
+        "pessoas": 11
+      },
+      "assessores": {
+        "total": 71473.57,
+        "pessoas": 12
+      },
+      "servidores": {
+        "total": 270792.44,
+        "pessoas": 22
+      }
+    },
+    "porVereador": {
+      "almir-de-melo-santos": 10000,
+      "antonio-moreira-sobrinho": 10000,
+      "arildo-guadagnini": 10000,
+      "clayton-aparecido-dos-santos": 12500,
+      "edemilson-pereira-dos-santos": 10000,
+      "edival-pereira-rosa": 10000,
+      "graziela-costa-leite": 10000,
+      "henrique-balseiros-chamosa-neto": 10000,
+      "luzia-de-fatima-izidorio-vidal": 10000,
+      "michel-oliveira-rodrigues-da-silva": 10000,
+      "rogerio-dos-santos-filho": 10000
+    },
+    "indenizacoes": 0
+  },
+  "2025-12": {
+    "grupos": {
+      "vereadores": {
+        "total": 112500,
+        "pessoas": 11
+      },
+      "assessores": {
+        "total": 137724.85,
+        "pessoas": 12
+      },
+      "servidores": {
+        "total": 567311.57,
+        "pessoas": 23
+      }
+    },
+    "porVereador": {
+      "almir-de-melo-santos": 10000,
+      "antonio-moreira-sobrinho": 10000,
+      "arildo-guadagnini": 10000,
+      "clayton-aparecido-dos-santos": 12500,
+      "edemilson-pereira-dos-santos": 10000,
+      "edival-pereira-rosa": 10000,
+      "graziela-costa-leite": 10000,
+      "henrique-balseiros-chamosa-neto": 10000,
+      "luzia-de-fatima-izidorio-vidal": 10000,
+      "michel-oliveira-rodrigues-da-silva": 10000,
+      "rogerio-dos-santos-filho": 10000
+    },
+    "indenizacoes": 0
+  },
+  "2026-01": {
+    "grupos": {
+      "vereadores": {
+        "total": 112500,
+        "pessoas": 11
+      },
+      "assessores": {
+        "total": 73726.32,
+        "pessoas": 12
+      },
+      "servidores": {
+        "total": 297262.32,
+        "pessoas": 23
+      }
+    },
+    "porVereador": {
+      "almir-de-melo-santos": 10000,
+      "antonio-moreira-sobrinho": 10000,
+      "arildo-guadagnini": 10000,
+      "clayton-aparecido-dos-santos": 12500,
+      "edemilson-pereira-dos-santos": 10000,
+      "edival-pereira-rosa": 10000,
+      "graziela-costa-leite": 10000,
+      "henrique-balseiros-chamosa-neto": 10000,
+      "luzia-de-fatima-izidorio-vidal": 10000,
+      "michel-oliveira-rodrigues-da-silva": 10000,
+      "rogerio-dos-santos-filho": 10000
+    },
+    "indenizacoes": 0
+  },
+  "2026-02": {
+    "grupos": {
+      "vereadores": {
+        "total": 0,
+        "pessoas": 0
+      },
+      "assessores": {
+        "total": 50174.85,
+        "pessoas": 11
+      },
+      "servidores": {
+        "total": 140904.8,
+        "pessoas": 23
+      }
+    },
+    "porVereador": {},
+    "indenizacoes": 0,
+    "parcial": true
+  },
+  "2026-03": {
+    "grupos": {
+      "vereadores": {
+        "total": 112500,
+        "pessoas": 11
+      },
+      "assessores": {
+        "total": 65534.51,
+        "pessoas": 11
+      },
+      "servidores": {
+        "total": 291112.43,
+        "pessoas": 23
+      }
+    },
+    "porVereador": {
+      "almir-de-melo-santos": 10000,
+      "antonio-moreira-sobrinho": 10000,
+      "arildo-guadagnini": 10000,
+      "clayton-aparecido-dos-santos": 12500,
+      "edemilson-pereira-dos-santos": 10000,
+      "edival-pereira-rosa": 10000,
+      "graziela-costa-leite": 10000,
+      "henrique-balseiros-chamosa-neto": 10000,
+      "luzia-de-fatima-izidorio-vidal": 10000,
+      "michel-oliveira-rodrigues-da-silva": 10000,
+      "rogerio-dos-santos-filho": 10000
+    },
+    "indenizacoes": 0
+  },
+  "2026-04": {
+    "grupos": {
+      "vereadores": {
+        "total": 112500,
+        "pessoas": 11
+      },
+      "assessores": {
+        "total": 82204.81,
+        "pessoas": 12
+      },
+      "servidores": {
+        "total": 376080.12,
+        "pessoas": 23
+      }
+    },
+    "porVereador": {
+      "almir-de-melo-santos": 10000,
+      "antonio-moreira-sobrinho": 10000,
+      "arildo-guadagnini": 10000,
+      "clayton-aparecido-dos-santos": 12500,
+      "edemilson-pereira-dos-santos": 10000,
+      "edival-pereira-rosa": 10000,
+      "graziela-costa-leite": 10000,
+      "henrique-balseiros-chamosa-neto": 10000,
+      "luzia-de-fatima-izidorio-vidal": 10000,
+      "michel-oliveira-rodrigues-da-silva": 10000,
+      "rogerio-dos-santos-filho": 10000
+    },
+    "indenizacoes": 0
+  },
+  "2026-05": {
+    "grupos": {
+      "vereadores": {
+        "total": 112500,
+        "pessoas": 11
+      },
+      "assessores": {
+        "total": 78149.88,
+        "pessoas": 12
+      },
+      "servidores": {
+        "total": 321020.71,
+        "pessoas": 23
+      }
+    },
+    "porVereador": {
+      "almir-de-melo-santos": 10000,
+      "antonio-moreira-sobrinho": 10000,
+      "arildo-guadagnini": 10000,
+      "clayton-aparecido-dos-santos": 12500,
+      "edemilson-pereira-dos-santos": 10000,
+      "edival-pereira-rosa": 10000,
+      "graziela-costa-leite": 10000,
+      "henrique-balseiros-chamosa-neto": 10000,
+      "luzia-de-fatima-izidorio-vidal": 10000,
+      "michel-oliveira-rodrigues-da-silva": 10000,
+      "rogerio-dos-santos-filho": 10000
+    },
+    "indenizacoes": 0
+  },
+  "2026-06": {
+    "grupos": {
+      "vereadores": {
+        "total": 113000,
+        "pessoas": 11
+      },
+      "assessores": {
+        "total": 90740.69,
+        "pessoas": 12
+      },
+      "servidores": {
+        "total": 334137.54,
+        "pessoas": 23
+      }
+    },
+    "porVereador": {
+      "almir-de-melo-santos": 10000,
+      "antonio-moreira-sobrinho": 10000,
+      "arildo-guadagnini": 10000,
+      "clayton-aparecido-dos-santos": 12500,
+      "edemilson-pereira-dos-santos": 10000,
+      "edival-pereira-rosa": 10000,
+      "graziela-costa-leite": 10000,
+      "henrique-balseiros-chamosa-neto": 10000,
+      "luzia-de-fatima-izidorio-vidal": 10000,
+      "michel-oliveira-rodrigues-da-silva": 10000,
+      "rogerio-dos-santos-filho": 10500
+    },
+    "indenizacoes": 0
+  },
+  "2026-07": {
+    "grupos": {
+      "vereadores": {
+        "total": 113050,
+        "pessoas": 11
+      },
+      "assessores": {
+        "total": 74479.99,
+        "pessoas": 12
+      },
+      "servidores": {
+        "total": 268792.29,
+        "pessoas": 23
+      }
+    },
+    "porVereador": {
+      "almir-de-melo-santos": 10000,
+      "antonio-moreira-sobrinho": 10000,
+      "arildo-guadagnini": 10000,
+      "clayton-aparecido-dos-santos": 12500,
+      "edemilson-pereira-dos-santos": 10000,
+      "edival-pereira-rosa": 10000,
+      "graziela-costa-leite": 10550,
+      "henrique-balseiros-chamosa-neto": 10000,
+      "luzia-de-fatima-izidorio-vidal": 10000,
+      "michel-oliveira-rodrigues-da-silva": 10000,
+      "rogerio-dos-santos-filho": 10000
+    },
+    "indenizacoes": 0
+  },
+  "2026-08": {
+    "grupos": {
+      "vereadores": {
+        "total": 112500,
+        "pessoas": 11
+      },
+      "assessores": {
+        "total": 71637.39,
+        "pessoas": 11
+      },
+      "servidores": {
+        "total": 294551.92,
+        "pessoas": 23
+      }
+    },
+    "porVereador": {
+      "almir-de-melo-santos": 10000,
+      "antonio-moreira-sobrinho": 10000,
+      "arildo-guadagnini": 10000,
+      "clayton-aparecido-dos-santos": 12500,
+      "edemilson-pereira-dos-santos": 10000,
+      "edival-pereira-rosa": 10000,
+      "graziela-costa-leite": 10000,
+      "henrique-balseiros-chamosa-neto": 10000,
+      "luzia-de-fatima-izidorio-vidal": 10000,
+      "michel-oliveira-rodrigues-da-silva": 10000,
+      "rogerio-dos-santos-filho": 10000
+    },
+    "indenizacoes": 0
+  },
+  "2026-10": {
+    "grupos": {
+      "vereadores": {
+        "total": 112500,
+        "pessoas": 11
+      },
+      "assessores": {
+        "total": 67512.82,
+        "pessoas": 11
+      },
+      "servidores": {
+        "total": 285542.8,
+        "pessoas": 22
+      }
+    },
+    "porVereador": {
+      "almir-de-melo-santos": 10000,
+      "antonio-moreira-sobrinho": 10000,
+      "arildo-guadagnini": 10000,
+      "clayton-aparecido-dos-santos": 12500,
+      "edemilson-pereira-dos-santos": 10000,
+      "edival-pereira-rosa": 10000,
+      "graziela-costa-leite": 10000,
+      "henrique-balseiros-chamosa-neto": 10000,
+      "luzia-de-fatima-izidorio-vidal": 10000,
+      "michel-oliveira-rodrigues-da-silva": 10000,
+      "rogerio-dos-santos-filho": 10000
+    },
+    "indenizacoes": 0
+  }
+}
