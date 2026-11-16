@@ -214,5 +214,5 @@ a.cartao-numero:hover { border-color: var(--rio); }
   .tabela-empilha, .tabela-empilha tbody, .tabela-empilha tr, .tabela-empilha td { display: block; width: 100%; }
   .tabela-empilha tr { padding: .5rem 0; border-bottom: 1px solid var(--linha); }
   .tabela-empilha td { display: flex; justify-content: space-between; gap: .75rem; border-bottom: 0; padding: .2rem 0; text-align: right; overflow-wrap: anywhere; }
-  .tabela-empilha td::before { content: attr(data-rotulo); font-weight: 600; text-align: left; color: var(--suave); }
+  .tabela-empilha td::before { content: attr(data-rotulo); flex: 0 0 auto; white-space: nowrap; font-weight: 600; text-align: left; color: var(--suave); }
 }
