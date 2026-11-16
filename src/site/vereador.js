@@ -82,7 +82,7 @@ ${cartaoNumero({ valor: String(v.votosContra), rotulo: 'vezes votou contra' })}
 <ul class="legenda"><li><span class="ponto b-P" aria-hidden="true"></span>presente</li><li><span class="ponto b-A" aria-hidden="true"></span>falta</li><li><span class="ponto b-AJ" aria-hidden="true"></span>falta justificada</li><li><span class="ponto b-vazio" aria-hidden="true"></span>sem registro</li></ul>
 <p><strong>${pres.P}</strong> presenças, <strong>${pres.A}</strong> faltas e <strong>${pres.AJ}</strong> ausências justificadas, em ${pres.sessoes.length} sessões registradas.</p>
 ${aviso(`As sessões extraordinárias aparecem junto com as ordinárias. Célula vazia no PDF não conta como falta.${veja}`)}
-<details><summary>Sessão por sessão</summary><table><thead><tr><th>Data</th><th>Registro</th><th>Fonte</th></tr></thead><tbody>${sessoes}</tbody></table></details>
+<details><summary>Sessão por sessão</summary><table class="tabela-sessoes"><thead><tr><th>Data</th><th>Registro</th><th>Fonte</th></tr></thead><tbody>${sessoes}</tbody></table></details>
 </section>
 <section class="secao cartao">
 <h2>Propostas</h2>
