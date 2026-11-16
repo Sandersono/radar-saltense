@@ -1,5 +1,6 @@
 import { fichaOficial } from './config.js';
 import { GRUPOS_RECEITA, TIPOS_IMPOSTO } from './regras/receitas.js';
+import { GRUPOS_GASTO } from './regras/despesas.js';
 
 export function relatorio(d, problemas) {
   const l = [];
@@ -43,6 +44,23 @@ export function relatorio(d, problemas) {
     l.push('', 'Por tipo de imposto (ano atual):', ...Object.entries(r.tiposAno).map(([k, v]) => `- ${TIPOS_IMPOSTO[k] || k}: ${reais(v)}`));
     l.push('', 'Por grupo (ano atual):', ...Object.entries(r.gruposAno).map(([k, v]) => `- ${GRUPOS_RECEITA[k] || k}: ${reais(v)}`));
     l.push(`- Fora do total (receitas intraorçamentárias, dinheiro que só passa de um órgão público para outro): ${reais(r.foraAno)}`);
+  }
+  const g = d.gastos;
+  l.push('', '## Raio-X dos gastos', '');
+  if (!g) {
+    l.push('- Despesas não coletadas.');
+  } else {
+    for (const [ano, a] of Object.entries(g.anos)) {
+      l.push(`### ${ano}`, '');
+      l.push(`- Último mês: ${a.ultimoMes || 'nenhum'} (${a.mesesPublicados} meses)`);
+      l.push(`- Total pago: ${reais(a.total)}`);
+      l.push(...Object.entries(a.porGrupo).map(([k, v]) => `- ${GRUPOS_GASTO[k]}: ${reais(v)}`));
+      l.push(`- Pessoas físicas: ${a.pessoasFisicas.quantidade}`);
+      l.push(...a.topEmpresas.slice(0, 5).map((e) => `- Top: ${e.nome} (${e.cnpj}): ${reais(e.total)}`));
+      l.push(`- Anulado: ${reais(a.anulado.total)}`);
+      l.push(`- SICONFI: ${a.areas ? `bimestre ${a.areas.bimestre}, total liquidado ${reais(a.areas.total)}` : 'ainda não publicado'}`, '');
+    }
+    l.push(`- Novas com valor alto no mandato: ${g.novas.length}`);
   }
   l.push('', '## O que é estimativa', '');
   l.push('- Impostômetro: depois do último mês oficial, o contador soma o ritmo médio diário dos últimos meses publicados; não considera a sazonalidade (o IPTU concentra em jan/fev).');

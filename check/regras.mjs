@@ -273,6 +273,7 @@ import { conferir } from '../src/conferir.js';
     votacoesLidas: [{ ano: 2026, blocos: 5, semEventos: 0 }],
     proposituras: [{}],
     receitas: { anoAnterior: { ano: 2025, mesesPublicados: 12 } },
+    gastos: { anos: { 2026: { areas: { bimestre: 4, total: 300, somaAreas: 300, lista: [] } } }, novas: [], empresas: [] },
     meta: { totalProposituras: 100, atualizadoEm: '2026-11-14T09:00:00Z', receitasMensais: { '2026-09': 100 } },
   };
   assert.deepEqual(conferir(base, { totalProposituras: 90 }, 11), []);
@@ -293,6 +294,16 @@ import { conferir } from '../src/conferir.js';
   assert.equal(conferir({ ...base, meta: { ...base.meta, receitasMensais: { '2026-09': 96 } } }, { totalProposituras: 90, receitasMensais: { '2026-09': 100 } }, 11).length, 0);
   assert.equal(conferir({ ...base, receitas: { anoAtual: 2027, anoAnterior: { ano: 2026, mesesPublicados: 12 } } }, { totalProposituras: 90, receitasMensais: { '2025-05': 100 } }, 11).length, 0);
   assert.match(conferir({ ...base, meta: { ...base.meta, receitasMensais: { '2026-09': 90 } } }, { totalProposituras: 90, receitasMensais: { '2026-09': 100 } }, 11)[0], /R\$ 100.*R\$ 90.*meta\.json/);
+  const antD = { totalProposituras: 90, despesasMensais: { '2026-09': 1000 } };
+  const comD = (m) => ({ ...base, meta: { ...base.meta, despesasMensais: m } });
+  assert.equal(conferir({ ...base, gastos: null }, null, 11).length, 1);
+  assert.equal(conferir(comD({ '2026-09': 1000 }), antD, 11).length, 0);
+  assert.equal(conferir(comD({}), antD, 11).length, 1);
+  assert.equal(conferir(comD({ '2026-09': 1060 }), antD, 11).length, 1);
+  assert.equal(conferir(comD({ '2026-09': 940 }), antD, 11).length, 1);
+  assert.equal(conferir(comD({ '2026-09': 1040 }), antD, 11).length, 0);
+  assert.equal(conferir({ ...base, gastos: { anos: { 2026: { areas: { bimestre: 4, total: 300, somaAreas: 290, lista: [] } } }, novas: [], empresas: [] } }, null, 11).length, 1);
+  assert.equal(conferir({ ...base, gastos: { anos: { 2026: { areas: null } }, novas: [], empresas: [] } }, null, 11).length, 0);
   console.log('ok: conferir');
 }
 

@@ -5,10 +5,11 @@ import { extrairLocais, tiposPedido } from './regras/local.js';
 import { criarCasador } from './regras/nomes.js';
 import { normalizar, anoMesBR } from './util/texto.js';
 import { resumirReceitas, montarImpostometro } from './regras/receitas.js';
+import { resumirDespesas, areasSiconfi } from './regras/despesas.js';
 
 const doisDigitos = (n) => String(n).padStart(2, '0');
 
-export function processar({ vereadores, cardsPorAno, presencas, votacoes, receitas, fotos, avisosFotos, coletadoEm }) {
+export function processar({ vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, coletadoEm }) {
   const casar = criarCasador(vereadores, OUTROS_NOMES);
   const inicio = `${ANO_INICIO}-01-01`;
   const naoAtribuidos = [];
@@ -167,6 +168,17 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
   const resumoReceitas = receitas ? resumirReceitas(receitas) : null;
   const { ano: anoReceitas, mes: mesReceitas } = anoMesBR(coletadoEm ? Date.parse(coletadoEm) : Date.now());
   const impostometro = resumoReceitas ? montarImpostometro(resumoReceitas, anoReceitas) : null;
+  const resumoDespesas = despesas ? resumirDespesas(despesas, cnpjs2024 || []) : null;
+  const gastos = resumoDespesas
+    ? {
+        anos: Object.fromEntries(Object.entries(resumoDespesas.anos).map(([ano, a]) => [ano, {
+          ...a,
+          areas: siconfi && siconfi[ano] ? { bimestre: siconfi[ano].bimestre, ...areasSiconfi(siconfi[ano].itens) } : null,
+        }])),
+        novas: resumoDespesas.novas,
+        empresas: resumoDespesas.empresas,
+      }
+    : null;
   if (impostometro && mesReceitas >= 3 && impostometro.anoAnterior.mesesPublicados < 12) {
     avisos.push(`Receitas de ${impostometro.anoAnterior.ano}: só ${impostometro.anoAnterior.mesesPublicados} de 12 meses publicados pelo TCE-SP até agora.`);
   }
@@ -188,6 +200,7 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
     avisos: [...new Set(avisos)],
     avisosFotos: avisosFotos || [],
     receitas: impostometro,
+    gastos,
     presencasLidas: presencas.map((p) => ({ arquivo: p.arquivo, linhas: p.linhas.length })),
     votacoesLidas: votacoes.map((v) => ({ ano: v.ano, blocos: v.blocos.length, semEventos: v.blocos.filter((b) => !b.eventos.length).length })),
     meta: {
@@ -197,6 +210,7 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
       receitasMensais: resumoReceitas
         ? Object.fromEntries(Object.entries(resumoReceitas.meses).map(([m, x]) => [m, Math.round(x.impostos * 100) / 100]))
         : {},
+      despesasMensais: resumoDespesas ? resumoDespesas.mensal : {},
     },
   };
 }
