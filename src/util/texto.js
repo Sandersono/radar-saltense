@@ -40,3 +40,12 @@ export function anoMesBR(instante = Date.now()) {
 }
 
 export const esperar = (ms) => new Promise((ok) => setTimeout(ok, ms));
+
+// Documentos pessoais nunca aparecem no site, mesmo quando o texto oficial os traz (ex.: portarias de nomeação).
+// Troca o número do CPF e do RG por "[omitido]" e mantém o resto do texto. "CPFL" e outros números não são tocados.
+export function ocultarDocumentos(s) {
+  return String(s ?? '')
+    .replace(/\b\d{3}\.\d{3}\.\d{3}-\d{2}\b/g, '[omitido]')
+    .replace(/(CPF(?:\/MF)?\s*(?:n[º°o.]*)?\s*:?\s*)\d{11}\b/gi, '$1[omitido]')
+    .replace(/(\bRG\s*(?:n[º°o.]*)?\s*:?\s*)\d[\d.]{4,11}(?:-?[\dXx])?/g, '$1[omitido]');
+}
