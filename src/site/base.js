@@ -72,7 +72,7 @@ export function layout({ titulo, corpo, prefixo = '', atualizadoEm, heroi = '' }
 <div class="topo-faixa"><div class="topo-barra">
 <a class="marca" href="${prefixo}index.html"><img src="${prefixo}marca/logo.png" alt="Radar Saltense, página inicial" width="140" height="56"></a>
 <button class="menu-botao" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
-<nav id="menu-principal" class="menu" aria-label="Principal"><a href="${prefixo}index.html#bairro">Seu bairro</a><a href="${prefixo}camara.html">Câmara</a><a href="${prefixo}gastos.html">Prefeitura</a><a href="${prefixo}impostometro.html">Impostos</a><a href="${prefixo}fontes.html">Fontes</a></nav>
+<nav id="menu-principal" class="menu" aria-label="Principal"><a href="${prefixo}index.html#bairro">Seu bairro</a><a href="${prefixo}camara.html">Câmara</a><a href="${prefixo}prefeitura.html">Prefeitura</a><a href="${prefixo}impostometro.html">Impostos</a><a href="${prefixo}fontes.html">Fontes</a></nav>
 </div></div>
 ${heroi ? `<div class="heroi">${heroi}</div>` : ''}
 <svg class="onda" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 30C240 60 480 0 720 22S1200 50 1440 18V60H0Z"/></svg>

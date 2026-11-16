@@ -2,7 +2,7 @@ import { ANO_INICIO, fichaOficial } from '../config.js';
 import { GRUPOS } from '../regras/classificar.js';
 import { esc } from '../util/texto.js';
 import { layout, dataBR, link, aviso, foto, seloFonte, barraProporcao, cartaoNumero, reais, numero, GRUPOS_PUBLICOS, AVISO_NOMES, apelidoHtml } from './base.js';
-import { ORIGENS_CAMPANHA } from '../regras/campanha.js';
+import { cartaoCampanha } from './campanha.js';
 import { URL_RH_CAMARA, mesAno } from './camara.js';
 import { percentual } from './util.js';
 import { amostraBoa } from '../regras/respostas.js';
@@ -36,18 +36,6 @@ function cartaoRespostas(v, d) {
 ${amostraBoa(x) ? `<p><strong>${numero(x.respondidos)} de ${numero(x.conferidos)}</strong> requerimentos conferidos foram respondidos (${x.percentual}%).${x.medianaDias === null ? '' : ` A resposta costuma levar ${x.medianaDias} dias.`}</p>` : `<p>${numero(x.conferidos)} de ${numero(x.feitos)} conferidos até agora; o percentual aparece quando o robô terminar de conferir.</p>`}
 ${espera > 0 && amostraBoa(x) ? `<p class="nota">Ainda faltam conferir ${numero(espera)} de ${numero(x.feitos)} requerimentos.</p>` : ''}
 <p class="nota">Resposta = documento anexado na ficha oficial. Indicações não entram: o portal não registra resposta a elas.</p>
-</section>`;
-}
-
-function cartaoCampanha(v, d) {
-  const c = d.camara.campanha.candidatos[v.id];
-  if (!c) return '';
-  const partes = Object.entries(ORIGENS_CAMPANHA).map(([k, rotulo]) => ({ rotulo, valor: c.origens[k] || 0, classe: `o-${k}` })).filter((x) => x.valor > 0);
-  return `<section class="secao cartao">
-<h2>Campanha de 2024</h2>
-<p>Recebeu <strong>${reais(c.total)}</strong>${c.doadoresPessoas > 0 ? `. ${numero(c.doadoresPessoas)} ${c.doadoresPessoas === 1 ? 'pessoa doou' : 'pessoas doaram'}` : ''}.</p>
-${barraProporcao(partes, reais)}
-<p>${seloFonte(c.link, 'ver doadores no TSE')}</p>
 </section>`;
 }
 
@@ -110,6 +98,6 @@ ${aviso(`Leitura do documento oficial de votações. Ele só cita quem votou con
 </section>
 ${cartaoSalario(v, d)}
 ${cartaoRespostas(v, d)}
-${cartaoCampanha(v, d)}`;
+${cartaoCampanha(d.camara.campanha.candidatos[v.id])}`;
   return layout({ titulo: `${v.nome}: Radar Saltense`, corpo, prefixo: '../', atualizadoEm: d.meta.atualizadoEm });
 }

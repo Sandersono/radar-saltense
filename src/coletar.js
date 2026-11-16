@@ -12,12 +12,17 @@ import { coletarSiconfi } from './coleta/siconfi.js';
 import { coletarFotos } from './coleta/fotos.js';
 import { coletarFolha } from './coleta/folha-camara.js';
 import { coletarRespostas } from './coleta/respostas.js';
+import { coletarIegm, listarAnosIegm } from './coleta/iegm.js';
+import { coletarObras } from './coleta/obras.js';
+import { coletarContratos } from './coleta/contratos.js';
+import { mesclarIegm, mesclarContratos, escolherObras, dataBaseMaisVelha, anosParaColetar } from './regras/prefeitura.js';
 import { lerCard } from './regras/apex.js';
 import { mesclarFolha } from './regras/folha.js';
 import { filaRespostas } from './regras/respostas.js';
 import { anoMesBR } from './util/texto.js';
 
 const ORCAMENTO_RESPOSTAS = 150;
+const PRAZO_CONTRATOS_MS = 6 * 60 * 1000;
 // Mensagens do Playwright trazem o registro de chamadas em várias linhas; só a primeira vai para o site.
 const primeiraLinha = (m) => String(m).split('\n')[0].trim();
 const doisDigitos = (n) => String(n).padStart(2, '0');
@@ -74,6 +79,52 @@ async function respostasDaCamara(cardsPorAno, salvo, avisos) {
   }
 }
 
+// Nota do TCE: o robô só refaz a lista de anos e o ano-base mais novo; os anos antigos ficam como estão.
+async function iegmDoTce(salvo, avisos) {
+  try {
+    const anos = await listarAnosIegm();
+    if (!anos.length) throw new Error('lista de anos vazia');
+    return mesclarIegm(salvo, await coletarIegm([anos[0]]));
+  } catch (e) {
+    avisos.push(`Nota do TCE (IEGM): ${primeiraLinha(e.message)}; mantido o último dado salvo.`);
+    return salvo;
+  }
+}
+
+async function obrasDoTce(salvo, avisos) {
+  try {
+    const novo = await coletarObras();
+    if (dataBaseMaisVelha(novo, salvo)) {
+      avisos.push(`Obras do TCE: o painel veio com data-base ${novo.dataBase}, mais velha que a salva (${salvo.dataBase}); mantido o último dado salvo.`);
+      return salvo;
+    }
+    return escolherObras(salvo, novo);
+  } catch (e) {
+    avisos.push(`Obras do TCE: ${primeiraLinha(e.message)}; mantido o último dado salvo.`);
+    return salvo;
+  }
+}
+
+// Compras no PNCP: o ano corrente a cada 7 dias (leva minutos); o anterior só se ainda não estiver salvo.
+async function contratosDoPncp(salvo, hoje, avisos) {
+  const anos = anosParaColetar(salvo, hoje.ano);
+  if (!anos.length) return salvo || {};
+  let novos = {};
+  try {
+    novos = await coletarContratos(anos, { prazoMs: PRAZO_CONTRATOS_MS });
+  } catch (e) {
+    novos = e.anosCompletos || {};
+    avisos.push(`Compras da Prefeitura (PNCP): ${primeiraLinha(e.message)}; mantido o último dado salvo${Object.keys(novos).length ? ` (anos atualizados: ${Object.keys(novos).join(', ')})` : ''}.`);
+  }
+  const atual = novos[hoje.ano];
+  if (atual && atual.contratos.quantidade === 0) avisos.push(`Compras da Prefeitura (PNCP): nenhum contrato de ${hoje.ano} veio da consulta; confira se o PNCP mudou.`);
+  const antes = salvo && salvo[hoje.ano];
+  if (atual && antes && atual.contratos.quantidade < antes.contratos.quantidade) {
+    avisos.push(`Compras da Prefeitura (PNCP): os contratos de ${hoje.ano} caíram de ${antes.contratos.quantidade} para ${atual.contratos.quantidade}; o PNCP não costuma perder registros.`);
+  }
+  return mesclarContratos(salvo, novos);
+}
+
 export async function coletarTudo() {
   const lista = anos();
   const anoAtual = lista[lista.length - 1];
@@ -91,9 +142,15 @@ export async function coletarTudo() {
   const folhaSalva = await lerJson('data/processado/folha-camara.json', {}, avisosFontes);
   const respostasSalvas = await lerJson('data/processado/respostas.json', {}, avisosFontes);
   const campanha = await lerJson('data/referencia/campanha-2024.json', null, avisosFontes);
+  const iegmSalvo = await lerJson('data/processado/iegm.json', null, avisosFontes);
+  const obrasSalvas = await lerJson('data/processado/obras.json', null, avisosFontes);
+  const contratosSalvos = await lerJson('data/processado/contratos.json', {}, avisosFontes);
+  const iegm = await iegmDoTce(iegmSalvo, avisosFontes);
+  const obras = await obrasDoTce(obrasSalvas, avisosFontes);
+  const contratos = await contratosDoPncp(contratosSalvos, hoje, avisosFontes);
   const folhaCamara = await folhaDaCamara(vereadores.map(({ id, nome, apelido }) => ({ id, nome, apelido })), hoje, folhaSalva, avisosFontes);
   const respostas = await respostasDaCamara(cardsPorAno, respostasSalvas, avisosFontes);
-  const coleta = { vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, folhaCamara, respostas, campanha, avisosFontes, coletadoEm: new Date().toISOString() };
+  const coleta = { vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, folhaCamara, respostas, campanha, iegm, obras, contratos, avisosFontes, coletadoEm: new Date().toISOString() };
   await salvar('data/bruto/coleta.json', JSON.stringify(coleta));
   return coleta;
 }
@@ -109,5 +166,6 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   console.log(`SICONFI: ${Object.entries(c.siconfi).map(([a, s]) => `${a} bimestre ${s.bimestre}`).join(', ') || 'nada'}`);
   console.log(`Fotos: ${Object.keys(c.fotos).length} de ${c.vereadores.length}`);
   console.log(`Folha da Câmara: ${Object.keys(c.folhaCamara).length} meses; respostas conferidas: ${Object.keys(c.respostas).length}`);
+  console.log(`Prefeitura: IEGM ${c.iegm ? Object.keys(c.iegm.anos).length : 0} anos; obras ${c.obras ? c.obras.obras.length : 0}; contratos ${Object.keys(c.contratos).join(', ') || 'nenhum'}`);
   for (const a of c.avisosFontes) console.log(`Aviso: ${a}`);
 }

@@ -9,8 +9,12 @@ const PAINEL = {
 
 // exercicioDS devolve [{ exercicio: 2024, descricao: 'IEG-M 2025 (Ano Base: 2024)' }, ...]; o ano-base é `exercicio`.
 // faixaTodosMunicipiosPeriodo recebe parampExercicio_mapa=<ano-base> e parampRegiao=-1 (todos os 644 municípios).
+export async function listarAnosIegm() {
+  return (await consultaCda({ ...PAINEL, dataAccessId: 'exercicioDS' })).map((l) => Number(l.exercicio)).sort((a, b) => b - a);
+}
+
 export async function coletarIegm(anos) {
-  const lista = anos || (await consultaCda({ ...PAINEL, dataAccessId: 'exercicioDS' })).map((l) => Number(l.exercicio)).sort((a, b) => b - a);
+  const lista = anos || (await listarAnosIegm());
   if (!lista.length) throw new Error('IEGM: exercicioDS veio vazio');
   const out = {};
   for (const ano of lista) {

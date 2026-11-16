@@ -6,7 +6,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "checar": "node check/regras.mjs && node check/folha.mjs && node check/respostas.mjs && node check/campanha.mjs",
+    "checar": "node check/regras.mjs && node check/folha.mjs && node check/respostas.mjs && node check/campanha.mjs && node check/tce.mjs && node check/contratos.mjs",
     "coletar": "node src/coletar.js",
     "atualizar": "node src/atualizar.js",
     "processar": "node src/atualizar.js --usar-cache",

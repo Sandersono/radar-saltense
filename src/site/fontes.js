@@ -26,6 +26,9 @@ export function paginaFontes(d) {
 <li><strong>Custo da Câmara:</strong> <a href="https://cmsalto.sisvetor.com.br/ords/cmsalto/f?p=839:8">folha de pagamento no portal da Transparência da Câmara</a> (só totais por grupo e o salário de cada vereador) e os <a href="https://www.camarasalto.sp.gov.br/contas-publicas/category/619-despesas-viagens-vereadores-servidores">PDFs de diárias e viagens</a>.</li>
 <li><strong>Respostas a requerimentos:</strong> anexo "Resposta Requerimento" na ficha oficial de cada requerimento, no <a href="https://cmsalto.sisvetor.com.br/ords/cmsalto/f?p=742:92">portal de proposituras</a>. O robô confere até 150 fichas por dia.</li>
 <li><strong>Campanha de 2024:</strong> <a href="https://divulgacandcontas.tse.jus.br/divulga/">prestação de contas no TSE</a> (dados abertos). Só os totais por origem e a quantidade de doadores; os nomes ficam no TSE.</li>
+<li><strong>Nota da gestão (IEGM):</strong> <a href="https://iegm.tce.sp.gov.br/">painel do IEG-M do TCE-SP</a>. Só a faixa (A, B+, B, C+ ou C) de Salto e de cinco cidades vizinhas.</li>
+<li><strong>Obras:</strong> <a href="https://paineldeobras.tce.sp.gov.br/">Painel de Obras do TCE-SP</a>. Só as obras que a Prefeitura cadastrou no sistema do Tribunal.</li>
+<li><strong>Compras da Prefeitura:</strong> <a href="https://pncp.gov.br/api/consulta/v1/">API pública do Portal Nacional de Contratações Públicas (PNCP)</a>, órgão CNPJ 46.634.507/0001-06. Só empresas com CNPJ aparecem pelo nome.</li>
 <li><strong>Vereadores e partidos:</strong> <a href="https://www.camarasalto.sp.gov.br/">página inicial da Câmara</a>.</li>
 </ul>
 </section>

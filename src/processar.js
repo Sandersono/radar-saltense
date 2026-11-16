@@ -10,7 +10,7 @@ import { resumoRespostas } from './regras/respostas.js';
 
 const doisDigitos = (n) => String(n).padStart(2, '0');
 
-export function processar({ vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, folhaCamara, respostas, campanha, avisosFontes, coletadoEm }) {
+export function processar({ vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, folhaCamara, respostas, campanha, iegm, obras, contratos, avisosFontes, coletadoEm }) {
   const casar = criarCasador(vereadores, OUTROS_NOMES);
   const inicio = `${ANO_INICIO}-01-01`;
   const naoAtribuidos = [];
@@ -228,6 +228,12 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
       folha: { meses: mesesFolha, ultimoMes: completos.length ? completos[completos.length - 1] : null },
       respostas: { geral: resumoResp.geral, porVereador: resumoResp.porVereador, pendentes: resumoResp.geral.feitos - resumoResp.geral.conferidos, conferidosHoje: Object.values(estadoRespostas).filter((e) => e.conferidoEm === hojeISO).length },
       campanha: { candidatos: (campanha && campanha.candidatos) || {} },
+    },
+    prefeitura: {
+      iegm: iegm && iegm.anos && Object.keys(iegm.anos).length ? iegm : null,
+      obras: obras && obras.obras ? obras : null,
+      contratos: contratos || {},
+      campanhaPrefeito: (campanha && campanha.candidatos && campanha.candidatos.prefeito) || null,
     },
     meta: {
       atualizadoEm: coletadoEm || new Date().toISOString(),
