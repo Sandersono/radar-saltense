@@ -14,7 +14,7 @@ export function valorFolha(s) {
 }
 
 export function lerCsvFolha(texto) {
-  const linhas = String(texto ?? '').replace(/^/, '').split(/\r?\n/).filter((l) => l.trim());
+  const linhas = String(texto ?? '').replace(new RegExp('^' + String.fromCharCode(0xfeff)), '').split(/\r?\n/).filter((l) => l.trim());
   if (!linhas.length) return [];
   const tira = (c) => c.trim().replace(/^"|"$/g, '').replace(/""/g, '"');
   const cab = linhas[0].split(';').map(tira);

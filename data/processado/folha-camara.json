@@ -255,7 +255,8 @@
       }
     },
     "porVereador": {},
-    "indenizacoes": 0
+    "indenizacoes": 0,
+    "parcial": true
   },
   "2025-11": {
     "grupos": {
@@ -363,7 +364,8 @@
       }
     },
     "porVereador": {},
-    "indenizacoes": 0
+    "indenizacoes": 0,
+    "parcial": true
   },
   "2026-03": {
     "grupos": {

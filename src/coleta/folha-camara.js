@@ -32,39 +32,58 @@ async function carregar(p) {
   }
 }
 
-async function selecionar(p, seletor, valor) {
+async function selecionar(p, seletor, valor, recarrega = false) {
+  if (recarrega) await p.evaluate(() => { window.__folhaMarca = 1; });
   await p.selectOption(seletor, valor);
+  if (recarrega) await p.waitForFunction(() => !window.__folhaMarca, null, { timeout: 30000 });
   await p.waitForLoadState('networkidle');
-  await p.waitForTimeout(1500);
   const atual = await p.locator(seletor).inputValue();
   if (atual !== valor) throw new Error(`Portal da Câmara: ${seletor} ficou em "${atual}" em vez de "${valor}"`);
 }
 
-const aparece = (loc) => loc.waitFor({ state: 'visible', timeout: 10000 }).then(() => true, () => false);
-
 function decodificar(buf) {
   const utf8 = buf.toString('utf8');
-  return utf8.includes('�') ? buf.toString('latin1') : utf8;
+  return utf8.includes(String.fromCharCode(0xfffd)) ? buf.toString('latin1') : utf8;
 }
 
-// Devolve o texto do CSV da folha do mês, ou null se o mês não tem folha publicada.
+const SEM_DADOS = /dados n[aã]o encontrados/i;
+
+// Clica e espera a página de fato recarregar (a marca em window some quando o APEX recarrega o documento).
+async function clicarERecarregar(p, loc) {
+  await p.evaluate(() => { window.__folhaMarca = 1; });
+  await loc.click();
+  await p.waitForFunction(() => !window.__folhaMarca, null, { timeout: 30000 });
+  await p.waitForLoadState('networkidle');
+}
+
+// Espera um dos dois desfechos; lança se nenhum aparecer (falha/timeout não é "sem folha").
+async function desfecho(p, alvo, rotulo) {
+  const achou = await Promise.race([
+    alvo.waitFor({ state: 'visible', timeout: 20000 }).then(() => 'ok', () => null),
+    p.getByText(SEM_DADOS).first().waitFor({ state: 'visible', timeout: 20000 }).then(() => 'vazio', () => null),
+  ]);
+  if (achou) return achou;
+  throw new Error(`nem ${rotulo} nem a mensagem de "dados não encontrados" apareceram em 20 s`);
+}
+
+// Devolve o texto do CSV da folha do mês, ou null se o portal diz "dados não encontrados".
 async function csvDoMes(p, ano, mes) {
   await carregar(p);
-  await selecionar(p, '#GLOBAL_EXERCICIO', String(ano));
+  await selecionar(p, '#GLOBAL_EXERCICIO', String(ano), true);
   await selecionar(p, '#P8_MES', String(mes));
   await selecionar(p, '#P8_TIPO_INFO', '3');
+  for (const [sel, v] of [['#GLOBAL_EXERCICIO', ano], ['#P8_MES', mes], ['#P8_TIPO_INFO', 3]]) {
+    const atual = await p.locator(sel).inputValue();
+    if (atual !== String(v)) throw new Error(`${sel} ficou em "${atual}" em vez de "${v}" antes de pesquisar`);
+  }
   await aguardarVez();
   try {
-    await p.click(BOTAO_PESQUISAR);
-    await p.waitForLoadState('networkidle');
-    await p.waitForTimeout(1500);
+    await clicarERecarregar(p, p.locator(BOTAO_PESQUISAR));
     const detalhar = p.locator(...LINK_DETALHAR).first();
-    if (!(await aparece(detalhar))) return null;
-    await detalhar.click();
-    await p.waitForLoadState('networkidle');
-    await p.waitForTimeout(2000);
+    if ((await desfecho(p, detalhar, 'o link Detalhar')) === 'vazio') return null;
+    await clicarERecarregar(p, detalhar);
     const csv = p.locator(...LINK_CSV).last();
-    if (!(await aparece(csv))) return null;
+    if ((await desfecho(p, csv, 'o link CSV')) === 'vazio') return null;
     const [download] = await Promise.all([p.waitForEvent('download', { timeout: 60000 }), csv.click()]);
     const arquivo = await download.path();
     try {
@@ -91,6 +110,8 @@ export async function coletarFolha(meses, vereadores) {
         throw new Error(`Folha da Câmara ${aaaamm}: formulário do portal mudou ou não respondeu (${e.message})`);
       }
       const linhas = texto ? lerCsvFolha(texto) : [];
+      const fora = linhas.find((l) => String(l['Ano']).trim() !== String(ano));
+      if (fora) throw new Error(`Folha da Câmara ${aaaamm}: o CSV veio com Ano "${fora['Ano']}" em vez de ${ano}`);
       resultado[aaaamm] = linhas.length ? resumirFolha(linhas, vereadores) : null;
       console.error(`folha ${aaaamm}: ${linhas.length ? linhas.length + ' linhas' : 'sem folha'}`);
     }

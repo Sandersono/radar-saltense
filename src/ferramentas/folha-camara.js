@@ -25,6 +25,8 @@ const dados = JSON.parse(await readFile(DADOS, 'utf8'));
 const vereadores = (dados.vereadores || []).map(({ id, nome, apelido }) => ({ id, nome, apelido }));
 
 const novos = await coletarFolha(meses, vereadores);
+// Mês sem vereadores na folha é parcial na fonte: guarda os dados, mas marca para a UI.
+for (const r of Object.values(novos)) if (r && r.grupos.vereadores.pessoas === 0) r.parcial = true;
 
 let salvo = {};
 try { salvo = JSON.parse(await readFile(SAIDA, 'utf8')); } catch { /* primeira carga */ }
