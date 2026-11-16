@@ -38,9 +38,12 @@ export function barraProporcao(segmentos, formato = numero) {
   return `<div class="proporcao" role="img" aria-label="${esc(rotulo)}">${fatias}</div><ul class="legenda">${legenda}</ul>`;
 }
 
-export const cartaoNumero = ({ valor, rotulo, href }) => href
-  ? `<a class="cartao cartao-numero" href="${esc(href)}"><span class="numero-grande">${esc(valor)}</span><span class="numero-rotulo">${esc(rotulo)}</span></a>`
-  : `<div class="cartao cartao-numero"><span class="numero-grande">${esc(valor)}</span><span class="numero-rotulo">${esc(rotulo)}</span></div>`;
+// Número longo (ex.: "R$ 192.825.486") não cabe em meia tela de celular: o cartão ganha a classe "largo" e ocupa a linha inteira.
+export const cartaoNumero = ({ valor, rotulo, href }) => {
+  const classe = `cartao cartao-numero${String(valor).length > 9 ? ' largo' : ''}`;
+  const miolo = `<span class="numero-grande">${esc(valor)}</span><span class="numero-rotulo">${esc(rotulo)}</span>`;
+  return href ? `<a class="${classe}" href="${esc(href)}">${miolo}</a>` : `<div class="${classe}">${miolo}</div>`;
+};
 
 export function layout({ titulo, corpo, prefixo = '', atualizadoEm, heroi = '' }) {
   return `<!doctype html>
