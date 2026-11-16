@@ -1,5 +1,6 @@
 import { agruparLinhas, textoDe } from './linhas.js';
 import { dividirNomes } from './nomes.js';
+import { ocultarDocumentos } from '../util/texto.js';
 
 const COL = { rotulo: [0, 100], ementa: [100, 250], autor: [250, 315], solucao: [575, 750] };
 const naColuna = (i, [a, b]) => i.x >= a && i.x < b;
@@ -105,7 +106,7 @@ export function lerVotacoes(paginas) {
   }
   return blocos.map(({ rotulo, ementa, autor, eventos }) => ({
     rotulo: rotulo.replace(/\s+\//g, '/').replace(/\s+/g, ' ').trim(),
-    ementa,
+    ementa: ocultarDocumentos(ementa),
     autor,
     eventos,
   }));

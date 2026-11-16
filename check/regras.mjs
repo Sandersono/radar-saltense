@@ -543,3 +543,14 @@ import { grupoFornecedor, cnpjDe, formatarCnpj, orgaoChave, resumirDespesas, are
   assert.equal(grupoFornecedor(L(PREF, 'Valor Pago', pj('11111111000177'), 'FUNDO NACIONAL DE DESENVOLVIMENTO DA EDUCACAO', '10,00')), 'publicos');
   console.log('ok: despesas');
 }
+
+import { ocultarDocumentos } from '../src/util/texto.js';
+
+{
+  const t = 'Nomeia Fulano, portador do RG 12.345.678-9 e do CPF/MF n° 123.456.789-01 para o cargo';
+  assert.equal(ocultarDocumentos(t), 'Nomeia Fulano, portador do RG [omitido] e do CPF/MF n° [omitido] para o cargo');
+  assert.equal(ocultarDocumentos('CPF 12345678901, RG nº 1234567X'), 'CPF [omitido], RG nº [omitido]');
+  assert.equal(ocultarDocumentos('Solicita à CPFL melhorias na Rua 15 de Novembro, 123'), 'Solicita à CPFL melhorias na Rua 15 de Novembro, 123');
+  assert.equal(ocultarDocumentos('Lei 4.124/2024 e processo 2024.000.123'), 'Lei 4.124/2024 e processo 2024.000.123');
+  console.log('ok: documentos ocultos');
+}

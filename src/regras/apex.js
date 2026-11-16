@@ -1,4 +1,4 @@
-import { normalizar, limparHtml } from '../util/texto.js';
+import { normalizar, limparHtml, ocultarDocumentos } from '../util/texto.js';
 import { dividirNomes } from './nomes.js';
 
 // titulo: "<strong>Categoria:</strong> X</br><strong>Número do Documento:</strong> N</br><strong>Autor(es):</strong> A</br><strong> Data:</strong> dd/mm/aaaa hh:mm:ss"
@@ -24,7 +24,7 @@ export function lerCard({ id, titulo, texto }) {
     numero: campos['numero do documento'] || '',
     autores: dividirNomes(campos['autor(es)'] || ''),
     data: dt ? `${dt[3]}-${dt[2].padStart(2, '0')}-${dt[1].padStart(2, '0')}` : '',
-    ementa: limparHtml(partes[0]),
+    ementa: ocultarDocumentos(limparHtml(partes[0])),
     solucao: limparHtml(partes[1] || ''),
   };
 }
