@@ -29,4 +29,12 @@ assert.equal(obras[1].cnpj, '12345678000190');
 assert.equal(obras[2].contratado, 'Pessoa física');
 assert.equal(obras[2].cnpj, null);
 assert.ok(!JSON.stringify(obras).includes('JOAO'));
+assert.deepEqual(linhasCda({}), []);
+const o2 = normalizarObras([
+  { ds_situacao: 'x', vl_ajuste: 1, nome: 'MARIA SEM ZERO', doc: '1234567890', ds_entidade: 'P', ano_ajuste: 2025, objeto_ajuste: 'a' },
+  { ds_situacao: 'x', vl_ajuste: 1, nome: 'EMPRESA SEM DOC', doc: '', ds_entidade: 'P', ano_ajuste: 2025, objeto_ajuste: 'b' },
+]);
+assert.equal(o2[0].contratado, 'Pessoa física');
+assert.equal(o2[1].contratado, 'Não informado');
+assert.ok(!JSON.stringify(o2).includes('MARIA') && !JSON.stringify(o2).includes('EMPRESA'));
 console.log('ok: tce');

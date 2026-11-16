@@ -19,5 +19,6 @@ export async function coletarObras() {
     dataAccessId: 'obrasTabela',
     params: { parampMunicipio: IBGE_SALTO, parampPeriodo: recente.id, parampSituacao: -1, parampFonteRecurso: -1, parampContratante: -1, parampContratado: -1 },
   });
+  if (!linhas.length) throw new Error(`Obras: obrasTabela sem linhas para Salto (período ${recente.id})`);
   return { dataBase, obras: normalizarObras(linhas) };
 }
