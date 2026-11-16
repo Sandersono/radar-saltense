@@ -43,6 +43,12 @@ export function conferir(dados, anterior, esperados) {
       }
     }
   }
+  const folhaNova = dados.meta.folhaMensal || {};
+  for (const [mes, valor] of Object.entries((anterior && anterior.folhaMensal) || {})) {
+    if (mes in folhaNova && valor > 0 && folhaNova[mes] < valor * 0.8) {
+      problemas.push(`Folha da Câmara de ${mes} caiu mais de 20% (de ${reais(valor)} para ${reais(folhaNova[mes])}). Confira o mês no Portal da Transparência da Câmara; se a mudança for real, ajuste folhaMensal em data/processado/meta.json e rode o robô de novo.`);
+    }
+  }
   return problemas;
 }
 

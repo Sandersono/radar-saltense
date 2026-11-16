@@ -24,5 +24,14 @@ if (problemas.length) {
 await mkdir('data/processado', { recursive: true });
 await writeFile('data/processado/dados.json', JSON.stringify(dados));
 await writeFile('data/processado/meta.json', `${JSON.stringify(dados.meta, null, 2)}\n`);
+await writeFile('data/processado/folha-camara.json', `${JSON.stringify(coleta.folhaCamara || {}, null, 2)}\n`);
+// Outra rodada (a ferramenta de carga) pode ter gravado respostas enquanto o robô coletava: relê e fica com a conferência mais nova.
+let respostasNoDisco = {};
+try { respostasNoDisco = JSON.parse(await readFile('data/processado/respostas.json', 'utf8')); } catch (e) { if (e.code !== 'ENOENT') throw e; }
+const respostas = { ...respostasNoDisco };
+for (const [id, e] of Object.entries(coleta.respostas || {})) {
+  if (!respostas[id] || e.conferidoEm >= respostas[id].conferidoEm) respostas[id] = e;
+}
+await writeFile('data/processado/respostas.json', JSON.stringify(respostas));
 await gerarSite(dados, 'dist');
 console.log('Pronto. Veja conferencia.md e a pasta dist/.');

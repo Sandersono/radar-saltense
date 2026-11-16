@@ -1,13 +1,54 @@
 import { ANO_INICIO, fichaOficial } from '../config.js';
 import { GRUPOS } from '../regras/classificar.js';
 import { esc } from '../util/texto.js';
-import { layout, dataBR, link, aviso, foto, seloFonte, barraProporcao, cartaoNumero, GRUPOS_PUBLICOS, AVISO_NOMES, apelidoHtml } from './base.js';
+import { layout, dataBR, link, aviso, foto, seloFonte, barraProporcao, cartaoNumero, reais, numero, GRUPOS_PUBLICOS, AVISO_NOMES, apelidoHtml } from './base.js';
+import { ORIGENS_CAMPANHA } from '../regras/campanha.js';
+import { URL_RH_CAMARA, mesAno } from './camara.js';
 import { percentual } from './util.js';
 
 const ROTULO_MARCA = { P: 'presente', A: 'falta', AJ: 'falta justificada', vazio: 'sem registro' };
 
 const itemProposta = (p) =>
-  `<li><span class="data">${dataBR(p.data)}</span> <span class="tag">${esc(p.categoria)} ${esc(p.numero)}</span> ${esc(p.ementa)} ${link(fichaOficial(p.id), 'ficha oficial')}</li>`;
+  `<li><span class="data">${dataBR(p.data)}</span> <span class="tag">${esc(p.categoria)} ${esc(p.numero)}</span> ${esc(p.ementa)} ${p.respondidoEm ? `<span class="nota">respondido em ${dataBR(p.respondidoEm)}</span> ` : ''}${link(fichaOficial(p.id), 'ficha oficial')}</li>`;
+
+function cartaoSalario(v, d) {
+  const f = d.camara.folha;
+  if (!f.ultimoMes) return '';
+  const bruto = f.meses[f.ultimoMes].porVereador[v.id];
+  if (bruto === undefined) return '';
+  const meses = Object.keys(f.meses).filter((m) => !f.meses[m].parcial && f.meses[m].porVereador[v.id] !== undefined);
+  const soma = meses.reduce((s, m) => s + f.meses[m].porVereador[v.id], 0);
+  return `<section class="secao cartao">
+<h2>Salário</h2>
+<p><strong>${reais(bruto)}</strong> em ${mesAno(f.ultimoMes)}, antes dos descontos.</p>
+<p>Desde janeiro de 2025: <strong>${reais(soma)}</strong>, em ${meses.length} meses publicados.</p>
+<p>${seloFonte(URL_RH_CAMARA, 'folha no portal da Câmara')}</p>
+</section>`;
+}
+
+function cartaoRespostas(v, d) {
+  const x = d.camara.respostas.porVereador[v.id];
+  if (!x || !x.conferidos) return '';
+  const espera = x.feitos - x.conferidos;
+  return `<section class="secao cartao">
+<h2>Requerimentos respondidos</h2>
+<p><strong>${numero(x.respondidos)} de ${numero(x.conferidos)}</strong> requerimentos conferidos foram respondidos (${x.percentual}%).${x.medianaDias === null ? '' : ` A resposta leva em média ${x.medianaDias} dias.`}</p>
+${espera > 0 ? `<p class="nota">Ainda faltam conferir ${numero(espera)} de ${numero(x.feitos)} requerimentos.</p>` : ''}
+<p class="nota">Resposta = documento anexado na ficha oficial. Indicações não entram: o portal não registra resposta a elas.</p>
+</section>`;
+}
+
+function cartaoCampanha(v, d) {
+  const c = d.camara.campanha.candidatos[v.id];
+  if (!c) return '';
+  const partes = Object.entries(ORIGENS_CAMPANHA).map(([k, rotulo]) => ({ rotulo, valor: c.origens[k] || 0, classe: `o-${k}` })).filter((x) => x.valor > 0);
+  return `<section class="secao cartao">
+<h2>Campanha de 2024</h2>
+<p>Recebeu <strong>${reais(c.total)}</strong>${c.doadoresPessoas > 0 ? `. ${numero(c.doadoresPessoas)} ${c.doadoresPessoas === 1 ? 'pessoa doou' : 'pessoas doaram'}` : ''}.</p>
+${barraProporcao(partes, reais)}
+<p>${seloFonte(c.link, 'ver doadores no TSE')}</p>
+</section>`;
+}
 
 export function paginaVereador(v, d) {
   const props = d.proposituras.filter((p) => p.vereadores.includes(v.id));
@@ -65,6 +106,9 @@ ${grupos}
 ${aviso(`Leitura do documento oficial de votações. Ele só cita quem votou contra ou faltou, e o site não deduz votos a favor. ${AVISO_NOMES}`)}
 <h3>Votou contra</h3><ul class="lista">${votos('contra')}</ul>
 <h3>Ausente na votação</h3><ul class="lista">${votos('ausentes')}</ul>
-</section>`;
+</section>
+${cartaoSalario(v, d)}
+${cartaoRespostas(v, d)}
+${cartaoCampanha(v, d)}`;
   return layout({ titulo: `${v.nome}: Radar Saltense`, corpo, prefixo: '../', atualizadoEm: d.meta.atualizadoEm });
 }

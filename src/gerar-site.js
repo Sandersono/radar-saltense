@@ -6,6 +6,7 @@ import { paginaVereador } from './site/vereador.js';
 import { paginaVotacoes } from './site/votacoes.js';
 import { paginaImpostometro } from './site/impostometro.js';
 import { paginaGastos } from './site/gastos.js';
+import { paginaCamara } from './site/camara.js';
 import { paginaFontes } from './site/fontes.js';
 
 // Foto quadrada pequena (240 px, WebP), sem cortar a cabeça.
@@ -31,6 +32,7 @@ export async function gerarSite(d, destino) {
   await writeFile(`${destino}/index.html`, paginaInicial(d));
   for (const v of d.vereadores) await writeFile(`${destino}/vereador/${v.id}.html`, paginaVereador(v, d));
   await writeFile(`${destino}/votacoes.html`, paginaVotacoes(d));
+  await writeFile(`${destino}/camara.html`, paginaCamara(d));
   await writeFile(`${destino}/fontes.html`, paginaFontes(d));
   if (d.receitas) await writeFile(`${destino}/impostometro.html`, paginaImpostometro(d));
   if (d.gastos) {

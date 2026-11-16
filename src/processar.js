@@ -6,10 +6,11 @@ import { criarCasador } from './regras/nomes.js';
 import { normalizar, anoMesBR } from './util/texto.js';
 import { resumirReceitas, montarImpostometro } from './regras/receitas.js';
 import { resumirDespesas, areasSiconfi } from './regras/despesas.js';
+import { resumoRespostas } from './regras/respostas.js';
 
 const doisDigitos = (n) => String(n).padStart(2, '0');
 
-export function processar({ vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, coletadoEm }) {
+export function processar({ vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, folhaCamara, respostas, campanha, avisosFontes, coletadoEm }) {
   const casar = criarCasador(vereadores, OUTROS_NOMES);
   const inicio = `${ANO_INICIO}-01-01`;
   const naoAtribuidos = [];
@@ -35,6 +36,26 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
     }
   }
   proposituras.sort((a, b) => b.data.localeCompare(a.data) || Number(b.numero) - Number(a.numero));
+
+  // Respostas a requerimentos (só quem já foi conferido no portal entra na conta)
+  const estadoRespostas = respostas || {};
+  for (const p of proposituras) {
+    const e = p.categoria === 'Requerimento' ? estadoRespostas[p.id] : null;
+    if (e && e.respondido && e.data) p.respondidoEm = e.data;
+  }
+  const requerimentos = proposituras.filter((p) => p.categoria === 'Requerimento').map((p) => ({ id: p.id, data: p.data, vereadores: p.vereadores }));
+  const hojeISO = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' }).format(coletadoEm ? Date.parse(coletadoEm) : Date.now());
+  const resumoResp = resumoRespostas(estadoRespostas, requerimentos);
+
+  // Folha da Câmara
+  const mesesFolha = folhaCamara || {};
+  const completos = Object.keys(mesesFolha).filter((m) => !mesesFolha[m].parcial);
+  const totalFolha = (r) => Math.round(Object.values(r.grupos).reduce((s, g) => s + g.total, 0) * 100) / 100;
+  for (const [mes, r] of Object.entries(mesesFolha)) {
+    if (r.parcial) avisos.push(`Folha da Câmara de ${mes}: o portal publicou o mês incompleto (sem os vereadores); fica de fora dos totais.`);
+    else if (r.grupos.vereadores.pessoas !== 11) avisos.push(`Folha da Câmara de ${mes}: ${r.grupos.vereadores.pessoas} vereadores na folha (esperado 11); pode haver suplente ou licença.`);
+  }
+  avisos.push(...(avisosFontes || []));
 
   // Índice de ruas e bairros (para a busca)
   const mapaLocais = new Map();
@@ -203,6 +224,11 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
     gastos,
     presencasLidas: presencas.map((p) => ({ arquivo: p.arquivo, linhas: p.linhas.length })),
     votacoesLidas: votacoes.map((v) => ({ ano: v.ano, blocos: v.blocos.length, semEventos: v.blocos.filter((b) => !b.eventos.length).length })),
+    camara: {
+      folha: { meses: mesesFolha, ultimoMes: completos.length ? completos[completos.length - 1] : null },
+      respostas: { geral: resumoResp.geral, porVereador: resumoResp.porVereador, pendentes: resumoResp.geral.feitos - resumoResp.geral.conferidos, conferidosHoje: Object.values(estadoRespostas).filter((e) => e.conferidoEm === hojeISO).length },
+      campanha: { candidatos: (campanha && campanha.candidatos) || {} },
+    },
     meta: {
       atualizadoEm: coletadoEm || new Date().toISOString(),
       totalProposituras: proposituras.length,
@@ -211,6 +237,7 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
         ? Object.fromEntries(Object.entries(resumoReceitas.meses).map(([m, x]) => [m, Math.round(x.impostos * 100) / 100]))
         : {},
       despesasMensais: resumoDespesas ? resumoDespesas.mensal : {},
+      folhaMensal: Object.fromEntries(completos.map((m) => [m, totalFolha(mesesFolha[m])])),
     },
   };
 }

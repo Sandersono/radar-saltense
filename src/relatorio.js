@@ -1,6 +1,7 @@
 import { fichaOficial } from './config.js';
 import { GRUPOS_RECEITA, TIPOS_IMPOSTO } from './regras/receitas.js';
 import { GRUPOS_GASTO } from './regras/despesas.js';
+import { GRUPOS_FOLHA } from './regras/folha.js';
 
 export function relatorio(d, problemas, aumentos = []) {
   const l = [];
@@ -62,6 +63,25 @@ export function relatorio(d, problemas, aumentos = []) {
       l.push(`- SICONFI: ${a.areas ? `bimestre ${a.areas.bimestre}, total liquidado ${reais(a.areas.total)}` : 'ainda não publicado'}`, '');
     }
     l.push(`- Novas com valor alto no mandato: ${g.novas.length}`);
+  }
+  const c = d.camara;
+  const brl = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  l.push('', '## Câmara', '');
+  if (!c || !c.folha.ultimoMes) {
+    l.push('- Folha da Câmara: sem mês completo salvo.');
+  } else {
+    const m = c.folha.meses[c.folha.ultimoMes];
+    const parciais = Object.keys(c.folha.meses).filter((k) => c.folha.meses[k].parcial);
+    l.push(`- Folha: último mês completo ${c.folha.ultimoMes}; ${Object.keys(c.folha.meses).length} meses guardados (incompletos no portal: ${parciais.join(', ') || 'nenhum'})`);
+    l.push(...Object.entries(GRUPOS_FOLHA).map(([k, nome]) => `- ${nome}: ${reais(m.grupos[k].total)} (${m.grupos[k].pessoas} pessoas)`));
+    l.push(`- Vereadores casados no mês: ${Object.keys(m.porVereador).length} de ${d.vereadores.length}`);
+  }
+  if (c) {
+    const g = c.respostas.geral;
+    l.push(`- Requerimentos: ${g.feitos} feitos, ${g.conferidos} conferidos, ${g.respondidos} respondidos (${g.percentual}% dos conferidos), ${c.respostas.pendentes} ainda por conferir, ${c.respostas.conferidosHoje} conferidos hoje; mediana ${g.medianaDias ?? '-'} dias`);
+    const cand = c.campanha.candidatos;
+    const doze = d.vereadores.reduce((s, v) => s + ((cand[v.id] && cand[v.id].total) || 0), 0);
+    l.push(`- Campanha 2024: os ${d.vereadores.length} vereadores somam ${brl(doze)}; prefeito ${cand.prefeito ? brl(cand.prefeito.total) : 'sem dado'}`);
   }
   l.push('', '## O que é estimativa', '');
   l.push('- Impostômetro: depois do último mês oficial, o contador soma o ritmo médio diário dos últimos meses publicados; não considera a sazonalidade (o IPTU concentra em jan/fev).');

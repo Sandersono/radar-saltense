@@ -310,6 +310,13 @@ import { conferir, aumentosDespesas } from '../src/conferir.js';
   assert.deepEqual(aumentosDespesas({ despesasMensais: { '2026-09': 1060 } }, null), []);
   assert.equal(conferir({ ...base, gastos: { anos: { 2026: { areas: { bimestre: 4, total: 300, somaAreas: 290, lista: [] } } }, novas: [], empresas: [] } }, null, 11).length, 1);
   assert.equal(conferir({ ...base, gastos: { anos: { 2026: { areas: null } }, novas: [], empresas: [] } }, null, 11).length, 0);
+  const antF = { totalProposituras: 90, folhaMensal: { '2026-09': 1000 } };
+  const comF = (m) => ({ ...base, camara: { folha: { meses: {}, ultimoMes: null } }, meta: { ...base.meta, folhaMensal: m } });
+  assert.equal(conferir(comF({ '2026-09': 750 }), antF, 11).length, 1);
+  assert.match(conferir(comF({ '2026-09': 750 }), antF, 11)[0], /Folha da Câmara.*20%/);
+  assert.equal(conferir(comF({ '2026-09': 900 }), antF, 11).length, 0);
+  assert.equal(conferir(comF({}), antF, 11).length, 0);
+  assert.equal(conferir(comF({ '2026-09': 750 }), null, 11).length, 0);
   console.log('ok: conferir');
 }
 
