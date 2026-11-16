@@ -14,10 +14,11 @@ export function blocoContador(r, prefixo, grande) {
     ? `Oficial até ${dataBR(r.fimOficial)}: ${reaisCentavos(r.oficialAno)} · daqui em diante é ${ritmo}.`
     : `Ainda não há mês oficial de ${r.anoAtual}: todo o valor é ${ritmo}.`;
   return `<div class="contador-impostos${grande ? ' grande' : ''}" data-oficial="${r.oficialAno}" data-ritmo="${r.ritmoDiario}" data-inicio="${instanteBR(r.inicioEstimativa)}" data-fim="${instanteBR(`${r.anoAtual + 1}-01-01`)}" data-populacao="${POPULACAO.valor}">
-<p class="rotulo">Impostos e taxas pagos à cidade em ${r.anoAtual}</p>
+<p class="rotulo">Impostos e taxas pagos à Prefeitura em ${r.anoAtual}</p>
 <p class="valor" aria-live="off">${reaisCentavos(r.oficialAno)}</p>
 <p class="nota">(parte oficial + estimativa)</p>
-<p class="por-morador">Dividido pelos ${POPULACAO.valor.toLocaleString('pt-BR')} moradores: <strong>${reaisCentavos(r.oficialAno / POPULACAO.valor)}</strong> por pessoa</p>
+<p class="por-morador">Isso dá <strong>${reaisCentavos(r.oficialAno / POPULACAO.valor)}</strong> por morador <small>(${POPULACAO.valor.toLocaleString('pt-BR')} moradores)</small></p>
+<p class="nesta-visita" hidden>Enquanto você está nesta página, Salto arrecadou <strong>R$ 0,00</strong></p>
 <p class="nota">${esc(oficialAte)}</p>
 <p>${seloFonte('https://transparencia.tce.sp.gov.br/', 'fonte: TCE-SP')}</p>
 ${grande ? '' : `<p><a class="botao" href="${prefixo}impostometro.html">De onde vem o dinheiro de Salto →</a></p>`}

@@ -186,6 +186,11 @@
     const pop = Number(el.dataset.populacao);
     const valor = el.querySelector('.valor');
     const porMorador = el.querySelector('.por-morador strong');
+    // "Enquanto você está nesta página": começa do zero ao abrir, no mesmo ritmo diário do contador
+    const nestaVisita = el.querySelector('.nesta-visita');
+    const valorVisita = nestaVisita && nestaVisita.querySelector('strong');
+    const abertura = Date.now();
+    if (nestaVisita && ritmo > 0) nestaVisita.hidden = false;
     let timer = null;
     let visivel = true;
     let ultimoPessoa = '';
@@ -198,6 +203,7 @@
         const t = moeda(v / pop);
         if (t !== ultimoPessoa) { ultimoPessoa = t; porMorador.textContent = t; }
       }
+      if (valorVisita && !nestaVisita.hidden) valorVisita.textContent = moeda(ritmo * (Math.min(agora, fim) - abertura) / 86400000);
       if (agora >= fim) { parar(); finalizado = true; }
     };
     let finalizado = false;

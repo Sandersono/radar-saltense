@@ -13,7 +13,7 @@ export function paginaFontes(d) {
     ? `<ul>${nomesSoltos.map(([nome, c]) => `<li>"${esc(nome)}": ${c} ${c === 1 ? 'registro' : 'registros'}</li>`).join('')}</ul>`
     : '<p>Nenhum.</p>';
   const corpo = `<h1>De onde vêm os números</h1>
-<p>Tudo sai de fontes oficiais. Nada é digitado à mão, exceto a população do IBGE, que fica registrada no código com a fonte. O site é refeito todo dia de madrugada.</p>
+<p>Tudo sai de fontes oficiais e o robô refaz o site todo dia de madrugada. Os poucos dados fixos ficam registrados com a fonte: população (IBGE), campanha de 2024 (TSE), a base de 2024 do Raio-X e as grafias de nomes conferidas à mão.</p>
 <nav class="sumario" aria-label="Nesta página"><a class="chip" href="#fontes">Fontes</a><a class="chip" href="#regras">A regra das propostas</a><a class="chip" href="#ruas">Ruas e bairros</a><a class="chip" href="#presenca">Presença</a><a class="chip" href="#votacoes">Votações</a><a class="chip" href="#avisos">Avisos</a><a class="chip" href="#creditos">Fotos e fontes</a></nav>
 <section id="fontes" class="secao cartao">
 <h2>Fontes</h2>

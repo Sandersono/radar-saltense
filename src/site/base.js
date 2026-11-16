@@ -3,7 +3,7 @@ import { esc } from '../util/texto.js';
 import { iniciais, fotoSite } from './util.js';
 
 const ENDERECO = 'https://sandersono.github.io/radar-saltense/';
-const DESCRICAO = 'O que cada vereador de Salto/SP fez desde a posse e quanto a cidade arrecada em impostos, só com dados oficiais.';
+const DESCRICAO = 'O que fazem os vereadores e a Prefeitura de Salto/SP, quanto a cidade arrecada e onde gasta. Só dado oficial, com link para a fonte, atualizado todo dia.';
 
 export const GRUPOS_PUBLICOS = ['melhoria', 'cobranca', 'homenagem', 'lei', 'outros'];
 export const AVISO_NOMES = 'Nomes escritos de outro jeito no PDF, que não são nem o nome nem o apelido oficial, ficam de fora e podem mudar estes números.';
@@ -83,7 +83,7 @@ ${corpo}
 <footer class="rodape"><div class="rodape-dentro">
 <p class="rodape-marca">Radar Saltense</p>
 <p>Atualizado em ${esc(quandoBR(atualizadoEm))}. Tudo sai de fontes oficiais: Câmara Municipal de Salto, Tribunal de Contas do Estado (TCE-SP), Tesouro Nacional, IBGE e Tribunal Superior Eleitoral (TSE). <a href="${prefixo}fontes.html">Veja de onde vêm os números</a>.</p>
-<p>Radar Saltense é um projeto independente de ${esc(AUTOR.nome)}, feito por morador, sem vínculo com a Câmara, com a Prefeitura ou com partido.</p>
+<p>Radar Saltense é um projeto independente de ${esc(AUTOR.nome)}, morador de Salto, sem ligação com a Câmara, a Prefeitura ou partidos.</p>
 <p>Achou um erro? Me chama no Instagram: <a href="https://instagram.com/${AUTOR.instagram}">@${AUTOR.instagram}</a>.</p>
 </div></footer>
 <script src="${prefixo}busca.js" defer></script>

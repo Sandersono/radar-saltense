@@ -44,8 +44,8 @@ export function paginaInicial(d) {
   const sugestoes = sugestoesBairros(d.locais);
 
   const heroi = `<p class="heroi-sobre">Salto · SP</p>
-<h1>Salto de olho na Câmara</h1>
-<p>O que cada vereador fez desde a posse, atualizado todo dia. Só dado oficial, com link para a fonte.</p>
+<h1>Seu vereador, sua Prefeitura, seu dinheiro</h1>
+<p>O que a Câmara e a Prefeitura de Salto fazem e quanto isso custa, só com dado oficial e link para a fonte. Atualizado todo dia.</p>
 <p class="atualizado">Atualizado em ${esc(quandoBR(d.meta.atualizadoEm))}</p>`;
 
   const corpo = `${salario}
@@ -53,7 +53,7 @@ ${d.receitas ? blocoContador(d.receitas, '', false) : ''}
 ${d.gastos ? chamadaGastos(d.gastos) : ''}
 <section id="bairro" class="secao">
 <h2>O que pediram pro seu bairro?</h2>
-<p>Veja tudo o que os vereadores pediram para a sua rua ou o seu bairro, com link para o documento oficial.</p>
+<p>Digite sua rua ou bairro e veja tudo o que os vereadores já pediram para lá, com o documento oficial.</p>
 <label class="sr-only" for="busca-bairro">Nome do bairro ou da rua</label>
 <input id="busca-bairro" class="busca" type="search" placeholder="Digite o bairro ou a rua" autocomplete="off">
 ${sugestoes.length ? `<div class="sugestoes" role="group" aria-label="Bairros com mais pedidos">${sugestoes.map((s) => `<button type="button" class="chip" data-busca="${esc(s)}">${esc(s)}</button>`).join('')}</div>` : ''}
@@ -97,5 +97,5 @@ ${grupos}
 <a class="cartao chamada" href="fontes.html"><strong>De onde vêm os números</strong><span>Todas as fontes oficiais e as regras usadas, para você conferir.</span></a>
 <a class="cartao chamada" href="https://instagram.com/${AUTOR.instagram}"><strong>Achou um erro?</strong><span>Me chama no Instagram @${AUTOR.instagram}.</span></a>
 </section>`;
-  return layout({ titulo: 'Radar Saltense: o que cada vereador de Salto fez', corpo, atualizadoEm: d.meta.atualizadoEm, heroi });
+  return layout({ titulo: 'Radar Saltense: Câmara, Prefeitura e o dinheiro de Salto', corpo, atualizadoEm: d.meta.atualizadoEm, heroi });
 }
