@@ -1,0 +1,228 @@
+{
+  "2025": {
+    "contratacoes": {
+      "porModalidade": {
+        "4": {
+          "nome": "Concorrência eletrônica",
+          "quantidade": 26,
+          "valor": 87807846.4
+        },
+        "6": {
+          "nome": "Pregão eletrônico",
+          "quantidade": 97,
+          "valor": 84707591.14
+        },
+        "8": {
+          "nome": "Dispensa",
+          "quantidade": 629,
+          "valor": 25368184.16
+        },
+        "9": {
+          "nome": "Inexigibilidade",
+          "quantidade": 35,
+          "valor": 5239603.67
+        },
+        "12": {
+          "nome": "Credenciamento",
+          "quantidade": 9,
+          "valor": 18453093.38
+        }
+      },
+      "total": {
+        "quantidade": 796,
+        "valor": 221576318.75
+      },
+      "semDisputa": {
+        "quantidade": 664,
+        "valor": 30607787.83,
+        "pctQuantidade": 83,
+        "pctValor": 14
+      }
+    },
+    "contratos": {
+      "quantidade": 975,
+      "valor": 68902715.82,
+      "top": [
+        {
+          "cnpj": "24281268000107",
+          "nome": "AUTO MECANICA BARROS LTDA",
+          "valor": 18181457.14,
+          "contratos": 47
+        },
+        {
+          "cnpj": "15049409000170",
+          "nome": "ÁGUA FORTE SANEAMENTO AMBIENTAL LTDA",
+          "valor": 11848599.1,
+          "contratos": 1
+        },
+        {
+          "cnpj": "35927638000157",
+          "nome": "SS & SILVA CONSTRUTORA LTDA",
+          "valor": 5115448.78,
+          "contratos": 1
+        },
+        {
+          "cnpj": "46571919000136",
+          "nome": "CHRONOS CONSTRUÇÃO E MANUTENÇÃO LTDA",
+          "valor": 4655497.25,
+          "contratos": 1
+        },
+        {
+          "cnpj": "43898972000158",
+          "nome": "CONSTRUTORA ROY LTDA",
+          "valor": 4500000,
+          "contratos": 1
+        },
+        {
+          "cnpj": "09455850000159",
+          "nome": "ASSOCIACAO BENEFICENTE DOS AMIGOS DO RECANTO RENASCER - ABARR",
+          "valor": 2777400,
+          "contratos": 1
+        },
+        {
+          "cnpj": "48576781000193",
+          "nome": "CENTRO DE ACOLHIMENTO E TRATAMENTO NOVA ESPERANCA",
+          "valor": 2536650,
+          "contratos": 5
+        },
+        {
+          "cnpj": "62577929000135",
+          "nome": "COMPANHIA PROCESSAMENTO DE DADOS DO ESTADO DE SÃO PAULO  - PRODESP",
+          "valor": 2167920,
+          "contratos": 2
+        },
+        {
+          "cnpj": "14584937000166",
+          "nome": "LILA EMPREENDIMENTOS IMOBILIARIOS LTDA",
+          "valor": 1800000,
+          "contratos": 1
+        },
+        {
+          "cnpj": "06176620000162",
+          "nome": "GAIATEC COMERCIO E SERVIÇO DE AUTOMAÇÃO E SISTEMA DO BRASIL LTDA",
+          "valor": 1417725,
+          "contratos": 1
+        }
+      ]
+    },
+    "coletadoEm": "2026-11-16T14:50:40.968Z"
+  },
+  "2026": {
+    "contratacoes": {
+      "porModalidade": {
+        "1": {
+          "nome": "Leilão eletrônico",
+          "quantidade": 2,
+          "valor": 350300
+        },
+        "4": {
+          "nome": "Concorrência eletrônica",
+          "quantidade": 20,
+          "valor": 50614497.65
+        },
+        "5": {
+          "nome": "Concorrência presencial",
+          "quantidade": 1,
+          "valor": 1500000
+        },
+        "6": {
+          "nome": "Pregão eletrônico",
+          "quantidade": 80,
+          "valor": 206403009.31
+        },
+        "8": {
+          "nome": "Dispensa",
+          "quantidade": 590,
+          "valor": 37671411.68
+        },
+        "9": {
+          "nome": "Inexigibilidade",
+          "quantidade": 50,
+          "valor": 2198214.5
+        },
+        "12": {
+          "nome": "Credenciamento",
+          "quantidade": 6,
+          "valor": 598539902.13
+        }
+      },
+      "total": {
+        "quantidade": 749,
+        "valor": 897277335.27
+      },
+      "semDisputa": {
+        "quantidade": 640,
+        "valor": 39869626.18,
+        "pctQuantidade": 85,
+        "pctValor": 4
+      }
+    },
+    "contratos": {
+      "quantidade": 1096,
+      "valor": 118551246.64,
+      "top": [
+        {
+          "cnpj": "03992945000125",
+          "nome": "VERDEBIANCO ENGENHARIA LTDA",
+          "valor": 34556095.52,
+          "contratos": 6
+        },
+        {
+          "cnpj": "27001408000134",
+          "nome": "OBARA INFORMATICA LTDA",
+          "valor": 28900000,
+          "contratos": 1
+        },
+        {
+          "cnpj": "55996615000101",
+          "nome": "CLD CONSTRUTORA LAÇOS DETETORES E ELETRÔNICA LTDA",
+          "valor": 12799000,
+          "contratos": 1
+        },
+        {
+          "cnpj": "55478293000109",
+          "nome": "CNT SOLUCOES LTDA",
+          "valor": 5709999.6,
+          "contratos": 1
+        },
+        {
+          "cnpj": "19092349000129",
+          "nome": "PLENA ALIMENTACAO E FACILITIES LTDA",
+          "valor": 5672366.64,
+          "contratos": 1
+        },
+        {
+          "cnpj": "09340675000154",
+          "nome": "PONTUALI CONSTRUTORA E ENGENHARIA LTDA",
+          "valor": 3651423.34,
+          "contratos": 2
+        },
+        {
+          "cnpj": "48576781000193",
+          "nome": "CENTRO DE ACOLHIMENTO E TRATAMENTO NOVA ESPERANCA",
+          "valor": 2011800,
+          "contratos": 6
+        },
+        {
+          "cnpj": "15311126000154",
+          "nome": "CLINICAO CLINICA VETERINARIA POPULAR LTDA",
+          "valor": 1899735,
+          "contratos": 1
+        },
+        {
+          "cnpj": "10786517000101",
+          "nome": "WORKSERV DESENVOLVIMENTO E COMERCIO DE SOFTWARE LTDA",
+          "valor": 1379994,
+          "contratos": 1
+        },
+        {
+          "cnpj": "08004710000100",
+          "nome": "TMS CESTAS IMPORTAÇÃO E EXPORTAÇÃO DE ALIMENTOS LTDA",
+          "valor": 1340918.2,
+          "contratos": 1
+        }
+      ]
+    },
+    "coletadoEm": "2026-11-16T14:50:40.968Z"
+  }
+}
