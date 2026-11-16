@@ -5,7 +5,7 @@ import { lerRespostas } from '../regras/respostas.js';
 
 const MAX_FALHAS_SEGUIDAS = 5;
 
-// Abre a ficha oficial (P78) de cada requerimento e lê os anexos. Página que não mostra "Anexos" = falha (não grava).
+// Abre a ficha oficial (P78) de cada requerimento e lê os anexos. Página que não mostra as linhas de anexo ("Tipo Documento") = falha (não grava): o título "Anexos" pode aparecer antes das linhas.
 // Para quando o orçamento de tempo acaba ou depois de 5 falhas seguidas; devolve o que já coletou.
 export async function coletarRespostas(ids, hoje, orcamentoMs = 8 * 60 * 1000) {
   const estado = {};
@@ -22,7 +22,7 @@ export async function coletarRespostas(ids, hoje, orcamentoMs = 8 * 60 * 1000) {
       await aguardarVez();
       try {
         await page.goto(`${APEX}?p=742:78:::::P78_ID_PROJETO:${id}`, { waitUntil: 'domcontentloaded', timeout: 20000 });
-        await page.waitForFunction(() => /Anexos|Tipo Documento/.test(document.body.innerText), null, { timeout: 15000 });
+        await page.waitForFunction(() => /Tipo Documento/.test(document.body.innerText), null, { timeout: 15000 });
         const texto = await page.evaluate(() => document.body.innerText);
         estado[id] = { ...lerRespostas(texto), conferidoEm: hoje };
         seguidas = 0;

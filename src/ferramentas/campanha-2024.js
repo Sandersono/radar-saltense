@@ -114,6 +114,6 @@ if (!pref.length) throw new Error('Prefeito (SQ_CANDIDATO) sem linhas.');
 candidatos.prefeito = { nome: 'José Geraldo Garcia', partido: pref[0].SG_PARTIDO, sq: SQ_PREFEITO, ...resumirCampanha(pref), link: LINK(SQ_PREFEITO) };
 
 await mkdir('data/referencia', { recursive: true });
-await writeFile('data/referencia/campanha-2024.json', `${JSON.stringify({ fonte: ZIP, geradoEm: new Date().toISOString(), candidatos }, null, 2)}\n`);
+await writeFile('data/referencia/campanha-2024.json', `${JSON.stringify({ fonte: ZIP, candidatos }, null, 2)}\n`);
 for (const [k, c] of Object.entries(candidatos)) console.log(k, c.partido, c.total, JSON.stringify(c.origens), c.doadoresPessoas);
 console.log('Soma dos vereadores:', Math.round(Object.entries(candidatos).filter(([k]) => k !== 'prefeito').reduce((s, [, c]) => s + c.total, 0) * 100) / 100);
