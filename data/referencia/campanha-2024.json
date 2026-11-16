@@ -1,0 +1,186 @@
+{
+  "fonte": "https://cdn.tse.jus.br/estatistica/sead/odsele/prestacao_contas/prestacao_de_contas_eleitorais_candidatos_2024.zip",
+  "geradoEm": "2026-11-16T11:06:48.224Z",
+  "candidatos": {
+    "almir-de-melo-santos": {
+      "nome": "Almir de Melo Santos",
+      "partido": "PRD",
+      "sq": "250002207762",
+      "total": 7050,
+      "origens": {
+        "partido": 0,
+        "pessoas": 7050,
+        "proprios": 0,
+        "coletivo": 0,
+        "outros": 0
+      },
+      "doadoresPessoas": 2,
+      "link": "https://divulgacandcontas.tse.jus.br/divulga/#/candidato/SUDESTE/SP/2045202024/250002207762/2024/70050"
+    },
+    "antonio-moreira-sobrinho": {
+      "nome": "Antônio Moreira Sobrinho",
+      "partido": "PL",
+      "sq": "250001985485",
+      "total": 10000,
+      "origens": {
+        "partido": 10000,
+        "pessoas": 0,
+        "proprios": 0,
+        "coletivo": 0,
+        "outros": 0
+      },
+      "doadoresPessoas": 0,
+      "link": "https://divulgacandcontas.tse.jus.br/divulga/#/candidato/SUDESTE/SP/2045202024/250001985485/2024/70050"
+    },
+    "arildo-guadagnini": {
+      "nome": "Arildo Guadagnini",
+      "partido": "DC",
+      "sq": "250002156072",
+      "total": 18514,
+      "origens": {
+        "partido": 0,
+        "pessoas": 11014,
+        "proprios": 7500,
+        "coletivo": 0,
+        "outros": 0
+      },
+      "doadoresPessoas": 5,
+      "link": "https://divulgacandcontas.tse.jus.br/divulga/#/candidato/SUDESTE/SP/2045202024/250002156072/2024/70050"
+    },
+    "clayton-aparecido-dos-santos": {
+      "nome": "Clayton Aparecido dos Santos",
+      "partido": "PP",
+      "sq": "250002208134",
+      "total": 1308,
+      "origens": {
+        "partido": 0,
+        "pessoas": 0,
+        "proprios": 1308,
+        "coletivo": 0,
+        "outros": 0
+      },
+      "doadoresPessoas": 0,
+      "link": "https://divulgacandcontas.tse.jus.br/divulga/#/candidato/SUDESTE/SP/2045202024/250002208134/2024/70050"
+    },
+    "edemilson-pereira-dos-santos": {
+      "nome": "Edemilson Pereira dos Santos",
+      "partido": "PODE",
+      "sq": "250002062689",
+      "total": 20100,
+      "origens": {
+        "partido": 0,
+        "pessoas": 12600,
+        "proprios": 7500,
+        "coletivo": 0,
+        "outros": 0
+      },
+      "doadoresPessoas": 4,
+      "link": "https://divulgacandcontas.tse.jus.br/divulga/#/candidato/SUDESTE/SP/2045202024/250002062689/2024/70050"
+    },
+    "edival-pereira-rosa": {
+      "nome": "Edival Pereira Rosa",
+      "partido": "UNIÃO",
+      "sq": "250002210533",
+      "total": 4504,
+      "origens": {
+        "partido": 0,
+        "pessoas": 0,
+        "proprios": 4504,
+        "coletivo": 0,
+        "outros": 0
+      },
+      "doadoresPessoas": 0,
+      "link": "https://divulgacandcontas.tse.jus.br/divulga/#/candidato/SUDESTE/SP/2045202024/250002210533/2024/70050"
+    },
+    "graziela-costa-leite": {
+      "nome": "Graziela Costa Leite",
+      "partido": "PSB",
+      "sq": "250002209293",
+      "total": 61151,
+      "origens": {
+        "partido": 30000,
+        "pessoas": 14980,
+        "proprios": 7000,
+        "coletivo": 9171,
+        "outros": 0
+      },
+      "doadoresPessoas": 5,
+      "link": "https://divulgacandcontas.tse.jus.br/divulga/#/candidato/SUDESTE/SP/2045202024/250002209293/2024/70050"
+    },
+    "henrique-balseiros-chamosa-neto": {
+      "nome": "Henrique Balseiros Chamosa Neto",
+      "partido": "PL",
+      "sq": "250001985477",
+      "total": 79200,
+      "origens": {
+        "partido": 73000,
+        "pessoas": 5200,
+        "proprios": 1000,
+        "coletivo": 0,
+        "outros": 0
+      },
+      "doadoresPessoas": 5,
+      "link": "https://divulgacandcontas.tse.jus.br/divulga/#/candidato/SUDESTE/SP/2045202024/250001985477/2024/70050"
+    },
+    "luzia-de-fatima-izidorio-vidal": {
+      "nome": "Luzia de Fátima Izidório Vidal",
+      "partido": "PSB",
+      "sq": "250002209298",
+      "total": 6329.8,
+      "origens": {
+        "partido": 0,
+        "pessoas": 3029.8,
+        "proprios": 3300,
+        "coletivo": 0,
+        "outros": 0
+      },
+      "doadoresPessoas": 3,
+      "link": "https://divulgacandcontas.tse.jus.br/divulga/#/candidato/SUDESTE/SP/2045202024/250002209298/2024/70050"
+    },
+    "michel-oliveira-rodrigues-da-silva": {
+      "nome": "Michel Oliveira Rodrigues da Silva",
+      "partido": "PT",
+      "sq": "250002207276",
+      "total": 45430.38,
+      "origens": {
+        "partido": 41386.78,
+        "pessoas": 4043.6,
+        "proprios": 0,
+        "coletivo": 0,
+        "outros": 0
+      },
+      "doadoresPessoas": 3,
+      "link": "https://divulgacandcontas.tse.jus.br/divulga/#/candidato/SUDESTE/SP/2045202024/250002207276/2024/70050"
+    },
+    "rogerio-dos-santos-filho": {
+      "nome": "Rogério dos Santos Filho",
+      "partido": "SOLIDARIEDADE",
+      "sq": "250002211017",
+      "total": 4930,
+      "origens": {
+        "partido": 0,
+        "pessoas": 2040,
+        "proprios": 2890,
+        "coletivo": 0,
+        "outros": 0
+      },
+      "doadoresPessoas": 1,
+      "link": "https://divulgacandcontas.tse.jus.br/divulga/#/candidato/SUDESTE/SP/2045202024/250002211017/2024/70050"
+    },
+    "prefeito": {
+      "nome": "José Geraldo Garcia",
+      "partido": "PP",
+      "sq": "250001985008",
+      "total": 515650.04,
+      "origens": {
+        "partido": 400000,
+        "pessoas": 93500,
+        "proprios": 22150.04,
+        "coletivo": 0,
+        "outros": 0
+      },
+      "doadoresPessoas": 18,
+      "link": "https://divulgacandcontas.tse.jus.br/divulga/#/candidato/SUDESTE/SP/2045202024/250001985008/2024/70050"
+    }
+  }
+}
