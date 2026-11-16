@@ -130,7 +130,7 @@
       const anos = Object.entries(porAno).sort().map(([a, v]) => `${a}: ${real.format(v)}`).join(' · ');
       const meses = Object.entries(porMes).sort().map(([k, v]) => `${MES[Number(k.slice(5, 7)) - 1]}/${k.slice(0, 4)}: ${real.format(v)}`).join(' · ');
       const orgaos = Object.entries(porOrgao).map(([k, v]) => `${ORG[k] || k}: ${real.format(v)}`).join(' · ');
-      return `<li><strong>${esc(nome)}</strong> <span class="nota">CNPJ ${esc(fmtCnpj(cnpj))}</span><br>Por ano: ${esc(anos)}<br>Por órgão: ${esc(orgaos)}<details><summary>Mês a mês</summary><p>${esc(meses)}</p></details><a href="https://transparencia.tce.sp.gov.br/despesas-fornecedor?nr_identificador_despesa=${esc(cnpj)}" target="_blank" rel="noopener">ver no TCE-SP</a></li>`;
+      return `<li><strong>${esc(nome)}</strong> <span class="nota">CNPJ <span class="cnpj">${esc(fmtCnpj(cnpj))}</span></span><br>Por ano: ${esc(anos)}<br>Por órgão: ${esc(orgaos)}<details><summary>Mês a mês</summary><p>${esc(meses)}</p></details><a href="https://transparencia.tce.sp.gov.br/despesas-fornecedor?nr_identificador_despesa=${esc(cnpj)}" target="_blank" rel="noopener">ver no TCE-SP</a></li>`;
     };
     campoEmpresa.addEventListener('input', () => {
       clearTimeout(esperaEmpresa);

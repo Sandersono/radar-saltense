@@ -11,7 +11,7 @@ const periodo = (a) => (!a.ultimoMes ? 'sem pagamento publicado ainda' : a.meses
 const anosOrdenados = (g) => Object.keys(g.anos).sort();
 
 const listaEmpresas = (lista) => (lista.length
-  ? `<ol class="lista lista-empresas">${lista.map((e) => `<li><strong>${esc(e.nome)}</strong> <span class="nota">CNPJ ${esc(formatarCnpj(e.cnpj))}</span><br><span class="valor-linha">${reais(e.total)}</span> ${link(linkTce(e.cnpj), 'ver no TCE-SP')}</li>`).join('')}</ol>`
+  ? `<ol class="lista lista-empresas">${lista.map((e) => `<li><strong>${esc(e.nome)}</strong> <span class="nota">CNPJ <span class="cnpj">${esc(formatarCnpj(e.cnpj))}</span></span><br><span class="valor-linha">${reais(e.total)}</span> ${link(linkTce(e.cnpj), 'ver no TCE-SP')}</li>`).join('')}</ol>`
   : '<p>Nenhuma.</p>');
 
 const pessoasFisicas = (a) => `<p>Pessoas físicas: ${reais(a.pessoasFisicas.total)} para ${numero(a.pessoasFisicas.quantidade)} pessoas. Os nomes de pessoas físicas não aparecem aqui. Para conferir, use a consulta oficial por credor: ${link(LINKS_CREDOR.prefeitura, 'Portal da Transparência da Prefeitura (Despesa Detalhada por Credor)')}, escolhendo a instituição e o ano, ou ${link(LINKS_CREDOR.tce, 'TCE-SP, Despesas por Fornecedor')}.</p>`;
@@ -75,7 +75,7 @@ ${anos.map((ano) => blocoAno(ano, g.anos[ano])).join('\n')}
 <h2 id="t-novas">Ponto de atenção do mandato: novas com valor alto</h2>
 ${aviso(esc(ATENCAO))}
 <p>Empresas e entidades que não receberam nada da cidade em 2024 e que, desde ${anos[0] || ''}, já receberam mais de ${reais(NOVA_LIMITE)}. Empresa nova pode ser fruto de licitação nova, troca de contrato ou mudança de CNPJ.</p>
-${g.novas.length ? `<ol class="lista lista-empresas">${g.novas.map((e) => `<li><strong>${esc(e.nome)}</strong> <span class="nota">CNPJ ${esc(formatarCnpj(e.cnpj))} · primeiro pagamento em ${esc(mesBR(e.primeiroMes))}</span><br><span class="valor-linha">${reais(e.total)}</span> ${link(linkTce(e.cnpj), 'ver no TCE-SP')}</li>`).join('')}</ol>` : '<p>Nenhuma.</p>'}
+${g.novas.length ? `<ol class="lista lista-empresas">${g.novas.map((e) => `<li><strong>${esc(e.nome)}</strong> <span class="nota">CNPJ <span class="cnpj">${esc(formatarCnpj(e.cnpj))}</span> · primeiro pagamento em ${esc(mesBR(e.primeiroMes))}</span><br><span class="valor-linha">${reais(e.total)}</span> ${link(linkTce(e.cnpj), 'ver no TCE-SP')}</li>`).join('')}</ol>` : '<p>Nenhuma.</p>'}
 </section>
 <section class="secao cartao" id="busca-empresas">
 <h2>Busca por empresa</h2>

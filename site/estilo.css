@@ -48,6 +48,9 @@ main { max-width: 1040px; margin: 0 auto; padding: .5rem 1rem 2rem; }
 main p, main li, main td { overflow-wrap: anywhere; }
 .secao { margin: 2.25rem 0; }
 .cartao { background: var(--branco); border: 1px solid var(--linha); border-radius: var(--raio); box-shadow: var(--sombra); padding: 1rem 1.1rem; }
+/* O respiro do cartão vem do padding; a margem do primeiro e do último filho não soma em cima dele */
+.cartao > :first-child { margin-top: 0; }
+.cartao > :last-child { margin-bottom: 0; }
 .botao { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: .6rem 1.4rem; border-radius: 999px; background: var(--ambar); color: var(--rio-escuro); font-family: var(--titulo); font-weight: 800; text-decoration: none; border: 0; cursor: pointer; text-align: center; }
 .botao:hover { background: #E8952A; }
 .botao-secundario { display: inline-flex; align-items: center; min-height: 44px; padding: .5rem 1.2rem; border-radius: 999px; border: 2px solid var(--rio); background: transparent; color: var(--rio); font: 600 .95rem var(--texto); cursor: pointer; text-decoration: none; }
@@ -67,12 +70,21 @@ html:not(.js) .ordens, html:not(.js) .sugestoes, html:not(.js) .filtros, html:no
 
 .lista { list-style: none; padding: 0; margin: .5rem 0; }
 .lista > li { padding: .7rem 0; border-bottom: 1px solid var(--linha); overflow-wrap: anywhere; }
-ol.lista { list-style: decimal; padding-left: 1.4rem; }
+.lista > li:last-child { border-bottom: 0; }
+ol.lista { list-style: decimal; padding-left: 2.2rem; }
 ol.lista > li { padding-left: .25rem; }
+ol.lista > li::marker { font-variant-numeric: tabular-nums; color: var(--suave); }
+/* Lista que é o próprio cartão: devolve o respiro que .lista tira (os números ficam dentro da borda) */
+.lista.cartao { padding: .35rem 1.1rem .35rem 1.1rem; }
+ol.lista.cartao { padding-left: 2.9rem; }
 .data { color: var(--suave); font-variant-numeric: tabular-nums; margin-right: .25rem; font-size: .9rem; }
-.tag { display: inline-block; font-size: .78rem; background: #E6F2FA; color: var(--rio-escuro); border-radius: 999px; padding: .05rem .55rem; margin-right: .25rem; }
+.tag { display: inline-block; font-size: .78rem; background: #E6F2FA; color: var(--rio-escuro); border-radius: 999px; padding: .12rem .55rem; margin-right: .25rem; }
 details { background: var(--branco); border: 1px solid var(--linha); border-radius: 14px; padding: .6rem .9rem; margin: .5rem 0; }
 summary { cursor: pointer; font-weight: 600; min-height: 32px; }
+/* Dentro de uma lista o "ver mais" não vira outra caixa dentro do cartão */
+.lista > li details { background: none; border: 0; border-radius: 0; padding: 0; margin: .35rem 0 0; }
+.lista > li summary { display: list-item; color: var(--rio); font-size: .92rem; padding: .3rem 0; min-height: 0; }
+.lista > li details[open] > summary { margin-bottom: .4rem; }
 .num { float: right; color: var(--suave); font-weight: 400; font-variant-numeric: tabular-nums; }
 table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
 th, td { text-align: left; padding: .4rem; border-bottom: 1px solid var(--linha); }
@@ -80,7 +92,7 @@ th, td { text-align: left; padding: .4rem; border-bottom: 1px solid var(--linha)
 .m-AJ { color: var(--ambar-escuro); font-weight: 600; }
 .m-P { color: var(--presente); }
 .partido { color: var(--suave); font-size: .9rem; }
-.apelido { color: var(--rio); white-space: nowrap; }
+.apelido { color: var(--rio); }
 
 .proporcao { display: flex; height: 18px; border-radius: 999px; overflow: hidden; background: var(--linha); margin: .75rem 0 .5rem; }
 .fatia { display: block; height: 100%; }
@@ -101,6 +113,7 @@ a.cartao-numero:hover { border-color: var(--rio); }
 .filtros { display: grid; gap: .5rem; margin: .75rem 0; }
 .cartoes { list-style: none; padding: 0; display: grid; gap: .9rem; grid-template-columns: minmax(0, 1fr); }
 .cartao-vereador-topo { display: flex; gap: .8rem; align-items: center; text-decoration: none; color: var(--rio-escuro); }
+.cartao-vereador-topo > span { min-width: 0; }
 .cartao-vereador-topo strong { display: block; font-family: var(--titulo); font-size: 1.1rem; }
 .foto { border-radius: 50%; object-fit: cover; flex: 0 0 auto; background: #D6ECFA; }
 .foto-iniciais { display: inline-flex; align-items: center; justify-content: center; font: 800 1.1rem var(--titulo); color: var(--rio); }
@@ -127,7 +140,7 @@ a.cartao-numero:hover { border-color: var(--rio); }
 .eventos > li { border-top: 1px solid var(--linha); padding: .6rem 0; }
 .eventos p { margin: .2rem 0; }
 .resultado { font-weight: 600; }
-.etiqueta { display: inline-block; font-size: .78rem; font-weight: 600; border-radius: 999px; padding: .05rem .6rem; margin-right: .3rem; }
+.etiqueta { display: inline-block; font-size: .78rem; font-weight: 600; border-radius: 999px; padding: .12rem .6rem; margin-right: .3rem; }
 .etiqueta-contra { background: #FBE4E2; color: #8A1C15; }
 .etiqueta-ausentes { background: #FDEBCB; color: var(--ambar-escuro); }
 
@@ -184,5 +197,6 @@ a.cartao-numero:hover { border-color: var(--rio); }
 }
 .chamada-gastos { margin: 1rem 0; }
 .ano-gastos h2 small { font-size: .9rem; font-weight: 600; color: var(--suave); }
+.cnpj { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .lista-empresas .valor-linha { font-weight: 600; color: var(--rio-escuro); margin-right: .4rem; }
 #resultado-empresa details { margin: .4rem 0; }
