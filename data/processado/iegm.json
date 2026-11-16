@@ -1,0 +1,686 @@
+{
+  "anos": {
+    "2014": {
+      "Cabreúva": {
+        "iegm": "B",
+        "plan": "C",
+        "fisc": "B+",
+        "educ": "B+",
+        "saude": "B+",
+        "amb": "B+",
+        "cidade": "A",
+        "gov": "C"
+      },
+      "Indaiatuba": {
+        "iegm": "B+",
+        "plan": "C+",
+        "fisc": "B+",
+        "educ": "A",
+        "saude": "A",
+        "amb": "B",
+        "cidade": "B+",
+        "gov": "B+"
+      },
+      "Itu": {
+        "iegm": "B+",
+        "plan": "C+",
+        "fisc": "B",
+        "educ": "A",
+        "saude": "B",
+        "amb": "A",
+        "cidade": "A",
+        "gov": "B+"
+      },
+      "Itupeva": {
+        "iegm": "B+",
+        "plan": "C+",
+        "fisc": "B",
+        "educ": "B+",
+        "saude": "A",
+        "amb": "B",
+        "cidade": "A",
+        "gov": "B"
+      },
+      "Salto": {
+        "iegm": "B",
+        "plan": "C",
+        "fisc": "B+",
+        "educ": "B+",
+        "saude": "A",
+        "amb": "B+",
+        "cidade": "C+",
+        "gov": "B"
+      },
+      "Sorocaba": {
+        "iegm": "C",
+        "plan": "C",
+        "fisc": "C",
+        "educ": "B",
+        "saude": "B",
+        "amb": "B+",
+        "cidade": "A",
+        "gov": "B"
+      }
+    },
+    "2015": {
+      "Cabreúva": {
+        "iegm": "B",
+        "plan": "C",
+        "fisc": "B+",
+        "educ": "B+",
+        "saude": "B+",
+        "amb": "B+",
+        "cidade": "A",
+        "gov": "C+"
+      },
+      "Indaiatuba": {
+        "iegm": "B+",
+        "plan": "C",
+        "fisc": "B+",
+        "educ": "A",
+        "saude": "A",
+        "amb": "A",
+        "cidade": "A",
+        "gov": "B+"
+      },
+      "Itu": {
+        "iegm": "B",
+        "plan": "C",
+        "fisc": "B+",
+        "educ": "B+",
+        "saude": "B+",
+        "amb": "A",
+        "cidade": "A",
+        "gov": "B"
+      },
+      "Itupeva": {
+        "iegm": "B",
+        "plan": "C+",
+        "fisc": "B",
+        "educ": "B+",
+        "saude": "A",
+        "amb": "B",
+        "cidade": "A",
+        "gov": "B"
+      },
+      "Salto": {
+        "iegm": "B+",
+        "plan": "B+",
+        "fisc": "B+",
+        "educ": "B+",
+        "saude": "A",
+        "amb": "B",
+        "cidade": "B",
+        "gov": "C"
+      },
+      "Sorocaba": {
+        "iegm": "B+",
+        "plan": "C",
+        "fisc": "B+",
+        "educ": "B+",
+        "saude": "B+",
+        "amb": "A",
+        "cidade": "A",
+        "gov": "A"
+      }
+    },
+    "2016": {
+      "Cabreúva": {
+        "iegm": "C+",
+        "plan": "C",
+        "fisc": "B+",
+        "educ": "B+",
+        "saude": "C",
+        "amb": "B+",
+        "cidade": "B+",
+        "gov": "C+"
+      },
+      "Indaiatuba": {
+        "iegm": "B+",
+        "plan": "C",
+        "fisc": "B+",
+        "educ": "A",
+        "saude": "A",
+        "amb": "A",
+        "cidade": "A",
+        "gov": "A"
+      },
+      "Itu": {
+        "iegm": "B",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "B",
+        "saude": "B+",
+        "amb": "A",
+        "cidade": "A",
+        "gov": "B"
+      },
+      "Itupeva": {
+        "iegm": "C+",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "C+",
+        "saude": "B",
+        "amb": "B",
+        "cidade": "A",
+        "gov": "B"
+      },
+      "Salto": {
+        "iegm": "B+",
+        "plan": "B+",
+        "fisc": "B+",
+        "educ": "B",
+        "saude": "B+",
+        "amb": "B+",
+        "cidade": "B+",
+        "gov": "C+"
+      },
+      "Sorocaba": {
+        "iegm": "B",
+        "plan": "C",
+        "fisc": "B+",
+        "educ": "B+",
+        "saude": "B+",
+        "amb": "A",
+        "cidade": "C+",
+        "gov": "B+"
+      }
+    },
+    "2017": {
+      "Cabreúva": {
+        "iegm": "C+",
+        "plan": "C",
+        "fisc": "C",
+        "educ": "B",
+        "saude": "B",
+        "amb": "B+",
+        "cidade": "B",
+        "gov": "C+"
+      },
+      "Indaiatuba": {
+        "iegm": "B+",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "B+",
+        "saude": "A",
+        "amb": "A",
+        "cidade": "A",
+        "gov": "B+"
+      },
+      "Itu": {
+        "iegm": "C+",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "C+",
+        "saude": "C+",
+        "amb": "A",
+        "cidade": "A",
+        "gov": "C+"
+      },
+      "Itupeva": {
+        "iegm": "B",
+        "plan": "C",
+        "fisc": "C+",
+        "educ": "B",
+        "saude": "B",
+        "amb": "B",
+        "cidade": "A",
+        "gov": "B"
+      },
+      "Salto": {
+        "iegm": "C+",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "C+",
+        "saude": "B",
+        "amb": "B+",
+        "cidade": "A",
+        "gov": "B+"
+      },
+      "Sorocaba": {
+        "iegm": "B",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "C+",
+        "saude": "B",
+        "amb": "B+",
+        "cidade": "B+",
+        "gov": "A"
+      }
+    },
+    "2018": {
+      "Cabreúva": {
+        "iegm": "B",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "B",
+        "saude": "B",
+        "amb": "B+",
+        "cidade": "B+",
+        "gov": "C"
+      },
+      "Indaiatuba": {
+        "iegm": "B+",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "B+",
+        "saude": "A",
+        "amb": "A",
+        "cidade": "A",
+        "gov": "A"
+      },
+      "Itu": {
+        "iegm": "B",
+        "plan": "C",
+        "fisc": "B+",
+        "educ": "B+",
+        "saude": "B+",
+        "amb": "A",
+        "cidade": "A",
+        "gov": "B"
+      },
+      "Itupeva": {
+        "iegm": "B",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "B",
+        "saude": "B",
+        "amb": "B",
+        "cidade": "B+",
+        "gov": "B+"
+      },
+      "Salto": {
+        "iegm": "B",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "C+",
+        "saude": "B",
+        "amb": "A",
+        "cidade": "A",
+        "gov": "B"
+      },
+      "Sorocaba": {
+        "iegm": "B",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "C+",
+        "saude": "B",
+        "amb": "B+",
+        "cidade": "B+",
+        "gov": "B+"
+      }
+    },
+    "2019": {
+      "Cabreúva": {
+        "iegm": "C+",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "B",
+        "saude": "C+",
+        "amb": "C+",
+        "cidade": "B+",
+        "gov": "C+"
+      },
+      "Indaiatuba": {
+        "iegm": "B",
+        "plan": "C",
+        "fisc": "B+",
+        "educ": "B+",
+        "saude": "B+",
+        "amb": "B",
+        "cidade": "B",
+        "gov": "B"
+      },
+      "Itu": {
+        "iegm": "B",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "B",
+        "saude": "B",
+        "amb": "B",
+        "cidade": "B",
+        "gov": "C"
+      },
+      "Itupeva": {
+        "iegm": "C",
+        "plan": "C",
+        "fisc": "C+",
+        "educ": "C+",
+        "saude": "C",
+        "amb": "B",
+        "cidade": "C",
+        "gov": "B"
+      },
+      "Salto": {
+        "iegm": "C+",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "C",
+        "saude": "C+",
+        "amb": "B",
+        "cidade": "A",
+        "gov": "B+"
+      },
+      "Sorocaba": {
+        "iegm": "C+",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "C",
+        "saude": "B",
+        "amb": "B",
+        "cidade": "B+",
+        "gov": "B"
+      }
+    },
+    "2020": {
+      "Cabreúva": {
+        "iegm": "C",
+        "plan": "C",
+        "fisc": "C+",
+        "educ": "C",
+        "saude": "C+",
+        "amb": "C+",
+        "cidade": "C+",
+        "gov": "C"
+      },
+      "Indaiatuba": {
+        "iegm": "B",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "B+",
+        "saude": "B+",
+        "amb": "B+",
+        "cidade": "C+",
+        "gov": "B+"
+      },
+      "Itu": {
+        "iegm": "C+",
+        "plan": "C",
+        "fisc": "C+",
+        "educ": "C+",
+        "saude": "C+",
+        "amb": "C+",
+        "cidade": "B",
+        "gov": "C+"
+      },
+      "Itupeva": {
+        "iegm": "C+",
+        "plan": "C",
+        "fisc": "C+",
+        "educ": "B",
+        "saude": "C+",
+        "amb": "B",
+        "cidade": "C+",
+        "gov": "B+"
+      },
+      "Salto": {
+        "iegm": "B",
+        "plan": "B+",
+        "fisc": "B+",
+        "educ": "C+",
+        "saude": "B",
+        "amb": "B+",
+        "cidade": "A",
+        "gov": "C+"
+      },
+      "Sorocaba": {
+        "iegm": "C+",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "C",
+        "saude": "C+",
+        "amb": "C+",
+        "cidade": "B+",
+        "gov": "B+"
+      }
+    },
+    "2021": {
+      "Cabreúva": {
+        "iegm": "C",
+        "plan": "C",
+        "fisc": "C",
+        "educ": "C",
+        "saude": "C+",
+        "amb": "C",
+        "cidade": "C+",
+        "gov": "C"
+      },
+      "Indaiatuba": {
+        "iegm": "B",
+        "plan": "C",
+        "fisc": "B+",
+        "educ": "B",
+        "saude": "B",
+        "amb": "B+",
+        "cidade": "B",
+        "gov": "B+"
+      },
+      "Itu": {
+        "iegm": "C+",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "C",
+        "saude": "C+",
+        "amb": "B",
+        "cidade": "B",
+        "gov": "C"
+      },
+      "Itupeva": {
+        "iegm": "C",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "C",
+        "saude": "C+",
+        "amb": "C+",
+        "cidade": "C",
+        "gov": "C"
+      },
+      "Salto": {
+        "iegm": "C+",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "C+",
+        "saude": "C",
+        "amb": "B+",
+        "cidade": "B+",
+        "gov": "C+"
+      },
+      "Sorocaba": {
+        "iegm": "C",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "C",
+        "saude": "C",
+        "amb": "C+",
+        "cidade": "B+",
+        "gov": "B+"
+      }
+    },
+    "2022": {
+      "Cabreúva": {
+        "iegm": "C",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "C",
+        "saude": "C+",
+        "amb": "C",
+        "cidade": "B",
+        "gov": "C"
+      },
+      "Indaiatuba": {
+        "iegm": "B",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "B",
+        "saude": "B",
+        "amb": "B",
+        "cidade": "B+",
+        "gov": "B+"
+      },
+      "Itu": {
+        "iegm": "C+",
+        "plan": "C",
+        "fisc": "B+",
+        "educ": "B+",
+        "saude": "C+",
+        "amb": "C+",
+        "cidade": "B+",
+        "gov": "C+"
+      },
+      "Itupeva": {
+        "iegm": "C",
+        "plan": "C",
+        "fisc": "C+",
+        "educ": "C",
+        "saude": "C+",
+        "amb": "C+",
+        "cidade": "C",
+        "gov": "B"
+      },
+      "Salto": {
+        "iegm": "C+",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "C",
+        "saude": "C",
+        "amb": "B",
+        "cidade": "B",
+        "gov": "B"
+      },
+      "Sorocaba": {
+        "iegm": "C+",
+        "plan": "C",
+        "fisc": "B+",
+        "educ": "C",
+        "saude": "C+",
+        "amb": "B",
+        "cidade": "B",
+        "gov": "B"
+      }
+    },
+    "2023": {
+      "Cabreúva": {
+        "iegm": "C",
+        "plan": "C",
+        "fisc": "C+",
+        "educ": "C",
+        "saude": "C+",
+        "amb": "C",
+        "cidade": "B",
+        "gov": "B+"
+      },
+      "Indaiatuba": {
+        "iegm": "B",
+        "plan": "C+",
+        "fisc": "B+",
+        "educ": "B",
+        "saude": "B",
+        "amb": "B",
+        "cidade": "C",
+        "gov": "B+"
+      },
+      "Itu": {
+        "iegm": "C+",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "B",
+        "saude": "B",
+        "amb": "C+",
+        "cidade": "B",
+        "gov": "C+"
+      },
+      "Itupeva": {
+        "iegm": "C",
+        "plan": "C",
+        "fisc": "C",
+        "educ": "C",
+        "saude": "C+",
+        "amb": "C",
+        "cidade": "C",
+        "gov": "C"
+      },
+      "Salto": {
+        "iegm": "C+",
+        "plan": "C",
+        "fisc": "C",
+        "educ": "B",
+        "saude": "B",
+        "amb": "B",
+        "cidade": "B",
+        "gov": "C+"
+      },
+      "Sorocaba": {
+        "iegm": "C+",
+        "plan": "C",
+        "fisc": "C+",
+        "educ": "C+",
+        "saude": "C+",
+        "amb": "B",
+        "cidade": "B+",
+        "gov": "B+"
+      }
+    },
+    "2024": {
+      "Cabreúva": {
+        "iegm": "C+",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "C+",
+        "saude": "C+",
+        "amb": "C",
+        "cidade": "B",
+        "gov": "B+"
+      },
+      "Indaiatuba": {
+        "iegm": "B",
+        "plan": "C+",
+        "fisc": "B+",
+        "educ": "B",
+        "saude": "B",
+        "amb": "C+",
+        "cidade": "C",
+        "gov": "B+"
+      },
+      "Itu": {
+        "iegm": "C+",
+        "plan": "C",
+        "fisc": "B",
+        "educ": "B",
+        "saude": "B",
+        "amb": "B",
+        "cidade": "C+",
+        "gov": "C"
+      },
+      "Itupeva": {
+        "iegm": "C",
+        "plan": "C",
+        "fisc": "C",
+        "educ": "C",
+        "saude": "C+",
+        "amb": "C",
+        "cidade": "C",
+        "gov": "B"
+      },
+      "Salto": {
+        "iegm": "C",
+        "plan": "C",
+        "fisc": "C+",
+        "educ": "C+",
+        "saude": "C+",
+        "amb": "C+",
+        "cidade": "C",
+        "gov": "C"
+      },
+      "Sorocaba": {
+        "iegm": "C+",
+        "plan": "C",
+        "fisc": "C+",
+        "educ": "B",
+        "saude": "B",
+        "amb": "B",
+        "cidade": "B",
+        "gov": "A"
+      }
+    }
+  }
+}
