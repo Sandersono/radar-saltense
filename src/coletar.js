@@ -1,3 +1,4 @@
+import { readFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { anos } from './config.js';
 import { coletarVereadores } from './coleta/vereadores.js';
@@ -6,6 +7,8 @@ import { coletarPresencas } from './coleta/presenca.js';
 import { coletarVotacoes } from './coleta/votacoes.js';
 import { salvar } from './coleta/http.js';
 import { coletarReceitas } from './coleta/receitas.js';
+import { coletarDespesas } from './coleta/despesas.js';
+import { coletarSiconfi } from './coleta/siconfi.js';
 import { coletarFotos } from './coleta/fotos.js';
 import { anoMesBR } from './util/texto.js';
 
@@ -19,7 +22,10 @@ export async function coletarTudo() {
   const votacoes = await coletarVotacoes(lista, anoAtual);
   const hoje = anoMesBR();
   const receitas = await coletarReceitas(hoje.ano, hoje.mes);
-  const coleta = { vereadores, cardsPorAno, presencas, votacoes, receitas, fotos, avisosFotos, coletadoEm: new Date().toISOString() };
+  const despesas = await coletarDespesas(hoje.ano, hoje.mes);
+  const siconfi = await coletarSiconfi(hoje.ano);
+  const cnpjs2024 = JSON.parse(await readFile('data/referencia/cnpjs-pagos-2024.json', 'utf8'));
+  const coleta = { vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, coletadoEm: new Date().toISOString() };
   await salvar('data/bruto/coleta.json', JSON.stringify(coleta));
   return coleta;
 }
@@ -31,5 +37,7 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   console.log(`Tabelas de presença: ${c.presencas.length} (linhas: ${[...new Set(c.presencas.map((p) => p.linhas.length))].join(', ')})`);
   for (const v of c.votacoes) console.log(`Votações ${v.ano}: ${v.blocos.length} projetos`);
   console.log(`Receitas: ${Object.keys(c.receitas).length} meses publicados`);
+  console.log(`Despesas: ${Object.keys(c.despesas).length} meses publicados`);
+  console.log(`SICONFI: ${Object.entries(c.siconfi).map(([a, s]) => `${a} bimestre ${s.bimestre}`).join(', ') || 'nada'}`);
   console.log(`Fotos: ${Object.keys(c.fotos).length} de ${c.vereadores.length}`);
 }

@@ -16,6 +16,14 @@ export const OUTROS_NOMES = {
   'michel-oliveira-rodrigues-da-silva': ['Chel'],
 };
 export const TCE_RECEITAS = 'https://transparencia.tce.sp.gov.br/api/json/receitas/salto';
+export const TCE_DESPESAS = 'https://transparencia.tce.sp.gov.br/api/json/despesas/salto';
+export const SICONFI_RREO = 'https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo';
+export const IBGE_SALTO = 3545209;
+// Onde o morador confere nomes de quem recebeu (o site não mostra nome de pessoa física).
+export const LINKS_CREDOR = {
+  prefeitura: 'https://salto.obaratec.com.br/ords/salto02/f?p=839:7',
+  tce: 'https://transparencia.tce.sp.gov.br/despesas-fornecedor',
+};
 export const POPULACAO = { valor: 141988, fonte: 'IBGE, informada pela Prefeitura ao Tesouro Nacional (RREO 2025)' };
 
 export function anos() {
