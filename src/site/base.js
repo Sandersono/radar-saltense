@@ -2,7 +2,7 @@ import { AUTOR } from '../config.js';
 import { esc } from '../util/texto.js';
 import { iniciais, fotoSite } from './util.js';
 
-const ENDERECO = 'https://sandersono.github.io/radar-saltense/';
+const ENDERECO = 'https://radarsaltense.com.br/';
 const DESCRICAO = 'O que fazem os vereadores e a Prefeitura de Salto/SP, quanto a cidade arrecada e onde gasta. Só dado oficial, com link para a fonte, atualizado todo dia.';
 
 export const GRUPOS_PUBLICOS = ['melhoria', 'cobranca', 'homenagem', 'lei', 'outros'];
