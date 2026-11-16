@@ -1,0 +1,425 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-16T01:46:15.270Z",
+  "title": "Design System: Radar Saltense",
+  "extensions": {
+    "colorMeta": {
+      "rio-escuro": {
+        "role": "primary",
+        "displayName": "Marinho do Logo",
+        "canonical": "#0B2545",
+        "oklch": "oklch(26.4% 0.068 255)",
+        "tonalRamp": [
+          "#080B0F",
+          "#1B2531",
+          "#31445B",
+          "#49658A",
+          "#6C88AD",
+          "#99ADC7",
+          "#C3CFDF",
+          "#EAEFF5"
+        ]
+      },
+      "ambar": {
+        "role": "primary",
+        "displayName": "Amarelo Salto",
+        "canonical": "#FFC20E",
+        "oklch": "oklch(84.6% 0.172 85)",
+        "tonalRamp": [
+          "#100A01",
+          "#302200",
+          "#553F03",
+          "#7D5E02",
+          "#A97F00",
+          "#CBA551",
+          "#E1CB9E",
+          "#F6EEDC"
+        ]
+      },
+      "rio": {
+        "role": "secondary",
+        "displayName": "Azul Rio",
+        "canonical": "#0E6BA8",
+        "oklch": "oklch(51.0% 0.124 245)",
+        "tonalRamp": [
+          "#050C13",
+          "#0C263A",
+          "#0E466D",
+          "#0768A5",
+          "#408CC8",
+          "#80B1DB",
+          "#B5D2EB",
+          "#E5F0FB"
+        ]
+      },
+      "rio-claro": {
+        "role": "secondary",
+        "displayName": "Névoa do Rio",
+        "canonical": "#E6F2FA",
+        "oklch": "oklch(95.5% 0.017 236)",
+        "tonalRamp": [
+          "#0A0B0C",
+          "#212527",
+          "#3D4348",
+          "#5B656C",
+          "#7E888F",
+          "#A5ACB1",
+          "#CACED1",
+          "#EDEFF0"
+        ]
+      },
+      "presente": {
+        "role": "tertiary",
+        "displayName": "Verde Presença",
+        "canonical": "#1E7A46",
+        "oklch": "oklch(51.4% 0.117 153)",
+        "tonalRamp": [
+          "#060D08",
+          "#0F2B19",
+          "#164F2D",
+          "#187642",
+          "#499A66",
+          "#85B995",
+          "#B9D7C1",
+          "#E6F2E9"
+        ]
+      },
+      "falta": {
+        "role": "tertiary",
+        "displayName": "Vermelho Falta",
+        "canonical": "#B3261E",
+        "oklch": "oklch(50.1% 0.178 28)",
+        "tonalRamp": [
+          "#150705",
+          "#40130F",
+          "#771D17",
+          "#B3251E",
+          "#D95447",
+          "#EB8E81",
+          "#F7BEB5",
+          "#FFE9E5"
+        ]
+      },
+      "ambar-escuro": {
+        "role": "tertiary",
+        "displayName": "Âmbar Queimado",
+        "canonical": "#7A4A00",
+        "oklch": "oklch(45.4% 0.100 68)",
+        "tonalRamp": [
+          "#0F0A05",
+          "#31200D",
+          "#5A3B13",
+          "#885716",
+          "#AC7B43",
+          "#C7A47F",
+          "#DFCAB4",
+          "#F5EDE4"
+        ]
+      },
+      "areia": {
+        "role": "neutral",
+        "displayName": "Areia",
+        "canonical": "#FFF7EA",
+        "oklch": "oklch(97.9% 0.019 80)",
+        "tonalRamp": [
+          "#0C0B0A",
+          "#262420",
+          "#46423A",
+          "#696257",
+          "#8C857A",
+          "#AFAAA2",
+          "#D0CDC9",
+          "#EFEEEC"
+        ]
+      },
+      "areia-escura": {
+        "role": "neutral",
+        "displayName": "Areia Escura",
+        "canonical": "#F6E7CC",
+        "oklch": "oklch(93.3% 0.039 82)",
+        "tonalRamp": [
+          "#0C0B08",
+          "#28231B",
+          "#4A4132",
+          "#6E614A",
+          "#91846D",
+          "#B3AA99",
+          "#D2CDC3",
+          "#F0EEEA"
+        ]
+      },
+      "branco": {
+        "role": "neutral",
+        "displayName": "Branco",
+        "canonical": "#FFFFFF",
+        "oklch": "oklch(100.0% 0.000 89)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#424242",
+          "#636363",
+          "#868686",
+          "#ABABAB",
+          "#CECECE",
+          "#EEEEEE"
+        ]
+      },
+      "linha": {
+        "role": "neutral",
+        "displayName": "Linha Bege",
+        "canonical": "#E8DCC6",
+        "oklch": "oklch(89.8% 0.032 82)",
+        "tonalRamp": [
+          "#0C0B09",
+          "#27241D",
+          "#484135",
+          "#6C624F",
+          "#8F8572",
+          "#B1AA9C",
+          "#D2CDC5",
+          "#F0EEEB"
+        ]
+      },
+      "suave": {
+        "role": "neutral",
+        "displayName": "Cinza Ardósia",
+        "canonical": "#5B6472",
+        "oklch": "oklch(50.1% 0.025 259)",
+        "tonalRamp": [
+          "#0A0B0D",
+          "#212429",
+          "#3D434C",
+          "#5B6472",
+          "#7E8795",
+          "#A5ABB5",
+          "#CACED4",
+          "#EDEEF1"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "h1 de cada página; branco no bloco marinho da home, marinho nas demais."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Títulos de seção (h2)."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "h3, título de votação, nome do vereador no cartão, título das chamadas."
+      },
+      "number": {
+        "displayName": "Number",
+        "purpose": "Números grandes dos cartões; o contador de impostos sobe até 2,4 rem (3 rem na página própria)."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Texto corrido, listas, tabelas."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Chips, botão secundário, menu, rótulos fortes."
+      },
+      "note": {
+        "displayName": "Note",
+        "purpose": "Notas, datas, partidos, rótulos de número, em cinza ardósia."
+      }
+    },
+    "shadows": [
+      {
+        "name": "sombra",
+        "value": "0 2px 8px rgb(11 37 69 / 6%)",
+        "purpose": "Única sombra: cartões e contador de impostos. Não muda no hover."
+      }
+    ],
+    "focus": [
+      {
+        "name": "foco",
+        "value": "outline: 3px solid #0B2545; outline-offset: 2px; box-shadow: 0 0 0 5px #FFC20E; border-radius: 6px",
+        "purpose": "Foco global sobre fundo claro."
+      },
+      {
+        "name": "foco-heroi",
+        "value": "outline: 3px solid #FFFFFF; box-shadow: none",
+        "purpose": "Foco dentro do bloco marinho."
+      },
+      {
+        "name": "foco-rodape",
+        "value": "outline: 3px solid #FFC20E; box-shadow: none",
+        "purpose": "Foco no rodapé marinho."
+      }
+    ],
+    "motion": [
+      {
+        "name": "scroll",
+        "value": "scroll-behavior: smooth",
+        "purpose": "Única animação; desligada (com toda transição e animação) em prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "tablet",
+        "value": "768px"
+      },
+      {
+        "name": "desktop",
+        "value": "1024px"
+      }
+    ],
+    "layout": {
+      "container": "1040px",
+      "gutter": "1rem",
+      "touchTargetMin": "44px"
+    }
+  },
+  "components": [
+    {
+      "name": "Botão principal",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Chamada principal de um bloco: pílula amarela com texto marinho em Nunito 800.",
+      "html": "<a class=\"ds-botao\" href=\"#\">De onde vem o dinheiro de Salto →</a>",
+      "css": ":host{--rio:#0E6BA8;--rio-escuro:#0B2545;--areia:#FFF7EA;--areia-escura:#F6E7CC;--ambar:#FFC20E;--ambar-escuro:#7A4A00;--branco:#FFFFFF;--suave:#5B6472;--linha:#E8DCC6;--presente:#1E7A46;--falta:#B3261E;--sombra:0 2px 8px rgb(11 37 69 / 6%);--raio:18px;--titulo:'Nunito',system-ui,sans-serif;--texto:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;} .ds-botao{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.6rem 1.4rem;border-radius:999px;background:var(--ambar);color:var(--rio-escuro);font-family:var(--titulo);font-weight:800;text-decoration:none;border:0;cursor:pointer;} .ds-botao:hover{background:#E8952A;} .ds-botao:focus-visible{outline:3px solid var(--rio-escuro);outline-offset:2px;box-shadow:0 0 0 5px var(--ambar);border-radius:6px;}"
+    },
+    {
+      "name": "Botão secundário",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Ação de apoio como \"ver mais\": pílula com contorno azul rio.",
+      "html": "<button class=\"ds-botao-sec\" type=\"button\">Ver mais 12 casos</button>",
+      "css": ":host{--rio:#0E6BA8;--rio-escuro:#0B2545;--areia:#FFF7EA;--areia-escura:#F6E7CC;--ambar:#FFC20E;--ambar-escuro:#7A4A00;--branco:#FFFFFF;--suave:#5B6472;--linha:#E8DCC6;--presente:#1E7A46;--falta:#B3261E;--sombra:0 2px 8px rgb(11 37 69 / 6%);--raio:18px;--titulo:'Nunito',system-ui,sans-serif;--texto:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;} .ds-botao-sec{display:inline-flex;align-items:center;min-height:44px;padding:.5rem 1.2rem;border-radius:999px;border:2px solid var(--rio);background:transparent;color:var(--rio);font:600 .95rem var(--texto);cursor:pointer;} .ds-botao-sec:focus-visible{outline:3px solid var(--rio-escuro);outline-offset:2px;box-shadow:0 0 0 5px var(--ambar);border-radius:6px;}"
+    },
+    {
+      "name": "Chips",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Sugestões, ordenação e escolha de ano; selecionado vira azul rio cheio.",
+      "html": "<div class=\"ds-chips\"><button class=\"ds-chip\" aria-pressed=\"false\">2024</button><button class=\"ds-chip\" aria-pressed=\"true\">2025</button></div>",
+      "css": ":host{--rio:#0E6BA8;--rio-escuro:#0B2545;--areia:#FFF7EA;--areia-escura:#F6E7CC;--ambar:#FFC20E;--ambar-escuro:#7A4A00;--branco:#FFFFFF;--suave:#5B6472;--linha:#E8DCC6;--presente:#1E7A46;--falta:#B3261E;--sombra:0 2px 8px rgb(11 37 69 / 6%);--raio:18px;--titulo:'Nunito',system-ui,sans-serif;--texto:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;} .ds-chips{display:flex;flex-wrap:wrap;gap:.5rem;} .ds-chip{min-height:44px;padding:.45rem 1rem;border-radius:999px;border:1px solid var(--linha);background:var(--branco);color:var(--rio-escuro);font:600 .9rem var(--texto);cursor:pointer;} .ds-chip:hover{border-color:var(--rio);} .ds-chip[aria-pressed=\"true\"]{background:var(--rio);border-color:var(--rio);color:#fff;} .ds-chip:focus-visible{outline:3px solid var(--rio-escuro);outline-offset:2px;box-shadow:0 0 0 5px var(--ambar);border-radius:6px;}"
+    },
+    {
+      "name": "Busca",
+      "kind": "input",
+      "refersTo": "input-search",
+      "description": "Campo de busca em pílula branca com contorno azul rio.",
+      "html": "<input class=\"ds-busca\" type=\"search\" placeholder=\"Digite seu bairro\">",
+      "css": ":host{--rio:#0E6BA8;--rio-escuro:#0B2545;--areia:#FFF7EA;--areia-escura:#F6E7CC;--ambar:#FFC20E;--ambar-escuro:#7A4A00;--branco:#FFFFFF;--suave:#5B6472;--linha:#E8DCC6;--presente:#1E7A46;--falta:#B3261E;--sombra:0 2px 8px rgb(11 37 69 / 6%);--raio:18px;--titulo:'Nunito',system-ui,sans-serif;--texto:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;} .ds-busca{width:100%;min-height:52px;padding:.7rem 1.2rem;border:2px solid var(--rio);border-radius:999px;font:400 1.05rem var(--texto);background:var(--branco);color:var(--rio-escuro);} .ds-busca:focus-visible{outline:3px solid var(--rio-escuro);outline-offset:2px;box-shadow:0 0 0 5px var(--ambar);border-radius:6px;}"
+    },
+    {
+      "name": "Cabeçalho",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Faixa branca com logo e menu, régua amarela, bloco marinho e onda areia.",
+      "html": "<header class=\"ds-topo\"><div class=\"ds-faixa\"><div class=\"ds-barra\"><strong class=\"ds-logo\">Radar Saltense</strong><nav class=\"ds-menu\"><a href=\"#\">Seu bairro</a><a href=\"#\">Vereadores</a><a href=\"#\">Votações</a></nav></div></div><div class=\"ds-heroi\"><h1>Salto de olho na Câmara</h1><p>Dados oficiais, atualizados todo dia.</p></div><svg class=\"ds-onda\" viewBox=\"0 0 1440 60\" preserveAspectRatio=\"none\" aria-hidden=\"true\"><path d=\"M0 30C240 60 480 0 720 22S1200 50 1440 18V60H0Z\"/></svg></header>",
+      "css": ":host{--rio:#0E6BA8;--rio-escuro:#0B2545;--areia:#FFF7EA;--areia-escura:#F6E7CC;--ambar:#FFC20E;--ambar-escuro:#7A4A00;--branco:#FFFFFF;--suave:#5B6472;--linha:#E8DCC6;--presente:#1E7A46;--falta:#B3261E;--sombra:0 2px 8px rgb(11 37 69 / 6%);--raio:18px;--titulo:'Nunito',system-ui,sans-serif;--texto:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;} .ds-topo{background:var(--rio-escuro);color:#fff;} .ds-faixa{background:#fff;border-bottom:4px solid var(--ambar);} .ds-barra{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem;padding:.75rem 1rem;} .ds-logo{font:800 1.3rem var(--titulo);color:var(--rio-escuro);} .ds-menu{display:flex;flex-wrap:wrap;gap:.25rem 1.1rem;} .ds-menu a{color:var(--rio-escuro);text-decoration:none;padding:.55rem 0;font:600 1rem var(--texto);} .ds-menu a:hover{text-decoration:underline;} .ds-heroi{padding:1.25rem 1rem;} .ds-heroi h1{margin:0 0 .5rem;font:800 clamp(1.8rem,6vw,2.6rem)/1.2 var(--titulo);color:#fff;} .ds-heroi p{margin:.25rem 0;color:#E3F1FB;font:400 1.05rem var(--texto);} .ds-onda{display:block;width:100%;height:36px;fill:var(--areia);margin-top:-1px;} .ds-menu a:focus-visible{outline:3px solid var(--rio-escuro);outline-offset:2px;box-shadow:0 0 0 5px var(--ambar);border-radius:6px;}"
+    },
+    {
+      "name": "Cartão de número",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Número grande azul em Nunito com rótulo cinza, num cartão branco sobre areia.",
+      "html": "<div class=\"ds-fundo\"><a class=\"ds-cartao\" href=\"#\"><span class=\"ds-numero\">1.284</span><span class=\"ds-rotulo\">pedidos de melhoria</span></a></div>",
+      "css": ":host{--rio:#0E6BA8;--rio-escuro:#0B2545;--areia:#FFF7EA;--areia-escura:#F6E7CC;--ambar:#FFC20E;--ambar-escuro:#7A4A00;--branco:#FFFFFF;--suave:#5B6472;--linha:#E8DCC6;--presente:#1E7A46;--falta:#B3261E;--sombra:0 2px 8px rgb(11 37 69 / 6%);--raio:18px;--titulo:'Nunito',system-ui,sans-serif;--texto:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;} .ds-fundo{background:var(--areia);padding:1rem;} .ds-cartao{display:flex;flex-direction:column;gap:.2rem;background:var(--branco);border:1px solid var(--linha);border-radius:var(--raio);box-shadow:var(--sombra);padding:1rem 1.1rem;text-decoration:none;color:var(--rio-escuro);} .ds-cartao:hover{border-color:var(--rio);} .ds-numero{font:800 clamp(1.5rem,6vw,2rem) var(--titulo);color:var(--rio);font-variant-numeric:tabular-nums;} .ds-rotulo{font:400 .9rem var(--texto);color:var(--suave);} .ds-cartao:focus-visible{outline:3px solid var(--rio-escuro);outline-offset:2px;box-shadow:0 0 0 5px var(--ambar);border-radius:6px;}"
+    },
+    {
+      "name": "Lista numerada em cartão",
+      "kind": "card",
+      "refersTo": "card-list",
+      "description": "Lista que é o próprio cartão: padding lateral devolvido e recuo para marcadores de dois dígitos.",
+      "html": "<div class=\"ds-fundo\"><ol class=\"ds-lista\" start=\"9\"><li>Rua das Flores, Jardim Saltense <span class=\"ds-num\">4</span></li><li>Avenida Dom Pedro II, Centro <span class=\"ds-num\">3</span></li><li>Rua Rui Barbosa, Vila Teixeira <span class=\"ds-num\">3</span></li></ol></div>",
+      "css": ":host{--rio:#0E6BA8;--rio-escuro:#0B2545;--areia:#FFF7EA;--areia-escura:#F6E7CC;--ambar:#FFC20E;--ambar-escuro:#7A4A00;--branco:#FFFFFF;--suave:#5B6472;--linha:#E8DCC6;--presente:#1E7A46;--falta:#B3261E;--sombra:0 2px 8px rgb(11 37 69 / 6%);--raio:18px;--titulo:'Nunito',system-ui,sans-serif;--texto:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;} .ds-fundo{background:var(--areia);padding:1rem;font:400 1rem/1.6 var(--texto);color:var(--rio-escuro);} .ds-lista{list-style:decimal;margin:0;background:var(--branco);border:1px solid var(--linha);border-radius:var(--raio);box-shadow:var(--sombra);padding:.35rem 1.1rem .35rem 2.9rem;} .ds-lista>li{padding:.7rem 0 .7rem .25rem;border-bottom:1px solid var(--linha);} .ds-lista>li:last-child{border-bottom:0;} .ds-lista>li::marker{font-variant-numeric:tabular-nums;color:var(--suave);} .ds-num{float:right;color:var(--suave);font-variant-numeric:tabular-nums;}"
+    },
+    {
+      "name": "Contador de impostos",
+      "kind": "custom",
+      "refersTo": "counter",
+      "description": "Assinatura: cartão de borda amarela com o valor arrecadado em Nunito azul.",
+      "html": "<div class=\"ds-contador\"><p class=\"ds-c-rotulo\">Arrecadado por Salto em 2025</p><p class=\"ds-c-valor\">R$ 412.903.118</p><p>R$ 3.402 por morador</p></div>",
+      "css": ":host{--rio:#0E6BA8;--rio-escuro:#0B2545;--areia:#FFF7EA;--areia-escura:#F6E7CC;--ambar:#FFC20E;--ambar-escuro:#7A4A00;--branco:#FFFFFF;--suave:#5B6472;--linha:#E8DCC6;--presente:#1E7A46;--falta:#B3261E;--sombra:0 2px 8px rgb(11 37 69 / 6%);--raio:18px;--titulo:'Nunito',system-ui,sans-serif;--texto:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;} .ds-contador{background:var(--branco);border:3px solid var(--ambar);border-radius:22px;box-shadow:var(--sombra);padding:1.1rem;text-align:center;font:400 1rem/1.6 var(--texto);color:var(--rio-escuro);} .ds-contador p{margin:.3rem 0;} .ds-c-rotulo{color:var(--suave);font-weight:600;} .ds-c-valor{font:800 clamp(1.35rem,7.2vw,2.4rem) var(--titulo);color:var(--rio);font-variant-numeric:tabular-nums;}"
+    },
+    {
+      "name": "Selo de fonte",
+      "kind": "chip",
+      "refersTo": "source-badge",
+      "description": "Pílula que leva cada número à fonte oficial.",
+      "html": "<a class=\"ds-selo\" href=\"#\">fonte oficial <span aria-hidden=\"true\">↗</span></a>",
+      "css": ":host{--rio:#0E6BA8;--rio-escuro:#0B2545;--areia:#FFF7EA;--areia-escura:#F6E7CC;--ambar:#FFC20E;--ambar-escuro:#7A4A00;--branco:#FFFFFF;--suave:#5B6472;--linha:#E8DCC6;--presente:#1E7A46;--falta:#B3261E;--sombra:0 2px 8px rgb(11 37 69 / 6%);--raio:18px;--titulo:'Nunito',system-ui,sans-serif;--texto:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;} .ds-selo{display:inline-flex;gap:.25rem;align-items:center;font:600 .8rem var(--texto);color:var(--rio);background:#E6F2FA;border-radius:999px;padding:.15rem .65rem;text-decoration:none;} .ds-selo:focus-visible{outline:3px solid var(--rio-escuro);outline-offset:2px;box-shadow:0 0 0 5px var(--ambar);border-radius:6px;}"
+    },
+    {
+      "name": "Barras de valor",
+      "kind": "custom",
+      "refersTo": "bars",
+      "description": "Trilho névoa do rio com preenchimento azul; ano anterior em azul claro.",
+      "html": "<ul class=\"ds-barras\"><li><span>Saúde</span><span class=\"ds-trilho\"><span class=\"ds-barra\" style=\"width:72%\"></span></span><span class=\"ds-v\">R$ 98 mi</span></li><li><span>Saúde (ano anterior)</span><span class=\"ds-trilho\"><span class=\"ds-barra ds-ant\" style=\"width:64%\"></span></span><span class=\"ds-v\">R$ 87 mi</span></li></ul>",
+      "css": ":host{--rio:#0E6BA8;--rio-escuro:#0B2545;--areia:#FFF7EA;--areia-escura:#F6E7CC;--ambar:#FFC20E;--ambar-escuro:#7A4A00;--branco:#FFFFFF;--suave:#5B6472;--linha:#E8DCC6;--presente:#1E7A46;--falta:#B3261E;--sombra:0 2px 8px rgb(11 37 69 / 6%);--raio:18px;--titulo:'Nunito',system-ui,sans-serif;--texto:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;} .ds-barras{list-style:none;padding:0;font:400 1rem/1.6 var(--texto);color:var(--rio-escuro);} .ds-barras li{display:grid;grid-template-columns:minmax(0,1fr);gap:.25rem;margin:.7rem 0;} .ds-trilho{display:block;background:#E6F2FA;border-radius:999px;height:12px;overflow:hidden;} .ds-barra{display:block;height:100%;background:var(--rio);border-radius:999px;} .ds-ant{background:#9CC7E6;} .ds-v{font-weight:600;font-variant-numeric:tabular-nums;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Salto Vivo, o vizinho que mostra a fonte",
+    "overview": "O Radar Saltense é um painel cívico que fala como gente da cidade. A identidade nasce do logo oficial: azul-marinho profundo e amarelo vivo, assentados sobre um fundo cor de areia que tira a frieza de \"portal de dados\". Tudo é arredondado e macio (pílulas, cartões de canto generoso, uma onda separando o cabeçalho do conteúdo), para que números de Câmara e de orçamento pareçam conversa de vizinho, e não planilha de prefeitura.\n\nA densidade é baixa e o ritmo é vertical: uma coluna de leitura no celular, que só se abre em grade de dois a quatro itens a partir de 768 px. Cada número grande vem acompanhado de um rótulo curto e de um caminho até a fonte oficial (o selo de fonte azul-claro). Cor carrega significado: azul é informação e ação, amarelo é marca e chamada principal, verde e vermelho aparecem só como registro factual de presença e falta, nunca como alarme.\n\nO sistema rejeita, de forma confirmada no produto, o portal burocrático (tabelas cruas, menus sem fim), o painel corporativo frio de BI e o visual sensacionalista de denúncia.",
+    "keyCharacteristics": [
+      "Cabeçalho em três camadas: faixa branca com o logo, régua amarela de 4 px, bloco azul-marinho com uma onda cor de areia na base.",
+      "Fundo areia quente; superfícies brancas com borda bege e sombra quase imperceptível.",
+      "Pílulas para tudo que se toca (botões, chips, busca, selos, etiquetas).",
+      "Números grandes em Nunito 800 azul, com algarismos tabulares.",
+      "Alvos de toque de 44 px ou mais; foco visível em anel duplo azul-marinho e amarelo."
+    ],
+    "rules": [
+      {
+        "name": "The Dois Polos Rule",
+        "section": "colors",
+        "body": "Marinho e amarelo são as cores da marca e vêm do logo oficial; nenhuma outra cor disputa esse papel. O amarelo nunca é usado como cor de texto sobre fundo claro (para isso existe o âmbar queimado)."
+      },
+      {
+        "name": "The Fato Não Alarme Rule",
+        "section": "colors",
+        "body": "Verde e vermelho só marcam presença e falta, e a etiqueta \"contra\" numa votação. Vermelho não vira fundo, faixa, título ou destaque de página."
+      },
+      {
+        "name": "The Número Tabular Rule",
+        "section": "typography",
+        "body": "Todo número que se compara (valores, contagens, datas, marcadores de lista numerada, células de tabela) usa algarismos tabulares."
+      },
+      {
+        "name": "The Nada Miúdo Rule",
+        "section": "typography",
+        "body": "O texto de leitura não desce abaixo de 0,85 rem; etiquetas e selos em pílula ficam em 0,78 a 0,8 rem e sempre em peso 600 ou com fundo próprio."
+      },
+      {
+        "name": "The Respiro É do Cartão Rule",
+        "section": "layout",
+        "body": "O espaço interno de um cartão vem só do seu padding. A margem de cima do primeiro filho e a de baixo do último filho são zeradas, para não somar respiro duplo."
+      },
+      {
+        "name": "The Lista que É Cartão Rule",
+        "section": "layout",
+        "body": "Quando uma lista é ela mesma o cartão, ela recupera o padding lateral do cartão (0,35 rem em cima e embaixo, 1,1 rem nos lados), e a lista numerada recua 2,9 rem para que os marcadores de dois dígitos (10 ou mais itens) fiquem dentro da borda. Listas numeradas fora de cartão recuam 2,2 rem."
+      },
+      {
+        "name": "The Papel Sobre Areia Rule",
+        "section": "elevation",
+        "body": "Elevação é branco sobre areia com borda bege. Não se empilham sombras nem se aumenta a sombra para dar destaque; destaque se faz com a borda amarela (contador) ou com a cor do número."
+      }
+    ],
+    "dos": [
+      "Do manter marinho (#0B2545) e amarelo (#FFC20E) como as únicas cores de marca, vindas do logo oficial.",
+      "Do colocar todo número relevante num cartão branco sobre areia, em Nunito 800 azul com algarismos tabulares, e ligá-lo à fonte oficial com o selo de fonte.",
+      "Do usar pílula (999 px) em todo controle tocável, com altura mínima de 44 px (48 px no botão principal, 52 px na busca).",
+      "Do deixar o respiro do cartão vir só do padding: zere a margem do primeiro e do último filho.",
+      "Do devolver o padding lateral quando a lista é o próprio cartão, e recuar listas numeradas o bastante para marcadores de dois dígitos (2,2 rem; 2,9 rem dentro de cartão).",
+      "Do diferenciar presença, ausência justificada e falta por forma e cor juntas, sempre com legenda.",
+      "Do manter o anel de foco marinho de 3 px com halo amarelo; em fundo marinho, contorno branco ou amarelo sem halo.",
+      "Do garantir que tudo funcione sem JavaScript: menu aberto, chips de filtro escondidos, conteúdo completo no HTML."
+    ],
+    "donts": [
+      "Don't usar vermelho fora do registro de falta e da etiqueta \"contra\": nada de faixa, fundo ou título vermelho de alerta.",
+      "Don't usar o amarelo como cor de texto sobre fundo claro; use âmbar queimado (#7A4A00).",
+      "Don't colocar uma caixa dentro de um cartão: \"ver mais\" dentro de lista perde fundo e borda.",
+      "Don't criar novas sombras ou sombras mais fortes; a profundidade é branco sobre areia com borda bege.",
+      "Don't usar texto de leitura menor que 0,85 rem nem cinza mais claro que o cinza ardósia.",
+      "Don't usar cantos retos em controles ou cartões; o canto reto é reservado à marca de falta."
+    ]
+  }
+}
