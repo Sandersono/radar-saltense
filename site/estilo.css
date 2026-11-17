@@ -219,6 +219,20 @@ a.cartao-numero:hover { border-color: var(--rio); }
 @media (min-width: 1024px) {
   .cartoes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
+/* Barra de consentimento do Google Analytics (fixa no pé; o body ganha respiro para não cobrir o conteúdo) */
+.barra-cookies { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: var(--rio-escuro); color: #fff; padding: .85rem 1rem calc(.85rem + env(safe-area-inset-bottom)); box-shadow: 0 -4px 16px rgba(11, 37, 69, .25); }
+.barra-cookies[hidden] { display: none; }
+.barra-cookies-dentro { max-width: 60rem; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; }
+.barra-cookies p { margin: 0; flex: 1 1 18rem; font-size: .95rem; line-height: 1.45; }
+.barra-cookies a { color: var(--ambar); }
+.barra-cookies .botoes { display: flex; gap: .5rem; flex-wrap: wrap; }
+.barra-cookies button { font: inherit; font-weight: 600; border-radius: 999px; padding: .55rem 1.2rem; min-height: 44px; cursor: pointer; border: 2px solid var(--ambar); }
+.barra-cookies .aceitar { background: var(--ambar); color: var(--rio-escuro); }
+.barra-cookies .aceitar:hover { background: var(--ambar-hover); border-color: var(--ambar-hover); }
+.barra-cookies .recusar { background: transparent; color: #fff; border-color: rgba(255, 255, 255, .6); }
+.barra-cookies button:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+body.com-barra-cookies { padding-bottom: 10rem; }
+.botao-link { background: none; border: 0; padding: 0; font: inherit; color: inherit; text-decoration: underline; cursor: pointer; }
 /* Tablet: tabelas de muitas colunas (ex.: emendas por vereador, 7 colunas) ainda não empilham e precisam caber. */
 @media (min-width: 601px) and (max-width: 1023px) {
   .tabela-empilha th, .tabela-empilha td { padding: .3rem .25rem; font-size: .9rem; }

@@ -14,7 +14,7 @@ export function paginaFontes(d) {
     : '<p>Nenhum.</p>';
   const corpo = `<h1>De onde vêm os números</h1>
 <p>Tudo sai de fontes oficiais e o robô refaz o site todo dia de madrugada. Os poucos dados fixos ficam registrados com a fonte: população (IBGE), campanha de 2024 (TSE), a base de 2024 do Raio-X e as grafias de nomes conferidas à mão.</p>
-<nav class="sumario" aria-label="Nesta página"><a class="chip" href="#fontes">Fontes</a><a class="chip" href="#regras">A regra das propostas</a><a class="chip" href="#ruas">Ruas e bairros</a><a class="chip" href="#presenca">Presença</a><a class="chip" href="#votacoes">Votações</a><a class="chip" href="#avisos">Avisos</a><a class="chip" href="#creditos">Fotos e fontes</a></nav>
+<nav class="sumario" aria-label="Nesta página"><a class="chip" href="#fontes">Fontes</a><a class="chip" href="#regras">A regra das propostas</a><a class="chip" href="#ruas">Ruas e bairros</a><a class="chip" href="#presenca">Presença</a><a class="chip" href="#votacoes">Votações</a><a class="chip" href="#avisos">Avisos</a><a class="chip" href="#privacidade">Privacidade</a><a class="chip" href="#creditos">Fotos e fontes</a></nav>
 <section id="fontes" class="secao cartao">
 <h2>Fontes</h2>
 <ul>
@@ -69,6 +69,16 @@ ${avisos}
 <h3>Nomes nas votações que não deu para ligar a um vereador</h3>
 <p>Estes nomes aparecem nos PDFs de votação, mas não bateram com exatamente um vereador (grafias diferentes ou vereador fora da tabela de presença do mês). O site não atribui esses votos a ninguém.</p>
 ${nomesHtml}
+</section>
+<section id="privacidade" class="secao cartao">
+<h2>Privacidade e audiência</h2>
+<p>Para saber se o site está ajudando, contamos as visitas de duas formas:</p>
+<ul>
+<li><strong>Cloudflare Web Analytics</strong>, para todo mundo: conta páginas vistas, de onde a pessoa chegou (Instagram, WhatsApp, Google…), país, cidade e se é celular ou computador. Não usa cookie e não identifica ninguém.</li>
+<li><strong>Google Analytics</strong>, só se você clicar em "Aceitar" na barra de cookies: mostra também o caminho dentro do site e quais links de fonte oficial são abertos. Antes do "Aceitar" o site não chama o Google.</li>
+</ul>
+<p>O que nunca é coletado: o texto que você digita nas buscas, seu nome, documento ou qualquer dado de cadastro (o site não tem cadastro).</p>
+<p>Para mudar sua escolha, use o botão "Cookies" no rodapé de qualquer página. Ao recusar, os cookies do Google Analytics são apagados.</p>
 </section>
 <section id="creditos" class="secao cartao">
 <h2>Fotos e fontes</h2>

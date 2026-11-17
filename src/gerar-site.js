@@ -13,6 +13,7 @@ import { paginaSemana } from './site/semana.js';
 import { paginaPromessas } from './site/promessas.js';
 import { feedRss } from './site/feed.js';
 import { ENDERECO } from './site/base.js';
+import { sitemapXml, robotsTxt } from './site/medicao.js';
 
 // Foto quadrada pequena (240 px, WebP), sem cortar a cabeça.
 async function recortarFoto(entrada, saida) {
@@ -34,18 +35,20 @@ const FONTES = [
 
 export async function gerarSite(d, destino) {
   for (const pasta of ['vereador', 'dados', 'fontes', 'fotos', 'marca']) await mkdir(`${destino}/${pasta}`, { recursive: true });
-  await writeFile(`${destino}/index.html`, paginaInicial(d));
-  for (const v of d.vereadores) await writeFile(`${destino}/vereador/${v.id}.html`, paginaVereador(v, d));
-  await writeFile(`${destino}/votacoes.html`, paginaVotacoes(d));
-  await writeFile(`${destino}/camara.html`, paginaCamara(d));
-  await writeFile(`${destino}/prefeitura.html`, paginaPrefeitura(d));
-  await writeFile(`${destino}/fontes.html`, paginaFontes(d));
-  await writeFile(`${destino}/semana.html`, paginaSemana(d, ENDERECO));
+  const paginas = []; // vão para o sitemap.xml
+  const pagina = async (caminho, html) => { await writeFile(`${destino}/${caminho}`, html); paginas.push(caminho); };
+  await pagina('index.html', paginaInicial(d));
+  for (const v of d.vereadores) await pagina(`vereador/${v.id}.html`, paginaVereador(v, d));
+  await pagina('votacoes.html', paginaVotacoes(d));
+  await pagina('camara.html', paginaCamara(d));
+  await pagina('prefeitura.html', paginaPrefeitura(d));
+  await pagina('fontes.html', paginaFontes(d));
+  await pagina('semana.html', paginaSemana(d, ENDERECO));
   await writeFile(`${destino}/feed.xml`, feedRss(d, ENDERECO));
-  if (d.promessas) await writeFile(`${destino}/promessas.html`, paginaPromessas(d));
-  if (d.receitas) await writeFile(`${destino}/impostometro.html`, paginaImpostometro(d));
+  if (d.promessas) await pagina('promessas.html', paginaPromessas(d));
+  if (d.receitas) await pagina('impostometro.html', paginaImpostometro(d));
   if (d.gastos) {
-    await writeFile(`${destino}/gastos.html`, paginaGastos(d));
+    await pagina('gastos.html', paginaGastos(d));
     await writeFile(`${destino}/dados/empresas.json`, JSON.stringify(d.gastos.empresas.map((e) => [e.cnpj, e.nome, e.porMes, e.porOrgao])));
   }
   const busca = {
@@ -58,5 +61,7 @@ export async function gerarSite(d, destino) {
   for (const [origem, nome] of FONTES) await copyFile(origem, `${destino}/fontes/${nome}`);
   for (const v of d.vereadores) if (v.fotoLocal) await recortarFoto(`data/bruto/${v.fotoLocal}`, `${destino}/${fotoSite(v.fotoLocal)}`);
   for (const nome of await readdir('site/marca')) await copyFile(`site/marca/${nome}`, `${destino}/marca/${nome}`);
+  await writeFile(`${destino}/sitemap.xml`, sitemapXml(paginas, ENDERECO, d.meta.atualizadoEm ? new Date(d.meta.atualizadoEm).toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' }) : ''));
+  await writeFile(`${destino}/robots.txt`, robotsTxt(ENDERECO));
   await writeFile(`${destino}/.nojekyll`, '');
 }

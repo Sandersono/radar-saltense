@@ -24,7 +24,9 @@ export const LINKS_CREDOR = {
   prefeitura: 'https://salto.obaratec.com.br/ords/salto02/f?p=839:7',
   tce: 'https://transparencia.tce.sp.gov.br/despesas-fornecedor',
 };
-export const POPULACAO = { valor: 141988, fonte: 'IBGE, informada pela Prefeitura ao Tesouro Nacional (RREO 2025)' };
+// Medição de audiência (spec 2026-11-16). Vazio = desligado. Os dois valores aparecem no HTML público, não são segredo.
+export const MEDICAO = { cloudflare: 'e7205a37f8b44118871698dc7ac0988a', ga4: 'G-MBXN096LL3' };
+export const POPULACAO ={ valor: 141988, fonte: 'IBGE, informada pela Prefeitura ao Tesouro Nacional (RREO 2025)' };
 
 export function anos() {
   const fim = new Date().getFullYear();

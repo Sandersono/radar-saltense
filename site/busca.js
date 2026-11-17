@@ -3,6 +3,78 @@
   const norm = (s) => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/\s+/g, ' ').trim();
   const dataBR = (d) => (d ? d.split('-').reverse().join('/') : 'sem data');
   const ficha = (id) => `https://cmsalto.sisvetor.com.br/ords/cmsalto/f?p=742:78:::::P78_ID_PROJETO:${esc(id)}`;
+  // Medição de audiência (spec 2026-11-16). A Cloudflare conta sem cookie e não passa por aqui.
+  // O Google Analytics só é carregado depois do "Aceitar" (LGPD); a escolha fica no navegador da pessoa.
+  const barra = document.getElementById('barra-cookies');
+  const GA = barra ? barra.dataset.ga : '';
+  const lerEscolha = () => { try { return localStorage.getItem('rs-cookies'); } catch { return null; } };
+  const gravarEscolha = (v) => { try { localStorage.setItem('rs-cookies', v); } catch { /* sem armazenamento: a barra volta na próxima página */ } };
+  let gaLigado = false;
+  const ligarGa = () => {
+    if (gaLigado || !GA) return;
+    gaLigado = true;
+    window[`ga-disable-${GA}`] = false;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function gtag() { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', GA);
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA)}`;
+    document.head.appendChild(s);
+  };
+  const evento = (nome, params = {}) => { if (gaLigado && window.gtag) window.gtag('event', nome, params); };
+  const apagarCookiesGa = () => {
+    const dominio = location.hostname.replace(/^www\./, '');
+    for (const c of document.cookie.split(';')) {
+      const nome = c.split('=')[0].trim();
+      if (!/^_ga/.test(nome)) continue;
+      for (const d of ['', `; domain=${dominio}`, `; domain=.${dominio}`]) document.cookie = `${nome}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${d}`;
+    }
+  };
+  if (GA) {
+    const mostrarBarra = (sim) => { barra.hidden = !sim; document.body.classList.toggle('com-barra-cookies', sim); };
+    const escolha = lerEscolha();
+    if (escolha === 'aceito') ligarGa();
+    else if (escolha !== 'recusado') mostrarBarra(true);
+    barra.querySelector('[data-cookies="aceitar"]').addEventListener('click', () => { gravarEscolha('aceito'); mostrarBarra(false); ligarGa(); });
+    barra.querySelector('[data-cookies="recusar"]').addEventListener('click', () => {
+      gravarEscolha('recusado');
+      mostrarBarra(false);
+      window[`ga-disable-${GA}`] = true;
+      apagarCookiesGa();
+    });
+    const caixa = document.getElementById('abrir-cookies-caixa');
+    const reabrir = document.getElementById('abrir-cookies');
+    if (caixa && reabrir) { caixa.hidden = false; reabrir.addEventListener('click', () => { mostrarBarra(true); barra.querySelector('button').focus(); }); }
+
+    // Eventos (só com consentimento). O texto digitado nas buscas nunca é enviado.
+    const OFICIAL = /\.(gov|jus|leg)\.br$|sisvetor\.com\.br$|obaratec\.com\.br$/;
+    document.addEventListener('click', (e) => {
+      const alvo = e.target instanceof Element ? e.target : null;
+      if (!alvo) return;
+      const ano = alvo.closest('[data-ano-botao]');
+      if (ano) evento('troca_ano', { ano: ano.dataset.anoBotao });
+      const a = alvo.closest('a[href]');
+      if (!a) return;
+      if (a.closest('#menu-principal')) evento('menu', { item: a.textContent.trim() });
+      else if (/feed\.xml$/.test(a.getAttribute('href'))) evento('rss');
+      else if (a.classList.contains('selo-fonte') || OFICIAL.test(a.hostname)) evento('clique_fonte', { dominio: a.hostname });
+    });
+    const medirBusca = (campo, tipo, saida) => {
+      if (!campo) return;
+      const vistos = new Set();
+      campo.addEventListener('change', () => {
+        const q = norm(campo.value);
+        if (q.length < 3 || vistos.has(q)) return;
+        vistos.add(q);
+        setTimeout(() => evento('busca', { tipo, achou: saida && saida.querySelector('li') ? 'sim' : 'nao' }), 600);
+      });
+    };
+    medirBusca(document.getElementById('busca-bairro'), 'bairro', document.getElementById('resultado-busca'));
+    medirBusca(document.getElementById('busca-empresa'), 'empresa', document.getElementById('resultado-empresa'));
+  }
+
   let dados = null;
   const carregar = async () => dados || (dados = await (await fetch('dados/busca.json')).json());
   const item = ([id, data, , autores, ementa, doc]) =>

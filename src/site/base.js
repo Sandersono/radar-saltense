@@ -1,6 +1,7 @@
 import { AUTOR } from '../config.js';
 import { esc } from '../util/texto.js';
 import { iniciais, fotoSite } from './util.js';
+import { scriptCloudflare, barraCookies } from './medicao.js';
 
 export const ENDERECO = 'https://radarsaltense.com.br/';
 const DESCRICAO = 'O que fazem os vereadores e a Prefeitura de Salto/SP, quanto a cidade arrecada e onde gasta. Só dado oficial, com link para a fonte, atualizado todo dia.';
@@ -99,8 +100,11 @@ ${corpo}
 <p>Atualizado em ${esc(quandoBR(atualizadoEm))}. Tudo sai de fontes oficiais: Câmara Municipal de Salto, Tribunal de Contas do Estado (TCE-SP), Tesouro Nacional, IBGE e Tribunal Superior Eleitoral (TSE). <a href="${prefixo}fontes.html">Veja de onde vêm os números</a>.</p>
 <p>Radar Saltense é um projeto independente de ${esc(AUTOR.nome)}, morador de Salto, sem ligação com a Câmara, a Prefeitura ou partidos.</p>
 <p>Achou um erro? Me chama no Instagram: <a href="https://instagram.com/${AUTOR.instagram}">@${AUTOR.instagram}</a>.</p>
+<p><a href="${prefixo}fontes.html#privacidade">Privacidade e audiência</a><span id="abrir-cookies-caixa" hidden> · <button type="button" id="abrir-cookies" class="botao-link">Cookies</button></span></p>
 </div></footer>
+${barraCookies(prefixo)}
 <script src="${prefixo}busca.js" defer></script>
+${scriptCloudflare()}
 </body>
 </html>
 `;
