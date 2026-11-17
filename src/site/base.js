@@ -29,7 +29,15 @@ export function avisoTce(d, fonte) {
   return aviso(`Dados do TCE-SP até ${esc(dia)}; a fonte não respondeu na última atualização.`);
 }
 
-export const apelidoHtml = (v) => (v.apelido ? ` <span class="apelido">“${esc(v.apelido)}”</span>` : '');
+// Fileira de atalhos para as seções da página. Só entram as seções que existem em `html`; com menos de 2, nada.
+export function sumario(html, itens) {
+  const validos = itens.filter(([id]) => html.includes(`id="${id}"`));
+  return validos.length > 1
+    ? `<nav class="sumario" aria-label="Nesta página">${validos.map(([id, texto]) => `<a class="chip" href="#${id}">${esc(texto)}</a>`).join('')}</nav>`
+    : '';
+}
+
+export const apelidoHtml =(v) => (v.apelido ? ` <span class="apelido">“${esc(v.apelido)}”</span>` : '');
 
 export function foto(v, prefixo, tamanho) {
   return v.fotoLocal

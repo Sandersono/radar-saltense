@@ -50,21 +50,22 @@ export function paginaImpostometro(d) {
   const avisoPainel = r.anoPainel !== r.anoAtual ? aviso(`Ainda não há mês oficial de ${r.anoAtual}; os quadros abaixo mostram ${r.anoPainel}.`) : '';
 
   const corpo = `<h1>Impostômetro de Salto</h1>
+<nav class="sumario" aria-label="Nesta página"><a class="chip" href="#impostos-ano">Impostos do ano</a><a class="chip" href="#mes-a-mes">Mês a mês</a><a class="chip" href="#origem">De onde vem</a><a class="chip" href="#fontes-impostometro">Fontes</a></nav>
 ${avisoTce(d, 'receitas')}
 ${blocoContador(r, '', true)}
 <p>A parte oficial é o que a Prefeitura registrou no Tribunal de Contas do Estado (TCE-SP), que publica os números com cerca de um mês e meio de atraso. Depois do último mês oficial, o contador sobe no ritmo médio dos últimos ${r.mesesRitmo} meses publicados: é uma estimativa e se corrige sozinha quando sai um mês novo.</p>
 ${aviso(esc(fechamento))}
 ${avisoPainel}
-<section class="secao cartao">
+<section id="impostos-ano" class="secao cartao">
 <h2>Os impostos da cidade em ${r.anoPainel}</h2>
 <p>Impostos e taxas que o morador e as empresas pagam direto à Prefeitura. O Imposto de Renda retido é o que a Prefeitura desconta dos salários e de outros pagamentos que faz e, por lei, fica com a cidade.</p>
 ${barras(tipos, totalTipos)}
 </section>
-<section class="secao cartao">
+<section id="mes-a-mes" class="secao cartao">
 <h2>Mês a mês</h2>
 <ul class="meses">${meses}</ul>
 </section>
-<section class="secao cartao">
+<section id="origem" class="secao cartao">
 <h2>De onde vem o dinheiro de Salto</h2>
 <p>Toda a arrecadação oficial de ${r.anoPainel}, até o último mês publicado. Os repasses do Estado e da União vêm, em boa parte, de impostos que eles arrecadam (como ICMS, IPVA e Imposto de Renda) e dividem com as cidades por regras da lei.</p>
 ${barras(grupos, totalGrupos)}

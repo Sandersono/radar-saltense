@@ -70,9 +70,12 @@ export function paginaGastos(d) {
   const corpo = `<h1>Raio-X dos gastos</h1>
 ${avisoTce(d, 'despesas')}
 <p>Quanto a Prefeitura, a Câmara e o SAAE pagaram, para quais áreas e para quais empresas, ano a ano desde o início do mandato. Tudo sai do Tribunal de Contas do Estado (TCE-SP), que publica com cerca de um mês e meio de atraso, e do Tesouro Nacional.</p>
+<nav class="sumario" aria-label="Nesta página"><a class="chip" href="#por-ano">Por ano</a><a class="chip" href="#novas">Ponto de atenção</a><a class="chip" href="#busca-empresas">Buscar empresa</a><a class="chip" href="#fontes-gastos">Fontes</a></nav>
+<div id="por-ano">
 ${seletor}
 ${anos.map((ano) => blocoAno(ano, g.anos[ano])).join('\n')}
-<section class="secao cartao" aria-labelledby="t-novas">
+</div>
+<section id="novas" class="secao cartao" aria-labelledby="t-novas">
 <h2 id="t-novas">Ponto de atenção do mandato: novas com valor alto</h2>
 ${aviso(esc(ATENCAO))}
 <p>Empresas e entidades que não receberam nada da cidade em 2024 e que, desde ${anos[0] || ''}, já receberam mais de ${reais(NOVA_LIMITE)}. Empresa nova pode ser fruto de licitação nova, troca de contrato ou mudança de CNPJ.</p>

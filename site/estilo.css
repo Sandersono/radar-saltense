@@ -219,6 +219,14 @@ a.cartao-numero:hover { border-color: var(--rio); }
 @media (min-width: 1024px) {
   .cartoes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
+/* "O que você quer saber?": grade de atalhos da página inicial (2 colunas no celular, 5 no computador) */
+.topicos { list-style: none; padding: 0; margin: .5rem 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
+.topico { display: flex; flex-direction: column; align-items: flex-start; gap: .5rem; height: 100%; min-height: 5.75rem; padding: .85rem; background: var(--branco); border: 1px solid var(--linha); border-radius: var(--raio-caixa); color: var(--rio-escuro); font: 600 .95rem/1.25 var(--texto); text-decoration: none; overflow-wrap: break-word; }
+.topico:hover { border-color: var(--rio); }
+.topico-icone { display: inline-flex; padding: .4rem; border-radius: 50%; background: var(--rio-claro); }
+.topico-icone svg { width: 24px; height: 24px; fill: none; stroke: var(--rio); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+@media (min-width: 768px) { .topicos { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+.sumario .chip { display: inline-flex; align-items: center; text-decoration: none; }
 /* Barra de consentimento do Google Analytics (fixa no pé; o body ganha respiro para não cobrir o conteúdo) */
 .barra-cookies { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: var(--rio-escuro); color: #fff; padding: .85rem 1rem calc(.85rem + env(safe-area-inset-bottom)); box-shadow: 0 -4px 16px rgba(11, 37, 69, .25); }
 .barra-cookies[hidden] { display: none; }

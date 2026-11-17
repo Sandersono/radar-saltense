@@ -2,7 +2,7 @@ import { esc } from '../util/texto.js';
 import { amostraBoa } from '../regras/respostas.js';
 import { ORIGENS_CAMPANHA } from '../regras/campanha.js';
 import { GRUPOS_FOLHA } from '../regras/folha.js';
-import { layout, reais, reaisCentavos, numero, link, seloFonte, aviso, cartaoNumero } from './base.js';
+import { layout, reais, reaisCentavos, numero, link, seloFonte, aviso, cartaoNumero, sumario } from './base.js';
 import { barras, NOMES_MES } from './impostometro.js';
 import { secaoEmendas, total2026 } from './emendas.js';
 
@@ -108,8 +108,13 @@ function secaoCampanha(d) {
 }
 
 export function paginaCamara(d) {
+  const secoes = `${secaoFolha(d)}
+${secaoRespostas(d)}
+${secaoEmendas(d)}
+${secaoCampanha(d)}`;
   const corpo = `<h1>A Câmara de Salto</h1>
 <p>Quanto a Câmara custa, o que os vereadores cobram da Prefeitura, para onde indicam dinheiro do orçamento e de onde veio o dinheiro das campanhas deles.</p>
+${sumario(secoes, [['custo', 'Custo'], ['respostas', 'Respostas'], ['emendas', 'Emendas'], ['campanha', 'Campanha']])}
 <section class="secao">
 <div class="grade-numeros">
 ${cartaoNumero({ valor: String(d.vereadores.length), rotulo: 'Os vereadores', href: 'index.html#vereadores' })}
@@ -117,9 +122,6 @@ ${cartaoNumero({ valor: numero(d.votacoes.length), rotulo: 'Votações', href: '
 ${total2026(d) ? cartaoNumero({ valor: reaisCentavos(total2026(d)), rotulo: 'em emendas dos vereadores para 2026 (planejado)', href: '#emendas' }) : ''}
 </div>
 </section>
-${secaoFolha(d)}
-${secaoRespostas(d)}
-${secaoEmendas(d)}
-${secaoCampanha(d)}`;
+${secoes}`;
   return layout({ titulo: 'A Câmara de Salto: Radar Saltense', corpo, atualizadoEm: d.meta.atualizadoEm });
 }

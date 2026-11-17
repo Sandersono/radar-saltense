@@ -58,6 +58,7 @@
       const a = alvo.closest('a[href]');
       if (!a) return;
       if (a.closest('#menu-principal')) evento('menu', { item: a.textContent.trim() });
+      else if (a.closest('.topicos, .sumario')) evento('atalho', { item: a.textContent.trim(), pagina: location.pathname });
       else if (/feed\.xml$/.test(a.getAttribute('href'))) evento('rss');
       else if (a.classList.contains('selo-fonte') || OFICIAL.test(a.hostname)) evento('clique_fonte', { dominio: a.hostname });
     });

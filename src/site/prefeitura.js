@@ -1,6 +1,6 @@
 import { esc } from '../util/texto.js';
 import { FAIXAS_IEGM, DIMENSOES_IEGM, MUNICIPIOS_IEGM } from '../regras/iegm.js';
-import { layout, reais, numero, quandoBR, seloFonte, aviso, cartaoNumero } from './base.js';
+import { layout, reais, numero, quandoBR, seloFonte, aviso, cartaoNumero, sumario } from './base.js';
 import { cartaoCampanha } from './campanha.js';
 import { NOMES_MES } from './impostometro.js';
 import { cartaoPromessas } from './promessas.js';
@@ -145,14 +145,16 @@ export function paginaPrefeitura(d) {
   const vazio = !p.iegm && !p.obras && !anosComCompras(p).length
     ? aviso('Os dados da Prefeitura ainda não foram coletados.')
     : '';
-  const corpo = `<h1>A Prefeitura de Salto</h1>
-<p>As promessas do prefeito, a nota que o Tribunal de Contas dá à gestão, as obras, como a Prefeitura compra e de onde veio o dinheiro da campanha do prefeito.</p>
-${vazio}
-${atalhos(d, p)}
-${cartaoPromessas(d)}
+  const secoes = `${cartaoPromessas(d)}
 ${secaoNota(p)}
 ${secaoObras(p)}
 ${secaoCompras(p)}
 ${p.campanhaPrefeito ? `<div id="campanha">${cartaoCampanha(p.campanhaPrefeito, { titulo: 'Campanha do prefeito em 2024', sujeito: `${p.campanhaPrefeito.nome} recebeu` })}</div>` : ''}`;
+  const corpo = `<h1>A Prefeitura de Salto</h1>
+<p>As promessas do prefeito, a nota que o Tribunal de Contas dá à gestão, as obras, como a Prefeitura compra e de onde veio o dinheiro da campanha do prefeito.</p>
+${sumario(secoes, [['promessas', 'Promessas'], ['nota', 'Nota do TCE'], ['obras', 'Obras'], ['compras', 'Compras'], ['campanha', 'Campanha']])}
+${vazio}
+${atalhos(d, p)}
+${secoes}`;
   return layout({ titulo: 'A Prefeitura de Salto: Radar Saltense', corpo, atualizadoEm: d.meta.atualizadoEm });
 }
