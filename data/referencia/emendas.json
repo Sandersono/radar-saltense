@@ -1,0 +1,3541 @@
+{
+  "2025": {
+    "fonte": "https://www.camarasalto.sp.gov.br/pdf/orcamento-publico/emendasimpositivas/Emendas_Prest_Contas_4o_trimestre_2025-1.pdf",
+    "pagina": "https://www.camarasalto.sp.gov.br/orcamento-publico/emendas-impositivas/category/569-2025",
+    "atualizadoEm": "2025-12-31",
+    "emendas": [
+      {
+        "vereador": "cicero-granjeiro-landim",
+        "entidade": "GRUPO ESCOTEIRO TAPERÁ",
+        "objeto": "OBJETIVO OU DESTINAÇÃO DA VERBA DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Governo",
+        "valor": 15000,
+        "pago": 15000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "ezequiel-de-souza-damasceno",
+        "entidade": "ASSOCIAÇÃO DOS ENGENHEIROS E ARQUITETOS",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Governo",
+        "valor": 60000,
+        "pago": 0,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "ezequiel-de-souza-damasceno",
+        "entidade": "ASPAS",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Governo",
+        "valor": 30000,
+        "pago": 30000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "GRUPO ESCOTEIRO TAPERÁ",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Governo",
+        "valor": 7000,
+        "pago": 7000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CAPELANIA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Governo",
+        "valor": 10000,
+        "pago": 0,
+        "situacao": "DEVOLVIDA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CEMUS XIV FLORISBELA AUGUSTA DA SILVA CASTRO - CRECHE",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": null,
+        "pago": 0,
+        "situacao": "NÃO EXECUTADA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CEMUS V - IVANI DE LIMA FLAUZINO - CRECHE SÃO GABRIEL",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": null,
+        "pago": 0,
+        "situacao": "NÃO EXECUTADA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CEMUS V - LUIZ RODRIGUES DE ALMEIDA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 20000,
+        "pago": 0,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CEMUS VIII - PROF. MARIA FLORINDA ZANNI",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 35000,
+        "pago": 0,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CEMUS XIV - PROF.ª. MÁRCIA REGINA BERTAGNA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": null,
+        "pago": 0,
+        "situacao": "NÃO EXECUTADA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CEMUS VIII - CEMEI PROF. IDINO JOSÉ TADEU PERUGINI",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 15000,
+        "pago": 0,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CEMUS VI PROF. MARIA CONCEIÇÃO LOPES GALVÃO PISCIOTTA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 20000,
+        "pago": 0,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "EVENTO - SEMANA DA DIVERSIDADE SALTO",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 30000,
+        "pago": 29780,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CEMUS VI PROF. LUZIA RAQUEL ROVERI – CRECHE – SOL D’ICARAÍ",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": null,
+        "pago": 0,
+        "situacao": "NÃO EXECUTADA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CEMUS X MARIA ANTONIETA BULDRIN SONTAG - CRECHE",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": null,
+        "pago": 0,
+        "situacao": "NÃO EXECUTADA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CEMUS III PROF. JOÃO BATISTA CÉSAR",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 30000,
+        "pago": 0,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CEMUS IX PROF. MARIA DE LOURDES GUARDA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 15000,
+        "pago": 14750,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CEMAEE - CENTRO MUNICIPAL DE ATENDIMENTO EDUCACIONAL ESPEC",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 30000,
+        "pago": 29800,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CEMUS I PROF. JOÃO BATISTA DALLA VECCHIA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 10000,
+        "pago": 0,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "cicero-granjeiro-landim",
+        "entidade": "CEMUS VII PROFª. Mª JESUINA NASCIMENTO DE MORAES",
+        "objeto": "MATERIAL PERMANENTE",
+        "secretaria": "Secretaria de Educação",
+        "valor": 20000,
+        "pago": 0,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "cicero-granjeiro-landim",
+        "entidade": "CEMUS X “JOÃO BAPTISTA FERARRI”",
+        "objeto": "MATERIAIS PERMANENTES",
+        "secretaria": "Secretaria de Educação",
+        "valor": 22908.59,
+        "pago": 2104,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "CEMUS IX PROFª. Mª DE LOURDES GUARDA",
+        "objeto": "MATERIAL PERMANENTE",
+        "secretaria": "Secretaria de Educação",
+        "valor": 30000,
+        "pago": 2555.13,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "CEMUS XI PROFª. LÁZARA Mª LARA BEGOSSI",
+        "objeto": "MATERIAL PERMANENTE",
+        "secretaria": "Secretaria de Educação",
+        "valor": 30000,
+        "pago": 3940,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "CEMUS XIV - PROF.ª. MÁRCIA REGINA BERTAGNA",
+        "objeto": "MATERIAL PERMANENTE",
+        "secretaria": "Secretaria de Educação",
+        "valor": 30000,
+        "pago": 27125.16,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "CEMUS X JOÃO BAPTISTA FERARRI",
+        "objeto": "MATERIAIS PERMANENTES",
+        "secretaria": "Secretaria de Educação",
+        "valor": 30000,
+        "pago": 26747.54,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "ezequiel-de-souza-damasceno",
+        "entidade": "CEMUS XI PROFª. LÁZARA Mª LARA BEGOSSI",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 50000,
+        "pago": 0,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "fabio-jorge-rodrigues",
+        "entidade": "CEMAEE - CENTRO MUNICIPAL DE ATENDIMENTO EDUCACIONAL ESPEC",
+        "objeto": "AQUISICAO DE EQUIPAMENTOS, CURSOS",
+        "secretaria": "Secretaria de Educação",
+        "valor": null,
+        "pago": 0,
+        "situacao": "NÃO EXECUTADA"
+      },
+      {
+        "vereador": "fabio-jorge-rodrigues",
+        "entidade": "CEMUS III PROF. JOÃO BATISTA CÉSAR - CRECHE",
+        "objeto": "EXTENSÃO CRECHE MARÍLIA",
+        "secretaria": "Secretaria de Educação",
+        "valor": 70000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "gideon-tavares",
+        "entidade": "CEMUS XV PROF. DANIEL GASPARINI",
+        "objeto": "IMPLANTAÇÃO DE AREA COBERTA",
+        "secretaria": "Secretaria de Educação",
+        "valor": 50000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "gideon-tavares",
+        "entidade": "CEMUS XV PROF. DANIEL GASPARINI",
+        "objeto": "COMPRA DE ARES-CONDICIONADOS PARA A SECRETARIA DA ESCOLA",
+        "secretaria": "Secretaria de Educação",
+        "valor": 20000,
+        "pago": 18900,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "gideon-tavares",
+        "entidade": "CEMAEE - CENTRO MUNICIPAL DE ATENDIMENTO EDUCACIONAL ESPEC",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": null,
+        "pago": 0,
+        "situacao": "NÃO EXECUTADA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "CEMUS X JOÃO BAPTISTA FERARRI",
+        "objeto": "LIVRE CUSTEIO PARA INSTALAÇÃO DE MURO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 80000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "CEMUS IV AMÁLIA ZUIM GATAVELLO - CRECHE",
+        "objeto": "AQUISIÇÃO E INSTALAÇÃO DE AR CONDICIONADO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 20000,
+        "pago": 0,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "CEMUS XI LÁZARA M. L. BEGOSSI - CRECHE II E III",
+        "objeto": "AQUIS. CAIXA D'ÁGUA E MANUT. PREDIAL",
+        "secretaria": "Secretaria de Educação",
+        "valor": 45000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "DEMANDA DA UNIDADE - CEMUS XI - CRECHE NAIR Z. D. VECCHIA",
+        "objeto": "MELHORIAS PREDIAIS",
+        "secretaria": "Secretaria de Educação",
+        "valor": null,
+        "pago": 0,
+        "situacao": "NÃO EXECUTADA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "CEMUS VII PROFª. Mª JESUINA NASCIMENTO DE MORAES",
+        "objeto": "AQUIS. E INST. AR-CONDICIONADO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 35000,
+        "pago": 24300,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "CEMAEE - CENTRO MUNICIPAL DE ATENDIMENTO EDUCACIONAL ESPEC",
+        "objeto": "AQUISIÇÃO DE MÓVEIS EM GERAL",
+        "secretaria": "Secretaria de Educação",
+        "valor": null,
+        "pago": 0,
+        "situacao": "NÃO EXECUTADA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "CEMUS III PROF. JOÃO BATISTA CÉSAR - CRECHE RUA PENAPOLIS 365",
+        "objeto": "AQUISIÇÃO DE MÓVEIS EM GERAL",
+        "secretaria": "Secretaria de Educação",
+        "valor": null,
+        "pago": 0,
+        "situacao": "NÃO EXECUTADA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "CEMUS V LUIZ RODRIGUES DE ALMEIDA",
+        "objeto": "AQUISIÇÃO DE MÓVEIS EM GERAL A UNIDADE",
+        "secretaria": "Secretaria de Educação",
+        "valor": null,
+        "pago": 0,
+        "situacao": "NÃO EXECUTADA"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "MANUTENÇÃO E MELHORIAS NAS INSTALAÇÕES FÍSICAS DA GARAGEM",
+        "objeto": "DESPESAS CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": null,
+        "pago": 0,
+        "situacao": "NÃO EXECUTADA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CEMUS I PROF. JOÃO BATISTA DALLA VECCHIA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 6555,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CEMUS II MAESTRO PROF. SILVESTRE PEREIRA DE OLIVEIRA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 10000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CEMUS III PROF. JOÃO BATISTA CÉSAR",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 6555,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CEMUS IV PROF. ODÍLO DELLA PASCHOA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 6555,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CEMUS V LUIZ RODRIGUES DE ALMEIDA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 10000,
+        "pago": 7578.92,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CEMUS VI PROFª. Mª DA CONCEIÇÃO LOPES GALVÃO PISCIOTTA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 6555,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CEMUS VII PROF. MARIA JESUINA NASCIMENTO DE MORAES",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 6555,
+        "pago": 4548,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CEMUS VIII PROFª. Mª FLORINDA ZANNI",
+        "objeto": "OBJETIVO OU DESTINAÇÃO DA VERBA DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 10000,
+        "pago": 0,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CEMUS IX PROFª. Mª DE LOURDES GUARDA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 6555,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CEMUS X JOÃO BAPTISTA FERARRI",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 20000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CEMUS XI PROFª. LÁZARA Mª LARA BEGOSSI",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 6555,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CEMUS XII PROFª. ANTONIETA DE CAMPOS BULDRIN SONTAG",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 6555,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CEMUS XIII PROFª. JOSÉ CARLOS KEILLER",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 6555,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CEMUS XIV PROFª. MÁRCIA REGINA BERTAGNA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 6555,
+        "pago": 1420,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CEMUS XV – PROF. DANIEL GASPARINI",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 6555,
+        "pago": 3988.81,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CONSERVATÓRIO",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Cultura",
+        "valor": 10000,
+        "pago": 9910,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "cicero-granjeiro-landim",
+        "entidade": "ASSOCIAÇÃO DE DANÇAS FACES OCULTAS",
+        "objeto": "AQUISIÇÃO DE MATERIAIS PERMANENTES",
+        "secretaria": "Secretaria de Cultura",
+        "valor": 20000,
+        "pago": 17779.69,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "ASSOCIAÇÃO DE DANÇAS FACES OCULTAS",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Cultura",
+        "valor": 75473.59,
+        "pago": 70300.83,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "INSTITUTO ZOOM",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 537908.6,
+        "pago": 537908.5,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "antonio-cordeiro-dos-santos",
+        "entidade": "SECRETARIA DE SAÚDE",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 537908.59,
+        "pago": 89093.82,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "antonio-cordeiro-dos-santos",
+        "entidade": "SECRETARIA DE SAÚDE",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 537908.6,
+        "pago": 160416.2,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "cicero-granjeiro-landim",
+        "entidade": "INSTITUTO ZOOM",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 150000,
+        "pago": 150000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "cicero-granjeiro-landim",
+        "entidade": "APAE",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 100000,
+        "pago": 100000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "cicero-granjeiro-landim",
+        "entidade": "SECRETARIA DE SAÚDE",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 287908.6,
+        "pago": 148615.44,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "CLÍNICA SALTO SAÚDE NAÇÕES",
+        "objeto": "AQUISIÇÃO MATERIAL PERMANETE",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 70000,
+        "pago": 7833.89,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "CLÍNICA SALTO SAÚDE SANTA CRUZ",
+        "objeto": "AQUISIÇÃO MATERIAL PERMANETE",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 70000,
+        "pago": 2096,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "CLÍNICA SALTO SAÚDE SALTENSE",
+        "objeto": "AQUISIÇÃO MATERIAL PERMANETE",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 70000,
+        "pago": 4703,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "CLÍNICA SALTO SAÚDE SÃO GABRIEL",
+        "objeto": "AQUISIÇÃO MATERIAL PERMANETE",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 70000,
+        "pago": 7223,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "CLÍNICA SALTO SAÚDE BELA VISTA",
+        "objeto": "AQUISIÇÃO MATERIAL PERMANETE",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 70000,
+        "pago": 14593.16,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "HOSPITAL NOSSA SENHORA MONTE SERRAT",
+        "objeto": "AQUISIÇÃO MATERIAL PERMANETE",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 97908.6,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "CASA DE NAIM",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 30000,
+        "pago": 30000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "INSTITUTO ZOOM",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 30000,
+        "pago": 30000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "APAE",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 30000,
+        "pago": 30000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "ezequiel-de-souza-damasceno",
+        "entidade": "CLÍNICA SALTO SAÚDE NAÇÕES",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 150000,
+        "pago": 144628.38,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "ezequiel-de-souza-damasceno",
+        "entidade": "",
+        "objeto": "DESPES DE CUSTEIO- CLÍNICA SALTO SAÚDE SANTA CRUZ",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 100000,
+        "pago": 96418.85,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "ezequiel-de-souza-damasceno",
+        "entidade": "CLÍNICA SALTO SAÚDE MOUTONNÉE",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 100000,
+        "pago": 96418.85,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "ezequiel-de-souza-damasceno",
+        "entidade": "CLÍNICA SALTO SAÚDE SÃO GABRIEL",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 100000,
+        "pago": 96418.45,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "ezequiel-de-souza-damasceno",
+        "entidade": "HOSPITAL NOSSA SENHORA MONTE SERRAT",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 87908.59,
+        "pago": 84751.11,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "fabio-jorge-rodrigues",
+        "entidade": "",
+        "objeto": "AQ MATERIAIS E INSUMOS PARA OFICINAS TERAPÊUTICAS NOS CAPS II, AD, IJ",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 50000,
+        "pago": 33210.72,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "fabio-jorge-rodrigues",
+        "entidade": "INSTITUTO ZOOM",
+        "objeto": "REALIZAÇÃO DE LAUDOS",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 50000,
+        "pago": 50000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "fabio-jorge-rodrigues",
+        "entidade": "PROGRAMA SAÚDE NA ESCOLA",
+        "objeto": "AQ MATERIAIS P/ AÇÕES DE ODONTOLOGIA DENTRO DAS ESCOLAS",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 50000,
+        "pago": 28861,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "fabio-jorge-rodrigues",
+        "entidade": "CASA DE NAIM",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 20000,
+        "pago": 20000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "fabio-jorge-rodrigues",
+        "entidade": "",
+        "objeto": "REFORMA/AMPLIAÇÃO E AQ EQUIPAMENTO/MOBILIÁRIO PROGRAMA MELHOR EM CASA",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 267908.6,
+        "pago": 0,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "fabio-jorge-rodrigues",
+        "entidade": "FISIOTERAPIA",
+        "objeto": "AQ EQUIPAMENTO/MOBILIÁRIO PARA CENTRO DE REABILITAÇÃO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 100000,
+        "pago": 1120,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "gideon-tavares",
+        "entidade": "CLÍNICA SAÚDE CECAP",
+        "objeto": "AMPLIAÇÃO SALA RECEPÇÃO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 67908.6,
+        "pago": 0,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "gideon-tavares",
+        "entidade": "INSTITUTO ZOOM",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 100000,
+        "pago": 100000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "gideon-tavares",
+        "entidade": "CASA DE NAIM",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 100000,
+        "pago": 100000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "gideon-tavares",
+        "entidade": "SETOR ZOONOSES",
+        "objeto": "CASTRAÇÃO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 100000,
+        "pago": 39016,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "gideon-tavares",
+        "entidade": "APAE",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 50000,
+        "pago": 50000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "gideon-tavares",
+        "entidade": "CLÍNICA SALTO SAÚDE SANTA CRUZ",
+        "objeto": "COMPRA DE ARES CONDICIONADOS",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 20000,
+        "pago": 10238,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "gideon-tavares",
+        "entidade": "CLÍNICA SALTO SAÚDE BELA VISTA",
+        "objeto": "REFORMA E COMPRA DE EQUIPAMENTOS",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 5000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "gideon-tavares",
+        "entidade": "GAB ODONTOLOGICO DAS CLÍNICAS DE SAÚDE",
+        "objeto": "AQ EQUIPAMENTOS ODONTOLOGICOS",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 50000,
+        "pago": 23680,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "HOSPITAL NOSSA SENHORA MONTE SERRAT",
+        "objeto": "DESPESAS DE MANUTENÇÃO PREDIAL EM GERAL",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 268954,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "HOSPITAL NOSSA SENHORA MONTE SERRAT",
+        "objeto": "AQUISIÇÃO DE MOBILIA E EQUIPAMENTOS DE AR CONDICIONADO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 268954.6,
+        "pago": 35959.25,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "APAE",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 100000,
+        "pago": 100000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "INSTITUTO ZOOM",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 197908.6,
+        "pago": 197908.6,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "CASA NAIM",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 40000,
+        "pago": 40000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "CLÍNICA SALTO SAÚDE SANTA CRUZ",
+        "objeto": "MANUTENÇÃO/ MELHORIAS E AMPLIAÇÃO DAS INST FÍSICAS",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 100000,
+        "pago": 0,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "CLÍNICA SALTO SAÚDE CECAP",
+        "objeto": "MANUTENÇÃO/ MELHORIAS E AMPLIAÇÃO DAS INST FÍSICAS",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 100000,
+        "pago": 0,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "marcio-conrado",
+        "entidade": "",
+        "objeto": "AQ MATERIAIS E INSUMOS PARA OFICINAS TERAPÊUTICAS NOS CAPS II, AD, IJ",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 50000,
+        "pago": 32457.55,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "marcio-conrado",
+        "entidade": "VIG. EPIDEMIOLOGICA E REDE DE FRIO",
+        "objeto": "AQUISIÇÃO DE AR CONDICIONADO E CÂMARA DE VACINAS",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 100000,
+        "pago": 11984.17,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "marcio-conrado",
+        "entidade": "PROGRAMA SAÚDE NA ESCOLA",
+        "objeto": "AQ MATERIAIS P/ AÇÕES DE ODONTOLOGIA",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 37908.59,
+        "pago": 15509.05,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "marcio-conrado",
+        "entidade": "CLÍNICA SALTO SAÚDE BELA VISTA",
+        "objeto": "REFORMA E COMPRA DE EQUIPAMENTOS/ MOBILIÁRIOS",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 300000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "marcio-conrado",
+        "entidade": "CLÍNICA SALTO SAÚDE II",
+        "objeto": "AQUISIÇÃO DE EQUIPAMENTOS/MOBILIÁRIOS",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 50000,
+        "pago": 4914.9,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "marcio-conrado",
+        "entidade": "",
+        "objeto": "AQ DE MATERIAIS E INSUMOS P/ AÇÕES DE FISIOTERAPIA NAS 10 UN. DE SAÚDE",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 10500,
+        "pago": 0,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "marcio-conrado",
+        "entidade": "PROGRAMA SAÚDE NA ESCOLA",
+        "objeto": "AQ DE CONSULTÓRIO ODONTOLÓGICO PORTÁTIL",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 30000,
+        "pago": 29997.06,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "marcio-conrado",
+        "entidade": "AMBULATÓRIO MUNICIPAL DE ESPECIALIDADES",
+        "objeto": "AQUISIÇÃO DE EQUIPAMENTOS/MOBILIÁRIOS",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 90000,
+        "pago": 15925.68,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "marcio-conrado",
+        "entidade": "",
+        "objeto": "OBJETIVO OU DESTINAÇÃO DA VERBA 10 UN. DE FRIGOBAR P/ ARMAZENAMENTO DE TESTES RÁPIDOS HIV, SIFILIS, HEPATITES B E C E COVID",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 17908.6,
+        "pago": 10520,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "INSTITUTO ZOOM",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 527908.6,
+        "pago": 527908.6,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CASA NAIM",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 10000,
+        "pago": 10000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "DEPARTAMENTO DE ELÉTRICA - SEC. DE OBRAS",
+        "objeto": "INSUMOS",
+        "secretaria": "Secretaria de Obras e Serviços Públicos",
+        "valor": 10000,
+        "pago": 5887.05,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "ÁREA DE LAZER DO SÃO GABRIEL",
+        "objeto": "PLAYGROUND E APARELHOS DE GINÁSTICA",
+        "secretaria": "Secretaria de Obras e Serviços Públicos",
+        "valor": 10000,
+        "pago": 6999.99,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "",
+        "objeto": "CONSTRUÇÃO DE QUIOSQUE NA ÁREA DE LAZER DO JARDIM TAQUARAL",
+        "secretaria": "Secretaria de Obras e Serviços Públicos",
+        "valor": 30000,
+        "pago": 0,
+        "situacao": "DEVOLVIDA"
+      },
+      {
+        "vereador": "cicero-granjeiro-landim",
+        "entidade": "",
+        "objeto": "SUBSTITUIÇÃO DAS LAMPADAS COMUNS POR LED NA R. ESTADO DA BAHIA, NO BAIRRO S. PEDRO E S. PAULO",
+        "secretaria": "Secretaria de Obras e Serviços Públicos",
+        "valor": 20000,
+        "pago": 0,
+        "situacao": "DEVOLVIDA"
+      },
+      {
+        "vereador": "cicero-granjeiro-landim",
+        "entidade": "",
+        "objeto": "SUBS. DAS LAMPADAS COMUNS POR LED NA R EST. DO RIO GRANDE DO SUL ATÉ A R. EST. DO PERNAMBUCO",
+        "secretaria": "Secretaria de Obras e Serviços Públicos",
+        "valor": 40000,
+        "pago": 0,
+        "situacao": "DEVOLVIDA"
+      },
+      {
+        "vereador": "cicero-granjeiro-landim",
+        "entidade": "",
+        "objeto": "AÇÃO DE ILUMINAÇÃO NOS POSTES NA ESTRADA DO JURUMIRIM",
+        "secretaria": "Secretaria de Obras e Serviços Públicos",
+        "valor": 15000,
+        "pago": 0,
+        "situacao": "DEVOLVIDA"
+      },
+      {
+        "vereador": "cicero-granjeiro-landim",
+        "entidade": "",
+        "objeto": "SUBSTITUIÇÃO DAS LAMPADAS COMUNS POR LED NA RUA RUA DOS CARAS, NO BAIRRO SALTO DE SÃO JOSÉ",
+        "secretaria": "Secretaria de Obras e Serviços Públicos",
+        "valor": 15000,
+        "pago": 0,
+        "situacao": "DEVOLVIDA"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "JD NAÇÕES",
+        "objeto": "AMPLIAÇÃO E REFORMA NA ÁREA DE LAZER RUA IRÃ, ESQUINA COM MARECHAL DEODORO",
+        "secretaria": "Secretaria de Obras e Serviços Públicos",
+        "valor": 30000,
+        "pago": 21200,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "INFRAESTRUTURA - BAIRRO ESTAÇÃO",
+        "objeto": "AMPLIAÇÃO E REFORMA",
+        "secretaria": "Secretaria de Obras e Serviços Públicos",
+        "valor": 60000,
+        "pago": 19770.86,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "ezequiel-de-souza-damasceno",
+        "entidade": "JARDIM SANTA CRUZ E JARDIM UNIÃO",
+        "objeto": "AQUISIÇÃO DE LÂMPADAS DE LED",
+        "secretaria": "Secretaria de Obras e Serviços Públicos",
+        "valor": 277908.6,
+        "pago": 0,
+        "situacao": "DEVOLVIDA"
+      },
+      {
+        "vereador": "fabio-jorge-rodrigues",
+        "entidade": "",
+        "objeto": "REFORMA/COBERT QUADRA FICA AO LADO DA CRECHE (CEMUS IX) ONDE ERA A DEFESA CIVIL NO SANTA CRUZ",
+        "secretaria": "Secretaria de Obras e Serviços Públicos",
+        "valor": 50000,
+        "pago": 0,
+        "situacao": "DEVOLVIDA"
+      },
+      {
+        "vereador": "gideon-tavares",
+        "entidade": "",
+        "objeto": "CONSTRUÇÃO DE CALÇADA NA RUA VATICANO, ENTRE A PONTE DO CÓRREGO E O ECOPONTO, NO BAIRRO UNIÃO",
+        "secretaria": "Secretaria de Obras e Serviços Públicos",
+        "valor": 30000,
+        "pago": 23707.97,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "ÁREA DE LAZER - RUA DAS PIABAS - SALTO DE SÃO JOSÉ",
+        "objeto": "REFORMA DAS INSTALAÇÕES",
+        "secretaria": "Secretaria de Obras e Serviços Públicos",
+        "valor": 50000.59,
+        "pago": 0,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "ESTÁDIO JOÃO DE ALMEIDA - STA CRUZ",
+        "objeto": "AMPL DA CANTINA E MANUT DAS INSTAL. FÍSICAS JÁ EXISTENTES",
+        "secretaria": "Secretaria de Obras e Serviços Públicos",
+        "valor": 50000,
+        "pago": 0,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "AQUISIÇÃO DE MÁQUINAS E FERRAMENTAS PARA USO OPERACIONAL - SEC. OBRAS",
+        "objeto": "DESPESAS CUSTEIO",
+        "secretaria": "Secretaria de Obras e Serviços Públicos",
+        "valor": 25000,
+        "pago": 24736.01,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "",
+        "objeto": "ILUMINAÇÃO LED RUA SÃO DIMAS",
+        "secretaria": "Secretaria de Obras e Serviços Públicos",
+        "valor": 50000,
+        "pago": 0,
+        "situacao": "DEVOLVIDA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "",
+        "objeto": "ILUMINAÇÃO LED RUA VATICANO",
+        "secretaria": "Secretaria de Obras e Serviços Públicos",
+        "valor": 25000,
+        "pago": 0,
+        "situacao": "DEVOLVIDA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CASA NAIM",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 50000,
+        "pago": 50000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CASA DE BELEM",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 10000,
+        "pago": 10000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "LAR FREDERICO OZANAN",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 30000,
+        "pago": 30000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "ADEFIS",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 10000,
+        "pago": 9997.13,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "ADEVISA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 10000,
+        "pago": 10000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CASA DA MULHER JOANNA DE ÂNGELIS",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 7908.59,
+        "pago": 7908.59,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CASA DA CRIANÇA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 10000,
+        "pago": 10000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "APAE",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 10000,
+        "pago": 10000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CÁRITAS INTERPAROQUIAL DE SALTO",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 8000,
+        "pago": 8000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "RENASCER",
+        "objeto": "OBJETIVO OU DESTINAÇÃO DA VERBA DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 10000,
+        "pago": 10000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "ASSOCIAÇÃO DE EDUCAÇÃO DO HOMEM DE AMANHÃ",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 10000,
+        "pago": 10000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "cicero-granjeiro-landim",
+        "entidade": "CÁRITAS INTERPAROQUIAL DE SALTO",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 35000,
+        "pago": 35000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "cicero-granjeiro-landim",
+        "entidade": "CASA DE BELEM",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 35000,
+        "pago": 35000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "cicero-granjeiro-landim",
+        "entidade": "CASA DA MULHER JOANNA DE ÂNGELIS",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 35000,
+        "pago": 35000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "cicero-granjeiro-landim",
+        "entidade": "CASA DA CRIANÇA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 35000,
+        "pago": 35000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "cicero-granjeiro-landim",
+        "entidade": "LAR FREDERICO OZANAN",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 20000,
+        "pago": 20000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "cicero-granjeiro-landim",
+        "entidade": "CIDADE RAHAMIM - ALIANÇA DE MISERICORDIA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 35000,
+        "pago": 35000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "CASA DA MULHER JOANNA DE ANGELIS",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 20000,
+        "pago": 20000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "CASA DA CRIANÇA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 30000,
+        "pago": 30000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "ADEFIS",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 20000,
+        "pago": 20000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "RENASCER",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 20000,
+        "pago": 20000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "CÁRITAS INTERPAROQUIAL DE SALTO",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 20000,
+        "pago": 20000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "LAR FREDERICO OZANAN",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 127908.59,
+        "pago": 127908.59,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "fabio-jorge-rodrigues",
+        "entidade": "ASSOCIAÇÃO DE EDUCAÇÃO DO HOMEM DE AMANHÃ",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 277908.59,
+        "pago": 277908.59,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "fabio-jorge-rodrigues",
+        "entidade": "CASA DA MULHER JOANNA DE ANGELIS",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 30000,
+        "pago": 30000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "gideon-tavares",
+        "entidade": "CASA DA MULHER JOANNA DE ANGELIS",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 20000,
+        "pago": 20000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "gideon-tavares",
+        "entidade": "CASA DA CRIANÇA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 50000,
+        "pago": 50000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "gideon-tavares",
+        "entidade": "CÁRITAS INTERPAROQUIAL DE SALTO",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 20000,
+        "pago": 20000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "gideon-tavares",
+        "entidade": "ADEFIS",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 100000,
+        "pago": 100000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "gideon-tavares",
+        "entidade": "CASA DE BELEM",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 27908.59,
+        "pago": 27908.59,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "gideon-tavares",
+        "entidade": "ASSOCIAÇÃO DE EDUCAÇÃO DO HOMEM DE AMANHÃ",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 20000,
+        "pago": 20000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "ADEFIS",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 10000,
+        "pago": 10000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "CASA DA MULHER JOANNA DE ANGELIS",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 10000,
+        "pago": 10000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "ADEVISA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 10000,
+        "pago": 10000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "CASA NAIM",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 10000,
+        "pago": 10000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "ADEVISA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 7000,
+        "pago": 7000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "ASSOCIAÇÃO DE EDUCAÇÃO DO HOMEM DE AMANHÃ",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 20000,
+        "pago": 20000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "CÁRITAS INTERPAROQUIAL DE SALTO",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 7000,
+        "pago": 7000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "CASA DA MULHER JOANNA DE ANGELIS",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 7000,
+        "pago": 7000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "CASA DA CRIANÇA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 7000,
+        "pago": 7000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "ADEFIS",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 7000,
+        "pago": 7000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "APAE",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 10000,
+        "pago": 10000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CASA DA CRIANÇA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 10000,
+        "pago": 10000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "ADEFIS",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 40000,
+        "pago": 40000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CASA DA MULHER JOANNA DE ANGELIS",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 10000,
+        "pago": 10000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "RENASCER",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 100000,
+        "pago": 100000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CÁRITAS INTERPAROQUIAL DE SALTO",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 10000,
+        "pago": 10000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "ASSOCIAÇÃO DE EDUCAÇÃO DO HOMEM DE AMANHÃ",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 5000,
+        "pago": 5000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "ADEVISA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 5000,
+        "pago": 5000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CONSELHO MUNICIPAL DA JUVENTUDE",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 2555,
+        "pago": 1725,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CONSELHO MUNICIPAL DA PESSOA IDOSA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 2555,
+        "pago": 1630,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CONSELHO MUNICIPAL DA PESSOA COM DEFICIÊNCIA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 2555,
+        "pago": 2132,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CONSELHO MUNICIPAL DA PROMOÇÃO DA IGUALDADE RACIAL",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 2555,
+        "pago": 2000,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CONSELHO MUNICIPAL DOS DIREITOS DA MULHER",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 2555,
+        "pago": 1700,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "CONSELHO MUNICIPAL DA DIVERSIDADE",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 2555,
+        "pago": 2299,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "marcio-conrado",
+        "entidade": "INSTITUTO ZOOM",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 50000,
+        "pago": 50000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "marcio-conrado",
+        "entidade": "CASA NAIM",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 50000,
+        "pago": 50000,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "cicero-granjeiro-landim",
+        "entidade": "PROJETO SALTO AGRO",
+        "objeto": "CONSTRUÇÃO DE QUIOSQUE COM CORTINA DE LONA E BANHEIROS FEM/MASC",
+        "secretaria": "Secretaria do Desenv. Econômico, Trabalho, Tecnologia e Inovação",
+        "valor": 60000,
+        "pago": 0,
+        "situacao": "DEVOLVIDA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "",
+        "objeto": "MANUTENÇÃO NO CAMPO DO VILA NORMA E ILUMINAÇÃO",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 15000,
+        "pago": 12150,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "PROJETO SOCIAL JARDIM CELANI (GILSON)",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 12000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "cicero-granjeiro-landim",
+        "entidade": "ARBITRAGEM, AQUISIÇÃO DE BOLAS, UNIFORMES, UTENSÍLIOS",
+        "objeto": "DESPESAS CUSTEIO",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 115000,
+        "pago": 74880,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "CAMPO DE FUTEBOL DO JD INDEPENDÊNCIA - RUA MARGARIADA",
+        "objeto": "AMPLIAÇÃO E REFORMA",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 50000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "entidade": "CENTRO DE LAZER “ARLINDO BONARDI”",
+        "objeto": "AMPLIAÇÃO E REFORMA",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 40000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "fabio-jorge-rodrigues",
+        "entidade": "",
+        "objeto": "PROJETO DE GINÁSTICA NA CRECHE MIRANTE DOS IPES",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 10000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "gideon-tavares",
+        "entidade": "",
+        "objeto": "CONSTR DE UM COMODO COM BANHEIRO ÁREA DE LAZER DO RONDON (R. HILÁRIO FERRARI)",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 100000,
+        "pago": 0,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "INSTALAÇÃO DE REDE DE PROTEÇÃO NA QUADRA DE AREIA PRAÇA DO BAIRRO SALTO VILLE",
+        "objeto": "CUSTEIO",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 5000,
+        "pago": 2231.68,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "INSTALAÇÃO DE REDE DE PROTEÇÃO NA QUADRA DE AREIA PRAÇA DO MADRE PAULINA",
+        "objeto": "DESPESAS CUSTEIO",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 5000,
+        "pago": 2905.68,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "MELHORIAS NAS INST. FISICAS DO CAMPO DE BOCHA DO BAIRRO NOVA ERA",
+        "objeto": "DESPESAS CUSTEIO",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 20000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "MELHORIAS NAS INST. FISICAS DO CAMPO DE BOCHA DO JD ELIZABETH",
+        "objeto": "DESPESAS CUSTEIO",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 15000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "TROCA DO PISO E OUTRAS MELHORIAS DO CAMPO DE BOCHA DO JARDIM SANTA CRUZ",
+        "objeto": "DESPESAS CUSTEIO",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 23000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "SEC. ESPORTES",
+        "objeto": "AQUISIÇÃO DE MATERIAL PERMANENTE",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 70000,
+        "pago": 3652.96,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "",
+        "objeto": "CONSTR DE SALA DE TROFÉUS AO LADO DO VESTIÁRIO DO CAMPO DE FUTEBOL C. ESPORT PEDRO C WANDERLEY",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 30000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "jose-benedito-de-carvalho",
+        "entidade": "ÁREA DE LAZER MOISÉS CAETANO ARENINHA",
+        "objeto": "OBJETIVO OU DESTINAÇÃO DA VERBA CONST VEST E BANHS E MANUT INST. FÍSICA EXIST",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 202908.59,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "SEC. ESPORTES",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 40000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "vinicius-saudino-de-moraes",
+        "entidade": "GINÁSIO MUNICIPAL",
+        "objeto": "ESCALADA",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 10000,
+        "pago": 7211.94,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "ezequiel-de-souza-damasceno",
+        "entidade": "DELEGACIA DE POLICIA",
+        "objeto": "DESPESA DE CUSTEIO",
+        "secretaria": "Secretaria de Defesa Social",
+        "valor": null,
+        "pago": 0,
+        "situacao": "NÃO EXECUTADA"
+      },
+      {
+        "vereador": "marcio-conrado",
+        "entidade": "",
+        "objeto": "AQUISIÇÃO DE CAMERAS DE MONITORAMENTO NAS PRINCIPAIS RUAS COMERCIAIS DO MUNICIPIO",
+        "secretaria": "Secretaria de Defesa Social",
+        "valor": 91060,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "CEMUS IV AMÁLIA ZUIM GATAVELLO - CRECHE",
+        "objeto": "DESPESAS CUSTEIO PARA INSTALAÇÃO DE AR CONDICIONADO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 70000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "DEMANDA DA UNIDADE - CEMUS XI - CRECHE NAIR Z. D. VECCHIA",
+        "objeto": "MELHORIAS PREDIAIS",
+        "secretaria": "Secretaria de Educação",
+        "valor": null,
+        "pago": 0,
+        "situacao": "NÃO EXECUTADA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "CEMUS VII PROFª. Mª JESUINA NASCIMENTO DE MORAES",
+        "objeto": "INSTALAÇÃO DE AR-CONDICIONADO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 7908,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "CEMAEE - CENTRO MUNICIPAL DE ATENDIMENTO EDUCACIONAL ESPEC",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": null,
+        "pago": 0,
+        "situacao": "NÃO EXECUTADA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "CEMUS III PROF JOÃO BATISTA CÉSAR - CRECHE RUA PENAPOLIS 365",
+        "objeto": "INSTALAÇÃO DE AR CONDICIONADO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 20000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "CEMUS III PROF JOÃO BATISTA CÉSAR - CRECHE RUA PENAPOLIS 365",
+        "objeto": "AQUISIÇÃO DE AR CONDICIONADO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 50000,
+        "pago": 9111,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "CEMUS V LUIZ RODRIGUES DE ALMEIDA",
+        "objeto": "AQUISIÇÃO DE AR CONDICIONADO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 40000,
+        "pago": 39822,
+        "situacao": "CONCLUÍDA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "CEMUS V LUIZ RODRIGUES DE ALMEIDA",
+        "objeto": "INSTALAÇÃO DE AR CONDICIONADO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 10000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "ezequiel-de-souza-damasceno",
+        "entidade": "DELEGACIA DE POLICIA",
+        "objeto": "DESPESA DE CUSTEIO",
+        "secretaria": "Secretaria de Defesa Social",
+        "valor": 120000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "marcio-conrado",
+        "entidade": "",
+        "objeto": "AQ DE MATERIAIS E INSUMOS P/ AÇÕES DE FISIOTERAPIA NAS 10 UN. DE SAÚDE",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 39500,
+        "pago": 0,
+        "situacao": "EM EXECUÇÃO"
+      },
+      {
+        "vereador": "gideon-tavares",
+        "entidade": "CLÍNICA SALTO SAÚDE BELA VISTA",
+        "objeto": "REFORMA E COMPRA DE EQUIPAMENTOS",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 45000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CEMUS XIV FLORISBELA AUGUSTA DA SILVA CASTRO - CRECHE",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 15000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CEMUS V - IVANI DE LIMA FLAUZINO - CRECHE SÃO GABRIEL",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 20000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CEMUS XIV - PROF.ª. MÁRCIA REGINA BERTAGNA",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 20000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CEMUS VI PROF. LUZIA RAQUEL ROVERI – CRECHE – SOL D’ICARAÍ",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 15000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "alessandro-dernival-da-silva",
+        "entidade": "CEMUS X MARIA ANTONIETA BULDRIN SONTAG - CRECHE",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 10000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "DEMANDA DA UNIDADE - CEMUS XI - CRECHE NAIR Z. D. VECCHIA",
+        "objeto": "MELHORIAS PREDIAIS",
+        "secretaria": "Secretaria de Educação",
+        "valor": 40000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "entidade": "CEMAEE - CENTRO MUNICIPAL DE ATENDIMENTO EDUCACIONAL ESPEC",
+        "objeto": "DESPESAS DE CUSTEIO",
+        "secretaria": "Secretaria de Educação",
+        "valor": 30000,
+        "pago": 0,
+        "situacao": "INICIADA"
+      },
+      {
+        "vereador": "marcio-conrado",
+        "entidade": "",
+        "objeto": "AQUISIÇÃO DE CAMERAS DE MONITORAMENTO NAS PRINCIPAIS RUAS COMERCIAIS DO MUNICIPIO",
+        "secretaria": "Secretaria de Defesa Social",
+        "valor": 158940,
+        "pago": 0,
+        "situacao": "INICIADA"
+      }
+    ]
+  },
+  "2026": {
+    "fonte": "https://www.camarasalto.sp.gov.br/pdf/orcamento-publico/emendasimpositivas/2026/Emenda%20impositiva%20-%20tabela%20-%2031.08.2026.pdf",
+    "pagina": "https://www.camarasalto.sp.gov.br/orcamento-publico/emendas-impositivas/category/568-2026",
+    "atualizadoEm": "2026-08-31",
+    "ajustes": [
+      {
+        "vereador": "graziela-costa-leite",
+        "bloco": "livre",
+        "de": 10153,
+        "para": 10153.3
+      },
+      {
+        "vereador": "graziela-costa-leite",
+        "bloco": "saúde",
+        "de": 25153,
+        "para": 25153.3
+      }
+    ],
+    "emendas": [
+      {
+        "vereador": "almir-de-melo-santos",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Baralhos modelo 139 Copag",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 20000
+      },
+      {
+        "vereador": "almir-de-melo-santos",
+        "tipo": "livre",
+        "entidade": "Associação Entrelaços das Diversidades, Culturas e Inclusão LGBTQIAP+",
+        "projeto": "Parada Preta: Cultura, Consciência e Inclusão LGBTQIAP+",
+        "secretaria": "Secretaria de Cultura",
+        "valor": 15000
+      },
+      {
+        "vereador": "almir-de-melo-santos",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Compra de bolas futebol, futsal e vôlei",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 22153.3
+      },
+      {
+        "vereador": "almir-de-melo-santos",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Construção de salão de 5x4m na área de lazer do Santa Efigênia",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 100000
+      },
+      {
+        "vereador": "almir-de-melo-santos",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Compra de equipamentos de som",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 20000
+      },
+      {
+        "vereador": "almir-de-melo-santos",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Reforma do Campo Cizo Wanderley, localizado na Rua Penápolis, s/n, Jardim Marília, (CAMPO DO MARILIA) com plantio de grama esportiva e aplicação de adubo, incluindo preparação do solo para melhoria das condições do gramado.",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 80000
+      },
+      {
+        "vereador": "almir-de-melo-santos",
+        "tipo": "livre",
+        "entidade": "Associação dos Deficientes Físicos de Salto - ADEFIS",
+        "projeto": "A importância da comunicação estratégica para a pessoa com deficiência / Contratar para Somar",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 11000
+      },
+      {
+        "vereador": "almir-de-melo-santos",
+        "tipo": "livre",
+        "entidade": "Associação de Engenheiros e Agrônomos de Salto",
+        "projeto": "Apoio para Regularização de Imóveis Residenciais - Baixa Renda",
+        "secretaria": "Secretaria de Governo",
+        "valor": 5000
+      },
+      {
+        "vereador": "almir-de-melo-santos",
+        "tipo": "livre",
+        "entidade": "Associação de Danças Faces Ocultas",
+        "projeto": "Zumbi e Dandara, Consciência Cultural",
+        "secretaria": "Secretaria de Cultura",
+        "valor": 5000
+      },
+      {
+        "vereador": "almir-de-melo-santos",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Tomógrafo 32 canais",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 220000
+      },
+      {
+        "vereador": "almir-de-melo-santos",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Livre aplicação",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 58153.3
+      },
+      {
+        "vereador": "antonio-moreira-sobrinho",
+        "tipo": "livre",
+        "entidade": "Cáritas Interparoquial de Salto",
+        "projeto": "Contos Digitais",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 70000
+      },
+      {
+        "vereador": "antonio-moreira-sobrinho",
+        "tipo": "livre",
+        "entidade": "Conselho Municipal da Pessoa Idosa",
+        "projeto": "Tecendo Ideias / Fortalecimento Estrutural do Conselho",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 10000
+      },
+      {
+        "vereador": "antonio-moreira-sobrinho",
+        "tipo": "livre",
+        "entidade": "Associação Casa da Criança de Salto",
+        "projeto": "Projeto Casa em Movimento - “Manutenção que gera transformação",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 50153.3
+      },
+      {
+        "vereador": "antonio-moreira-sobrinho",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Construção e aquisição de Playgroud",
+        "secretaria": "Secretaria de Educação",
+        "valor": 55000
+      },
+      {
+        "vereador": "antonio-moreira-sobrinho",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Oficina Dança de Salão e Dança de Rua nos bairros Jardim Celani e Jardim Elizabeth",
+        "secretaria": "Secretaria de Cultura",
+        "valor": 13000
+      },
+      {
+        "vereador": "antonio-moreira-sobrinho",
+        "tipo": "livre",
+        "entidade": "Associação Casa Naim Salto",
+        "projeto": "Coração Solidário – Sustentabilidade para o Acolhimento Institucional",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 50000
+      },
+      {
+        "vereador": "antonio-moreira-sobrinho",
+        "tipo": "livre",
+        "entidade": "Associação dos Deficientes Físicos de Salto - ADEFIS",
+        "projeto": "A importância da comunicação estratégica para a pessoa com deficiência / Contratar para Somar",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 30000
+      },
+      {
+        "vereador": "antonio-moreira-sobrinho",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Tomógrafo 32 canais",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 70000
+      },
+      {
+        "vereador": "antonio-moreira-sobrinho",
+        "tipo": "saude",
+        "entidade": "Instituto Zoom",
+        "projeto": "Atendimento Psicológico, Médico e de Estimulação Multidisciplinar Sensorial",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 50000
+      },
+      {
+        "vereador": "antonio-moreira-sobrinho",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Climatização - ar condicionado",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 15000
+      },
+      {
+        "vereador": "antonio-moreira-sobrinho",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Climatização - ar condicionado",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 10000
+      },
+      {
+        "vereador": "antonio-moreira-sobrinho",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Locação de Impressoras",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 15000
+      },
+      {
+        "vereador": "antonio-moreira-sobrinho",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Equipamento de senha para recepção informatizada",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 15000
+      },
+      {
+        "vereador": "antonio-moreira-sobrinho",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "25 colchonetes para fisioterapia",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 15000
+      },
+      {
+        "vereador": "antonio-moreira-sobrinho",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Aquisição de Materiais Permanentes",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 15000
+      },
+      {
+        "vereador": "antonio-moreira-sobrinho",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Climatização",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 10000
+      },
+      {
+        "vereador": "antonio-moreira-sobrinho",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Aquisição de Materiais Permanentes",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 13153.3
+      },
+      {
+        "vereador": "antonio-moreira-sobrinho",
+        "tipo": "saude",
+        "entidade": "Associação Casa Naim Salto",
+        "projeto": "Laços de Ternura: Saúde Construída com Afeto e Cuidado",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 50000
+      },
+      {
+        "vereador": "arildo-guadagnini",
+        "tipo": "livre",
+        "entidade": "Associação Promocional Nossa Senhora das Graças - Casa de Belém",
+        "projeto": "Excelência em Manutenção: Cuidar é transformar",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 140153.3
+      },
+      {
+        "vereador": "arildo-guadagnini",
+        "tipo": "livre",
+        "entidade": "Cáritas Interparoquial de Salto",
+        "projeto": "Contos Digitais",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 50000
+      },
+      {
+        "vereador": "arildo-guadagnini",
+        "tipo": "livre",
+        "entidade": "Associação dos Deficientes Físicos de Salto - ADEFIS",
+        "projeto": "A importância da comunicação estratégica para a pessoa com deficiência / Contratar para Somar",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 35000
+      },
+      {
+        "vereador": "arildo-guadagnini",
+        "tipo": "livre",
+        "entidade": "Conselho Municipal da Pessoa Idosa",
+        "projeto": "Tecendo Ideias / Fortalecimento Estrutural do Conselho",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 8000
+      },
+      {
+        "vereador": "arildo-guadagnini",
+        "tipo": "livre",
+        "entidade": "Associação de Pais e Amigos dos Surdos - ASPAS",
+        "projeto": "LIBRAS para Servidores",
+        "secretaria": "Secretaria de Governo",
+        "valor": 13000
+      },
+      {
+        "vereador": "arildo-guadagnini",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Livre aplicação",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 10000
+      },
+      {
+        "vereador": "arildo-guadagnini",
+        "tipo": "livre",
+        "entidade": "Grupo de Escoteiros Taperá de Salto",
+        "projeto": "Livre aplicação",
+        "secretaria": "Secretaria de Governo",
+        "valor": 22000
+      },
+      {
+        "vereador": "arildo-guadagnini",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Assistência Farmacêutica - COMPRA DE MAT. PERMANENTE",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 125153.3
+      },
+      {
+        "vereador": "arildo-guadagnini",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Compra de Material Permamente",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 53000
+      },
+      {
+        "vereador": "arildo-guadagnini",
+        "tipo": "saude",
+        "entidade": "Associação dos Defensores dos Animais Ajuda Anjos de Salto",
+        "projeto": "Atendimento Veterinário",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 60000
+      },
+      {
+        "vereador": "arildo-guadagnini",
+        "tipo": "saude",
+        "entidade": "Associação Casa Naim Salto",
+        "projeto": "Laços de Ternura: Saúde Construída com Afeto e Cuidado",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 40000
+      },
+      {
+        "vereador": "clayton-aparecido-dos-santos",
+        "tipo": "livre",
+        "entidade": "Associação dos Deficientes Físicos de Salto - ADEFIS",
+        "projeto": "A importância da comunicação estratégica para a pessoa com deficiência / Contratar para Somar",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 17153.3
+      },
+      {
+        "vereador": "clayton-aparecido-dos-santos",
+        "tipo": "livre",
+        "entidade": "Conselho Municipal da Pessoa Idosa",
+        "projeto": "Tecendo Ideias / Fortalecimento Estrutural do Conselho",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 9000
+      },
+      {
+        "vereador": "clayton-aparecido-dos-santos",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Projetos, infraestrutura elétrica e instalação",
+        "secretaria": "Secretaria de Educação",
+        "valor": 100000
+      },
+      {
+        "vereador": "clayton-aparecido-dos-santos",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Projetos, infraestrutura elétrica e instalação",
+        "secretaria": "Secretaria de Educação",
+        "valor": 100000
+      },
+      {
+        "vereador": "clayton-aparecido-dos-santos",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Reforma de 2 quadras esportivas - JD Santa Cruz e JD Monte Paschoal",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 52000
+      },
+      {
+        "vereador": "clayton-aparecido-dos-santos",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Tomógrafo 32 canais",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 70000
+      },
+      {
+        "vereador": "clayton-aparecido-dos-santos",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Investimentos",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 30000
+      },
+      {
+        "vereador": "clayton-aparecido-dos-santos",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Aquisição de 15 cadeiras de rodas hospitalares",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 45000
+      },
+      {
+        "vereador": "clayton-aparecido-dos-santos",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "30 unidades - poltrona reclinável hospitalar",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 33000
+      },
+      {
+        "vereador": "clayton-aparecido-dos-santos",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Investimentos",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 100153.3
+      },
+      {
+        "vereador": "edemilson-pereira-dos-santos",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Espaço dos Artesãos - aquisição de persianas e melhorias estruturais para valorização do trabalho artesanal e fortalecimento da economia criativa",
+        "secretaria": "Secretaria de Comunicação e Turismo",
+        "valor": 14000
+      },
+      {
+        "vereador": "edemilson-pereira-dos-santos",
+        "tipo": "livre",
+        "entidade": "Associação Filantrópica Renascer",
+        "projeto": "Atividade Confortável: Climatização para o Centro de Convivência do Idoso / Viva Bem",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 104000
+      },
+      {
+        "vereador": "edemilson-pereira-dos-santos",
+        "tipo": "livre",
+        "entidade": "Associação de Engenheiros e Agrônomos de Salto",
+        "projeto": "Apoio para Regularização de Imóveis Residenciais - Baixa Renda",
+        "secretaria": "Secretaria de Governo",
+        "valor": 40000
+      },
+      {
+        "vereador": "edemilson-pereira-dos-santos",
+        "tipo": "livre",
+        "entidade": "Secretaria de Obras e Serviços Públicos",
+        "projeto": "Instalação travessia elevada de pedestres (lombofaixa) rod Hilário Ferrari, aproxim. Nº 1768",
+        "secretaria": "Secretaria de Obras e Serviços Públicos",
+        "valor": 30000
+      },
+      {
+        "vereador": "edemilson-pereira-dos-santos",
+        "tipo": "livre",
+        "entidade": "Conselho Municipal dos Direitos da Mulher",
+        "projeto": "Escrevivências Femininas – Vozes que Marcaram a História de Salto",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 14000
+      },
+      {
+        "vereador": "edemilson-pereira-dos-santos",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Salto Agro - Aquisição de Grade Niveladora, Enxada rotativa ( encanteiradora), Sulcador 3 bicos, Arado 3 discos.",
+        "secretaria": "Secretaria de Desenvolvimento Econômico, Trabalho, Tecnologia e Inovação",
+        "valor": 15000
+      },
+      {
+        "vereador": "edemilson-pereira-dos-santos",
+        "tipo": "livre",
+        "entidade": "ASLE - Academia Saltense de Letras Zelia Gattai",
+        "projeto": "Reedição do livro História de Salto, de autoria de Luiz Castellari - reedição do livro História de Salto, de autoria de Luiz Castellari",
+        "secretaria": "Secretaria de Cultura",
+        "valor": 30000
+      },
+      {
+        "vereador": "edemilson-pereira-dos-santos",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Salto Delas - para o projeto de Empreendedorismo Feminino, para ações voltadas a ODS 8.3 fomentar a renda e o trabalho dessas mulheres",
+        "secretaria": "Secretaria de Desenvolvimento Econômico, Trabalho, Tecnologia e Inovação",
+        "valor": 20000
+      },
+      {
+        "vereador": "edemilson-pereira-dos-santos",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Compra de Material Permanente - Compra de Uniformes para os Jogos Regionais",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 11153.3
+      },
+      {
+        "vereador": "edemilson-pereira-dos-santos",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Tomógrafo 32 canais",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 150000
+      },
+      {
+        "vereador": "edemilson-pereira-dos-santos",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Obras de reforma, adequação e modernização da Infraestrutura do setor, bem como com a aquisição de equipamentos, mobiliários, materiais permanentes e demais investimentos necessários ao aprimoramento dos serviços prestados às gestantes, puérperas e recém-nascidos atendidos pela rede pública municipal de saúde.",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 39346.7
+      },
+      {
+        "vereador": "edemilson-pereira-dos-santos",
+        "tipo": "saude",
+        "entidade": "Associação dos Defensores dos Animais Ajuda Anjos de Salto",
+        "projeto": "Atendimento Veterinário",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 88806.6
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Livre aplicação",
+        "secretaria": "Secretaria de Desenvolvimento Econômico, Trabalho, Tecnologia e Inovação",
+        "valor": 40000
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "livre",
+        "entidade": "Cáritas Interparoquial de Salto",
+        "projeto": "Contos Digitais",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 14500
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "livre",
+        "entidade": "Associação dos Deficientes Físicos de Salto - ADEFIS",
+        "projeto": "A importância da comunicação estratégica para a pessoa com deficiência / Contratar para Somar",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 14500
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "livre",
+        "entidade": "Associação Casa da Criança de Salto",
+        "projeto": "Projeto Casa em Movimento - “Manutenção que gera transformação",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 14500
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "livre",
+        "entidade": "Associação Filantrópica Renascer",
+        "projeto": "Atividade Confortável: Climatização para o Centro de Convivência do Idoso / Viva Bem",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 14500
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "livre",
+        "entidade": "Assistência Vicentina Frederico Ozanam",
+        "projeto": "Essência de Cuidar",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 54453.3
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Aquisição de material permanente",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 14500
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "livre",
+        "entidade": "Associação Aliança de Misericórdia - Projeto Cidade Rahamin",
+        "projeto": "Custeio Parcial da Equipe de Recursos Humanos",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 14500
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Aquisição de peças automotivas e contratação de serviços especializados de manutenção corretiva e preventiva do micro-ônibus de placa DJL-4E36.",
+        "secretaria": "Secretaria de Esporte",
+        "valor": 10000
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Aquisição de: • 50 metros de mangueira de combate a incêndio • 20 camisas • 20 calças • 04 macacões anti-chamas • 04 botas cano longo anti-chamas • 10 oletes de voluntários (Defesa Civil) • 10 coletes refletivos operacionais • 10 jaquetas • 10",
+        "secretaria": "Secretaria de Defesa Social",
+        "valor": 27700
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "livre",
+        "entidade": "Conselho Municipal da Pessoa Idosa",
+        "projeto": "Tecendo Ideias / Fortalecimento Estrutural do Conselho",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 9000
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Livre aplicação",
+        "secretaria": "Secretaria de Educação",
+        "valor": 15000
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Livre aplicação",
+        "secretaria": "Secretaria de Educação",
+        "valor": 15000
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "livre aplicação",
+        "secretaria": "Secretaria de Esporte",
+        "valor": 20000
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Tomógrafo 32 canais",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 70000
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "saude",
+        "entidade": "Associação Casa Naim Salto",
+        "projeto": "Laços de Ternura: Saúde Construída com Afeto e Cuidado",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 20000
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Livre aplicação",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 50000
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "saude",
+        "entidade": "Instituto Zoom",
+        "projeto": "Atendimento Psicológico, Médico e de Estimulação Multidisciplinar Sensorial",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 20000
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "saude",
+        "entidade": "Associação de Pais e Amigos dos Excepcionais de Salto - APAE",
+        "projeto": "Projeto: Custeio, Instalações e Manutenção",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 20000
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Clínica Salto Saúde Saltense",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 30000
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Livre aplicação",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 30000
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Obras de reforma, adequação e modernização da Infraestrutura do setor, bem como com a aquisição de equipamentos, mobiliários, materiais permanentes e demais investimentos necessários ao aprimoramento dos serviços prestados às gestantes, puérperas e recém-nascidos atendidos pela rede pública municipal de saúde.",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 28153.3
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "saude",
+        "entidade": "Clínica Salto Saúde Moutonnée",
+        "projeto": "Livre Aplicação",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 5000
+      },
+      {
+        "vereador": "edival-pereira-rosa",
+        "tipo": "saude",
+        "entidade": "Clínica Salto Saúde Nações",
+        "projeto": "Livre Aplicação",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 5000
+      },
+      {
+        "vereador": "graziela-costa-leite",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Projeto Anjos da Vida: apoio às ações de resgate, primeiros socorros e atendimento emergencial da equipe Anjos da Vida",
+        "secretaria": "Secretaria de Defesa Social",
+        "valor": 10000
+      },
+      {
+        "vereador": "graziela-costa-leite",
+        "tipo": "livre",
+        "entidade": "Escola Zumbi dos Palmares",
+        "projeto": "Zumbi dos Palmares Fomento ao projeto social de percussão infantil, promovendo cultura, arte e inclusão entre crianças e adolescentes no Bairro Santa Cruz 18000",
+        "secretaria": "Secretaria de Cultura",
+        "valor": 18000
+      },
+      {
+        "vereador": "graziela-costa-leite",
+        "tipo": "livre",
+        "entidade": "Cáritas Interparoquial de Salto",
+        "projeto": "Contos Digitais",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 32000
+      },
+      {
+        "vereador": "graziela-costa-leite",
+        "tipo": "livre",
+        "entidade": "ADEVISA - Associação dos Deficientes Visuais de Salto",
+        "projeto": "Orçamento Estratégico RH",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 10153.3
+      },
+      {
+        "vereador": "graziela-costa-leite",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Programa Sinal Sonoro nas Escolas: implantação do programa de segurança e acessibilidade sonora nas unidades escolares do município 5 unidades",
+        "secretaria": "Secretaria de Educação",
+        "valor": 15000
+      },
+      {
+        "vereador": "graziela-costa-leite",
+        "tipo": "livre",
+        "entidade": "Conselho Municipal dos Direitos da Mulher",
+        "projeto": "Gênero, Educação e Futuro: Letramento e Autonomia Econômica",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 14000
+      },
+      {
+        "vereador": "graziela-costa-leite",
+        "tipo": "livre",
+        "entidade": "Associação Entrelaços das Diversidades, Culturas e Inclusão LGBTQIAP+",
+        "projeto": "Parada Preta: Cultura, Consciência e Inclusão LGBTQIAP+",
+        "secretaria": "Secretaria de Cultura",
+        "valor": 15000
+      },
+      {
+        "vereador": "graziela-costa-leite",
+        "tipo": "livre",
+        "entidade": "Conselho Municipal da Igualdade Racial",
+        "projeto": "Raiz: Quilombamento e Igualdade Racial",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 15000
+      },
+      {
+        "vereador": "graziela-costa-leite",
+        "tipo": "livre",
+        "entidade": "Associação Cultural e Esportiva Craques do Amanhã",
+        "projeto": "Custeio de Despesas",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 35000
+      },
+      {
+        "vereador": "graziela-costa-leite",
+        "tipo": "livre",
+        "entidade": "Associação Casa da Criança de Salto",
+        "projeto": "Projeto Casa em Movimento - “Manutenção que gera transformação”",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 30000
+      },
+      {
+        "vereador": "graziela-costa-leite",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Espaço dos Artesãos - aquisição de persianas e melhorias estruturais para valorização do trabalho artesanal e fortalecimento da economia criativa",
+        "secretaria": "Secretaria de Comunicação e Turismo",
+        "valor": 14000
+      },
+      {
+        "vereador": "graziela-costa-leite",
+        "tipo": "livre",
+        "entidade": "Associação Filantrópica Renascer",
+        "projeto": "Atividade Confortável: Climatização para o Centro de Convivência do Idoso / Viva Bem",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 12000
+      },
+      {
+        "vereador": "graziela-costa-leite",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Plataforma elevatória - elevador para piscina",
+        "secretaria": "Secretaria de Esportes",
+        "valor": 28000
+      },
+      {
+        "vereador": "graziela-costa-leite",
+        "tipo": "livre",
+        "entidade": "Associação de Pais e Amigos dos Surdos - ASPAS",
+        "projeto": "Libras para Servidores",
+        "secretaria": "Secretaria de Governo",
+        "valor": 12000
+      },
+      {
+        "vereador": "graziela-costa-leite",
+        "tipo": "livre",
+        "entidade": "Faces Ocultas",
+        "projeto": "Programa Mulheres em Movimento - Promover o bem-estar físico, emocional e comunitário por meio de oficinas de dança que valorizam o corpo, a cultura afro- brasileira e a educação popular como práticas de autocuidado, Saúde integral e fortalecimento da autoestima de mulheres e jovens da cidade de Salto.",
+        "secretaria": "Secretaria de Cultura",
+        "valor": 18000
+      },
+      {
+        "vereador": "graziela-costa-leite",
+        "tipo": "saude",
+        "entidade": "Instituto Zoom",
+        "projeto": "Atendimento Psicológico, Médico e de Estimulação Multidisciplinar Sensorial",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 100000
+      },
+      {
+        "vereador": "graziela-costa-leite",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Promoção da semana da maternidade atípica",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 4994
+      },
+      {
+        "vereador": "graziela-costa-leite",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Tomógrafo 32 canais",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 88000
+      },
+      {
+        "vereador": "graziela-costa-leite",
+        "tipo": "saude",
+        "entidade": "Associação dos Defensores dos Animais Ajuda Anjos de Salto",
+        "projeto": "Atendimento Veterinário",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 25153.3
+      },
+      {
+        "vereador": "graziela-costa-leite",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Custeio para aquisição de aparelho respiratório infantil",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 60006
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Projetos, infraestrutura elétrica e instalação",
+        "secretaria": "Secretaria de Educação",
+        "valor": 150000
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Livre aplicação",
+        "secretaria": "Secretaria de Obras e Serviços Públicos",
+        "valor": 28153.3
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "tipo": "livre",
+        "entidade": "Associação Promocional Nossa Senhora das Graças - Casa de Belém",
+        "projeto": "Excelência em Manutenção: Cuidar é transformar",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 10000
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "tipo": "livre",
+        "entidade": "ADEVISA - Associação dos Deficientes Visuais de Salto",
+        "projeto": "Livre aplicação",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 10000
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Livre aplicação",
+        "secretaria": "Secretaria de Defesa Social",
+        "valor": 60000
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Livre aplicação",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 10000
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Livre aplicação",
+        "secretaria": "Secretaria de Cultura",
+        "valor": 10000
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Tomógrafo 32 canais",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 70000
+      },
+      {
+        "vereador": "henrique-balseiros-chamosa-neto",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Livre aplicação",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 208153.3
+      },
+      {
+        "vereador": "luzia-de-fatima-izidorio-vidal",
+        "tipo": "livre",
+        "entidade": "Associação de Pais e Amigos dos Surdos - ASPAS",
+        "projeto": "LIBRAS para Servidores",
+        "secretaria": "Secretaria de Governo",
+        "valor": 35000
+      },
+      {
+        "vereador": "luzia-de-fatima-izidorio-vidal",
+        "tipo": "livre",
+        "entidade": "Conselho Municipal da Pessoa com Deficiência",
+        "projeto": "Livre aplicação",
+        "secretaria": "Secretaria da Assistencia Social",
+        "valor": 10000
+      },
+      {
+        "vereador": "luzia-de-fatima-izidorio-vidal",
+        "tipo": "livre",
+        "entidade": "Conselho Municipal da Pessoa Idosa",
+        "projeto": "Tecendo Ideias / Fortalecimento Estrutural do Conselho",
+        "secretaria": "Secretaria da Assistencia Social",
+        "valor": 8750
+      },
+      {
+        "vereador": "luzia-de-fatima-izidorio-vidal",
+        "tipo": "livre",
+        "entidade": "Instituto Mestre Ricardo Pereira",
+        "projeto": "Crescendo e Aprendendo a Evoluir – Taekwondo, Cidadania e Formação",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 10000
+      },
+      {
+        "vereador": "luzia-de-fatima-izidorio-vidal",
+        "tipo": "livre",
+        "entidade": "Conselho Municipal de Segurança Alimentar e Nutricional – Comsea",
+        "projeto": "Impressão de Cartilhas",
+        "secretaria": "Secretaria de Desenvolvimento Econômico, Trabalho, Tecnologia e Inovação",
+        "valor": 5000
+      },
+      {
+        "vereador": "luzia-de-fatima-izidorio-vidal",
+        "tipo": "livre",
+        "entidade": "Associação Casa de Naim",
+        "projeto": "Laços de Ternura: Saúde Construída com Afeto e Cuidado",
+        "secretaria": "Secretaria da Assistencia Social",
+        "valor": 10000
+      },
+      {
+        "vereador": "luzia-de-fatima-izidorio-vidal",
+        "tipo": "livre",
+        "entidade": "Conselho Municipal de Assistência Social",
+        "projeto": "Fortalecendo para Transformar Vidas",
+        "secretaria": "Secretaria da Assistencia Social",
+        "valor": 1403.3
+      },
+      {
+        "vereador": "luzia-de-fatima-izidorio-vidal",
+        "tipo": "livre",
+        "entidade": "ADEVISA - Associação dos Deficientes Visuais de Salto",
+        "projeto": "Orçamento Estratégico RH",
+        "secretaria": "Secretaria da Assistencia Social",
+        "valor": 10000
+      },
+      {
+        "vereador": "luzia-de-fatima-izidorio-vidal",
+        "tipo": "livre",
+        "entidade": "Associação Casa da Criança de Salto",
+        "projeto": "Projeto Casa em Movimento - “Manutenção que gera transformação",
+        "secretaria": "Secretaria da Assistencia Social",
+        "valor": 10000
+      },
+      {
+        "vereador": "luzia-de-fatima-izidorio-vidal",
+        "tipo": "livre",
+        "entidade": "Associação de Danças Faces Ocultas",
+        "projeto": "Zumbi e Dandara, Consciência Cultutal",
+        "secretaria": "Secretaria da Cultura",
+        "valor": 10000
+      },
+      {
+        "vereador": "luzia-de-fatima-izidorio-vidal",
+        "tipo": "livre",
+        "entidade": "Associação dos Deficientes Físicos de Salto - ADEFIS",
+        "projeto": "A importância da comunicação estratégica para a pessoa com deficiência / Contratar para Somar",
+        "secretaria": "Secretaria da Assistencia Social",
+        "valor": 4000
+      },
+      {
+        "vereador": "luzia-de-fatima-izidorio-vidal",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Aquisição de equipamentos a fim de possibilitar a realização de atividades colerivas de ginástica socioassistenciais do SUAS, CRAS e CCI",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 20000
+      },
+      {
+        "vereador": "luzia-de-fatima-izidorio-vidal",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Melhorias - Telhado",
+        "secretaria": "Secretaria de Educação",
+        "valor": 26000
+      },
+      {
+        "vereador": "luzia-de-fatima-izidorio-vidal",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Manutenção Predial das Unidades Escolares - fechamento de area",
+        "secretaria": "Secretaria de Educação",
+        "valor": 30000
+      },
+      {
+        "vereador": "luzia-de-fatima-izidorio-vidal",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Raspagem (da quadra calafetação com cola p.u e aplicação de verniz alto trafego, incluindo material, mão de obra e verniz).",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 80000
+      },
+      {
+        "vereador": "luzia-de-fatima-izidorio-vidal",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Baralhos modelo 139 Copag",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 8000
+      },
+      {
+        "vereador": "luzia-de-fatima-izidorio-vidal",
+        "tipo": "saude",
+        "entidade": "Instituto Zoom",
+        "projeto": "Atendimento Psicológico, Médico e de Estimulação Multidisciplinar Sensorial",
+        "secretaria": "Secretaria da Saúde",
+        "valor": 70000
+      },
+      {
+        "vereador": "luzia-de-fatima-izidorio-vidal",
+        "tipo": "saude",
+        "entidade": "Associação Casa de Naim",
+        "projeto": "Laços de Ternura: Saúde Construída com Afeto e Cuidado",
+        "secretaria": "Secretaria da Saúde",
+        "valor": 10000
+      },
+      {
+        "vereador": "luzia-de-fatima-izidorio-vidal",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Exames de diagnóstico – ultrassonografias",
+        "secretaria": "Secretaria da Saúde",
+        "valor": 20000
+      },
+      {
+        "vereador": "luzia-de-fatima-izidorio-vidal",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Tomógrafo 32 canais",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 70000
+      },
+      {
+        "vereador": "luzia-de-fatima-izidorio-vidal",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Ventilador mecanico ou pulmonar",
+        "secretaria": "Secretaria da Saúde",
+        "valor": 70000
+      },
+      {
+        "vereador": "luzia-de-fatima-izidorio-vidal",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Aquisição de carrinhos de banho, focos clínicos e suportes para soro",
+        "secretaria": "Secretaria da Saúde",
+        "valor": 38153.3
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "livre",
+        "entidade": "Cáritas Interparoquial de Salto",
+        "projeto": "Contos Digitais",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 20200
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "livre",
+        "entidade": "Associação Entrelaços das Diversidades, Culturas e Inclusão LGBTQIAP+",
+        "projeto": "Parada Preta: Cultura, Consciência e Inclusão LGBTQIAP+",
+        "secretaria": "Secretaria de Cultura",
+        "valor": 15000
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "livre",
+        "entidade": "Conselho Municipal de Promoção da Igualdade Racial",
+        "projeto": "Casa da Memória Negra: Modernização Tecnológica e Acessibilidade Cultural",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 19603.58
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "livre",
+        "entidade": "Conselho Municipal da Pessoa Idosa",
+        "projeto": "Tecendo Ideias / Fortalecimento Estrutural do Conselho",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 3250
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "livre",
+        "entidade": "Associação de Danças Faces Ocultas",
+        "projeto": "Zumbi e Dandara, Consciência Cultural",
+        "secretaria": "Secretaria de Cultura",
+        "valor": 15000
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "livre",
+        "entidade": "Associação Aliança de Misericórdia",
+        "projeto": "Acolher e Reintegrar - Manutenção da Equipe Psicossocial da Cidade Rahamim",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 15000
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Oficina Dança de Salão e Dança de Rua nos bairros Jardim Celani e Jardim Elizabeth",
+        "secretaria": "Secretaria de Cultura",
+        "valor": 12000
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Equipe de Xadrez Saltense",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 5000
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Eventos – Dia Municipal do Reggae – em atendimento à Lei nº 3.985/2022",
+        "secretaria": "Secretaria de Cultura",
+        "valor": 10000
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Melhorias – manutenção do forro",
+        "secretaria": "Secretaria de Educação",
+        "valor": 35000
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Instalação de cobertura da entrada – Rua São Dimas",
+        "secretaria": "Secretaria de Educação",
+        "valor": 30000
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Eventos - Dia Municipal do Reggae - Em atendimento à LEI Nº 3.985/2022",
+        "secretaria": "Secretaria de Cultura",
+        "valor": 25000
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Eventos - Semana da Cultura Flashback - Em atendimento à LEI Nº 3.985/2022",
+        "secretaria": "Secretaria de Cultura",
+        "valor": 15000
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "livre",
+        "entidade": "Grupo de Escoteiros Taperá de Salto",
+        "projeto": "Livre Aplicação",
+        "secretaria": "Secretaria de Governo",
+        "valor": 5000
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Manutenção de Iluminação para Auditório J. Silvestre",
+        "secretaria": "Secretaria de Cultura",
+        "valor": 7000
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Manutenção e aquisição de utensílios para melhoria no Campo do Bairro Vila Norma",
+        "secretaria": "Secretaria de Esporte e Lazer",
+        "valor": 26099.72
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Aquisição de brinquedos",
+        "secretaria": "Secretaria de Educação",
+        "valor": 20000
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Tomógrafo 32 canais",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 70000
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "saude",
+        "entidade": "Associação dos Defensores dos Animais Ajuda Anjos de Salto",
+        "projeto": "Atendimento Veterinário",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 20000
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Aquisição de Ar Condicionado para sala de Triagem",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 5000
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Aquisição de Fraldário e Ar Condicionado",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 15000
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Aquisição de equipamentos de climatização (Ar condicionado e Ventiladores) e projetor",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 11653.3
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Maca e ar-condicionado",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 10000
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Compra referente à \"cesta básica\" de medicamentos - Relação Nacional de Medicamentos Essenciais (Rename)",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 120000
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "saude",
+        "entidade": "Associação Casa Naim Salto",
+        "projeto": "Laços de Ternura: Saúde Construída com Afeto e Cuidado",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 15000
+      },
+      {
+        "vereador": "michel-oliveira-rodrigues-da-silva",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Aquisição ar condicionado",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 11500
+      },
+      {
+        "vereador": "rogerio-dos-santos-filho",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Instalação de Interfone da Creche",
+        "secretaria": "Secretaria de Educação",
+        "valor": 15000
+      },
+      {
+        "vereador": "rogerio-dos-santos-filho",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Aquisição de bebedouros de Água Purificada",
+        "secretaria": "Secretaria de Educação",
+        "valor": 5153.3
+      },
+      {
+        "vereador": "rogerio-dos-santos-filho",
+        "tipo": "livre",
+        "entidade": "Conselho Municipal de Assistência Social",
+        "projeto": "Fortalecendo para Transformar Vidas",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 2000
+      },
+      {
+        "vereador": "rogerio-dos-santos-filho",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Aquisição de 100 colchões para atender os atletas e equipes técnicas durante os Jogos Regionais, garantindo condições adequadas de descanso e bem-estar durante o evento.",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 15000
+      },
+      {
+        "vereador": "rogerio-dos-santos-filho",
+        "tipo": "livre",
+        "entidade": "Associação Promocional Nossa Senhora das Graças - Casa de Belém",
+        "projeto": "Excelência em Manutenção: Cuidar é transformar",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 20000
+      },
+      {
+        "vereador": "rogerio-dos-santos-filho",
+        "tipo": "livre",
+        "entidade": "Associação dos Deficientes Visuais de Salto – SP (Adevisa)",
+        "projeto": "Orçamento Estratégico RH",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 10000
+      },
+      {
+        "vereador": "rogerio-dos-santos-filho",
+        "tipo": "livre",
+        "entidade": "Associação dos Deficientes Físicos de Salto – SP (Adefis)",
+        "projeto": "A importância da comunicação estratégica para a pessoa com deficiência / Contratar para Somar",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 15000
+      },
+      {
+        "vereador": "rogerio-dos-santos-filho",
+        "tipo": "livre",
+        "entidade": "Associação Casa da Criança de Salto – SP",
+        "projeto": "Projeto Casa em Movimento - “Manutenção que gera transformação",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 30000
+      },
+      {
+        "vereador": "rogerio-dos-santos-filho",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Aquisição, conserto (restauração/reparo) e afinação de instrumentos musicais para o Conservatório Municipal Maestro Henrique Castellari.",
+        "secretaria": "Secretaria de Cultura",
+        "valor": 30000
+      },
+      {
+        "vereador": "rogerio-dos-santos-filho",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Aquisição de equipamentos para academia municipal",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 15000
+      },
+      {
+        "vereador": "rogerio-dos-santos-filho",
+        "tipo": "livre",
+        "entidade": "Academia Municipal",
+        "projeto": "Manutenção corretiva e preventiva dos equipamentos existentes da academia municipal",
+        "secretaria": "Secretaria de Esportes e Lazer",
+        "valor": 5000
+      },
+      {
+        "vereador": "rogerio-dos-santos-filho",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Livre Aplicação",
+        "secretaria": "Secretaria de Cultura",
+        "valor": 48000
+      },
+      {
+        "vereador": "rogerio-dos-santos-filho",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Evento Marcha para Jesus em Salto – diversos – custeio para garantir a realização do evento, incluindo pagamento de bandas, sonorização, locações e demais despesas de custeio.",
+        "secretaria": "Secretaria de Cultura",
+        "valor": 30000
+      },
+      {
+        "vereador": "rogerio-dos-santos-filho",
+        "tipo": "livre",
+        "entidade": "Conselho Municipal da Pessoa Idosa",
+        "projeto": "Tecendo Ideias / Fortalecimento Estrutural do Conselho",
+        "secretaria": "Secretaria de Ação Social e Cidadania",
+        "valor": 10000
+      },
+      {
+        "vereador": "rogerio-dos-santos-filho",
+        "tipo": "livre",
+        "entidade": "",
+        "projeto": "Plataforma elevatória - elevador para piscina",
+        "secretaria": "Secretaria de Esportes",
+        "valor": 28000
+      },
+      {
+        "vereador": "rogerio-dos-santos-filho",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Tomógrafo 32 canais",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 70000
+      },
+      {
+        "vereador": "rogerio-dos-santos-filho",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Projeto instalação de toldo/cobertura da entrada, centro integrado saúde da mulher - CI",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 15000
+      },
+      {
+        "vereador": "rogerio-dos-santos-filho",
+        "tipo": "saude",
+        "entidade": "Associação Casa Naim Salto",
+        "projeto": "Laços de Ternura: Saúde Construída com Afeto e Cuidado",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 40000
+      },
+      {
+        "vereador": "rogerio-dos-santos-filho",
+        "tipo": "saude",
+        "entidade": "Associação de Pais e Amigos dos Excepcionais de Salto - APAE",
+        "projeto": "Projeto: Custeio, Instalações e Manutenção",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 25000
+      },
+      {
+        "vereador": "rogerio-dos-santos-filho",
+        "tipo": "saude",
+        "entidade": "Instituto Zoom",
+        "projeto": "Atendimento Psicológico, Médico e de Estimulação Multidisciplinar Sensorial",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 25000
+      },
+      {
+        "vereador": "rogerio-dos-santos-filho",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Livre aplicação",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 50653.3
+      },
+      {
+        "vereador": "rogerio-dos-santos-filho",
+        "tipo": "saude",
+        "entidade": "",
+        "projeto": "Obras de reforma, adequação e modernização da Infraestrutura do setor, bem como com a aquisição de equipamentos, mobiliários, materiais permanentes e demais investimentos necessários ao aprimoramento dos serviços prestados às gestantes, puérperas e recém-nascidos atendidos pela rede pública municipal de saúde.",
+        "secretaria": "Secretaria de Saúde",
+        "valor": 67500
+      }
+    ]
+  },
+  "iniciaisConferidas": {
+    "ACS": "antonio-cordeiro-dos-santos",
+    "ADS": "alessandro-dernival-da-silva",
+    "CGL": "cicero-granjeiro-landim",
+    "EPR": "edival-pereira-rosa",
+    "ESD": "ezequiel-de-souza-damasceno",
+    "FJR": "fabio-jorge-rodrigues",
+    "GT": "gideon-tavares",
+    "HBCN": "henrique-balseiros-chamosa-neto",
+    "JBC": "jose-benedito-de-carvalho",
+    "MC": "marcio-conrado",
+    "VSM": "vinicius-saudino-de-moraes"
+  },
+  "vereadoresAnteriores": {
+    "alessandro-dernival-da-silva": "ALESSANDRO DERNIVAL DA SILVA",
+    "antonio-cordeiro-dos-santos": "ANTÔNIO CORDEIRO DOS SANTOS",
+    "cicero-granjeiro-landim": "CÍCERO GRANJEIRO LANDIM",
+    "ezequiel-de-souza-damasceno": "EZEQUIEL DE SOUZA DAMASCENO",
+    "fabio-jorge-rodrigues": "FABIO JORGE RODRIGUES",
+    "gideon-tavares": "GIDEON TAVARES",
+    "jose-benedito-de-carvalho": "JOSÉ BENEDITO DE CARVALHO",
+    "marcio-conrado": "MARCIO CONRADO",
+    "vinicius-saudino-de-moraes": "VINICIUS SAUDINO DE MORAES"
+  }
+}

@@ -8,3 +8,4 @@ data/bruto/despesas/
 
 # Texto bruto das proposições: o oficial cita CPF/RG de nomeados. O site mascara ao ler; a cópia bruta não vai para o repositório público.
 data/bruto/proposituras-*.json
+data/bruto/promessas-rascunho.json
