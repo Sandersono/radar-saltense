@@ -37,9 +37,12 @@ const FONTES = [
 
 // semanas: arquivo semanal (data/processado/semanas.json); sem ele, é montado agora com os dados atuais.
 export async function gerarSite(d, destino, semanasSalvas = null) {
-  const semanas = semanasSalvas && Object.keys(semanasSalvas).length
-    ? semanasSalvas
-    : atualizarSemanas({}, d, hojeSP(d.meta.atualizadoEm), d.meta.novidadesRecentes);
+  let semanas = semanasSalvas && Object.keys(semanasSalvas).length ? semanasSalvas : null;
+  if (!semanas) {
+    // Erro no arquivo semanal nunca impede publicar: o site sai sem as páginas de semana desta vez.
+    try { semanas = atualizarSemanas({}, d, hojeSP(d.meta.atualizadoEm), d.meta.novidadesRecentes); }
+    catch (e) { console.warn(`Arquivo semanal não montado: ${e.message}`); semanas = {}; }
+  }
   for (const pasta of ['vereador', 'semana', 'dados', 'fontes', 'fotos', 'marca']) await mkdir(`${destino}/${pasta}`, { recursive: true });
   const paginas = []; // vão para o sitemap.xml
   const pagina = async (caminho, html) => { await writeFile(`${destino}/${caminho}`, html); paginas.push(caminho); };

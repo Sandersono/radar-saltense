@@ -159,7 +159,7 @@ ${nav}
       dateModified: r.completa ? r.domingo : d.meta.atualizadoEm,
       inLanguage: 'pt-BR',
       about: { '@type': 'City', name: 'Salto (SP)' },
-      publisher: { '@type': 'WebSite', name: 'Radar Saltense', url: ENDERECO },
+      publisher: { '@type': 'Organization', name: 'Radar Saltense', url: ENDERECO },
     },
     corpo,
     prefixo: '../',
