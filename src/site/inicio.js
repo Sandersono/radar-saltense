@@ -84,9 +84,9 @@ export function paginaInicial(d) {
 <p>O que a Câmara e a Prefeitura de Salto fazem e quanto isso custa, só com dado oficial e link para a fonte. Atualizado todo dia.</p>
 <p class="atualizado">Atualizado em ${esc(quandoBR(d.meta.atualizadoEm))}</p>`;
 
-  const corpo = `${gradeTopicos(d)}
-${salario}
+  const corpo = `${salario}
 ${d.receitas ? blocoContador(d.receitas, '', false) : ''}
+${gradeTopicos(d)}
 ${d.gastos ? chamadaGastos(d.gastos) : ''}
 <section id="bairro" class="secao">
 <h2>O que pediram pro seu bairro?</h2>
