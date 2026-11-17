@@ -61,7 +61,10 @@ export const descricaoVereador = (v) => {
 // O apelido abre o título (busca por apelido); o nome completo vem entre parênteses.
 // Com apelido, até 70 caracteres: o fim sai, e por último o nome completo. Sem gênero.
 export const tituloVereador = (v) => {
-  if (!v.apelido) return `${v.nome} na Câmara de Salto: presença, votos e propostas`;
+  if (!v.apelido) {
+    const longo = `${v.nome} na Câmara de Salto: presença, votos e propostas`;
+    return longo.length <= 70 ? longo : `${v.nome} na Câmara de Salto`;
+  }
   const opcoes = [
     `${v.apelido} (${v.nome}) na Câmara de Salto: presença, votos e propostas`,
     `${v.apelido} (${v.nome}) na Câmara de Salto`,
