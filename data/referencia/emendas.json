@@ -54,7 +54,7 @@
         "entidade": "CEMUS XIV FLORISBELA AUGUSTA DA SILVA CASTRO - CRECHE",
         "objeto": "DESPESAS DE CUSTEIO",
         "secretaria": "Secretaria de Educação",
-        "valor": 0,
+        "valor": null,
         "pago": 0,
         "situacao": "NÃO EXECUTADA"
       },
@@ -63,7 +63,7 @@
         "entidade": "CEMUS V - IVANI DE LIMA FLAUZINO - CRECHE SÃO GABRIEL",
         "objeto": "DESPESAS DE CUSTEIO",
         "secretaria": "Secretaria de Educação",
-        "valor": 0,
+        "valor": null,
         "pago": 0,
         "situacao": "NÃO EXECUTADA"
       },
@@ -90,7 +90,7 @@
         "entidade": "CEMUS XIV - PROF.ª. MÁRCIA REGINA BERTAGNA",
         "objeto": "DESPESAS DE CUSTEIO",
         "secretaria": "Secretaria de Educação",
-        "valor": 0,
+        "valor": null,
         "pago": 0,
         "situacao": "NÃO EXECUTADA"
       },
@@ -126,7 +126,7 @@
         "entidade": "CEMUS VI PROF. LUZIA RAQUEL ROVERI – CRECHE – SOL D’ICARAÍ",
         "objeto": "DESPESAS DE CUSTEIO",
         "secretaria": "Secretaria de Educação",
-        "valor": 0,
+        "valor": null,
         "pago": 0,
         "situacao": "NÃO EXECUTADA"
       },
@@ -135,7 +135,7 @@
         "entidade": "CEMUS X MARIA ANTONIETA BULDRIN SONTAG - CRECHE",
         "objeto": "DESPESAS DE CUSTEIO",
         "secretaria": "Secretaria de Educação",
-        "valor": 0,
+        "valor": null,
         "pago": 0,
         "situacao": "NÃO EXECUTADA"
       },
@@ -243,7 +243,7 @@
         "entidade": "CEMAEE - CENTRO MUNICIPAL DE ATENDIMENTO EDUCACIONAL ESPEC",
         "objeto": "AQUISICAO DE EQUIPAMENTOS, CURSOS",
         "secretaria": "Secretaria de Educação",
-        "valor": 0,
+        "valor": null,
         "pago": 0,
         "situacao": "NÃO EXECUTADA"
       },
@@ -279,7 +279,7 @@
         "entidade": "CEMAEE - CENTRO MUNICIPAL DE ATENDIMENTO EDUCACIONAL ESPEC",
         "objeto": "DESPESAS DE CUSTEIO",
         "secretaria": "Secretaria de Educação",
-        "valor": 0,
+        "valor": null,
         "pago": 0,
         "situacao": "NÃO EXECUTADA"
       },
@@ -315,7 +315,7 @@
         "entidade": "DEMANDA DA UNIDADE - CEMUS XI - CRECHE NAIR Z. D. VECCHIA",
         "objeto": "MELHORIAS PREDIAIS",
         "secretaria": "Secretaria de Educação",
-        "valor": 0,
+        "valor": null,
         "pago": 0,
         "situacao": "NÃO EXECUTADA"
       },
@@ -333,7 +333,7 @@
         "entidade": "CEMAEE - CENTRO MUNICIPAL DE ATENDIMENTO EDUCACIONAL ESPEC",
         "objeto": "AQUISIÇÃO DE MÓVEIS EM GERAL",
         "secretaria": "Secretaria de Educação",
-        "valor": 0,
+        "valor": null,
         "pago": 0,
         "situacao": "NÃO EXECUTADA"
       },
@@ -342,7 +342,7 @@
         "entidade": "CEMUS III PROF. JOÃO BATISTA CÉSAR - CRECHE RUA PENAPOLIS 365",
         "objeto": "AQUISIÇÃO DE MÓVEIS EM GERAL",
         "secretaria": "Secretaria de Educação",
-        "valor": 0,
+        "valor": null,
         "pago": 0,
         "situacao": "NÃO EXECUTADA"
       },
@@ -351,7 +351,7 @@
         "entidade": "CEMUS V LUIZ RODRIGUES DE ALMEIDA",
         "objeto": "AQUISIÇÃO DE MÓVEIS EM GERAL A UNIDADE",
         "secretaria": "Secretaria de Educação",
-        "valor": 0,
+        "valor": null,
         "pago": 0,
         "situacao": "NÃO EXECUTADA"
       },
@@ -360,7 +360,7 @@
         "entidade": "MANUTENÇÃO E MELHORIAS NAS INSTALAÇÕES FÍSICAS DA GARAGEM",
         "objeto": "DESPESAS CUSTEIO",
         "secretaria": "Secretaria de Educação",
-        "valor": 0,
+        "valor": null,
         "pago": 0,
         "situacao": "NÃO EXECUTADA"
       },
@@ -1827,7 +1827,7 @@
         "entidade": "DELEGACIA DE POLICIA",
         "objeto": "DESPESA DE CUSTEIO",
         "secretaria": "Secretaria de Defesa Social",
-        "valor": 0,
+        "valor": null,
         "pago": 0,
         "situacao": "NÃO EXECUTADA"
       },
@@ -1854,7 +1854,7 @@
         "entidade": "DEMANDA DA UNIDADE - CEMUS XI - CRECHE NAIR Z. D. VECCHIA",
         "objeto": "MELHORIAS PREDIAIS",
         "secretaria": "Secretaria de Educação",
-        "valor": 0,
+        "valor": null,
         "pago": 0,
         "situacao": "NÃO EXECUTADA"
       },
@@ -1872,7 +1872,7 @@
         "entidade": "CEMAEE - CENTRO MUNICIPAL DE ATENDIMENTO EDUCACIONAL ESPEC",
         "objeto": "DESPESAS DE CUSTEIO",
         "secretaria": "Secretaria de Educação",
-        "valor": 0,
+        "valor": null,
         "pago": 0,
         "situacao": "NÃO EXECUTADA"
       },
@@ -2017,6 +2017,20 @@
     "fonte": "https://www.camarasalto.sp.gov.br/pdf/orcamento-publico/emendasimpositivas/2026/Emenda%20impositiva%20-%20tabela%20-%2031.08.2026.pdf",
     "pagina": "https://www.camarasalto.sp.gov.br/orcamento-publico/emendas-impositivas/category/568-2026",
     "atualizadoEm": "2026-08-31",
+    "ajustes": [
+      {
+        "vereador": "graziela-costa-leite",
+        "bloco": "livre",
+        "de": 10153,
+        "para": 10153.3
+      },
+      {
+        "vereador": "graziela-costa-leite",
+        "bloco": "saúde",
+        "de": 25153,
+        "para": 25153.3
+      }
+    ],
     "emendas": [
       {
         "vereador": "almir-de-melo-santos",
@@ -2589,8 +2603,8 @@
       {
         "vereador": "edival-pereira-rosa",
         "tipo": "livre",
-        "entidade": "Aquisição de: • 50 metros de mangueira de combate a incêndio • 20 camisas • 20",
-        "projeto": "calças • 04 macacões anti-chamas • 04 botas cano longo anti-chamas • 10 oletes de voluntários (Defesa Civil) • 10 coletes refletivos operacionais • 10 jaquetas • 10",
+        "entidade": "",
+        "projeto": "Aquisição de: • 50 metros de mangueira de combate a incêndio • 20 camisas • 20 calças • 04 macacões anti-chamas • 04 botas cano longo anti-chamas • 10 oletes de voluntários (Defesa Civil) • 10 coletes refletivos operacionais • 10 jaquetas • 10",
         "secretaria": "Secretaria de Defesa Social",
         "valor": 27700
       },
