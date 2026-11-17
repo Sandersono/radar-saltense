@@ -1,0 +1,46 @@
+name: Sentinela do Radar Saltense
+# Todo dia às 12:30 em Brasília (depois da reserva das 11:00): confere se o robô rodou e se o site está certo.
+# Se houver problema ou algo a fazer, abre um alerta (issue com o rótulo "sentinela"), que chega por e-mail.
+# Quando tudo volta ao normal, fecha o alerta. Ver OPERACAO.md.
+
+on:
+  schedule:
+    - cron: '30 15 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+  issues: write
+
+jobs:
+  conferir:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - id: sentinela
+        run: node src/sentinela.js
+      - name: Abrir, atualizar ou fechar o alerta
+        run: |
+          gh label create sentinela --color B60205 --description "Alerta automático da sentinela" --force >/dev/null
+          aberto=$(gh issue list --label sentinela --state open --json number -q '.[0].number')
+          estado="${{ steps.sentinela.outputs.estado }}"
+          if [ "$estado" = "ok" ]; then
+            if [ -n "$aberto" ]; then gh issue close "$aberto" --comment "Tudo certo na verificação de hoje. Alerta encerrado."; fi
+          else
+            titulo="Sentinela: $( [ "$estado" = "erro" ] && echo 'problema no Radar Saltense' || echo 'algo a fazer no Radar Saltense' ) ($(TZ=America/Sao_Paulo date +%d/%m/%Y))"
+            if [ -n "$aberto" ]; then
+              gh issue comment "$aberto" --body-file sentinela.md
+              gh issue edit "$aberto" --title "$titulo"
+            else
+              printf '%s\n\n@%s\n' "$(cat sentinela.md)" "${{ github.repository_owner }}" > corpo.md
+              gh issue create --title "$titulo" --label sentinela --body-file corpo.md
+            fi
+          fi
