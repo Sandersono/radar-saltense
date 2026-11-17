@@ -8,10 +8,13 @@ const arquivos = [...OBRIGATORIAS, 'estilo.css', 'vereador/a.html'];
 // Tudo certo
 assert.deepEqual(vistoriar([...base, { caminho: 'vereador/a.html', html: corpo('<a href="../index.html">x</a>') }], arquivos), { bloqueios: [], avisos: [] });
 
-// CPF no texto bloqueia; dentro de script não conta
-const comCpf = vistoriar([...base.slice(1), { caminho: 'index.html', html: corpo('<p>CPF 123.456.789-01</p>') }], arquivos);
-assert.equal(comCpf.bloqueios.length, 1);
-assert.equal(vistoriar([...base.slice(1), { caminho: 'index.html', html: corpo('<script>var x="123.456.789-01"</script>') }], arquivos).bloqueios.length, 0);
+// CPF bloqueia: no texto, em atributo, em script ou num arquivo de dados publicado
+const comCpf = (extra) => vistoriar([...base.slice(1), { caminho: 'index.html', html: corpo(extra) }], arquivos).bloqueios.length;
+assert.equal(comCpf('<p>CPF 123.456.789-01</p>'), 1);
+assert.equal(comCpf('<img alt="123.456.789-01">'), 1);
+assert.equal(vistoriar(base, arquivos, [{ caminho: 'dados/busca.json', conteudo: '["x 123.456.789-01"]' }]).bloqueios.length, 1);
+// Não confunde com CNPJ, valor, número de processo com mais grupos
+assert.equal(comCpf('<p>46.634.507/0001-06 · 1.234.567,89 · 1.234.567.890-12 · 12.345.678.901-23 · 123.456.789-012</p>'), 0);
 
 // Página obrigatória faltando ou vazia bloqueia
 assert.equal(vistoriar(base.slice(1), arquivos).bloqueios.length, 1);
