@@ -1,10 +1,11 @@
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, appendFile } from 'node:fs/promises';
 import { VEREADORES_ESPERADOS } from './config.js';
 import { coletarTudo } from './coletar.js';
 import { processar } from './processar.js';
 import { conferir, aumentosDespesas } from './conferir.js';
 import { relatorio } from './relatorio.js';
 import { gerarSite } from './gerar-site.js';
+import { vistoriarPasta, relatorioVistoria } from './vistoria.js';
 import { mesclarFolha } from './regras/folha.js';
 import { serializarRespostas } from './regras/respostas.js';
 import { reaproveitarTce, datasTce, idadeTce } from './regras/tce-anterior.js';
@@ -83,4 +84,11 @@ if (coleta.obras) await writeFile('data/processado/obras.json', json(coleta.obra
 if (Object.keys(coleta.contratos).length) await writeFile('data/processado/contratos.json', json(coleta.contratos));
 if (Object.values(coleta.obrasFontes).some(Boolean)) await writeFile('data/processado/obras-fontes.json', json(coleta.obrasFontes));
 await gerarSite(dados, 'dist');
+// Vistoria do site pronto: CPF ou página obrigatória faltando impedem a publicação (o workflow para aqui).
+const vistoria = await vistoriarPasta('dist');
+await appendFile('conferencia.md', relatorioVistoria(vistoria));
+if (vistoria.bloqueios.length) {
+  console.error(`NÃO PUBLICADO (vistoria). O site continua na última versão boa.\n- ${vistoria.bloqueios.join('\n- ')}`);
+  process.exit(1);
+}
 console.log('Pronto. Veja conferencia.md e a pasta dist/.');
