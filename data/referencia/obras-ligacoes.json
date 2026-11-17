@@ -71,7 +71,7 @@
         "15.1"
       ],
       "pendente": "Só há o financiamento com a Caixa (20/05/2026); até 17/11/2026 a obra não tinha licitação no PNCP nem registro no Obrasgov.br. Quando a licitação sair, ela entra sozinha na lista de obras e a conferência avisa (campo buscar); aí colocar o número do PNCP aqui para ligar à promessa.",
-      "buscar": "(\\bETA\\b|esta[cç][aã]o de tratamento)[^.]{0,120}(jo[aã]o jabour|\\bbur[uú]\\b)|(jo[aã]o jabour|\\bbur[uú]\\b)[^.]{0,120}(\\bETA\\b|esta[cç][aã]o de tratamento)"
+      "buscar": "(\\bETA\\b|esta[cç][aã]o de tratamento)[^.]{0,120}(jo[aã]o jabour|\\bbur[uú](?![a-zà-ú]))|(jo[aã]o jabour|\\bbur[uú](?![a-zà-ú]))[^.]{0,120}(\\bETA\\b|esta[cç][aã]o de tratamento)"
     },
     {
       "id": "rede-santa-lucia",

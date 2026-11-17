@@ -309,7 +309,8 @@ export function validarLigacoes(ref, numerosPromessa) {
     const temFonte = (Array.isArray(l.pncp) && l.pncp.length) || (Array.isArray(l.obrasgov) && l.obrasgov.length);
     if (!temFonte && !(typeof l.pendente === 'string' && l.pendente.trim())) problemas.push(`${nome}: sem PNCP, sem Obrasgov e sem "pendente"`);
     if (l.buscar !== undefined) {
-      try { new RegExp(String(l.buscar), 'i'); } catch { problemas.push(`${nome}: "buscar" não é uma expressão válida`); }
+      if (typeof l.buscar !== 'string' || !l.buscar.trim()) problemas.push(`${nome}: "buscar" precisa ser um texto não vazio`);
+      else try { new RegExp(l.buscar, 'i'); } catch { problemas.push(`${nome}: "buscar" não é uma expressão válida`); }
     }
   });
   return problemas;
