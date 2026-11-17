@@ -961,8 +961,18 @@
         {
           "numero": "13.3",
           "texto": "Viabilizar recursos para asfaltar a estrada do Lajeado;",
-          "status": "sem informação",
-          "provas": []
+          "status": "em andamento",
+          "provas": [
+            {
+              "titulo": "Prefeitura inicia obras de duplicação da Avenida Lajeado, com recapeamento",
+              "url": "https://salto.sp.gov.br/prefeitura-de-salto-inicia-obras-de-duplicacao-da-avenida-lajeado/",
+              "data": "2026-06-26"
+            },
+            {
+              "titulo": "Contrato CA 133/2026: duplicação, pavimentação asfáltica e drenagem da Estrada do Lajeado",
+              "url": "https://salto.sp.gov.br/wp-content/uploads/2026/06/CA-133-2026-VERDEBIANCO-ENGENHARIA-LTDA.pdf"
+            }
+          ]
         },
         {
           "numero": "13.4",
@@ -1003,8 +1013,14 @@
         {
           "numero": "13.9",
           "texto": "Gerir a manutenção das ruas e avenidas do município;",
-          "status": "sem informação",
-          "provas": []
+          "status": "em andamento",
+          "provas": [
+            {
+              "titulo": "Contrato de recuperação de pavimento asfáltico (tapa-buracos), R$ 2,67 milhões",
+              "url": "https://pncp.gov.br/app/contratos/46634507000106/2025/971",
+              "data": "2025-11-24"
+            }
+          ]
         },
         {
           "numero": "13.10",
@@ -1142,8 +1158,14 @@
         {
           "numero": "15.8",
           "texto": "Implantar um plano de modernização do SAAE, com troca de bombas e equipamentos de toda a cidade por alternativas mais modernas, confiáveis e com menor consumo de eletricidade, visando proporcionar abastecimento contínuo e ininterrupto.",
-          "status": "sem informação",
-          "provas": []
+          "status": "em andamento",
+          "provas": [
+            {
+              "titulo": "Licitação homologada de painéis elétricos com inversores de frequência para as elevatórias de água",
+              "url": "https://pncp.gov.br/app/editais/46634507000106/2026/484",
+              "data": "2026-07-22"
+            }
+          ]
         }
       ]
     },
