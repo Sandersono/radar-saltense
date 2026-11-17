@@ -226,6 +226,7 @@ a.cartao-numero:hover { border-color: var(--rio); }
 .topico-icone { display: inline-flex; padding: .4rem; border-radius: 50%; background: var(--rio-claro); }
 .topico-icone svg { width: 24px; height: 24px; fill: none; stroke: var(--rio); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 @media (min-width: 768px) { .topicos { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+.lista-compacta > li { padding: .4rem 0 .4rem .25rem; }
 .sumario .chip { display: inline-flex; align-items: center; text-decoration: none; }
 /* Barra de consentimento do Google Analytics (fixa no pé; o body ganha respiro para não cobrir o conteúdo) */
 .barra-cookies { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: var(--rio-escuro); color: #fff; padding: .85rem 1rem calc(.85rem + env(safe-area-inset-bottom)); box-shadow: 0 -4px 16px rgba(11, 37, 69, .25); }

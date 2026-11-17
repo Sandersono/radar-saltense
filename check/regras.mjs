@@ -470,6 +470,7 @@ import { grupoFornecedor, cnpjDe, formatarCnpj, orgaoChave, resumirDespesas, are
 
   assert.equal(grupoFornecedor(L(PREF, 'Valor Pago', 'PESSOA FÍSICA - 121458', 'FULANO DE TAL', '10,00')), 'pessoas');
   assert.equal(grupoFornecedor(L(PREF, 'Valor Pago', pj('46634507000106'), 'MUNICIPIO DE SALTO', '10,00')), 'publicos');
+  assert.equal(grupoFornecedor(L(PREF, 'Valor Pago', pj('51460589000158'), 'CAMARA DA ESTANCIA TURISTICA DE SALTO', '10,00')), 'publicos');
   assert.equal(grupoFornecedor(L(PREF, 'Valor Pago', pj('29979036000140'), 'INSTITUTO NACIONAL DO SEGURO SOCIAL', '10,00')), 'publicos');
   assert.equal(grupoFornecedor(L(PREF, 'Valor Pago', pj('00360305000104'), 'CAIXA ECONOMICA FEDERAL S/A', '10,00')), 'publicos');
   assert.equal(grupoFornecedor(L(PREF, 'Valor Pago', pj('30681633000173'), 'CSO AMBIENTAL DE SALTO SPE SA', '10,00')), 'empresas');

@@ -14,6 +14,15 @@ const listaEmpresas = (lista) => (lista.length
   ? `<ol class="lista lista-empresas">${lista.map((e) => `<li><strong>${esc(e.nome)}</strong> <span class="nota">CNPJ <span class="cnpj">${esc(formatarCnpj(e.cnpj))}</span></span><br><span class="valor-linha">${reais(e.total)}</span> ${link(linkTce(e.cnpj), 'ver no TCE-SP')}</li>`).join('')}</ol>`
   : '<p>Nenhuma.</p>');
 
+// As 10 da "Concentração": nome, valor e fatia de cada uma no total pago a empresas e entidades (CNPJ e link na lista acima).
+const fatia = (v, total) => `${(Math.round((v / total) * 1000) / 10).toLocaleString('pt-BR')}%`;
+const dezMaiores = (a) => {
+  const dez = a.topEmpresas.slice(0, 10);
+  if (!dez.length || !(a.concentracao.totalEmpresas > 0)) return '';
+  return `<ol class="lista lista-compacta">${dez.map((e) => `<li><strong>${esc(e.nome)}</strong>: ${reais(e.total)} <small class="nota">(${fatia(e.total, a.concentracao.totalEmpresas)})</small></li>`).join('')}</ol>
+<p class="nota">CNPJ e link para o TCE-SP de cada uma estão na lista "Empresas e entidades que mais receberam", logo acima.</p>`;
+};
+
 const pessoasFisicas = (a) => `<p>Pessoas físicas: ${reais(a.pessoasFisicas.total)} para ${numero(a.pessoasFisicas.quantidade)} pessoas. Os nomes de pessoas físicas não aparecem aqui. Para conferir, use a consulta oficial por credor: ${link(LINKS_CREDOR.prefeitura, 'Portal da Transparência da Prefeitura (Despesa Detalhada por Credor)')}, escolhendo a instituição e o ano, ou ${link(LINKS_CREDOR.tce, 'TCE-SP, Despesas por Fornecedor')}.</p>`;
 
 function blocoAno(ano, a) {
@@ -45,7 +54,8 @@ ${listaEmpresas(a.topEmpresas)}
 <h3>Pontos de atenção</h3>
 ${aviso(esc(ATENCAO))}
 <h4>Concentração</h4>
-<p>As 10 empresas e entidades que mais receberam ficaram com <strong>${a.concentracao.percentual}%</strong> do que foi pago a empresas e entidades em ${ano} (${reais(a.concentracao.top10)} de ${reais(a.concentracao.totalEmpresas)}).</p>
+<p>As 10 empresas e entidades que mais receberam ficaram com <strong>${a.concentracao.percentual}%</strong> do que foi pago a empresas e entidades em ${ano} (${reais(a.concentracao.top10)} de ${reais(a.concentracao.totalEmpresas)}):</p>
+${dezMaiores(a)}
 <h4>Reservado e depois cancelado</h4>
 <p>Empenhar é reservar o dinheiro para uma despesa; anular é cancelar essa reserva, por sobra, troca de contrato ou erro de lançamento. Em ${ano} foram anulados ${reais(a.anulado.total)}. Empresas e entidades com mais valor anulado:</p>
 ${listaEmpresas(a.anulado.top)}
