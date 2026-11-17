@@ -237,6 +237,21 @@
   }
 
 
+  // Link com #âncora para algo dentro de um "ver mais" fechado (obra encerrada, promessa de uma área): abre e rola até lá.
+  const abrirAlvo = () => {
+    let id = '';
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; }
+    const alvo = id && document.getElementById(id);
+    if (!alvo) return;
+    let abriu = false;
+    for (let d = alvo.closest('details'); d; d = d.parentElement && d.parentElement.closest('details')) {
+      if (!d.open) { d.open = true; abriu = true; }
+    }
+    if (abriu) alvo.scrollIntoView();
+  };
+  abrirAlvo();
+  window.addEventListener('hashchange', abrirAlvo);
+
   // Contador de salário (só existe na página se houver fonte oficial)
   const sal = document.getElementById('contador-salario');
   if (sal) {

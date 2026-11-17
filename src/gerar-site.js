@@ -11,6 +11,7 @@ import { paginaPrefeitura } from './site/prefeitura.js';
 import { paginaFontes } from './site/fontes.js';
 import { paginaSemana } from './site/semana.js';
 import { paginaPromessas } from './site/promessas.js';
+import { paginaObras } from './site/obras.js';
 import { feedRss } from './site/feed.js';
 import { ENDERECO } from './site/base.js';
 import { sitemapXml, robotsTxt } from './site/medicao.js';
@@ -42,6 +43,7 @@ export async function gerarSite(d, destino) {
   await pagina('votacoes.html', paginaVotacoes(d));
   await pagina('camara.html', paginaCamara(d));
   await pagina('prefeitura.html', paginaPrefeitura(d));
+  await pagina('obras.html', paginaObras(d));
   await pagina('fontes.html', paginaFontes(d));
   await pagina('semana.html', paginaSemana(d, ENDERECO));
   await writeFile(`${destino}/feed.xml`, feedRss(d, ENDERECO));

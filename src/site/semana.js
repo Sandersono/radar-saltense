@@ -16,7 +16,7 @@ export function paginaDaNovidade(texto) {
   if (/gastos/i.test(texto)) return 'gastos.html';
   if (/folha/i.test(texto)) return 'camara.html#custo';
   if (/IEGM/.test(texto)) return 'prefeitura.html#nota';
-  if (/obra/i.test(texto)) return 'prefeitura.html#obras';
+  if (/obra/i.test(texto)) return 'obras.html';
   return null;
 }
 

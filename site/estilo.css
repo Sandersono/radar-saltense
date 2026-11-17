@@ -268,6 +268,23 @@ body.com-barra-cookies { padding-bottom: 10rem; }
   .tabela-empilha.larga td::before { content: attr(data-rotulo); flex: 0 0 auto; white-space: nowrap; font-weight: 600; text-align: left; color: var(--suave); }
 }
 .situacao-paralisada { color: var(--falta); }
+/* Página de obras: lista de cartões (1 coluna no celular, 2 a partir de 900px). Situação em marinho: fato, não alarme. */
+.lista-obras { list-style: none; padding: 0; margin: .75rem 0 0; display: grid; gap: .9rem; grid-template-columns: minmax(0, 1fr); }
+.obra { min-width: 0; }
+.obra:target { border-color: var(--rio); }
+.obra h3 { margin: 0 0 .4rem; font-size: 1.08rem; overflow-wrap: anywhere; }
+.obra-situacao { margin: 0 0 .6rem; font-weight: 600; }
+.obra-dados { display: grid; grid-template-columns: minmax(0, 8.5rem) minmax(0, 1fr); gap: .3rem .75rem; margin: 0 0 .6rem; font-size: .92rem; }
+.obra-dados dt { color: var(--suave); font-weight: 600; overflow-wrap: anywhere; }
+.obra-dados dd { margin: 0; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.obra details { background: none; border: 0; border-radius: 0; padding: 0; margin: 0 0 .5rem; }
+.obra summary { min-height: 0; padding: .2rem 0; color: var(--rio); font-size: .9rem; }
+.obra-promessas { margin: .5rem 0 0; }
+.obra-promessas .tag { display: inline-flex; align-items: center; min-height: 32px; padding: .2rem .75rem; font-size: .85rem; font-weight: 600; text-decoration: none; color: var(--rio-escuro); }
+.obra-links { display: flex; flex-wrap: wrap; gap: .4rem; margin: .5rem 0 0; }
+.obra-links .selo-fonte { min-height: 32px; overflow-wrap: anywhere; }
+h2 .contagem { font-size: .9rem; font-weight: 600; color: var(--suave); font-family: var(--texto); }
+@media (min-width: 900px) { .lista-obras { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 /* Emendas de 2025 por situação e promessas por status: só azuis, amarelo e cinza (fato, não alarme) */
 .s-concluida, .p-cumprida { background: var(--rio); }
 .s-andamento, .p-andamento { background: #5AB0DE; }

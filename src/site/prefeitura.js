@@ -4,6 +4,7 @@ import { layout, reais, numero, quandoBR, seloFonte, aviso, cartaoNumero, sumari
 import { cartaoCampanha } from './campanha.js';
 import { NOMES_MES } from './impostometro.js';
 import { cartaoPromessas } from './promessas.js';
+import { cartaoObras } from './obras.js';
 
 export const URL_IEGM = 'https://iegm.tce.sp.gov.br/';
 export const URL_OBRAS = 'https://paineldeobras.tce.sp.gov.br/';
@@ -119,7 +120,10 @@ function atalhos(d, p) {
     const f = ult && p.iegm.anos[ult].Salto.iegm;
     if (f) c.push(cartaoNumero({ valor: f, rotulo: `nota do TCE à gestão (ano-base ${esc(ult)})`, href: '#nota' }));
   }
-  if (p.obras) {
+  if (d.obras) {
+    const par = d.obras.resumo.paralisadas;
+    c.push(cartaoNumero({ valor: numero(d.obras.resumo.total), rotulo: `obras na lista${par ? ` (${numero(par)} ${par === 1 ? 'paralisada' : 'paralisadas'})` : ''}`, href: 'obras.html' }));
+  } else if (p.obras) {
     const par = p.obras.obras.filter((x) => x.paralisada).length;
     c.push(cartaoNumero({ valor: numero(p.obras.obras.length), rotulo: `obras no painel do TCE${par ? ` (${numero(par)} ${par === 1 ? 'paralisada' : 'paralisadas'})` : ''}`, href: '#obras' }));
   }
@@ -142,12 +146,12 @@ function atalhos(d, p) {
 
 export function paginaPrefeitura(d) {
   const p = d.prefeitura || { iegm: null, obras: null, contratos: {}, campanhaPrefeito: null };
-  const vazio = !p.iegm && !p.obras && !anosComCompras(p).length
+  const vazio = !p.iegm && !p.obras && !d.obras && !anosComCompras(p).length
     ? aviso('Os dados da Prefeitura ainda não foram coletados.')
     : '';
   const secoes = `${cartaoPromessas(d)}
 ${secaoNota(p)}
-${secaoObras(p)}
+${d.obras ? cartaoObras(d) : secaoObras(p)}
 ${secaoCompras(p)}
 ${p.campanhaPrefeito ? `<div id="campanha">${cartaoCampanha(p.campanhaPrefeito, { titulo: 'Campanha do prefeito em 2024', sujeito: `${p.campanhaPrefeito.nome} recebeu` })}</div>` : ''}`;
   const corpo = `<h1>A Prefeitura de Salto</h1>

@@ -39,7 +39,7 @@ function gradeTopicos(d) {
     ['camara.html#custo', 'Quanto custa a Câmara', 'camara'],
     ['camara.html#emendas', 'Emendas dos vereadores', 'emendas'],
     d.promessas && ['promessas.html', 'Promessas do prefeito', 'promessas'],
-    ['prefeitura.html#obras', 'Obras', 'obras'],
+    ['obras.html', 'Obras', 'obras'],
     d.receitas && ['impostometro.html', 'Impostos', 'impostos'],
     d.gastos && ['gastos.html', 'Onde a Prefeitura gasta', 'gastos'],
     ['semana.html', 'Resumo da semana', 'semana'],

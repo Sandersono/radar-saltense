@@ -1,0 +1,77 @@
+{
+  "observacao": "Ligações conferidas à mão (pesquisa de 17/11/2026, .superpowers/pesquisa/obras-fontes.md). O robô só lê este arquivo. Cada item é uma obra: 'pncp' lista números de controle do PNCP (contratação -1- ou contrato -2-), 'obrasgov' lista ids do Obrasgov.br, 'promessas' lista números de data/referencia/promessas.json. Item sem PNCP e sem Obrasgov precisa de 'pendente' (motivo) e não aparece no site. 'id' vira a âncora em obras.html#id.",
+  "ligacoes": [
+    {
+      "id": "creche-constelacoes",
+      "nome": "Creche/Cemus 17 do Jardim das Constelações",
+      "pncp": ["46634507000106-2-000646/2025"],
+      "obrasgov": ["38643.35-00"],
+      "promessas": ["6.1"]
+    },
+    {
+      "id": "escola-barnabe",
+      "nome": "Escola de tempo integral do Residencial Barnabé",
+      "pncp": ["46634507000106-2-000494/2026"],
+      "obrasgov": ["38667.35-50"],
+      "promessas": ["6.4"]
+    },
+    {
+      "id": "duplicacao-lajeado",
+      "nome": "Duplicação da Rua John Kennedy (Estrada do Lajeado)",
+      "pncp": ["46634507000106-1-000288/2026"],
+      "obrasgov": ["99085.35-61", "99086.35-18"],
+      "promessas": ["13.8", "13.3"]
+    },
+    {
+      "id": "eta-jundiai-fase-1",
+      "nome": "ETA Jundiaí, fase 1 (projeto e obra)",
+      "pncp": ["46634507000106-1-000592/2026"],
+      "promessas": ["15.2"]
+    },
+    {
+      "id": "eta-jundiai-reservacao",
+      "nome": "Reservação e sistema auxiliar da ETA Jundiaí (emergencial)",
+      "pncp": ["46634507000106-2-000112/2026"],
+      "promessas": ["15.2"]
+    },
+    {
+      "id": "eta-joao-jabour",
+      "nome": "Nova ETA João Jabour (Buru)",
+      "pncp": [],
+      "obrasgov": [],
+      "promessas": ["15.1"],
+      "pendente": "Só há o financiamento com a Caixa (20/05/2026); até 17/11/2026 a obra não tinha licitação no PNCP nem registro no Obrasgov.br. Quando a licitação sair, colocar o número do PNCP aqui."
+    },
+    {
+      "id": "rede-santa-lucia",
+      "nome": "Troca de 5,4 km de rede de água no Jardim Santa Lúcia (SAAE)",
+      "pncp": ["11065186000183-2-000071/2026"],
+      "promessas": ["15.5"]
+    },
+    {
+      "id": "rede-pead-saae",
+      "nome": "Substituição de rede PEAD de 3/4 por 60 mm (SAAE)",
+      "pncp": ["11065186000183-2-000078/2026"],
+      "promessas": ["15.5"]
+    },
+    {
+      "id": "tapa-buracos",
+      "nome": "Recuperação de pavimento asfáltico (tapa-buracos)",
+      "pncp": ["46634507000106-2-000971/2025"],
+      "promessas": ["13.9"]
+    },
+    {
+      "id": "paineis-inversores",
+      "nome": "Painéis elétricos com inversores de frequência para elevatórias de água",
+      "pncp": ["46634507000106-1-000484/2026"],
+      "promessas": ["15.8"]
+    },
+    {
+      "id": "calcadas-caminho-da-inclusao",
+      "nome": "Calçadas acessíveis no entorno da Praça Antônio Vieira Tavares",
+      "pncp": ["46634507000106-2-000150/2026"],
+      "obrasgov": ["59650.35-77"],
+      "promessas": []
+    }
+  ]
+}

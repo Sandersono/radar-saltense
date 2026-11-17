@@ -113,6 +113,15 @@ export function relatorio(d, problemas, aumentos = []) {
     }
     if (!Object.keys(pf.contratos).length) l.push('- Contratações: sem dado');
     if (d.meta.duracaoPncpMs != null) l.push(`- Coleta do PNCP: levou ${Math.round(d.meta.duracaoPncpMs / 1000)} s nesta atualização (prazo de 360 s).`);
+    const ob = d.obras;
+    if (!ob) l.push('- Obras (obras.html): sem dado');
+    else {
+      const f = ob.fontes;
+      l.push(`- Obras (obras.html): ${ob.lista.length} na lista (${Object.entries(ob.resumo.porGrupo).map(([g, n]) => `${g} ${n}`).join(', ')}); contratos em execução ou paralisados ${reais(ob.resumo.valorContratado)}`);
+      l.push(`- Fontes das obras: PNCP ${f.pncp || 'sem dado'}; Obrasgov.br ${f.obrasgov || 'sem dado'} (base ${f.obrasgovBase || '-'}); paralisadas da Prefeitura ${f.paralisadas || 'sem dado'}; TCE data-base ${f.tceDataBase || '-'}`);
+      l.push(...(ob.pendentes || []).map((p) => `- Ligação de obra pendente (não aparece no site): ${p.id}, promessas ${p.promessas.join(', ') || '-'}: ${p.pendente}`));
+      if (d.meta.duracaoObrasMs != null) l.push(`- Coleta das obras: levou ${Math.round(d.meta.duracaoObrasMs / 1000)} s nesta atualização.`);
+    }
   }
   l.push('', '## O que é estimativa', '');
   l.push('- Impostômetro: depois do último mês oficial, o contador soma o ritmo médio diário dos últimos meses publicados; não considera a sazonalidade (o IPTU concentra em jan/fev).');

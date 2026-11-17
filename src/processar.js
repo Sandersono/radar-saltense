@@ -9,6 +9,7 @@ import { resumirDespesas, areasSiconfi } from './regras/despesas.js';
 import { resumoRespostas } from './regras/respostas.js';
 import { resumirEmendas } from './regras/emendas.js';
 import { validarPromessas, resumoPromessas, limparPromessas } from './regras/promessas.js';
+import { montarObras, validarLigacoes, numerosDePromessas } from './regras/obras-cidade.js';
 
 const doisDigitos = (n) => String(n).padStart(2, '0');
 const DIAS_RESPOSTAS_RECENTES = 14;
@@ -44,7 +45,7 @@ function montarPromessas(ref, avisos) {
   return { ...dados, resumo: resumoPromessas(dados) };
 }
 
-export function processar({ vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, folhaCamara, respostas, campanha, emendas, promessas, iegm, obras, contratos, duracaoPncpMs, avisosFontes, avisosManutencao, coletadoEm }) {
+export function processar({ vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, folhaCamara, respostas, campanha, emendas, promessas, iegm, obras, contratos, duracaoPncpMs, obrasFontes, ligacoesObras, duracaoObrasMs, avisosFontes, avisosManutencao, coletadoEm }) {
   const casar = criarCasador(vereadores, OUTROS_NOMES);
   const inicio = `${ANO_INICIO}-01-01`;
   const naoAtribuidos = [];
@@ -241,6 +242,16 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
   const manutencao = [...(avisosManutencao || [])];
   const dadosEmendas = montarEmendas(emendas, vereadores, manutencao);
   const dadosPromessas = montarPromessas(promessas, manutencao);
+  // Obras em Salto: lista montada com PNCP, Obrasgov.br, TCE e a página de paralisadas da Prefeitura (obras.html).
+  const numerosPromessa = numerosDePromessas(promessas);
+  if (ligacoesObras) {
+    const prob = validarLigacoes(ligacoesObras, numerosPromessa);
+    if (prob.length) manutencao.push(`Ligações de obras (data/referencia/obras-ligacoes.json): ${prob.length} ${prob.length === 1 ? 'problema' : 'problemas'}: ${prob.slice(0, 5).join('; ')}.`);
+  }
+  const fo = obrasFontes || {};
+  const montadas = montarObras({ pncp: fo.pncp, obrasgov: fo.obrasgov, paralisadas: fo.paralisadas, tce: obras && obras.obras, tceDataBase: obras && obras.dataBase, ligacoes: ligacoesObras, numerosPromessa, hoje: hojeISO });
+  manutencao.push(...montadas.manutencao);
+  if (fo.pncp && fo.pncp.comprasPendentes) manutencao.push(`Obras no PNCP: ${fo.pncp.comprasPendentes} contratações ainda sem modalidade conferida; ficam para as próximas atualizações.`);
   // Requerimentos respondidos nos últimos dias (para o resumo da semana).
   const desdeRecentes = new Date(Date.parse(hojeISO) - DIAS_RESPOSTAS_RECENTES * 86400000).toISOString().slice(0, 10);
   const respostasRecentes = proposituras
@@ -275,6 +286,7 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
     },
     emendas: dadosEmendas,
     promessas: dadosPromessas,
+    obras: montadas.lista.length || fo.pncp || fo.obrasgov ? { lista: montadas.lista, resumo: montadas.resumo, fontes: montadas.fontes, pendentes: montadas.pendentes } : null,
     prefeitura: {
       iegm: iegm && iegm.anos && Object.keys(iegm.anos).length ? iegm : null,
       obras: obras && obras.obras ? obras : null,
@@ -284,6 +296,7 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
     meta: {
       atualizadoEm: coletadoEm || new Date().toISOString(),
       duracaoPncpMs: Number.isFinite(duracaoPncpMs) ? duracaoPncpMs : null,
+      duracaoObrasMs: Number.isFinite(duracaoObrasMs) ? duracaoObrasMs : null,
       totalProposituras: proposituras.length,
       semLocal: proposituras.filter((p) => p.grupo === 'melhoria' && !p.locais.length).length,
       receitasMensais: resumoReceitas

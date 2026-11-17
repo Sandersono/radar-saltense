@@ -8,28 +8,28 @@ export const CNPJ_ORGAO = '46634507000106';
 const ESPERAS_MS = [5000, 15000];
 const MAX_PAGINAS = { 50: 200, 500: 20 };
 
-const hojeSP = (agora) => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' }).format(agora);
+export const hojeSP = (agora) => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' }).format(agora);
 
 // A API do PNCP oscila (504, demoras de 20 a 70 s): até 3 tentativas com espera de 5 s e 15 s em 5xx, 429 ou tempo esgotado.
-// O prazo (instante absoluto `limite`) vale para cada pedido e para cada espera entre tentativas.
-async function baixarComTentativas(url, limite) {
+// O prazo (instante absoluto `limite`) vale para cada pedido e para cada espera entre tentativas. `esperas` troca as pausas.
+export async function baixarComTentativas(url, limite, esperas = ESPERAS_MS) {
   for (let t = 0; ; t++) {
     try { return await baixar(url, { limite, rotulo: 'PNCP' }); } catch (e) {
       const transitorio = e.name === 'TimeoutError' || e.name === 'AbortError' || e.status === 429 || e.status >= 500;
-      if (!transitorio || t >= ESPERAS_MS.length) throw e;
-      tempoDoPedido(limite - ESPERAS_MS[t], 'PNCP');
-      await esperar(ESPERAS_MS[t]);
+      if (!transitorio || t >= esperas.length) throw e;
+      tempoDoPedido(limite - esperas[t], 'PNCP');
+      await esperar(esperas[t]);
     }
   }
 }
 
 // 204 na primeira página = sem itens. Qualquer inconsistência lança: nunca devolve lista incompleta.
-async function paginas(caminho, tamanho, limite) {
+export async function paginas(caminho, tamanho, limite, esperas = ESPERAS_MS) {
   const porId = new Map();
   let total = null;
   for (let pagina = 1; ; pagina++) {
     if (pagina > MAX_PAGINAS[tamanho]) throw new Error(`PNCP ${caminho}: páginas demais (limite ${MAX_PAGINAS[tamanho]}).`);
-    const buf = await baixarComTentativas(`${BASE}${caminho}&pagina=${pagina}&tamanhoPagina=${tamanho}`, limite);
+    const buf = await baixarComTentativas(`${BASE}${caminho}&pagina=${pagina}&tamanhoPagina=${tamanho}`, limite, esperas);
     if (!buf.length) {
       if (pagina > 1) throw new Error(`PNCP ${caminho}: página ${pagina} vazia no meio da paginação.`);
       break;

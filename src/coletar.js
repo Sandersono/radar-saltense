@@ -15,6 +15,7 @@ import { coletarRespostas } from './coleta/respostas.js';
 import { coletarIegm, listarAnosIegm } from './coleta/iegm.js';
 import { coletarObras } from './coleta/obras.js';
 import { coletarContratos } from './coleta/contratos.js';
+import { coletarObrasPncp, coletarObrasgov, coletarParalisadas } from './coleta/obras-cidade.js';
 import { mesclarIegm, mesclarContratos, escolherObras, dataBaseMaisVelha, anosParaColetar, decidirAnoContratos } from './regras/prefeitura.js';
 import { lerCard } from './regras/apex.js';
 import { mesclarFolha } from './regras/folha.js';
@@ -28,6 +29,8 @@ const PRAZO_PENTAHO_MS = 3 * 60 * 1000;
 const PRAZO_RECEITAS_MS = 4 * 60 * 1000;
 const PRAZO_DESPESAS_MS = 6 * 60 * 1000;
 const PRAZO_SICONFI_MS = 3 * 60 * 1000;
+const PRAZO_OBRAS_PNCP_MS = 6 * 60 * 1000;
+const PRAZO_OBRASGOV_MS = 5 * 60 * 1000;
 // Mensagens do Playwright trazem o registro de chamadas em várias linhas; só a primeira vai para o site, em português.
 const primeiraLinha = (m) => mensagemErro(m);
 const doisDigitos = (n) => String(n).padStart(2, '0');
@@ -139,6 +142,31 @@ async function contratosDoPncp(salvo, hoje, avisos) {
   return { contratos: mesclarContratos(salvo, novos), duracaoMs: Date.now() - inicio };
 }
 
+// Obras em Salto (obras.html): três fontes independentes; a que falhar fica com o último dado salvo e gera aviso.
+async function obrasDaCidade(salvo, ligacoes, avisos) {
+  const s = salvo || {};
+  const saida = { pncp: s.pncp || null, obrasgov: s.obrasgov || null, paralisadas: s.paralisadas || null };
+  const manter = new Set(((ligacoes && Array.isArray(ligacoes.ligacoes)) ? ligacoes.ligacoes : []).flatMap((l) => (l && Array.isArray(l.pncp) ? l.pncp : [])));
+  try {
+    saida.pncp = await coletarObrasPncp(s.pncp, { manter, prazoMs: PRAZO_OBRAS_PNCP_MS });
+    if (saida.pncp.incompleto) avisos.push(`Obras no PNCP: a primeira leitura completa ainda não terminou (${saida.pncp.semente.feitas.length} partes prontas${saida.pncp.erro ? `; ${primeiraLinha(saida.pncp.erro)}` : ''}); a lista pode estar incompleta e continua na próxima atualização.`);
+  } catch (e) {
+    avisos.push(`Obras no PNCP: ${primeiraLinha(e.message)}; mantido o último dado salvo.`);
+  }
+  try {
+    saida.obrasgov = await coletarObrasgov(s.obrasgov, { prazoMs: PRAZO_OBRASGOV_MS });
+    if (saida.obrasgov.incompleto) avisos.push('Obras no Obrasgov.br: o tempo reservado acabou; parte das obras ficou com o dado da coleta anterior.');
+  } catch (e) {
+    avisos.push(`Obras no Obrasgov.br: ${primeiraLinha(e.message)}; mantido o último dado salvo.`);
+  }
+  try {
+    saida.paralisadas = await coletarParalisadas();
+  } catch (e) {
+    avisos.push(`Consulta de Obras Paralisadas (Prefeitura): ${primeiraLinha(e.message)}; mantido o último dado salvo.`);
+  }
+  return saida;
+}
+
 // Emendas: o robô não lê os PDFs (a ferramenta é rodada à mão); só avisa quando a Câmara publica PDF novo
 // nas categorias de 2025 e 2026. Aviso de manutenção: vai para o conferencia.md, não para o site.
 async function emendasNaCamara(emendas, avisos) {
@@ -184,9 +212,13 @@ export async function coletarTudo() {
   const iegm = await iegmDoTce(iegmSalvo, avisosFontes);
   const obras = await obrasDoTce(obrasSalvas, avisosFontes);
   const { contratos, duracaoMs: duracaoPncpMs } = await contratosDoPncp(contratosSalvos, hoje, avisosFontes);
+  const ligacoesObras = await lerJson('data/referencia/obras-ligacoes.json', null, avisosFontes);
+  const inicioObras = Date.now();
+  const obrasFontes = await obrasDaCidade(await lerJson('data/processado/obras-fontes.json', null, avisosFontes), ligacoesObras, avisosFontes);
+  const duracaoObrasMs = Date.now() - inicioObras;
   const folhaCamara = await folhaDaCamara(vereadores.map(({ id, nome, apelido }) => ({ id, nome, apelido })), hoje, folhaSalva, avisosFontes);
   const respostas = await respostasDaCamara(cardsPorAno, respostasSalvas, avisosFontes);
-  const coleta = { vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, folhaCamara, respostas, campanha, emendas, promessas, iegm, obras, contratos, duracaoPncpMs, avisosFontes, avisosManutencao, coletadoEm: new Date().toISOString() };
+  const coleta = { vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, folhaCamara, respostas, campanha, emendas, promessas, iegm, obras, contratos, duracaoPncpMs, obrasFontes, ligacoesObras, duracaoObrasMs, avisosFontes, avisosManutencao, coletadoEm: new Date().toISOString() };
   await salvar('data/bruto/coleta.json', JSON.stringify(coleta));
   return coleta;
 }
@@ -203,6 +235,8 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   console.log(`Fotos: ${Object.keys(c.fotos).length} de ${c.vereadores.length}`);
   console.log(`Folha da Câmara: ${Object.keys(c.folhaCamara).length} meses; respostas conferidas: ${Object.keys(c.respostas).length}`);
   console.log(`Prefeitura: IEGM ${c.iegm ? Object.keys(c.iegm.anos).length : 0} anos; obras ${c.obras ? c.obras.obras.length : 0}; contratos ${Object.keys(c.contratos).join(', ') || 'nenhum'}`);
+  const of = c.obrasFontes || {};
+  console.log(`Obras: PNCP ${of.pncp ? `${Object.keys(of.pncp.contratacoes).length} licitações, ${Object.keys(of.pncp.contratos).length} contratos candidatos` : 'sem dado'}; Obrasgov.br ${of.obrasgov ? Object.keys(of.obrasgov.projetos).length : 0} projetos; paralisadas na Prefeitura ${of.paralisadas ? of.paralisadas.obras.length : 0} (${Math.round(c.duracaoObrasMs / 1000)} s)`);
   for (const a of c.avisosFontes) console.log(`Aviso: ${a}`);
   for (const a of c.avisosManutencao) console.log(`Manutenção: ${a}`);
 }
