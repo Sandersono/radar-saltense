@@ -3,6 +3,7 @@ name: Atualizar Radar Saltense
 on:
   schedule:
     - cron: '0 6 * * *' # 03:00 em Brasília
+    - cron: '0 14 * * *' # 11:00 em Brasília: reserva, se o GitHub pular ou atrasar a das 03:00
   workflow_dispatch:
     inputs:
       so_publicar:
@@ -14,13 +15,36 @@ permissions:
   contents: write
   pages: write
   id-token: write
+  actions: read
 
 concurrency:
   group: radar-saltense
   cancel-in-progress: false
 
 jobs:
+  # Execução agendada só roda se ainda não houve uma agendada com sucesso hoje (em Brasília).
+  # Assim a reserva das 11:00 não repete o trabalho, e a das 03:00 atrasada não roda depois da reserva.
+  hoje:
+    runs-on: ubuntu-latest
+    outputs:
+      pular: ${{ steps.ver.outputs.pular }}
+    steps:
+      - id: ver
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          pular=false
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            hoje=$(TZ=America/Sao_Paulo date +%F)
+            feitas=$(gh run list --repo "${{ github.repository }}" --workflow atualizar.yml --event schedule --status success --limit 10 --json createdAt -q '.[].createdAt' \
+              | while read -r d; do TZ=America/Sao_Paulo date -d "$d" +%F; done | grep -c "^$hoje$" || true)
+            [ "$feitas" -gt 0 ] && pular=true
+            echo "Hoje: $hoje. Execuções agendadas com sucesso hoje: $feitas. Pular: $pular."
+          fi
+          echo "pular=$pular" >> "$GITHUB_OUTPUT"
   atualizar:
+    needs: hoje
+    if: needs.hoje.outputs.pular != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 40
     environment:
