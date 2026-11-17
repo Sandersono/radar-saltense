@@ -8,7 +8,7 @@ const URL_PARALISADAS = 'https://salto.sp.gov.br/consulta-de-obras-paralisadas/'
 export const ABERTURA_OBRAS = 'Lista montada todo dia com as licitações e contratos de obras que a Prefeitura e o SAAE publicam no Portal Nacional de Contratações Públicas (PNCP) e com as obras que recebem dinheiro federal no Obrasgov.br. O TCE-SP só classifica (no prazo, atrasada, paralisada) as obras que a Prefeitura declarou ao Tribunal.';
 
 // [grupo, título, âncora, explicação]
-const GRUPOS = [
+export const GRUPOS = [
   ['paralisada', 'Paralisadas', 'paralisadas', 'Obras que a própria Prefeitura, o TCE-SP ou o Obrasgov.br declaram paralisadas ou inacabadas. A palavra é da fonte, citada em cada obra.'],
   ['execucao', 'Em execução ou contratadas', 'em-execucao', 'Contrato publicado no PNCP e ainda em vigência, ou obra em execução segundo o TCE-SP ou o Obrasgov.br.'],
   ['licitacao', 'Em licitação', 'em-licitacao', 'Edital recebendo propostas, ou licitação já homologada cujo contrato ainda não foi publicado no PNCP.'],

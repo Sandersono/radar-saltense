@@ -175,6 +175,27 @@
     aplicar();
   }
 
+  // Índice de bairros: filtro pelo nome (sem JS a lista toda aparece). data-nome traz também as outras grafias.
+  const listaBairros = document.getElementById('lista-bairros');
+  const filtroBairros = document.getElementById('filtro-bairros');
+  if (listaBairros && filtroBairros) {
+    const contagemBairros = document.getElementById('contagem-bairros');
+    const itensBairros = [...listaBairros.children];
+    filtroBairros.addEventListener('input', () => {
+      const q = norm(filtroBairros.value);
+      let n = 0;
+      for (const li of itensBairros) {
+        const ok = !q || norm(li.dataset.nome).includes(q);
+        li.hidden = !ok;
+        if (ok) n++;
+      }
+      listaBairros.hidden = n === 0;
+      contagemBairros.textContent = !q ? '' : n
+        ? `${n} ${n === 1 ? 'bairro' : 'bairros'}`
+        : 'Nenhum bairro com página tem esse nome. Tente a busca da página inicial, que tem todos os bairros e ruas.';
+    });
+  }
+
   // Raio-X: seletor de ano (sem JS todos os anos aparecem)
   const botoesAno = [...document.querySelectorAll('[data-ano-botao]')];
   if (botoesAno.length) {

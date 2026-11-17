@@ -1,4 +1,4 @@
-import { mkdir, writeFile, copyFile, readdir } from 'node:fs/promises';
+import { mkdir, writeFile, copyFile, readdir, readFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { geometriaRecorte, fotoSite } from './site/util.js';
 import { paginaInicial } from './site/inicio.js';
@@ -14,6 +14,8 @@ import { atualizarSemanas, hojeSP } from './regras/semana.js';
 import { paginaPromessas } from './site/promessas.js';
 import { paginaObras } from './site/obras.js';
 import { feedRss } from './site/feed.js';
+import { paginaBairro, paginaBairros } from './site/bairros.js';
+import { montarBairros, bairrosComPagina, validarApelidos } from './regras/bairros.js';
 import { ENDERECO } from './site/base.js';
 import { sitemapXml, robotsTxt } from './site/medicao.js';
 
@@ -43,7 +45,7 @@ export async function gerarSite(d, destino, semanasSalvas = null) {
     try { semanas = atualizarSemanas({}, d, hojeSP(d.meta.atualizadoEm), d.meta.novidadesRecentes); }
     catch (e) { console.warn(`Arquivo semanal não montado: ${e.message}`); semanas = {}; }
   }
-  for (const pasta of ['vereador', 'semana', 'dados', 'fontes', 'fotos', 'marca']) await mkdir(`${destino}/${pasta}`, { recursive: true });
+  for (const pasta of ['vereador', 'semana', 'bairro', 'dados', 'fontes', 'fotos', 'marca']) await mkdir(`${destino}/${pasta}`, { recursive: true });
   const paginas = []; // vão para o sitemap.xml
   const pagina = async (caminho, html) => { await writeFile(`${destino}/${caminho}`, html); paginas.push(caminho); };
   await pagina('index.html', paginaInicial(d));
@@ -58,6 +60,16 @@ export async function gerarSite(d, destino, semanasSalvas = null) {
   for (const [i, s] of segundas.entries()) {
     await pagina(`semana/${s}.html`, paginaSemanaArquivo(semanas[s], d, { anterior: segundas[i - 1], proxima: segundas[i + 1] }, ENDERECO));
   }
+  // Páginas por bairro (spec 2026-11-17): montadas aqui, a partir das propostas; nada novo em data/processado.
+  let apelidos = {};
+  try { apelidos = JSON.parse(await readFile('data/referencia/bairros-apelidos.json', 'utf8')); }
+  catch (e) { console.warn(`Lista de apelidos de bairro não lida: ${e.message}`); }
+  const nomesVistos = d.proposituras.flatMap((p) => (p.locais || []).filter((l) => l.tipo === 'bairro').map((l) => l.nome));
+  for (const erro of validarApelidos(apelidos, nomesVistos)) console.warn(`Apelido de bairro: ${erro}`);
+  const todosBairros = montarBairros(d.proposituras, apelidos);
+  const bairros = bairrosComPagina(todosBairros);
+  await pagina('bairros.html', paginaBairros(bairros, d));
+  for (const b of bairros) await pagina(`bairro/${b.slug}.html`, paginaBairro(b, d, todosBairros));
   await writeFile(`${destino}/feed.xml`, feedRss(d, ENDERECO, semanas));
   if (d.promessas) await pagina('promessas.html', paginaPromessas(d));
   if (d.receitas) await pagina('impostometro.html', paginaImpostometro(d));

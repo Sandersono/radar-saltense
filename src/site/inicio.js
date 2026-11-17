@@ -61,15 +61,20 @@ function cartaoVereador(v) {
 </li>`;
 }
 
+// "O problema que não some": até 30 casos, 10 à mostra e o resto atrás do botão "ver mais" (busca.js). Usado também nas páginas de bairro.
+export function itensRepetidos(lista) {
+  const html = lista.slice(0, 30).map((r, i) =>
+    `<li${i >= 10 ? ' data-extra' : ''}><strong>${esc(r.rua)}</strong>: ${esc(TIPOS_NOME[r.tipo] || r.tipo)}, pedido ${r.pedidos.length} vezes
+<details><summary>ver datas e autores</summary><ul class="lista">${r.pedidos.map((p) => `<li><span class="data">${dataBR(p.data)}</span> ${esc(p.autores)} ${link(fichaOficial(p.id), 'ficha')}</li>`).join('')}</ul></details></li>`).join('\n');
+  return { html, extras: Math.max(0, Math.min(30, lista.length) - 10) };
+}
+
 export function paginaInicial(d) {
   const n = d.vereadores.length;
   const salario = SALARIO
     ? `<p class="destaque">Salário pago aos ${n} vereadores desde a posse: <strong id="contador-salario" data-mensal="${SALARIO.valorMensal * n}" data-inicio="${ANO_INICIO}-01-01">—</strong><br><small>Estimativa: ${n} salários de R$ ${SALARIO.valorMensal.toLocaleString('pt-BR')} por mês desde 1º de janeiro de ${ANO_INICIO}. ${link(SALARIO.fonte, 'fonte oficial')}</small></p>`
     : '';
-  const repetidos = d.repetidos.slice(0, 30).map((r, i) =>
-    `<li${i >= 10 ? ' data-extra' : ''}><strong>${esc(r.rua)}</strong>: ${esc(TIPOS_NOME[r.tipo] || r.tipo)}, pedido ${r.pedidos.length} vezes
-<details><summary>ver datas e autores</summary><ul class="lista">${r.pedidos.map((p) => `<li><span class="data">${dataBR(p.data)}</span> ${esc(p.autores)} ${link(fichaOficial(p.id), 'ficha')}</li>`).join('')}</ul></details></li>`).join('\n');
-  const extras = Math.max(0, Math.min(30, d.repetidos.length) - 10);
+  const { html: repetidos, extras } = itensRepetidos(d.repetidos);
   const contagem = Object.fromEntries(GRUPOS_PUBLICOS.map((g) => [g, d.proposituras.filter((p) => p.grupo === g).length]));
   const grupos = GRUPOS_PUBLICOS.map((g) =>
     `<details class="grupo" data-grupo="${g}"><summary>${esc(GRUPOS[g])} <span class="num">${contagem[g]}</span></summary><ul class="lista"></ul></details>`).join('\n');
@@ -95,6 +100,7 @@ ${d.gastos ? chamadaGastos(d.gastos) : ''}
 <input id="busca-bairro" class="busca" type="search" placeholder="Digite o bairro ou a rua" autocomplete="off">
 ${sugestoes.length ? `<div class="sugestoes" role="group" aria-label="Bairros com mais pedidos">${sugestoes.map((s) => `<button type="button" class="chip" data-busca="${esc(s)}">${esc(s)}</button>`).join('')}</div>` : ''}
 <div id="resultado-busca" aria-live="polite"></div>
+<p><a class="botao-secundario" href="bairros.html">Ver a página do seu bairro</a></p>
 </section>
 <section class="secao" aria-labelledby="t-numeros">
 <h2 id="t-numeros">A Câmara em números</h2>

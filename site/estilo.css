@@ -292,6 +292,15 @@ h2 .contagem { font-size: .9rem; font-weight: 600; color: var(--suave); font-fam
 .s-devolvida { background: var(--ambar); }
 .status-promessa { color: var(--rio); }
 
+/* Índice de bairros: lista de A a Z em cartão; 2 colunas a partir de 768px. */
+.lista-bairros > li { display: flex; justify-content: space-between; align-items: baseline; gap: .75rem; }
+.lista-bairros > li > a { min-width: 0; font-weight: 600; padding: .2rem 0; }
+.lista-bairros .num { float: none; flex: 0 0 auto; font-size: .9rem; }
+@media (min-width: 768px) {
+  .lista-bairros { columns: 2; column-gap: 2.5rem; }
+  .lista-bairros > li { break-inside: avoid; }
+}
+
 /* Página de uma semana: anterior, próxima e todas as semanas. */
 .semana-nav { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; margin: 1.25rem 0; }
 .semana-todas { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }

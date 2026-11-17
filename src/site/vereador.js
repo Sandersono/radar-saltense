@@ -42,11 +42,25 @@ ${espera > 0 && amostraBoa(x) ? `<p class="nota">Ainda faltam conferir ${numero(
 
 // Sem gênero: o texto nunca diz "vereador" ou "vereadora" de uma pessoa. Até ~155 caracteres:
 // "Dados oficiais." só entra quando cabe.
+// Com apelido, ele vem primeiro (é por ele que as pessoas procuram) e o fim sai aos poucos até caber em ~160.
 export const descricaoVereador = (v) => {
-  const quem = v.apelido ? `${v.nome}, “${v.apelido}”` : v.nome;
-  const frase = `Presença, votos, propostas, requerimentos respondidos e emendas de ${quem}${v.partido ? ` (${v.partido})` : ''}${v.apelido ? ',' : ''} na Câmara de Salto/SP.`;
+  if (v.apelido) {
+    const quem = `${v.apelido} (${v.nome}${v.partido ? `, ${v.partido}` : ''}) na Câmara de Salto/SP:`;
+    const opcoes = [
+      `${quem} presença nas sessões, votos, propostas, requerimentos respondidos e emendas. Dados oficiais.`,
+      `${quem} presença nas sessões, votos, propostas, requerimentos respondidos e emendas.`,
+      `${quem} presença, votos, propostas, requerimentos respondidos e emendas.`,
+      `${quem} presença, votos e propostas.`,
+    ];
+    return opcoes.find((t) => t.length <= 160) || opcoes[opcoes.length - 1];
+  }
+  const frase = `Presença, votos, propostas, requerimentos respondidos e emendas de ${v.nome}${v.partido ? ` (${v.partido})` : ''} na Câmara de Salto/SP.`;
   return frase.length + 16 <= 155 ? `${frase} Dados oficiais.` : frase;
 };
+
+// O apelido abre o título (busca por apelido); o nome completo vem entre parênteses.
+export const tituloVereador = (v) =>
+  `${v.apelido ? `${v.apelido} (${v.nome})` : v.nome} na Câmara de Salto: presença, votos e propostas`;
 
 // schema.org Person, sem cargo (jobTitle) e sem gênero.
 export function pessoaJsonLd(v) {
@@ -125,7 +139,7 @@ ${cartaoRespostas(v, d)}
 ${cartaoEmendas(v, d)}
 ${cartaoCampanha(d.camara.campanha.candidatos[v.id])}`;
   return layout({
-    titulo: `${v.nome} na Câmara de Salto: presença, votos e propostas`,
+    titulo: tituloVereador(v),
     descricao: descricaoVereador(v),
     caminho: `vereador/${v.id}.html`,
     jsonld: pessoaJsonLd(v),
