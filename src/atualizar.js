@@ -92,7 +92,13 @@ if (coleta.iegm && Object.keys(coleta.iegm.anos).length) await writeFile('data/p
 if (coleta.obras) await writeFile('data/processado/obras.json', json(coleta.obras));
 if (Object.keys(coleta.contratos).length) await writeFile('data/processado/contratos.json', json(coleta.contratos));
 if (Object.values(coleta.obrasFontes).some(Boolean)) await writeFile('data/processado/obras-fontes.json', json(coleta.obrasFontes));
-await gerarSite(dados, 'dist', semanas);
+const gerado = await gerarSite(dados, 'dist', semanas);
+// Avisos do gerador (ex.: bairro novo sem nome fixo) também vão para a manutenção e para a sentinela.
+if (gerado && gerado.manutencao && gerado.manutencao.length) {
+  dados.avisosManutencao = [...new Set([...(dados.avisosManutencao || []), ...gerado.manutencao])];
+  await writeFile('data/processado/dados.json', JSON.stringify(dados));
+  await appendFile('conferencia.md', `\n## Manutenção do gerador\n\n${gerado.manutencao.map((a) => `- ${a}`).join('\n')}\n`);
+}
 // Vistoria do site pronto: CPF ou página obrigatória faltando impedem a publicação (o workflow para aqui).
 const vistoria = await vistoriarPasta('dist');
 await appendFile('conferencia.md', relatorioVistoria(vistoria));

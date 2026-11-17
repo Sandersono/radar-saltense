@@ -39,6 +39,7 @@ const FONTES = [
 
 // semanas: arquivo semanal (data/processado/semanas.json); sem ele, é montado agora com os dados atuais.
 export async function gerarSite(d, destino, semanasSalvas = null) {
+  const manutencao = []; // avisos de manutenção do próprio gerador (devolvidos a quem chamou)
   let semanas = semanasSalvas && Object.keys(semanasSalvas).length ? semanasSalvas : null;
   if (!semanas) {
     // Erro no arquivo semanal nunca impede publicar: o site sai sem as páginas de semana desta vez.
@@ -72,7 +73,12 @@ export async function gerarSite(d, destino, semanasSalvas = null) {
   for (const erro of validarNomes(nomes, todosBairros)) console.warn(`Nome de bairro: ${erro}`);
   const bairros = bairrosComPagina(todosBairros);
   // Bairro novo que passou do corte: a página sai com a grafia mais comum até o nome ser fixado na lista.
-  for (const b of bairros) if (!b.fixo) console.warn(`Bairro com página e sem nome fixo em bairros-apelidos.json: "${b.chave}" (${b.nome}).`);
+  for (const b of bairros) {
+    if (b.fixo) continue;
+    const texto = `Bairro novo com página e sem nome fixo em data/referencia/bairros-apelidos.json (nomes): "${b.chave}" (${b.nome}).`;
+    console.warn(texto);
+    manutencao.push(texto);
+  }
   await pagina('bairros.html', paginaBairros(bairros, d));
   for (const b of bairros) await pagina(`bairro/${b.slug}.html`, paginaBairro(b, d, todosBairros));
   await writeFile(`${destino}/feed.xml`, feedRss(d, ENDERECO, semanas));
@@ -95,4 +101,5 @@ export async function gerarSite(d, destino, semanasSalvas = null) {
   await writeFile(`${destino}/sitemap.xml`, sitemapXml(paginas, ENDERECO, d.meta.atualizadoEm ? new Date(d.meta.atualizadoEm).toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' }) : ''));
   await writeFile(`${destino}/robots.txt`, robotsTxt(ENDERECO));
   await writeFile(`${destino}/.nojekyll`, '');
+  return { manutencao };
 }

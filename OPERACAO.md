@@ -80,9 +80,10 @@ Fica no artefato "conferencia" de cada execução do robô, na aba Actions. As s
 
 **Atenção** (abrem alerta de "algo a fazer"):
 - a atualização não veio do despertador da VPS;
-- avisos de manutenção do robô.
+- a atualização ainda está rodando às 12:30, porque o GitHub atrasou;
+- avisos de manutenção do robô, incluindo obra pendente com possível licitação já na lista e bairro novo sem nome fixo.
 
-Os alertas são issues com o rótulo `sentinela` no repositório e chegam por e-mail ao dono. Se já houver um alerta aberto, ela comenta nele. Quando tudo volta ao normal, ela fecha o alerta.
+Os alertas são issues com o rótulo `sentinela` no repositório e chegam por e-mail ao dono. Se já houver um alerta aberto, ela comenta nele, mas só quando o conteúdo muda, para não repetir e-mail todo dia. Quando tudo volta ao normal, ela fecha o alerta. Se a própria sentinela falhar, ela abre um alerta dizendo isso.
 
 ## 4. O que fazer em cada alerta
 
@@ -101,9 +102,9 @@ Os alertas são issues com o rótulo `sentinela` no repositório e chegam por e-
 
 - **Quando e onde:** dia 15, às 09:00 de Brasília, na rotina na nuvem `trig_01SH2Dn5tbXGfkyGwyRdcAjF`.
 - **O que faz:**
-  - procura provas oficiais de 2025 em diante;
-  - nunca rebaixa status nem marca promessa como descumprida;
-  - nunca mexe no main.
+ - procura provas oficiais de 2025 em diante;
+ - nunca rebaixa status nem marca promessa como descumprida;
+ - nunca mexe no main.
 - **O que entrega:** um PR com tabela, provas e itens descartados. Ao juntar o PR, o robô publica no dia seguinte.
 - **Se não aparecer nada no dia 15:** ver a execução em claude.ai/code/routines.
 

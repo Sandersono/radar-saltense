@@ -37,10 +37,21 @@ jobs:
           else
             titulo="Sentinela: $( [ "$estado" = "erro" ] && echo 'problema no Radar Saltense' || echo 'algo a fazer no Radar Saltense' ) ($(TZ=America/Sao_Paulo date +%d/%m/%Y))"
             if [ -n "$aberto" ]; then
-              gh issue comment "$aberto" --body-file sentinela.md
+              # Só comenta se o conteúdo mudou (ignora a 1ª linha, que tem a data): sem e-mail repetido todo dia.
+              anterior=$(gh issue view "$aberto" --json body,comments -q '(.comments | last | .body) // .body')
+              if [ "$(printf '%s' "$anterior" | tail -n +2 | grep -v '^@')" != "$(tail -n +2 sentinela.md)" ]; then
+                gh issue comment "$aberto" --body-file sentinela.md
+              fi
               gh issue edit "$aberto" --title "$titulo"
             else
               printf '%s\n\n@%s\n' "$(cat sentinela.md)" "${{ github.repository_owner }}" > corpo.md
               gh issue create --title "$titulo" --label sentinela --body-file corpo.md
             fi
           fi
+      - name: A própria sentinela falhou
+        if: failure()
+        run: |
+          gh label create sentinela --color B60205 --description "Alerta automático da sentinela" --force >/dev/null || true
+          gh issue create --label sentinela \
+            --title "Sentinela: a verificação de hoje falhou ($(TZ=America/Sao_Paulo date +%d/%m/%Y))" \
+            --body "A sentinela não conseguiu terminar a verificação. Veja o log em ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} e a seção 3 do OPERACAO.md. @${{ github.repository_owner }}"

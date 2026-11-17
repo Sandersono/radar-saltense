@@ -22,7 +22,10 @@ export function avaliar({ execucoes, paginas, dados, agora }) {
   const hoje = diaSP(agora);
   const deHoje = (execucoes || []).filter((e) => e.displayTitle === NOME_COMPLETA && diaSP(e.createdAt) === hoje);
   const ok = deHoje.filter((e) => e.conclusion === 'success');
-  if (!ok.length) {
+  const andando = deHoje.filter((e) => ['in_progress', 'queued', 'waiting', 'requested', 'pending'].includes(e.status));
+  if (!ok.length && andando.length) {
+    atencao.push('A atualização de hoje ainda está rodando (o GitHub atrasou o horário). A sentinela confere de novo amanhã; se quiser, veja a aba Actions mais tarde.');
+  } else if (!ok.length) {
     const falhas = deHoje.filter((e) => e.status === 'completed' && e.conclusion && e.conclusion !== 'success' && e.conclusion !== 'skipped');
     problemas.push(`Nenhuma atualização completa deu certo hoje (${dataBR(hoje)}).${falhas.length ? ` ${falhas.length} tentativa(s) falharam: veja a aba Actions e o relatório "conferencia".` : ' Nenhuma tentativa foi registrada.'}`);
   } else if (!ok.some((e) => e.event === 'workflow_dispatch' && horaUTC(e.createdAt) < 7)) {

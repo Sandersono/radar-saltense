@@ -30,6 +30,12 @@ const p = site('18/11/2026', 40);
 p['obras.html'] = { status: 404, texto: '' };
 assert.equal(avaliar({ execucoes: [execDespertador], paginas: p, dados: null, agora }).problemas.length, 2);
 
+// Atualização ainda rodando às 12:30 (GitHub atrasou): atenção, não problema
+const rodando = { ...execDespertador, createdAt: '2026-11-18T14:05:00Z', event: 'schedule', status: 'in_progress', conclusion: '' };
+const rr = avaliar({ execucoes: [rodando], paginas: site('17/11/2026'), dados: null, agora });
+assert.equal(rr.problemas.length, 0);
+assert.ok(rr.atencao[0].includes('ainda está rodando'));
+
 // Aviso de manutenção real vira atenção
 assert.equal(avaliar({ execucoes: [execDespertador], paginas: site(), dados: { avisosManutencao: ['Há PDF novo de emendas de 2026 na Câmara'] }, agora }).atencao.length, 1);
 console.log('sentinela: ok');

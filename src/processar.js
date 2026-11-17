@@ -251,6 +251,10 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
   const fo = obrasFontes || {};
   const montadas = montarObras({ pncp: fo.pncp, obrasgov: fo.obrasgov, paralisadas: fo.paralisadas, tce: obras && obras.obras, tceDataBase: obras && obras.dataBase, ligacoes: ligacoesObras, numerosPromessa, hoje: hojeISO });
   manutencao.push(...montadas.manutencao);
+  // Obra pendente (ex.: ETA João Jabour) com possível obra já na lista: alguém confere e liga à mão.
+  for (const p of montadas.pendentes || []) {
+    if (p.candidatos && p.candidatos.length) manutencao.push(`Obra pendente "${p.nome}": possível obra já na lista (${p.candidatos.join(', ')}). Conferir e colocar o número do PNCP/Obrasgov em data/referencia/obras-ligacoes.json.`);
+  }
   if (fo.pncp && fo.pncp.comprasPendentes) manutencao.push(`Obras no PNCP: ${fo.pncp.comprasPendentes} contratações ainda sem modalidade conferida; ficam para as próximas atualizações.`);
   // Requerimentos respondidos nos últimos dias (para o resumo da semana).
   const desdeRecentes = new Date(Date.parse(hojeISO) - DIAS_RESPOSTAS_RECENTES * 86400000).toISOString().slice(0, 10);
