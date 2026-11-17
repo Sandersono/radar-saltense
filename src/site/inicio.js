@@ -80,7 +80,7 @@ export function paginaInicial(d) {
   const sugestoes = sugestoesBairros(d.locais);
 
   const heroi = `<p class="heroi-sobre">Salto · SP</p>
-<h1>Seu vereador, sua Prefeitura, seu dinheiro</h1>
+<h1>Seu vereador, sua Prefeitura, <span style="white-space:nowrap">SEU DINHEIRO</span></h1>
 <p>O que a Câmara e a Prefeitura de Salto fazem e quanto isso custa, só com dado oficial e link para a fonte. Atualizado todo dia.</p>
 <p class="atualizado">Atualizado em ${esc(quandoBR(d.meta.atualizadoEm))}</p>`;
 
