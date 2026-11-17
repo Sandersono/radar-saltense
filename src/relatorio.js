@@ -119,7 +119,7 @@ export function relatorio(d, problemas, aumentos = []) {
       const f = ob.fontes;
       l.push(`- Obras (obras.html): ${ob.lista.length} na lista (${Object.entries(ob.resumo.porGrupo).map(([g, n]) => `${g} ${n}`).join(', ')}); contratos em execução ou paralisados ${reais(ob.resumo.valorContratado)}`);
       l.push(`- Fontes das obras: PNCP ${f.pncp || 'sem dado'}; Obrasgov.br ${f.obrasgov || 'sem dado'} (base ${f.obrasgovBase || '-'}); paralisadas da Prefeitura ${f.paralisadas || 'sem dado'}; TCE data-base ${f.tceDataBase || '-'}`);
-      l.push(...(ob.pendentes || []).map((p) => `- Ligação de obra pendente (não aparece no site): ${p.id}, promessas ${p.promessas.join(', ') || '-'}: ${p.pendente}`));
+      l.push(...(ob.pendentes || []).map((p) => `- Ligação de obra pendente (não aparece no site): ${p.id}, promessas ${p.promessas.join(', ') || '-'}: ${p.pendente}${p.candidatos && p.candidatos.length ? ` **Possível obra já na lista: ${p.candidatos.join(', ')}. Conferir e colocar o número do PNCP/Obrasgov na ligação.**` : ''}`));
       if (d.meta.duracaoObrasMs != null) l.push(`- Coleta das obras: levou ${Math.round(d.meta.duracaoObrasMs / 1000)} s nesta atualização.`);
     }
   }

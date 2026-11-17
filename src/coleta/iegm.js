@@ -11,13 +11,14 @@ const PAINEL = {
 // faixaTodosMunicipiosPeriodo recebe parampExercicio_mapa=<ano-base> e parampRegiao=-1 (todos os 644 municípios).
 export const PRAZO_PENTAHO_MS = 3 * 60 * 1000;
 
-export async function listarAnosIegm({ prazoMs = PRAZO_PENTAHO_MS } = {}) {
-  return (await consultaCda({ ...PAINEL, dataAccessId: 'exercicioDS', limite: Date.now() + prazoMs })).map((l) => Number(l.exercicio)).sort((a, b) => b - a);
+// `limite` (instante em ms) é um prazo único para todas as consultas do IEGM numa atualização: quem chama
+// listarAnosIegm e coletarIegm em seguida passa o mesmo limite, e o total não passa de PRAZO_PENTAHO_MS.
+export async function listarAnosIegm({ prazoMs = PRAZO_PENTAHO_MS, limite = Date.now() + prazoMs } = {}) {
+  return (await consultaCda({ ...PAINEL, dataAccessId: 'exercicioDS', limite })).map((l) => Number(l.exercicio)).sort((a, b) => b - a);
 }
 
-export async function coletarIegm(anos, { prazoMs = PRAZO_PENTAHO_MS } = {}) {
-  const limite = Date.now() + prazoMs;
-  const lista = anos || (await listarAnosIegm({ prazoMs }));
+export async function coletarIegm(anos, { prazoMs = PRAZO_PENTAHO_MS, limite = Date.now() + prazoMs } = {}) {
+  const lista = anos || (await listarAnosIegm({ limite }));
   if (!lista.length) throw new Error('IEGM: exercicioDS veio vazio');
   const out = {};
   for (const ano of lista) {

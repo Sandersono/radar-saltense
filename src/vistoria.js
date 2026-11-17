@@ -7,6 +7,7 @@ export const OBRIGATORIAS = ['index.html', 'camara.html', 'prefeitura.html', 'vo
 // Não pega número de processo/protocolo com mais grupos (ex.: 1.234.567.890-12).
 const CPF = /(?<![\d.])\d{3}\.\d{3}\.\d{3}-\d{2}(?![\d-])/;
 const EXTERNO = /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i;
+const FONTE_OFICIAL = /href="https:\/\/[^"/]*(?:\.gov\.br|\.jus\.br|\.leg\.br|sisvetor\.com\.br|obaratec\.com\.br)[/"]/;
 
 // Texto que o leitor vê: sem scripts, estilos e tags.
 export const textoVisivel = (html) => html
@@ -41,6 +42,9 @@ export function vistoriar(paginas, arquivos, dados = []) {
     const ruim = texto.match(/\b(undefined|NaN)\b|(?:^|[\s:(])null(?=[\s,.)]|$)/);
     if (ruim) avisos.push(`${caminho}: texto "${ruim[0].trim()}" aparece para o leitor.`);
     if (/R\$\s*-\s*\d/.test(texto)) avisos.push(`${caminho}: valor em reais negativo.`);
+    // Toda página de dados precisa levar a uma fonte oficial (link direto ou a página "De onde vêm os números").
+    // A regra é por página: muitas seções usam a fonte citada no fim da própria página, de propósito.
+    if (caminho !== 'fontes.html' && !FONTE_OFICIAL.test(html) && !/href="(?:\.\.\/)?fontes\.html/.test(html)) avisos.push(`${caminho}: nenhum link para fonte oficial nem para "De onde vêm os números".`);
     const quebrados = new Set();
     for (const m of html.matchAll(/href="([^"]*)"/g)) {
       const href = m[1].replace(/&amp;/g, '&');

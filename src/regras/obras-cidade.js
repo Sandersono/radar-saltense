@@ -308,8 +308,20 @@ export function validarLigacoes(ref, numerosPromessa) {
     else for (const n of l.promessas) if (!numerosPromessa.has(String(n))) problemas.push(`${nome}: a promessa ${n} não existe em promessas.json`);
     const temFonte = (Array.isArray(l.pncp) && l.pncp.length) || (Array.isArray(l.obrasgov) && l.obrasgov.length);
     if (!temFonte && !(typeof l.pendente === 'string' && l.pendente.trim())) problemas.push(`${nome}: sem PNCP, sem Obrasgov e sem "pendente"`);
+    if (l.buscar !== undefined) {
+      try { new RegExp(String(l.buscar), 'i'); } catch { problemas.push(`${nome}: "buscar" não é uma expressão válida`); }
+    }
   });
   return problemas;
+}
+
+// Ligação pendente com "buscar": obras da lista (ainda não ligadas à mão) cujo título ou objeto casa com a expressão.
+// Não liga nada sozinho: só avisa na conferência para alguém conferir e colocar o número na ligação.
+export function candidatosPendente(ligacao, lista) {
+  if (!ligacao || typeof ligacao.buscar !== 'string' || !ligacao.buscar.trim()) return [];
+  let re;
+  try { re = new RegExp(ligacao.buscar, 'i'); } catch { return []; }
+  return (lista || []).filter((o) => !o.ligacao && re.test(`${o.titulo || ''} ${o.objeto || ''}`)).map((o) => o.id);
 }
 
 // --- Montagem da lista ---
@@ -478,7 +490,7 @@ export function montarObras({ pncp, obrasgov, paralisadas, tce, tceDataBase, lig
       paralisadasLink: (paralisadas && paralisadas.link) || null,
       tceDataBase: tceDataBase || null,
     },
-    pendentes: ligs.filter((l) => typeof l.pendente === 'string' && l.pendente.trim()).map((l) => ({ id: l.id, nome: l.nome || l.id, pendente: l.pendente, promessas: l.promessas || [] })),
+    pendentes: ligs.filter((l) => typeof l.pendente === 'string' && l.pendente.trim()).map((l) => ({ id: l.id, nome: l.nome || l.id, pendente: l.pendente, promessas: l.promessas || [], candidatos: candidatosPendente(l, lista) })),
     manutencao,
   };
 }

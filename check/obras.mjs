@@ -166,3 +166,17 @@ const ids = (ordem) => montarObras({ pncp: { contratacoes: { [lic9.id]: lic9 }, 
 assert.deepEqual(ids([k1, k2]), ids([k2, k1]));
 assert.ok(ids([k1, k2])[0].startsWith('prefeitura-99-2026-contrato-2026-20='));
 console.log('ok: obras');
+
+// Ligação pendente com "buscar": aponta obra candidata, sem confundir rua com estação de tratamento
+{
+  const { candidatosPendente } = await import('../src/regras/obras-cidade.js');
+  const lig = JSON.parse((await import('node:fs')).readFileSync(new URL('../data/referencia/obras-ligacoes.json', import.meta.url), 'utf8')).ligacoes.find((l) => l.id === 'eta-joao-jabour');
+  const lista = [
+    { id: 'a', titulo: 'Construção da nova ETA João Jabour', objeto: '' },
+    { id: 'b', titulo: 'Pavimentação e drenagem João Jabour e Buru', objeto: 'ruas João Jabour e Buru' },
+    { id: 'c', titulo: 'ETA João Jabour', objeto: '', ligacao: 'x' },
+  ];
+  assert.deepEqual(candidatosPendente(lig, lista), ['a']);
+  assert.deepEqual(candidatosPendente({ id: 'z' }, lista), []);
+  console.log('obras (pendente com buscar): ok');
+}

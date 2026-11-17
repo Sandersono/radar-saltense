@@ -97,9 +97,10 @@ async function respostasDaCamara(cardsPorAno, salvo, avisos) {
 // Nota do TCE: o robô só refaz a lista de anos e o ano-base mais novo; os anos antigos ficam como estão.
 async function iegmDoTce(salvo, avisos) {
   try {
-    const anos = await listarAnosIegm({ prazoMs: PRAZO_PENTAHO_MS });
+    const limite = Date.now() + PRAZO_PENTAHO_MS; // um prazo só para a lista de anos e o ano mais novo
+    const anos = await listarAnosIegm({ limite });
     if (!anos.length) throw new Error('lista de anos vazia');
-    return mesclarIegm(salvo, await coletarIegm([anos[0]], { prazoMs: PRAZO_PENTAHO_MS }));
+    return mesclarIegm(salvo, await coletarIegm([anos[0]], { limite }));
   } catch (e) {
     avisos.push(`Nota do TCE (IEGM): ${primeiraLinha(e.message)}; mantido o último dado salvo.`);
     return salvo;

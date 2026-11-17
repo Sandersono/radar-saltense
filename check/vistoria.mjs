@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { vistoriar, OBRIGATORIAS } from '../src/vistoria.js';
 
-const corpo = (extra = '') => `<html><body><main><h1>Título</h1><p>${'texto '.repeat(120)}</p>${extra}</main></body></html>`;
+// Toda página de teste leva um link oficial, salvo `fonte = false` (teste do aviso de página sem fonte).
+const corpo = (extra = '', fonte = true) => `<html><body><main><h1>Título</h1><p>${'texto '.repeat(120)}</p>${fonte ? '<a href="https://www.camarasalto.sp.gov.br/">Câmara</a>' : ''}${extra}</main></body></html>`;
 const base = OBRIGATORIAS.map((caminho) => ({ caminho, html: corpo() }));
 const arquivos = [...OBRIGATORIAS, 'estilo.css', 'vereador/a.html'];
 
@@ -31,3 +32,10 @@ assert.ok(a.avisos.some((x) => x.includes('negativo')));
 // Links externos e âncoras existentes não geram aviso; "nulla" ou "anulado" não contam como null
 assert.equal(vistoriar([...base.slice(1), { caminho: 'index.html', html: corpo('<a href="https://x.gov.br/a#b">x</a><a href="#ok" id="ok">y</a><p>valor anulado</p>') }], arquivos).avisos.length, 0);
 console.log('vistoria: ok');
+
+// Página sem nenhuma fonte oficial gera aviso; link oficial ou para fontes.html resolve
+const semFonte = vistoriar([...base.slice(1), { caminho: 'index.html', html: corpo('<a href="https://instagram.com/x">x</a>', false) }], arquivos);
+assert.ok(semFonte.avisos.some((x) => x.includes('fonte oficial')));
+assert.equal(vistoriar([...base.slice(1), { caminho: 'index.html', html: corpo('<a href="https://pncp.gov.br/app/x">x</a>', false) }], arquivos).avisos.length, 0);
+assert.equal(vistoriar([{ caminho: 'vereador/a.html', html: corpo('<a href="../fontes.html">fontes</a>', false) }, ...base], arquivos).avisos.length, 0);
+console.log('vistoria (fonte): ok');
