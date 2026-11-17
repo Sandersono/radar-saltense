@@ -1,6 +1,9 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { chaveBairro, montarBairros, bairrosComPagina, validarApelidos, obraCitaBairro, nomeBomParaObra, nomesMaiores, atribuirSlugs, limparRua, CORTE_BAIRRO } from '../src/regras/bairros.js';
+import {
+  chaveBairro, montarBairros, bairrosComPagina, validarApelidos, validarNomes, obraCitaBairro, nomeBomParaObra, nomesMaiores, nomesParaObra,
+  atribuirSlugs, limparRua, resumoBairro, CORTE_BAIRRO,
+} from '../src/regras/bairros.js';
 import { tituloVereador, descricaoVereador, pessoaJsonLd } from '../src/site/vereador.js';
 import { descricaoBairro, lugarJsonLd } from '../src/site/bairros.js';
 
@@ -10,6 +13,19 @@ assert.equal(limparRua('Rua Japão ao'), 'Rua Japão');
 assert.equal(limparRua('Rua Botucatu com a Rua Campinas'), 'Rua Botucatu');
 assert.equal(limparRua('Rua 7 de Setembro'), 'Rua 7 de Setembro');
 assert.equal(limparRua('Rua Santa Maria Goretti'), 'Rua Santa Maria Goretti');
+assert.equal(limparRua('Rua 5 A'), 'Rua 5 A'); // letra final do nome fica
+assert.equal(limparRua('Rua 5 a'), 'Rua 5 a');
+assert.equal(limparRua('Rua 5A'), 'Rua 5A');
+assert.equal(limparRua('Praça XV e'), 'Praça XV');
+assert.equal(limparRua('Praça do'), ''); // só o tipo: some
+assert.equal(limparRua('Rua do'), '');
+assert.equal(limparRua('Avenida entre o'), '');
+assert.equal(limparRua('Rua que liga os Bairros'), '');
+assert.equal(limparRua('Rua Japão que interliga o'), 'Rua Japão');
+assert.equal(limparRua('Avenida das Nações Unidas e as casas do'), 'Avenida das Nações Unidas');
+assert.equal(limparRua('Rua Quintino Bocaiuva e os fundos do Carrefour'), 'Rua Quintino Bocaiuva');
+assert.equal(limparRua('Rua Palma de Ouro para que realize a limpeza do local'), 'Rua Palma de Ouro');
+assert.equal(limparRua('Rua das Madressilvas e demais ruas do'), 'Rua das Madressilvas');
 
 // chaveBairro: sufixo de cidade, "Jd."/"Vl.", acentos; números romanos continuam.
 assert.equal(chaveBairro('Vila Teixeira - Salto/SP'), 'vila teixeira');
@@ -67,20 +83,45 @@ assert.equal(obraCitaBairro('Implantação da ETA Barnabé', 'Barnabé', ['resid
 assert.equal(nomeBomParaObra('Vila Nova'), false);
 assert.equal(nomeBomParaObra('Barnabé'), true);
 assert.equal(nomeBomParaObra('CECAP'), false);
+// Outras grafias valem na obra só se já começam por Jardim, Vila, Parque etc.
+assert.deepEqual(nomesParaObra({ nome: 'Jardim Santa Cruz', grafias: ['Jardim Santa Cruz', 'Santa Cruz'] }), ['Jardim Santa Cruz']);
+assert.deepEqual(nomesParaObra({ nome: 'Parque Laguna', grafias: ['Parque Laguna', 'Laguna', 'Residencial Parque Laguna'] }), ['Parque Laguna', 'Residencial Parque Laguna']);
+
+// Nome fixo: vence a grafia mais comum e corrige nome cortado; chave inexistente é erro.
+const fixos = montarBairros([prop('São Pedro'), prop('São Pedro'), prop('Jardim São Pedro')], { 'sao pedro': 'Jardim São Pedro' }, { 'jardim sao pedro': 'Jardim São Pedro e São Paulo' });
+assert.equal(fixos[0].nome, 'Jardim São Pedro e São Paulo');
+assert.equal(fixos[0].slug, 'jardim-sao-pedro-e-sao-paulo');
+assert.equal(fixos[0].fixo, true);
+assert.ok(validarNomes({ 'jardim x': 'Jardim X' }, fixos).length > 0);
+
+// Repetido só de rua citada com o bairro em 2 propostas ou mais (a grafia com sobra conta como a mesma rua).
+const ruaProp = (i, ...ruas) => ({ id: String(i), data: `2026-01-0${i}`, grupo: 'melhoria', vereadores: [], tipos: [], ementa: '',
+  locais: [{ tipo: 'bairro', nome: 'Jardim Y' }, ...ruas.map((nome) => ({ tipo: 'rua', nome }))] });
+const dRep = { proposituras: [ruaProp(1, 'Rua A Um', 'Rua B Dois'), ruaProp(2, 'Rua A Um e o')], obras: { lista: [] },
+  repetidos: [{ rua: 'Rua A Um', tipo: 'buraco', pedidos: [] }, { rua: 'Rua B Dois', tipo: 'buraco', pedidos: [] }] };
+assert.deepEqual(resumoBairro(montarBairros(dRep.proposituras)[0], dRep).repetidos.map((r) => r.rua), ['Rua A Um']);
 
 // Apelidos: todo destino existe nos nomes vistos (lista real contra os dados reais).
 assert.ok(validarApelidos({ 'santa cruz': 'Jardim Santa Kruz' }, ['Santa Cruz']).length > 0);
 assert.ok(validarApelidos({ 'Santa Cruz': 'Jardim Santa Cruz' }, ['Jardim Santa Cruz']).length > 0);
-const apelidos = JSON.parse(readFileSync('data/referencia/bairros-apelidos.json', 'utf8'));
+const { apelidos, nomes } = JSON.parse(readFileSync('data/referencia/bairros-apelidos.json', 'utf8'));
 const dados = JSON.parse(readFileSync('data/processado/dados.json', 'utf8'));
 const vistos = dados.proposituras.flatMap((p) => (p.locais || []).filter((l) => l.tipo === 'bairro').map((l) => l.nome));
 assert.deepEqual(validarApelidos(apelidos, vistos), []);
-// Nunca juntar "X II" com "X": apelido e destino têm o mesmo número romano no fim (ou nenhum).
-const romano = (s) => (chaveBairro(s).match(/ (i{1,3}|iv|v)$/) || [''])[0];
-for (const [k, n] of Object.entries(apelidos)) assert.equal(romano(k), romano(n), `${k} → ${n}`);
+// Nunca juntar "X II" com "X" (nem "X 2" com "X"): apelido e destino têm o mesmo número no fim (romano de i a x, ou arábico), ou nenhum.
+const numeroFinal = (s) => (chaveBairro(s).match(/ (i{1,3}|iv|vi{0,3}|ix|x|\d+)$/) || [''])[0];
+assert.equal(numeroFinal('Jardim Y VI'), ' vi');
+assert.equal(numeroFinal('Jardim Y 2'), ' 2');
+assert.equal(numeroFinal('Jardim Y'), '');
+for (const [k, n] of Object.entries(apelidos)) assert.equal(numeroFinal(k), numeroFinal(n), `${k} → ${n}`);
+// Todo bairro com página tem nome fixo (o endereço não muda quando a grafia mais comum muda).
+const todos = montarBairros(dados.proposituras, apelidos, nomes);
+assert.deepEqual(validarNomes(nomes, todos), []);
+assert.deepEqual(bairrosComPagina(todos).filter((b) => !b.fixo).map((b) => b.chave), []);
 
-// Textos da página de bairro.
-assert.equal(descricaoBairro('Jardim Celani', 70), 'Em Jardim Celani (Salto/SP), os vereadores fizeram 70 pedidos desde 2025: veja os tipos de problema, as ruas mais citadas, os pedidos repetidos e as obras.');
+// Textos da página de bairro: "e as obras" só com obras.
+assert.equal(descricaoBairro('Jardim Celani', 70, true), 'Em Jardim Celani (Salto/SP), os vereadores fizeram 70 pedidos desde 2025: veja os tipos de problema, as ruas mais citadas, os pedidos repetidos e as obras.');
+assert.equal(descricaoBairro('Jardim Celani', 70, false), 'Em Jardim Celani (Salto/SP), os vereadores fizeram 70 pedidos desde 2025: veja os tipos de problema, as ruas mais citadas e os pedidos repetidos.');
 const lugar = lugarJsonLd({ nome: 'Jardim Celani', slug: 'jardim-celani' });
 assert.equal(lugar['@type'], 'Place');
 assert.equal(lugar.containedInPlace.name, 'Salto');
@@ -89,7 +130,11 @@ assert.equal(lugar.containedInPlace.address.addressRegion, 'SP');
 // Vereador: o apelido abre o título e a descrição; sem gênero; nome completo no JSON-LD.
 const comApelido = { id: 'x', nome: 'Rogério dos Santos Filho', apelido: 'Dr. Rogério Pinheiro', partido: 'Solidariedade' };
 const semApelido = { id: 'y', nome: 'Arildo Guadagnini', apelido: null, partido: 'Democracia Cristã' };
-assert.equal(tituloVereador(comApelido), 'Dr. Rogério Pinheiro (Rogério dos Santos Filho) na Câmara de Salto: presença, votos e propostas');
+// Título com apelido: até 70 caracteres, encurtando em dois passos.
+assert.equal(tituloVereador({ ...comApelido, apelido: 'Preto', nome: 'Ana Lima' }), 'Preto (Ana Lima) na Câmara de Salto: presença, votos e propostas');
+assert.equal(tituloVereador(comApelido), 'Dr. Rogério Pinheiro (Rogério dos Santos Filho) na Câmara de Salto');
+assert.equal(tituloVereador({ ...comApelido, nome: 'Nome Muito Comprido de Alguém da Silva Pereira Souza' }), 'Dr. Rogério Pinheiro na Câmara de Salto');
+for (const v of [comApelido, { ...comApelido, apelido: 'Chell', nome: 'Michel Oliveira Rodrigues da Silva' }]) assert.ok(tituloVereador(v).length <= 70);
 assert.equal(tituloVereador(semApelido), 'Arildo Guadagnini na Câmara de Salto: presença, votos e propostas');
 for (const v of [comApelido, { ...comApelido, apelido: 'Almir da Adega', nome: 'Almir de Melo Santos', partido: 'PRD' }, { ...comApelido, nome: 'Nome Muito Comprido de Alguém da Silva Pereira Souza', partido: 'Partido Muito Comprido' }]) {
   const t = descricaoVereador(v);

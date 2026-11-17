@@ -59,8 +59,15 @@ export const descricaoVereador = (v) => {
 };
 
 // O apelido abre o título (busca por apelido); o nome completo vem entre parênteses.
-export const tituloVereador = (v) =>
-  `${v.apelido ? `${v.apelido} (${v.nome})` : v.nome} na Câmara de Salto: presença, votos e propostas`;
+// Com apelido, até 70 caracteres: o fim sai, e por último o nome completo. Sem gênero.
+export const tituloVereador = (v) => {
+  if (!v.apelido) return `${v.nome} na Câmara de Salto: presença, votos e propostas`;
+  const opcoes = [
+    `${v.apelido} (${v.nome}) na Câmara de Salto: presença, votos e propostas`,
+    `${v.apelido} (${v.nome}) na Câmara de Salto`,
+  ];
+  return opcoes.find((t) => t.length <= 70) || `${v.apelido} na Câmara de Salto`;
+};
 
 // schema.org Person, sem cargo (jobTitle) e sem gênero.
 export function pessoaJsonLd(v) {

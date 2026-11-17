@@ -15,7 +15,7 @@ import { paginaPromessas } from './site/promessas.js';
 import { paginaObras } from './site/obras.js';
 import { feedRss } from './site/feed.js';
 import { paginaBairro, paginaBairros } from './site/bairros.js';
-import { montarBairros, bairrosComPagina, validarApelidos } from './regras/bairros.js';
+import { montarBairros, bairrosComPagina, validarApelidos, validarNomes } from './regras/bairros.js';
 import { ENDERECO } from './site/base.js';
 import { sitemapXml, robotsTxt } from './site/medicao.js';
 
@@ -61,13 +61,18 @@ export async function gerarSite(d, destino, semanasSalvas = null) {
     await pagina(`semana/${s}.html`, paginaSemanaArquivo(semanas[s], d, { anterior: segundas[i - 1], proxima: segundas[i + 1] }, ENDERECO));
   }
   // Páginas por bairro (spec 2026-11-17): montadas aqui, a partir das propostas; nada novo em data/processado.
-  let apelidos = {};
-  try { apelidos = JSON.parse(await readFile('data/referencia/bairros-apelidos.json', 'utf8')); }
+  let ref = {};
+  try { ref = JSON.parse(await readFile('data/referencia/bairros-apelidos.json', 'utf8')); }
   catch (e) { console.warn(`Lista de apelidos de bairro não lida: ${e.message}`); }
+  const apelidos = ref.apelidos || {};
+  const nomes = ref.nomes || {};
   const nomesVistos = d.proposituras.flatMap((p) => (p.locais || []).filter((l) => l.tipo === 'bairro').map((l) => l.nome));
   for (const erro of validarApelidos(apelidos, nomesVistos)) console.warn(`Apelido de bairro: ${erro}`);
-  const todosBairros = montarBairros(d.proposituras, apelidos);
+  const todosBairros = montarBairros(d.proposituras, apelidos, nomes);
+  for (const erro of validarNomes(nomes, todosBairros)) console.warn(`Nome de bairro: ${erro}`);
   const bairros = bairrosComPagina(todosBairros);
+  // Bairro novo que passou do corte: a página sai com a grafia mais comum até o nome ser fixado na lista.
+  for (const b of bairros) if (!b.fixo) console.warn(`Bairro com página e sem nome fixo em bairros-apelidos.json: "${b.chave}" (${b.nome}).`);
   await pagina('bairros.html', paginaBairros(bairros, d));
   for (const b of bairros) await pagina(`bairro/${b.slug}.html`, paginaBairro(b, d, todosBairros));
   await writeFile(`${destino}/feed.xml`, feedRss(d, ENDERECO, semanas));

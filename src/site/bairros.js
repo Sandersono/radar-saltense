@@ -12,8 +12,9 @@ const AVISO_BAIRRO = 'Pedido não é obra feita. Pedido repetido não prova que 
 const plural = (n, um, varios) => `${numero(n)} ${n === 1 ? um : varios}`;
 const rotuloObra = Object.fromEntries(GRUPOS_OBRA.map(([g, titulo]) => [g, titulo]));
 
-export const descricaoBairro = (nome, total) =>
-  `Em ${nome} (Salto/SP), os vereadores fizeram ${plural(total, 'pedido', 'pedidos')} desde ${ANO_INICIO}: veja os tipos de problema, as ruas mais citadas, os pedidos repetidos e as obras.`;
+// "e as obras" só quando a página tem obras.
+export const descricaoBairro = (nome, total, temObras = false) =>
+  `Em ${nome} (Salto/SP), os vereadores fizeram ${plural(total, 'pedido', 'pedidos')} desde ${ANO_INICIO}: veja os tipos de problema, as ruas mais citadas${temObras ? ', os pedidos repetidos e as obras.' : ' e os pedidos repetidos.'}`;
 
 // schema.org Place: só o nome do bairro e a cidade.
 export const lugarJsonLd = (b) => ({
@@ -94,7 +95,7 @@ ${sumario(secoes, [['numeros', 'Números'], ['tipos', 'Tipos de problema'], ['ru
 ${secoes}`;
   return layout({
     titulo: `${b.nome}, Salto: pedidos dos vereadores, ruas e obras: Radar Saltense`,
-    descricao: descricaoBairro(b.nome, r.total),
+    descricao: descricaoBairro(b.nome, r.total, r.obras.length > 0),
     caminho: `bairro/${b.slug}.html`,
     jsonld: lugarJsonLd(b),
     corpo,
