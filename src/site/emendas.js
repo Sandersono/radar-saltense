@@ -133,7 +133,7 @@ ${cartaoNumero({ valor: reaisCentavos(res.total), rotulo: `indicados em ${numero
 ${cartaoNumero({ valor: reaisCentavos(res.pago), rotulo: `pagos até ${dataBR(a25.atualizadoEm)}` })}
 </div>
 ${barraProporcao(Object.keys(ROTULO_GRUPO).map((k) => ({ rotulo: ROTULO_GRUPO[k], valor: g[k], classe: `s-${k}` })))}
-<table class="tabela-empilha"><thead><tr><th>Vereador</th><th>Indicado</th><th>Pago</th>${Object.values(ROTULO_GRUPO).map((r) => `<th>${r}</th>`).join('')}</tr></thead><tbody>${linhas}</tbody></table>
+<table class="tabela-empilha larga"><thead><tr><th>Vereador</th><th>Indicado</th><th>Pago</th>${Object.values(ROTULO_GRUPO).map((r) => `<th>${r}</th>`).join('')}</tr></thead><tbody>${linhas}</tbody></table>
 ${aviso(FRASE_EMENDAS)}
 <p class="nota">"Em andamento" junta as emendas iniciadas e as em execução. Emenda não executada não tem valor no relatório e fica fora das somas. Os nomes com link são de vereadores que também estão na Câmara agora.</p>
 <p>${seloFonte(a25.fonte, 'relatório do 4º trimestre de 2025 (PDF da Câmara)')}</p>`);

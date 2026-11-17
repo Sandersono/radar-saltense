@@ -219,6 +219,10 @@ a.cartao-numero:hover { border-color: var(--rio); }
 @media (min-width: 1024px) {
   .cartoes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
+/* Tablet: tabelas de muitas colunas (ex.: emendas por vereador, 7 colunas) ainda não empilham e precisam caber. */
+@media (min-width: 601px) and (max-width: 1023px) {
+  .tabela-empilha th, .tabela-empilha td { padding: .3rem .25rem; font-size: .9rem; }
+}
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { transition: none !important; animation: none !important; }
@@ -231,6 +235,14 @@ a.cartao-numero:hover { border-color: var(--rio); }
   .tabela-empilha tr { padding: .5rem 0; border-bottom: 1px solid var(--linha); }
   .tabela-empilha td { display: flex; justify-content: space-between; gap: .75rem; border-bottom: 0; padding: .2rem 0; text-align: right; overflow-wrap: anywhere; }
   .tabela-empilha td::before { content: attr(data-rotulo); flex: 0 0 auto; white-space: nowrap; font-weight: 600; text-align: left; color: var(--suave); }
+}
+/* Tabela de 7 colunas (emendas de 2025) só cabe a partir de 900px: empilha até lá. */
+@media (min-width: 601px) and (max-width: 900px) {
+  .tabela-empilha.larga thead { display: none; }
+  .tabela-empilha.larga, .tabela-empilha.larga tbody, .tabela-empilha.larga tr, .tabela-empilha.larga td { display: block; width: 100%; }
+  .tabela-empilha.larga tr { padding: .5rem 0; border-bottom: 1px solid var(--linha); }
+  .tabela-empilha.larga td { display: flex; justify-content: space-between; gap: .75rem; border-bottom: 0; padding: .2rem 0; text-align: right; }
+  .tabela-empilha.larga td::before { content: attr(data-rotulo); flex: 0 0 auto; white-space: nowrap; font-weight: 600; text-align: left; color: var(--suave); }
 }
 .situacao-paralisada { color: var(--falta); }
 /* Emendas de 2025 por situação e promessas por status: só azuis, amarelo e cinza (fato, não alarme) */
