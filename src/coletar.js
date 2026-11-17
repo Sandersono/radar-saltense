@@ -143,7 +143,7 @@ async function contratosDoPncp(salvo, hoje, avisos) {
 }
 
 // Obras em Salto (obras.html): três fontes independentes; a que falhar fica com o último dado salvo e gera aviso.
-async function obrasDaCidade(salvo, ligacoes, avisos) {
+async function obrasDaCidade(salvo, ligacoes, avisos, manutencao) {
   const s = salvo || {};
   const saida = { pncp: s.pncp || null, obrasgov: s.obrasgov || null, paralisadas: s.paralisadas || null };
   const manter = new Set(((ligacoes && Array.isArray(ligacoes.ligacoes)) ? ligacoes.ligacoes : []).flatMap((l) => (l && Array.isArray(l.pncp) ? l.pncp : [])));
@@ -155,7 +155,8 @@ async function obrasDaCidade(salvo, ligacoes, avisos) {
   }
   try {
     saida.obrasgov = await coletarObrasgov(s.obrasgov, { prazoMs: PRAZO_OBRASGOV_MS });
-    if (saida.obrasgov.incompleto) avisos.push('Obras no Obrasgov.br: o tempo reservado acabou; parte das obras ficou com o dado da coleta anterior.');
+    if (saida.obrasgov.esgotado) avisos.push('Obras no Obrasgov.br: o tempo reservado acabou; parte das obras ficou com o dado da coleta anterior.');
+    if (saida.obrasgov.adiados) manutencao.push(`Obras no Obrasgov.br: limite diário de consultas atingido; ${saida.obrasgov.adiados} projetos ficam para a próxima atualização.`);
   } catch (e) {
     avisos.push(`Obras no Obrasgov.br: ${primeiraLinha(e.message)}; mantido o último dado salvo.`);
   }
@@ -214,7 +215,7 @@ export async function coletarTudo() {
   const { contratos, duracaoMs: duracaoPncpMs } = await contratosDoPncp(contratosSalvos, hoje, avisosFontes);
   const ligacoesObras = await lerJson('data/referencia/obras-ligacoes.json', null, avisosFontes);
   const inicioObras = Date.now();
-  const obrasFontes = await obrasDaCidade(await lerJson('data/processado/obras-fontes.json', null, avisosFontes), ligacoesObras, avisosFontes);
+  const obrasFontes = await obrasDaCidade(await lerJson('data/processado/obras-fontes.json', null, avisosFontes), ligacoesObras, avisosFontes, avisosManutencao);
   const duracaoObrasMs = Date.now() - inicioObras;
   const folhaCamara = await folhaDaCamara(vereadores.map(({ id, nome, apelido }) => ({ id, nome, apelido })), hoje, folhaSalva, avisosFontes);
   const respostas = await respostasDaCamara(cardsPorAno, respostasSalvas, avisosFontes);

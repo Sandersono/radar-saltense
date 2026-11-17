@@ -3,7 +3,36 @@ import { readFileSync } from 'node:fs';
 import {
   ehObra, temPalavraObra, agruparPorProcesso, situacaoObra, juntarTce, lerTabelaParalisadas, resumirObjeto, validarLigacoes,
   numerosDePromessas, mesclarFontesObras, janelas, urlPncp, enxugarContrato, montarObras,
+  guardarLeitura, podarReleitura, projetoPrincipal, execucaoMaisRecente,
 } from '../src/regras/obras-cidade.js';
+
+// Falsos positivos da revisão (compra de material, serviços em volta da obra).
+assert.equal(ehObra('Aquisição de medicamentos para ampliação da rede de atendimento', 4), false);
+assert.equal(ehObra('Fornecimento de brita para construção de calçadas', 4), false);
+assert.equal(ehObra('Fornecimento de materiais e execução de rede coletora de esgoto e ampliação da E.E.E Rodésia', 4), true);
+assert.equal(ehObra('Serviços de implantação, manutenção, monitoramento e consolidação da Restauração Ecológica da futura APP', 4), false);
+assert.equal(ehObra('Serviços para execução de pesquisa de vazamentos com tecnologia de correlação', null, 9), false);
+assert.equal(ehObra('Serviços de implantação de ações de perdas com setorização do setor 15', 4), false);
+assert.equal(ehObra('Fornecimento e instalação de sistema de medição com macromedidores de vazão', 4), false);
+
+// Releitura do PNCP: parcial nunca apaga o que já estava salvo; completa tira o que sumiu.
+const lic = (id) => ({ id, cnpj: '46634507000106', processo: id, objeto: 'Construção de creche', modalidadeId: 4 });
+const ctr = (id, compra) => ({ id, cnpj: '46634507000106', compra, objeto: 'Construção de creche', categoriaId: 7, tipo: 'Contrato' });
+const salvo = { contratacoes: { L1: lic('L1'), L2: lic('L2') }, contratos: { K1: ctr('K1', 'L1'), K2: ctr('K2', 'L2') } };
+const parcial = guardarLeitura({ ...salvo, vistosC: [], vistosK: [] }, { contratacoes: [lic('L1')], contratos: [ctr('K1', 'L1'), ctr('K3', 'L1')] });
+assert.deepEqual(Object.keys(parcial.contratacoes).sort(), ['L1', 'L2']);
+assert.deepEqual(Object.keys(parcial.contratos).sort(), ['K1', 'K2', 'K3']);
+const podado = podarReleitura(parcial);
+assert.deepEqual(Object.keys(podado.contratacoes), ['L1']);
+assert.deepEqual(Object.keys(podado.contratos).sort(), ['K1', 'K3']);
+// Contrato que deixou de ser candidato (virou empenho) sai na hora.
+assert.equal(guardarLeitura(salvo, { contratos: [{ ...ctr('K2', 'L2'), tipo: 'Empenho' }] }).contratos.K2, undefined);
+
+// Vários registros do Obrasgov.br: situação do mais grave, % do mais recente.
+const regs = [{ id: 'a', situacao: 'Cadastrada', pct: 10, pctEm: '2026-01-01' }, { id: 'b', situacao: 'Inacabada', pct: 40, pctEm: '2026-06-01' }, { id: 'c', situacao: 'Em execução', pct: null }];
+assert.equal(projetoPrincipal(regs).id, 'b');
+assert.equal(projetoPrincipal(regs.filter((r) => r.id !== 'b')).id, 'c');
+assert.equal(execucaoMaisRecente(regs).id, 'b');
 
 // O que conta como obra (casos da pesquisa).
 assert.equal(ehObra('Aquisição de material de escritório para a Secretaria de Saúde', 4), false); // "secretaria" não é ETA
@@ -119,4 +148,21 @@ assert.equal(clinica.tce.situacao, 'Em execução - no prazo');
 assert.deepEqual(clinica.promessas, ['6.1']);
 assert.equal(r.resumo.total, 2);
 assert.equal(r.resumo.valorContratado, 4550000);
+
+// Paralisada da Prefeitura só casa com valor igual E pelo menos 2 palavras em comum; sem isso, entra sozinha.
+const ctCentro = enxugarContrato({ numeroControlePNCP: '46634507000106-2-000010/2026', orgaoEntidade: { cnpj: '46634507000106' }, niFornecedor: '11111111000111', nomeRazaoSocialFornecedor: 'REVIDE LTDA', objetoContrato: 'Construção de um centro comunitário no bairro Jd. União', categoriaProcesso: { id: 7 }, tipoContrato: { nome: 'Contrato' }, valorGlobal: 186500, dataAssinatura: '2026-01-20', dataVigenciaFim: '2027-01-20' });
+const ctOutro = { ...ctCentro, id: '46634507000106-2-000011/2026', objeto: 'Reforma da cozinha da escola municipal' };
+const par = (contratos) => montarObras({ pncp: { contratacoes: {}, contratos, compras: {} }, paralisadas: { obras: [{ nome: 'Centro Comunitário Jardim União', valor: 186500, pct: 3, paralisada: true }] }, numerosPromessa: numeros, hoje: H });
+assert.ok(par({ [ctCentro.id]: ctCentro }).lista.find((o) => o.contrato && o.prefeitura));
+const semPar = par({ [ctOutro.id]: ctOutro }).lista;
+assert.ok(!semPar.find((o) => o.contrato && o.prefeitura));
+assert.equal(semPar.filter((o) => o.prefeitura).length, 1);
+
+// Ids estáveis: dois contratos da mesma licitação ganham o número do contrato, em qualquer ordem de entrada.
+const lic9 = { id: '46634507000106-1-000009/2026', cnpj: '46634507000106', processo: '99/2026', objeto: 'Construção de praças', modalidadeId: 4, situacao: 'Divulgada', homologado: 0 };
+const k1 = { ...ctCentro, id: '46634507000106-2-000021/2026', compra: lic9.id, objeto: 'Construção de praça A' };
+const k2 = { ...ctCentro, id: '46634507000106-2-000020/2026', compra: lic9.id, objeto: 'Construção de praça B' };
+const ids = (ordem) => montarObras({ pncp: { contratacoes: { [lic9.id]: lic9 }, contratos: Object.fromEntries(ordem.map((k) => [k.id, k])), compras: {} }, numerosPromessa: numeros, hoje: H }).lista.map((o) => `${o.id}=${o.contrato.id}`).sort();
+assert.deepEqual(ids([k1, k2]), ids([k2, k1]));
+assert.ok(ids([k1, k2])[0].startsWith('prefeitura-99-2026-contrato-2026-20='));
 console.log('ok: obras');

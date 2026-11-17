@@ -17,14 +17,34 @@ const PALAVRAS = /\bobras?\b|engenharia|constru|reforma|amplia|pavimenta|drenage
 const SIGLAS_OBRA = /\b(ETA|ETE|EEE)\b/;
 // Além das exclusões da pesquisa: estudos e serviços de apoio à obra (acompanhamento, fiscalização, topografia) não são a obra.
 const EXCLUSAO = /consultoria|elaboracao d[oe]s? (projeto|plano)|plano municipal|manutencao mecanica|operacao, manutencao|estudos? de concepcao|acompanhamento tecnico|apoio a fiscalizacao|servicos? de topografia/;
-// Contratação integrada (projeto + obra) não é "só projeto": continua sendo obra.
+// Contratação integrada (projeto + obra) não é "só projeto": continua sendo obra. Vale também para setorização.
 const EXECUCAO_DE_OBRA = /execucao d[aeo]s? obras?/;
+// Fora sempre: não é obra mesmo com palavra de obra no objeto (revisão de 17/11/2026).
+const EXCLUSAO_FIXA = /restauracao ecologica|recomposicao florestal|reflorestamento|\bapp\b|(pesquisa|deteccao) de vazamentos?|macromedidor|medicamento/;
+// Compra de material ("aquisição de", "fornecimento de") só é obra se também fala da obra em si.
+// "para construção" é destino do material, não obra ("brita para construção de calçadas").
+const SUPRIMENTO = /^(aquisicao|fornecimento) de\b/;
+const SUPRIMENTO_COM_OBRA = /\bobras?\b|execucao d[aeo]s? |(?<!para )\b(construcao|reforma)\b/;
 
 export function temPalavraObra(objeto) {
   const t = normalizar(objeto).replace(/mao[\s-]+de[\s-]+obra/g, ' ');
   if (!PALAVRAS.test(t) && !SIGLAS_OBRA.test(String(objeto ?? ''))) return false;
-  return !(EXCLUSAO.test(t) && !EXECUCAO_DE_OBRA.test(t));
+  if (EXCLUSAO_FIXA.test(t)) return false;
+  if (SUPRIMENTO.test(t) && !SUPRIMENTO_COM_OBRA.test(t)) return false;
+  return !((EXCLUSAO.test(t) || /setorizacao/.test(t)) && !EXECUCAO_DE_OBRA.test(t));
 }
+
+// Palavras que identificam uma obra (para casar textos de fontes diferentes); fora as genéricas.
+const GENERICAS = new Set(['obra', 'obras', 'para', 'jardim', 'bairro', 'salto', 'municipio', 'contratacao', 'empresa', 'especializada', 'execucao', 'servicos', 'servico', 'rua', 'avenida', 'localizada', 'situada', 'com', 'fornecimento', 'materiais', 'equipamentos', 'necessarios', 'forma', 'indireta']);
+export const palavrasChave = (txt) => new Set(normalizar(txt).split(/[^a-z0-9]+/).filter((w) => w.length >= 4 && !GENERICAS.has(w)));
+export const palavrasEmComum = (a, b) => { const pb = palavrasChave(b); return [...palavrasChave(a)].filter((w) => pb.has(w)).length; };
+
+// Obra com mais de um registro no Obrasgov.br: a situação vem do mais grave (Paralisada/Inacabada > Em execução > outras);
+// o % executado vem da atualização mais recente.
+const PESO_OG = (s) => (s === 'Paralisada' || s === 'Inacabada' ? 2 : s === 'Em execução' ? 1 : 0);
+export const projetoPrincipal = (lista) => [...(lista || [])].sort((a, b) => PESO_OG(b.situacao) - PESO_OG(a.situacao))[0] || null;
+export const execucaoMaisRecente = (lista) => [...(lista || [])].filter((p) => p.pct != null)
+  .sort((a, b) => String(b.pctEm || '').localeCompare(String(a.pctEm || '')))[0] || null;
 
 // Dispensa por emergência: Lei 14.133, art. 75, VIII (código 38 no PNCP).
 export const amparoEmergencial = (a) => Boolean(a) && (Number(a.codigo) === 38 || /art\.?\s*75,?\s*(inciso\s*)?VIII\b/i.test(String(a.nome ?? a)));
@@ -222,6 +242,30 @@ export function janelas(inicio, hoje, meses) {
   }
 }
 
+// Leitura do PNCP (já enxugada) sobre o estado salvo: sobrescreve o que veio e nunca apaga o que não veio.
+// Na releitura completa, `vistosC`/`vistosK` guardam o que apareceu; só `podarReleitura`, no fim, tira o resto.
+export function guardarLeitura(estado, lido, manter = new Set()) {
+  const contratacoes = { ...((estado && estado.contratacoes) || {}) };
+  const contratos = { ...((estado && estado.contratos) || {}) };
+  const vistosC = new Set((estado && estado.vistosC) || []);
+  const vistosK = new Set((estado && estado.vistosK) || []);
+  for (const c of lido.contratacoes || []) if (ORGAOS[c.cnpj]) { contratacoes[c.id] = c; vistosC.add(c.id); }
+  const idsC = new Set(Object.keys(contratacoes));
+  for (const k of lido.contratos || []) {
+    if (candidatoContrato(k, idsC, manter)) { contratos[k.id] = k; vistosK.add(k.id); } else delete contratos[k.id];
+  }
+  return { contratacoes, contratos, vistosC: [...vistosC], vistosK: [...vistosK] };
+}
+
+export function podarReleitura(estado) {
+  const vc = new Set(estado.vistosC || []);
+  const vk = new Set(estado.vistosK || []);
+  return {
+    contratacoes: Object.fromEntries(Object.entries(estado.contratacoes || {}).filter(([id]) => vc.has(id))),
+    contratos: Object.fromEntries(Object.entries(estado.contratos || {}).filter(([id]) => vk.has(id))),
+  };
+}
+
 // Cada fonte fica com a coleta mais recente (coletadoEm). Em empate, vale o segundo argumento.
 export function mesclarFontesObras(a, b) {
   const out = {};
@@ -303,7 +347,7 @@ export function montarObras({ pncp, obrasgov, paralisadas, tce, tceDataBase, lig
   const grupoDoContrato = (ct) => {
     const g = ct.compra ? grupoDe.get(ct.compra) : null;
     if (!g || !g.atual.homologado || Math.abs(g.atual.homologado - ct.valor) < 1) return g;
-    return grupos.find((x) => x.atual.cnpj === ct.cnpj && x.atual.homologado && Math.abs(x.atual.homologado - ct.valor) < 1) || g;
+    return grupos.find((x) => x.atual.cnpj === ct.cnpj && x.atual.homologado && Math.abs(x.atual.homologado - ct.valor) < 1 && palavrasEmComum(ct.objeto, x.atual.objeto) >= 1) || g;
   };
   const comContrato = new Set(contratos.map(grupoDoContrato).filter(Boolean).map((g) => g.chave));
 
@@ -367,25 +411,37 @@ export function montarObras({ pncp, obrasgov, paralisadas, tce, tceDataBase, lig
     }));
   }
 
-  // Paralisadas declaradas pela Prefeitura: mesma obra = mesmo valor; com mais de uma, a que tem mais palavras do nome no objeto.
+  // Paralisadas declaradas pela Prefeitura: mesma obra = mesmo valor E pelo menos 2 palavras do nome no objeto
+  // (casar errado atribuiria "paralisada" a outro contrato). Sem par seguro, a obra entra sozinha.
   for (const linha of ((paralisadas && paralisadas.obras) || []).filter((x) => x.paralisada)) {
-    const palavras = normalizar(linha.nome).split(/\W+/).filter((w) => w.length >= 4);
-    const nota = (o) => palavras.filter((w) => normalizar(o.objeto).includes(w)).length;
-    const cands = obras.filter((o) => o.orgao === 'Prefeitura' && !o.prefeitura && linha.valor > 0 && Math.abs(o.valor - linha.valor) < 1).sort((a, b) => nota(b) - nota(a));
+    const nota = (o) => palavrasEmComum(linha.nome, o.objeto);
+    const cands = obras.filter((o) => o.orgao === 'Prefeitura' && !o.prefeitura && linha.valor > 0 && Math.abs(o.valor - linha.valor) < 1 && nota(o) >= 2).sort((a, b) => nota(b) - nota(a));
     const anexo = { nome: linha.nome, paralisada: true, pct: linha.pct, inicio: linha.inicio, termino: linha.termino, link: linha.link, status: linha.status };
     if (cands.length) cands[0].prefeitura = anexo;
     else obras.push(nova({ ...comObjeto(linha.nome), orgao: 'Prefeitura', valor: linha.valor, tipoValor: linha.valor ? 'contrato' : null, prefeitura: anexo, idBase: `prefeitura-${slug(linha.nome)}` }));
   }
 
-  // Grupo, ids únicos e promessas.
+  // Grupo, ids únicos e promessas. Ids estáveis: mesma base em duas obras (ex.: dois contratos de uma licitação)
+  // -> a base ganha o número do contrato no PNCP; o que ainda repetir leva -2, -3 na ordem dos números do PNCP.
+  const chaveOrdem = (o) => (o.contrato && o.contrato.id) || (o.licitacao && o.licitacao.id) || (o.obrasgov[0] && o.obrasgov[0].id) || o.idBase || '';
+  const ordemPncp = (id) => { const m = /-0*(\d+)\/(\d{4})$/.exec(id); return m ? `${m[2]}-${m[1].padStart(6, '0')}` : id; };
+  obras.sort((a, b) => ordemPncp(chaveOrdem(a)).localeCompare(ordemPncp(chaveOrdem(b))) || chaveOrdem(a).localeCompare(chaveOrdem(b)));
+  const usoBase = new Map();
+  for (const o of obras) if (!o.ligacao) usoBase.set(o.idBase, (usoBase.get(o.idBase) || 0) + 1);
   const vistos = new Set();
   const lista = [];
   for (const o of obras) {
-    const grupo = situacaoObra({ contrato: o.contrato ? { fimVigencia: o.fimVigencia } : null, licitacao: o.contrato ? null : o.licitacao, obrasgov: o.obrasgov[0] || null, tce: o.tce, prefeitura: o.prefeitura }, hoje);
+    const principal = projetoPrincipal(o.obrasgov);
+    const grupo = situacaoObra({ contrato: o.contrato ? { fimVigencia: o.fimVigencia } : null, licitacao: o.contrato ? null : o.licitacao, obrasgov: principal, tce: o.tce, prefeitura: o.prefeitura }, hoje);
     if (!grupo) continue;
-    let id = (o.ligacao && o.ligacao.id) || o.idBase;
-    for (let n = 2; vistos.has(id); n++) id = `${(o.ligacao && o.ligacao.id) || o.idBase}-${n}`;
+    let base = (o.ligacao && o.ligacao.id) || o.idBase;
+    if (!o.ligacao && usoBase.get(o.idBase) > 1 && o.contrato) base = `${o.idBase}-contrato-${seqDe(o.contrato.id)}`;
+    let id = base;
+    for (let n = 2; vistos.has(id); n++) id = `${base}-${n}`;
     vistos.add(id);
+    o.obrasgovSituacao = principal ? { id: principal.id, situacao: principal.situacao } : null;
+    const exec = execucaoMaisRecente(o.obrasgov);
+    o.execucao = exec ? { id: exec.id, pct: exec.pct, em: exec.pctEm } : null;
     const promessas = o.ligacao && Array.isArray(o.ligacao.promessas) ? o.ligacao.promessas.map(String).filter((n) => numerosPromessa.has(n)) : [];
     const { idBase, ligacao, ...resto } = o;
     lista.push({

@@ -6602,8 +6602,8 @@
       }
     },
     "completoEm": "2026-11-17T14:23:01.093Z",
-    "atualizadoAte": "2026-11-17T14:51:08.827Z",
-    "coletadoEm": "2026-11-17T14:51:08.827Z",
+    "atualizadoAte": "2026-11-17T14:59:57.946Z",
+    "coletadoEm": "2026-11-17T14:59:57.946Z",
     "comprasPendentes": 0,
     "incompleto": false,
     "erro": null
@@ -7906,8 +7906,10 @@
         "execucao": null
       }
     },
-    "coletadoEm": "2026-11-17T14:51:35.559Z",
+    "coletadoEm": "2026-11-17T15:00:24.484Z",
     "falhas": 0,
+    "esgotado": false,
+    "adiados": 0,
     "incompleto": false
   },
   "paralisadas": {
@@ -7925,6 +7927,6 @@
         "paralisada": true
       }
     ],
-    "coletadoEm": "2026-11-17T14:51:39.792Z"
+    "coletadoEm": "2026-11-17T15:00:28.757Z"
   }
 }

@@ -24,16 +24,18 @@ export const tituloCurto = (o, max = 80) => (o.titulo.length <= max ? o.titulo :
 
 function situacao(o) {
   const tce = o.tce ? `${o.tce.situacao.replace(/\s+-\s+/, ', ').toLowerCase()}, segundo o TCE-SP` : '';
-  const og = o.obrasgov[0];
+  // Registro do Obrasgov.br de onde veio a situação (o mais grave, quando a obra tem mais de um).
+  const og = o.obrasgovSituacao;
+  const segundoOg = og ? `segundo o Obrasgov.br (${og.id})` : 'segundo o Obrasgov.br';
   switch (o.grupo) {
     case 'paralisada':
       if (o.prefeitura) return `Paralisada, declarada pela Prefeitura${o.prefeitura.pct != null ? ` (cerca de ${pctBR(o.prefeitura.pct)} feito)` : ''}`;
       if (o.tce && o.tce.paralisada) return `${o.tce.situacao}, segundo o TCE-SP`;
-      return `${og.situacao}, segundo o Obrasgov.br`;
+      return `${og.situacao}, ${segundoOg}`;
     case 'execucao':
-      if (o.contrato) return o.vigente ? (o.fimVigencia ? `Contrato em vigência até ${dataBR(o.fimVigencia)}` : 'Contrato em vigência') : `Vigência do contrato terminou em ${dataBR(o.fimVigencia)}; em execução ${tce ? 'segundo o TCE-SP' : 'segundo o Obrasgov.br'}`;
+      if (o.contrato) return o.vigente ? (o.fimVigencia ? `Contrato em vigência até ${dataBR(o.fimVigencia)}` : 'Contrato em vigência') : `Vigência do contrato terminou em ${dataBR(o.fimVigencia)}; em execução ${tce ? 'segundo o TCE-SP' : segundoOg}`;
       if (o.tce) return tce.charAt(0).toUpperCase() + tce.slice(1);
-      return 'Em execução, segundo o Obrasgov.br';
+      return `Em execução, ${segundoOg}`;
     case 'licitacao': {
       const l = o.licitacao;
       if (/suspens/i.test(l.situacao || '')) return 'Licitação suspensa, segundo o PNCP';
@@ -46,7 +48,7 @@ function situacao(o) {
     default:
       if (o.contrato && o.fimVigencia) return `Vigência do contrato terminou em ${dataBR(o.fimVigencia)}`;
       if (o.tce) return `${o.tce.situacao}, segundo o TCE-SP`;
-      return 'Concluída, segundo o Obrasgov.br';
+      return `Concluída, ${segundoOg}`;
   }
 }
 
@@ -62,8 +64,8 @@ function cartaoObra(o, tceDataBase) {
   if (o.fimVigencia) linhas.push(['Fim da vigência', dataBR(o.fimVigencia)]);
   if (o.prefeitura && o.prefeitura.inicio) linhas.push(['Início (Prefeitura)', dataBR(o.prefeitura.inicio)]);
   if (o.prefeitura && o.prefeitura.termino) linhas.push(['Previsão de término (Prefeitura)', dataBR(o.prefeitura.termino)]);
-  const comPct = og.find((p) => p.pct != null);
-  if (comPct) linhas.push(['Executado', `${pctBR(comPct.pct)}${comPct.pctEm ? ` em ${dataBR(comPct.pctEm)}` : ''}, informado ao Governo Federal (Obrasgov.br)`]);
+  const ex = o.execucao; // a atualização mais recente entre os registros do Obrasgov.br
+  if (ex) linhas.push(['Executado', `${pctBR(ex.pct)}${ex.em ? ` em ${dataBR(ex.em)}` : ''}, informado ao Governo Federal (Obrasgov.br${og.length > 1 ? ` ${esc(ex.id)}` : ''})`]);
   if (o.tce) linhas.push(['Situação no TCE-SP', `${esc(o.tce.situacao)}${tceDataBase ? ` (data-base ${esc(tceDataBase)})` : ''}`]);
   const repasse = [...new Set(og.map((p) => p.repassador).filter(Boolean))];
   if (repasse.length) linhas.push(['Dinheiro federal', esc(repasse.map((r) => r.charAt(0) + r.slice(1).toLocaleLowerCase('pt-BR')).join('; '))]);

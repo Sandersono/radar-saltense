@@ -3,7 +3,7 @@ import { paginas, baixarComTentativas, hojeSP } from './contratos.js';
 import { esperar } from '../util/texto.js';
 import { IBGE_SALTO } from '../config.js';
 import {
-  ORGAOS, INICIO_OBRAS, janelas, enxugarContratacao, enxugarContrato, candidatoContrato, precisaConsultarCompra,
+  ORGAOS, INICIO_OBRAS, janelas, enxugarContratacao, enxugarContrato, guardarLeitura, podarReleitura, precisaConsultarCompra,
   enxugarProjeto, ultimaExecucao, precisaReconsultar, precisaExecucao, lerTabelaParalisadas,
 } from '../regras/obras-cidade.js';
 
@@ -26,27 +26,25 @@ function pedidosCompletos(hoje) {
   return lista;
 }
 
+const enxugar = (brutosC, brutos) => ({
+  contratacoes: brutosC.filter((c) => c.orgaoEntidade && ORGAOS[c.orgaoEntidade.cnpj]).map(enxugarContratacao),
+  contratos: brutos.map(enxugarContrato),
+});
+
 // PNCP: a primeira leitura (e uma por mês) lê tudo desde 2025, guardando o progresso por janela: se o prazo acabar,
 // a próxima atualização continua de onde parou. Nos outros dias só pede o que foi atualizado desde a última coleta.
-// Devolve `incompleto` quando a leitura completa ainda não terminou (o que já veio fica salvo).
+// A releitura parte do que já está salvo e só apaga o que sumiu quando termina inteira; se nada foi lido nesta
+// rodada, lança erro (quem chama mantém o último dado salvo e avisa). `incompleto` = releitura ainda não terminou.
 export async function coletarObrasPncp(salvo, { manter = new Set(), prazoMs = 6 * 60 * 1000, agora = new Date() } = {}) {
   const limite = Date.now() + prazoMs;
   const hoje = hojeSP(agora);
   const s = salvo && salvo.contratos ? salvo : null;
   const emSemente = Boolean(s && s.semente);
   const incremental = !emSemente && Boolean(s && s.completoEm && agora - Date.parse(s.completoEm) < 30 * DIA && s.atualizadoAte && agora - Date.parse(s.atualizadoAte) < 300 * DIA);
-  const semente = incremental ? null : emSemente ? { ...s.semente, feitas: [...s.semente.feitas] } : { inicio: agora.toISOString(), feitas: [] };
-  const contratacoes = s && (incremental || emSemente) ? { ...s.contratacoes } : {};
-  const contratos = s && (incremental || emSemente) ? { ...s.contratos } : {};
-  const guardar = (brutosC, brutos, apagar) => {
-    for (const c of brutosC) if (c.orgaoEntidade && ORGAOS[c.orgaoEntidade.cnpj]) contratacoes[c.numeroControlePNCP] = enxugarContratacao(c);
-    const idsC = new Set(Object.keys(contratacoes));
-    for (const c of brutos) {
-      const e = enxugarContrato(c);
-      if (candidatoContrato(e, idsC, manter)) contratos[e.id] = e;
-      else if (apagar) delete contratos[e.id];
-    }
-  };
+  const base = { contratacoes: (s && s.contratacoes) || {}, contratos: (s && s.contratos) || {} };
+  let contratacoes;
+  let contratos;
+  let semente = null;
   let parou = null;
   if (incremental) {
     const ini = hojeSP(new Date(Date.parse(s.atualizadoAte) - DIA)).replaceAll('-', '');
@@ -55,23 +53,30 @@ export async function coletarObrasPncp(salvo, { manter = new Set(), prazoMs = 6 
     const brutos = [];
     for (const mod of [4, 5]) brutosC.push(...await paginas(`/contratacoes/atualizacao?dataInicial=${ini}&dataFinal=${fim}&codigoModalidadeContratacao=${mod}&codigoMunicipioIbge=${IBGE_SALTO}`, 50, limite, ESPERAS_PNCP));
     for (const cnpj of Object.keys(ORGAOS)) brutos.push(...await paginas(`/contratos/atualizacao?dataInicial=${ini}&dataFinal=${fim}&cnpjOrgao=${cnpj}`, 500, limite, ESPERAS_PNCP));
-    guardar(brutosC, brutos, true);
+    ({ contratacoes, contratos } = guardarLeitura(base, enxugar(brutosC, brutos), manter));
   } else {
+    const ant = emSemente ? s.semente : { inicio: agora.toISOString(), feitas: [], vistosC: [], vistosK: [] };
+    let estado = { ...base, vistosC: ant.vistosC || [], vistosK: ant.vistosK || [] };
+    const feitas = [...ant.feitas];
     // Licitações primeiro: decidem quais contratos são candidatos.
-    const pedidos = pedidosCompletos(hoje).filter((p) => !semente.feitas.includes(p.chave));
-    for (const p of pedidos) {
+    let lidas = 0;
+    for (const p of pedidosCompletos(hoje).filter((x) => !feitas.includes(x.chave))) {
       try {
         const itens = await paginas(p.caminho, p.tamanho, limite, ESPERAS_PNCP);
-        guardar(p.tipo === 'c' ? itens : [], p.tipo === 'k' ? itens : [], false);
-        semente.feitas.push(p.chave);
+        estado = guardarLeitura(estado, enxugar(p.tipo === 'c' ? itens : [], p.tipo === 'k' ? itens : []), manter);
+        feitas.push(p.chave);
+        lidas++;
       } catch (e) {
         parou = e;
         break;
       }
     }
-    if (parou && !semente.feitas.length && !s) throw parou;
+    if (parou && !lidas) throw parou;
+    const terminou = pedidosCompletos(hoje).every((p) => feitas.includes(p.chave));
+    ({ contratacoes, contratos } = terminou ? podarReleitura(estado) : estado);
+    if (!terminou) semente = { inicio: ant.inicio, feitas, vistosC: estado.vistosC, vistosK: estado.vistosK };
   }
-  const completa = incremental || pedidosCompletos(hoje).every((p) => semente.feitas.includes(p.chave));
+  const completa = !semente;
   // Contrato que pode ser obra, vindo de contratação que não é concorrência: modalidade e amparo da contratação, uma vez só.
   const compras = { ...((s && s.compras) || {}) };
   const faltam = [...new Set(Object.values(contratos).filter((c) => precisaConsultarCompra(c, contratacoes, compras)).map((c) => c.compra))];
@@ -90,9 +95,9 @@ export async function coletarObrasPncp(salvo, { manter = new Set(), prazoMs = 6 
   }
   return {
     contratacoes, contratos, compras,
-    completoEm: incremental ? s.completoEm : completa ? semente.inicio : (s && s.completoEm) || null,
-    // A próxima leitura por atualização começa daqui (na leitura completa, do início dela).
-    atualizadoAte: incremental ? agora.toISOString() : completa ? semente.inicio : (s && s.atualizadoAte) || null,
+    // A próxima leitura por atualização começa daqui (na releitura completa, do início dela).
+    completoEm: incremental ? s.completoEm : completa ? (emSemente ? s.semente.inicio : agora.toISOString()) : (s && s.completoEm) || null,
+    atualizadoAte: incremental ? agora.toISOString() : completa ? (emSemente ? s.semente.inicio : agora.toISOString()) : (s && s.atualizadoAte) || null,
     ...(completa ? {} : { semente }),
     coletadoEm: agora.toISOString(),
     comprasPendentes: Math.max(0, faltam.length - consultadas),
@@ -133,9 +138,12 @@ export async function coletarObrasgov(salvo, { prazoMs = 5 * 60 * 1000, agora = 
   let consultas = 0;
   let falhas = 0;
   let esgotado = false;
+  let adiados = 0;
   for (const id of [...ids].sort()) {
     const ant = antes[id];
-    if (esgotado || !precisaReconsultar(ant, agora) || consultas >= MAX_PROJETOS_POR_DIA) { if (ant) projetos[id] = ant; continue; }
+    if (esgotado || !precisaReconsultar(ant, agora)) { if (ant) projetos[id] = ant; continue; }
+    // Limite diário: o resto fica para amanhã (com o dado anterior, se houver).
+    if (consultas >= MAX_PROJETOS_POR_DIA) { adiados++; if (ant) projetos[id] = ant; continue; }
     consultas++;
     try {
       const p = ((await pedirObrasgov(`/projeto-investimento?id_projeto_investimento=${encodeURIComponent(id)}`, limite)).data || [])[0];
@@ -149,7 +157,7 @@ export async function coletarObrasgov(salvo, { prazoMs = 5 * 60 * 1000, agora = 
       if (++falhas > 10) throw new Error(`Obrasgov.br: mais de 10 projetos falharam (${e.message})`);
     }
   }
-  return { dataAtualizacao: (base && base.data_ultima_atualizacao) || null, projetos, coletadoEm: agora.toISOString(), falhas, incompleto: esgotado };
+  return { dataAtualizacao: (base && base.data_ultima_atualizacao) || null, projetos, coletadoEm: agora.toISOString(), falhas, esgotado, adiados, incompleto: esgotado || adiados > 0 };
 }
 
 const PAGINA_PARALISADAS = 'https://salto.sp.gov.br/wp-json/wp/v2/pages?slug=consulta-de-obras-paralisadas&_fields=modified,link,content';
