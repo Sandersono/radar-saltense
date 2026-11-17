@@ -11,7 +11,7 @@ import { serializarRespostas } from './regras/respostas.js';
 import { reaproveitarTce, datasTce, idadeTce } from './regras/tce-anterior.js';
 import { mesclarIegm, mesclarContratos, escolherObras } from './regras/prefeitura.js';
 import { mesclarFontesObras } from './regras/obras-cidade.js';
-import { hojeSP, marcos, semanaComHistorico } from './regras/semana.js';
+import { hojeSP, marcos, semanaComHistorico, atualizarSemanas, serializarSemanas } from './regras/semana.js';
 
 const usarCache = process.argv.includes('--usar-cache');
 const coleta = usarCache ? JSON.parse(await readFile('data/bruto/coleta.json', 'utf8')) : await coletarTudo();
@@ -64,6 +64,14 @@ dados.meta.marcosAnteriores = dadosAnteriores.vereadores ? marcos(dadosAnteriore
 const semana = semanaComHistorico(dados, hojeSP(dados.meta.atualizadoEm), dados.meta.marcosAnteriores, anterior && anterior.novidadesRecentes);
 dados.semana = semana.semana;
 dados.meta.novidadesRecentes = semana.novidadesRecentes;
+// Arquivo semanal: refaz a semana corrente e preenche as que faltam desde 30/12/2024. Erro aqui não trava o robô.
+const semanasDisco = await doDisco('data/processado/semanas.json');
+let semanas = semanasDisco;
+try {
+  semanas = atualizarSemanas(semanasDisco, dados, hojeSP(dados.meta.atualizadoEm), dados.meta.novidadesRecentes);
+} catch (e) {
+  dados.avisosManutencao.push(`Arquivo semanal não foi atualizado: ${e.message}`);
+}
 
 const problemas = conferir(dados, anterior, VEREADORES_ESPERADOS);
 const aumentos = aumentosDespesas(dados.meta, anterior);
@@ -78,12 +86,13 @@ await writeFile('data/processado/dados.json', JSON.stringify(dados));
 await writeFile('data/processado/meta.json', `${JSON.stringify(dados.meta, null, 2)}\n`);
 await writeFile('data/processado/folha-camara.json', `${JSON.stringify(coleta.folhaCamara || {}, null, 2)}\n`);
 await writeFile('data/processado/respostas.json', serializarRespostas(coleta.respostas));
+if (Object.keys(semanas).length) await writeFile('data/processado/semanas.json', serializarSemanas(semanas));
 const json = (v) => `${JSON.stringify(v, null, 2)}\n`;
 if (coleta.iegm && Object.keys(coleta.iegm.anos).length) await writeFile('data/processado/iegm.json', json(coleta.iegm));
 if (coleta.obras) await writeFile('data/processado/obras.json', json(coleta.obras));
 if (Object.keys(coleta.contratos).length) await writeFile('data/processado/contratos.json', json(coleta.contratos));
 if (Object.values(coleta.obrasFontes).some(Boolean)) await writeFile('data/processado/obras-fontes.json', json(coleta.obrasFontes));
-await gerarSite(dados, 'dist');
+await gerarSite(dados, 'dist', semanas);
 // Vistoria do site pronto: CPF ou página obrigatória faltando impedem a publicação (o workflow para aqui).
 const vistoria = await vistoriarPasta('dist');
 await appendFile('conferencia.md', relatorioVistoria(vistoria));

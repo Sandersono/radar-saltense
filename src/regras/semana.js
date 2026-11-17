@@ -52,8 +52,8 @@ function novidades(atual, anterior) {
   return t;
 }
 
-export function resumoSemana(d, hojeISO, anterior = null) {
-  const j = janelaSemana(hojeISO);
+// Propostas, votações e respondidos dentro da janela j ({ inicio, fim }); respostas: [{ data, vereadores }].
+function contarJanela(d, j, respostas) {
   const nome = Object.fromEntries((d.vereadores ?? []).map((v) => [v.id, v.nome]));
   const porVer = (listas) => contar(listas.flat()).map(([id, total]) => ({ id, nome: nome[id] ?? id, total }));
   const props = (d.proposituras ?? []).filter((p) => dentro(p.data, j));
@@ -64,9 +64,8 @@ export function resumoSemana(d, hojeISO, anterior = null) {
     }
   }
   votacoes.sort((a, b) => a.data.localeCompare(b.data) || a.rotulo.localeCompare(b.rotulo, 'pt-BR', { numeric: true }));
-  const resp = (d.camara?.respostas?.recentes ?? []).filter((r) => dentro(r.data, j));
+  const resp = respostas.filter((r) => dentro(r.data, j));
   return {
-    ...j,
     proposituras: {
       total: props.length,
       porVereador: porVer(props.map((p) => p.vereadores ?? [])),
@@ -75,8 +74,60 @@ export function resumoSemana(d, hojeISO, anterior = null) {
     },
     votacoes,
     respondidos: { total: resp.length, porVereador: porVer(resp.map((r) => r.vereadores ?? [])) },
-    novidades: novidades(marcos(d), anterior),
   };
+}
+
+export function resumoSemana(d, hojeISO, anterior = null) {
+  const j = janelaSemana(hojeISO);
+  return { ...j, ...contarJanela(d, j, d.camara?.respostas?.recentes ?? []), novidades: novidades(marcos(d), anterior) };
+}
+
+// Arquivo semanal: semanas de segunda a domingo (fuso de São Paulo), identificadas pela segunda-feira.
+// Começa na semana de 1º de janeiro de 2025.
+export const INICIO_ARQUIVO = '2024-12-30';
+const somarDias = (diaISO, n) => iso(Date.parse(diaISO) + n * DIA);
+export const domingoDe = (segundaISO) => somarDias(segundaISO, 6);
+
+// Requerimentos respondidos, pela data do documento de resposta na ficha oficial (data/processado/respostas.json,
+// já ligada a cada proposta em p.respondidoEm). Todos os requerimentos são conferidos, então vale para qualquer semana.
+const respostasDatadas = (d) => (d.proposituras ?? []).filter((p) => p.respondidoEm).map((p) => ({ data: p.respondidoEm, vereadores: p.vereadores ?? [] }));
+
+// Semana de calendário: da segunda até o menor entre o domingo e ateISO (hoje).
+// novidadesDaSemana: [{ data, texto }] (meta.novidadesRecentes); entram só as de dentro da janela.
+export function resumoSemanaCalendario(d, segundaISO, ateISO, novidadesDaSemana = []) {
+  const domingo = domingoDe(segundaISO);
+  const j = { inicio: segundaISO, fim: ateISO < domingo ? ateISO : domingo };
+  const textos = (novidadesDaSemana ?? []).filter((n) => dentro(n.data, j)).map((n) => n.texto);
+  return {
+    segunda: segundaISO,
+    domingo,
+    ...j,
+    completa: ateISO > domingo,
+    ...contarJanela(d, j, respostasDatadas(d)),
+    novidades: [...new Set(textos)],
+  };
+}
+
+// Recalcula a semana corrente e preenche as que faltam (desde INICIO_ARQUIVO); semana completa já salva não muda.
+// Semana salva ainda incompleta (era a corrente na última execução) é refeita, sem perder as novidades que já tinha.
+export function atualizarSemanas(salvas, d, hojeISO, novidadesRecentes = []) {
+  const antes = salvas ?? {};
+  const novas = {};
+  for (let s = INICIO_ARQUIVO; s <= segundaDaSemana(hojeISO); s = somarDias(s, 7)) {
+    const velha = antes[s];
+    if (velha && velha.completa) continue;
+    const r = resumoSemanaCalendario(d, s, hojeISO, novidadesRecentes);
+    novas[s] = { ...r, novidades: [...new Set([...(velha?.novidades ?? []), ...r.novidades])] };
+  }
+  const todas = { ...antes, ...novas };
+  return Object.fromEntries(Object.keys(todas).sort().map((k) => [k, todas[k]]));
+}
+
+// Uma semana por linha, em ordem, para o git mostrar só a semana que mudou.
+export function serializarSemanas(semanas) {
+  const ks = Object.keys(semanas).sort();
+  if (!ks.length) return '{}\n';
+  return `{\n${ks.map((k) => `${JSON.stringify(k)}:${JSON.stringify(semanas[k])}`).join(',\n')}\n}\n`;
 }
 
 const dm = (iso8) => iso8.slice(5).split('-').reverse().join('/');

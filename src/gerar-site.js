@@ -9,7 +9,8 @@ import { paginaGastos } from './site/gastos.js';
 import { paginaCamara } from './site/camara.js';
 import { paginaPrefeitura } from './site/prefeitura.js';
 import { paginaFontes } from './site/fontes.js';
-import { paginaSemana } from './site/semana.js';
+import { paginaSemana, paginaSemanaArquivo } from './site/semana.js';
+import { atualizarSemanas, hojeSP } from './regras/semana.js';
 import { paginaPromessas } from './site/promessas.js';
 import { paginaObras } from './site/obras.js';
 import { feedRss } from './site/feed.js';
@@ -34,8 +35,12 @@ const FONTES = [
   ['node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2', 'inter-600.woff2'],
 ];
 
-export async function gerarSite(d, destino) {
-  for (const pasta of ['vereador', 'dados', 'fontes', 'fotos', 'marca']) await mkdir(`${destino}/${pasta}`, { recursive: true });
+// semanas: arquivo semanal (data/processado/semanas.json); sem ele, é montado agora com os dados atuais.
+export async function gerarSite(d, destino, semanasSalvas = null) {
+  const semanas = semanasSalvas && Object.keys(semanasSalvas).length
+    ? semanasSalvas
+    : atualizarSemanas({}, d, hojeSP(d.meta.atualizadoEm), d.meta.novidadesRecentes);
+  for (const pasta of ['vereador', 'semana', 'dados', 'fontes', 'fotos', 'marca']) await mkdir(`${destino}/${pasta}`, { recursive: true });
   const paginas = []; // vão para o sitemap.xml
   const pagina = async (caminho, html) => { await writeFile(`${destino}/${caminho}`, html); paginas.push(caminho); };
   await pagina('index.html', paginaInicial(d));
@@ -45,8 +50,12 @@ export async function gerarSite(d, destino) {
   await pagina('prefeitura.html', paginaPrefeitura(d));
   await pagina('obras.html', paginaObras(d));
   await pagina('fontes.html', paginaFontes(d));
-  await pagina('semana.html', paginaSemana(d, ENDERECO));
-  await writeFile(`${destino}/feed.xml`, feedRss(d, ENDERECO));
+  await pagina('semana.html', paginaSemana(d, ENDERECO, semanas));
+  const segundas = Object.keys(semanas).sort();
+  for (const [i, s] of segundas.entries()) {
+    await pagina(`semana/${s}.html`, paginaSemanaArquivo(semanas[s], d, { anterior: segundas[i - 1], proxima: segundas[i + 1] }, ENDERECO));
+  }
+  await writeFile(`${destino}/feed.xml`, feedRss(d, ENDERECO, semanas));
   if (d.promessas) await pagina('promessas.html', paginaPromessas(d));
   if (d.receitas) await pagina('impostometro.html', paginaImpostometro(d));
   if (d.gastos) {

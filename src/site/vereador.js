@@ -1,11 +1,11 @@
 import { ANO_INICIO, fichaOficial } from '../config.js';
 import { GRUPOS } from '../regras/classificar.js';
 import { esc } from '../util/texto.js';
-import { layout, dataBR, link, aviso, foto, seloFonte, barraProporcao, cartaoNumero, reais, numero, GRUPOS_PUBLICOS, AVISO_NOMES, apelidoHtml } from './base.js';
+import { layout, ENDERECO, CAMARA_JSONLD, dataBR, link, aviso, foto, seloFonte, barraProporcao, cartaoNumero, reais, numero, GRUPOS_PUBLICOS, AVISO_NOMES, apelidoHtml } from './base.js';
 import { cartaoCampanha } from './campanha.js';
 import { cartaoEmendas } from './emendas.js';
 import { URL_RH_CAMARA, mesAno } from './camara.js';
-import { percentual } from './util.js';
+import { percentual, fotoSite } from './util.js';
 import { amostraBoa } from '../regras/respostas.js';
 
 const ROTULO_MARCA = { P: 'presente', A: 'falta', AJ: 'falta justificada', vazio: 'sem registro' };
@@ -38,6 +38,29 @@ ${amostraBoa(x) ? `<p><strong>${numero(x.respondidos)} de ${numero(x.conferidos)
 ${espera > 0 && amostraBoa(x) ? `<p class="nota">Ainda faltam conferir ${numero(espera)} de ${numero(x.feitos)} requerimentos.</p>` : ''}
 <p class="nota">Resposta = documento anexado na ficha oficial. Indicações não entram: o portal não registra resposta a elas.</p>
 </section>`;
+}
+
+// Sem gênero: o texto nunca diz "vereador" ou "vereadora" de uma pessoa. Até ~155 caracteres:
+// "Dados oficiais." só entra quando cabe.
+export const descricaoVereador = (v) => {
+  const quem = v.apelido ? `${v.nome}, “${v.apelido}”` : v.nome;
+  const frase = `Presença, votos, propostas, requerimentos respondidos e emendas de ${quem}${v.partido ? ` (${v.partido})` : ''}${v.apelido ? ',' : ''} na Câmara de Salto/SP.`;
+  return frase.length + 16 <= 155 ? `${frase} Dados oficiais.` : frase;
+};
+
+// schema.org Person, sem cargo (jobTitle) e sem gênero.
+export function pessoaJsonLd(v) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: v.nome,
+    ...(v.apelido ? { alternateName: v.apelido } : {}),
+    ...(v.fotoLocal ? { image: `${ENDERECO}${fotoSite(v.fotoLocal)}` } : {}),
+    url: `${ENDERECO}vereador/${v.id}.html`,
+    ...(v.url ? { sameAs: v.url } : {}),
+    memberOf: CAMARA_JSONLD,
+    ...(v.partido ? { affiliation: { '@type': 'PoliticalParty', name: v.partido } } : {}),
+  };
 }
 
 export function paginaVereador(v, d) {
@@ -101,5 +124,13 @@ ${cartaoSalario(v, d)}
 ${cartaoRespostas(v, d)}
 ${cartaoEmendas(v, d)}
 ${cartaoCampanha(d.camara.campanha.candidatos[v.id])}`;
-  return layout({ titulo: `${v.nome}: Radar Saltense`, corpo, prefixo: '../', atualizadoEm: d.meta.atualizadoEm });
+  return layout({
+    titulo: `${v.nome} na Câmara de Salto: presença, votos e propostas`,
+    descricao: descricaoVereador(v),
+    caminho: `vereador/${v.id}.html`,
+    jsonld: pessoaJsonLd(v),
+    corpo,
+    prefixo: '../',
+    atualizadoEm: d.meta.atualizadoEm,
+  });
 }

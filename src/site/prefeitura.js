@@ -6,6 +6,7 @@ import { NOMES_MES } from './impostometro.js';
 import { cartaoPromessas } from './promessas.js';
 import { cartaoObras } from './obras.js';
 
+export const URL_PREFEITURA = 'https://salto.sp.gov.br/';
 export const URL_IEGM = 'https://iegm.tce.sp.gov.br/';
 export const URL_OBRAS = 'https://paineldeobras.tce.sp.gov.br/';
 export const URL_PNCP = 'https://pncp.gov.br/app/orgaos/46634507000106';
@@ -160,5 +161,12 @@ ${sumario(secoes, [['promessas', 'Promessas'], ['nota', 'Nota do TCE'], ['obras'
 ${vazio}
 ${atalhos(d, p)}
 ${secoes}`;
-  return layout({ titulo: 'A Prefeitura de Salto: Radar Saltense', corpo, atualizadoEm: d.meta.atualizadoEm });
+  return layout({
+    titulo: 'A Prefeitura de Salto: promessas, obras, compras e nota do TCE',
+    descricao: 'Promessas do prefeito de Salto/SP, obras, compras no PNCP, a nota do TCE-SP para a gestão e a campanha de 2024. Dados oficiais, com link para a fonte.',
+    caminho: 'prefeitura.html',
+    jsonld: { '@context': 'https://schema.org', '@type': 'GovernmentOrganization', name: 'Prefeitura de Salto', url: URL_PREFEITURA, sameAs: URL_PREFEITURA, areaServed: { '@type': 'City', name: 'Salto (SP)' } },
+    corpo,
+    atualizadoEm: d.meta.atualizadoEm,
+  });
 }

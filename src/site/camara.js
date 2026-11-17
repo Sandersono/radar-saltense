@@ -2,7 +2,7 @@ import { esc } from '../util/texto.js';
 import { amostraBoa } from '../regras/respostas.js';
 import { ORIGENS_CAMPANHA } from '../regras/campanha.js';
 import { GRUPOS_FOLHA } from '../regras/folha.js';
-import { layout, reais, reaisCentavos, numero, link, seloFonte, aviso, cartaoNumero, sumario } from './base.js';
+import { layout, CAMARA_JSONLD, reais, reaisCentavos, numero, link, seloFonte, aviso, cartaoNumero, sumario } from './base.js';
 import { barras, NOMES_MES } from './impostometro.js';
 import { secaoEmendas, total2026 } from './emendas.js';
 
@@ -123,5 +123,12 @@ ${total2026(d) ? cartaoNumero({ valor: reaisCentavos(total2026(d)), rotulo: 'em 
 </div>
 </section>
 ${secoes}`;
-  return layout({ titulo: 'A Câmara de Salto: Radar Saltense', corpo, atualizadoEm: d.meta.atualizadoEm });
+  return layout({
+    titulo: 'A Câmara de Salto: custo, emendas e requerimentos',
+    descricao: 'Quanto custa a Câmara de Salto/SP, salários e folha, requerimentos respondidos pela Prefeitura, emendas dos vereadores e campanhas de 2024.',
+    caminho: 'camara.html',
+    jsonld: { '@context': 'https://schema.org', ...CAMARA_JSONLD, areaServed: { '@type': 'City', name: 'Salto (SP)' } },
+    corpo,
+    atualizadoEm: d.meta.atualizadoEm,
+  });
 }

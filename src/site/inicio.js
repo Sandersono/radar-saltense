@@ -2,7 +2,7 @@ import { SALARIO, ANO_INICIO, AUTOR, fichaOficial } from '../config.js';
 import { GRUPOS } from '../regras/classificar.js';
 import { TIPOS_NOME } from '../regras/local.js';
 import { esc } from '../util/texto.js';
-import { layout, dataBR, link, numero, aviso, foto, barraProporcao, cartaoNumero, quandoBR, GRUPOS_PUBLICOS, AVISO_NOMES, apelidoHtml } from './base.js';
+import { layout, ENDERECO, DESCRICAO, dataBR, link, numero, aviso, foto, barraProporcao, cartaoNumero, quandoBR, GRUPOS_PUBLICOS, AVISO_NOMES, apelidoHtml } from './base.js';
 import { percentual, sugestoesBairros } from './util.js';
 import { blocoContador } from './impostometro.js';
 import { chamadaGastos } from './gastos.js';
@@ -134,5 +134,11 @@ ${grupos}
 <a class="cartao chamada" href="fontes.html"><strong>De onde vêm os números</strong><span>Todas as fontes oficiais e as regras usadas, para você conferir.</span></a>
 <a class="cartao chamada" href="https://instagram.com/${AUTOR.instagram}"><strong>Achou um erro?</strong><span>Me chama no Instagram @${AUTOR.instagram}.</span></a>
 </section>`;
-  return layout({ titulo: 'Radar Saltense: Câmara, Prefeitura e o dinheiro de Salto', corpo, atualizadoEm: d.meta.atualizadoEm, heroi });
+  return layout({ titulo: 'Radar Saltense: Câmara, Prefeitura e o dinheiro de Salto',
+    caminho: 'index.html',
+    jsonld: { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Radar Saltense', url: ENDERECO, inLanguage: 'pt-BR', description: DESCRICAO },
+    corpo,
+    atualizadoEm: d.meta.atualizadoEm,
+    heroi,
+  });
 }

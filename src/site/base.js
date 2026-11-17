@@ -1,10 +1,10 @@
-import { AUTOR } from '../config.js';
+import { AUTOR, CAMARA } from '../config.js';
 import { esc } from '../util/texto.js';
 import { iniciais, fotoSite } from './util.js';
 import { scriptCloudflare, barraCookies } from './medicao.js';
 
 export const ENDERECO = 'https://radarsaltense.com.br/';
-const DESCRICAO = 'O que fazem os vereadores e a Prefeitura de Salto/SP, quanto a cidade arrecada e onde gasta. Só dado oficial, com link para a fonte, atualizado todo dia.';
+export const DESCRICAO = 'O que fazem os vereadores e a Prefeitura de Salto/SP, quanto a cidade arrecada e onde gasta. Só dado oficial, com link para a fonte, atualizado todo dia.';
 
 export const GRUPOS_PUBLICOS = ['melhoria', 'cobranca', 'homenagem', 'lei', 'outros'];
 export const AVISO_NOMES = 'Nomes escritos de outro jeito no PDF, que não são nem o nome nem o apelido oficial, ficam de fora e podem mudar estes números.';
@@ -64,22 +64,33 @@ export const cartaoNumero = ({ valor, rotulo, href }) => {
   return href ? `<a class="${classe}" href="${esc(href)}">${miolo}</a>` : `<div class="${classe}">${miolo}</div>`;
 };
 
-export function layout({ titulo, corpo, prefixo = '', atualizadoEm, heroi = '' }) {
+// Endereço absoluto de uma página do site; "index.html" vira a raiz.
+export const enderecoDe = (caminho) => (caminho === 'index.html' ? ENDERECO : `${ENDERECO}${caminho}`);
+
+// Dado estruturado (schema.org) para buscadores; "</" vira "<\/" para nunca fechar o <script> antes da hora.
+export const jsonLd = (dado) => `<script type="application/ld+json">${JSON.stringify(dado).replace(/<\//g, '<\\/')}</script>`;
+
+export const CAMARA_JSONLD = { '@type': 'GovernmentOrganization', name: 'Câmara Municipal de Salto', url: CAMARA, sameAs: CAMARA };
+
+// descricao: frase curta (até ~155 caracteres) para o Google e as prévias de link; caminho: ex. "vereador/x.html" ou "index.html".
+export function layout({ titulo, corpo, prefixo = '', atualizadoEm, heroi = '', descricao = DESCRICAO, caminho = '', jsonld = null }) {
+  const canonico = caminho ? enderecoDe(caminho) : '';
   return `<!doctype html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(titulo)}</title>
-<meta name="description" content="${DESCRICAO}">
-<meta name="theme-color" content="#0B2545">
+<meta name="description" content="${esc(descricao)}">
+${canonico ? `<link rel="canonical" href="${esc(canonico)}">\n` : ''}<meta name="theme-color" content="#0B2545">
 <link rel="icon" type="image/png" sizes="32x32" href="${prefixo}marca/icone-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="${prefixo}marca/icone-192.png">
 <link rel="apple-touch-icon" href="${prefixo}marca/icone-180.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Radar Saltense">
 <meta property="og:title" content="${esc(titulo)}">
-<meta property="og:description" content="${DESCRICAO}">
+<meta property="og:description" content="${esc(descricao)}">
+${canonico ? `<meta property="og:url" content="${esc(canonico)}">\n` : ''}<meta property="og:locale" content="pt_BR">
 <meta property="og:image" content="${ENDERECO}marca/previa.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -88,6 +99,7 @@ export function layout({ titulo, corpo, prefixo = '', atualizadoEm, heroi = '' }
 <link rel="alternate" type="application/rss+xml" title="Radar Saltense: resumo da semana" href="${prefixo}feed.xml">
 <link rel="stylesheet" href="${prefixo}estilo.css">
 <script>document.documentElement.classList.add('js')</script>
+${jsonld ? `${jsonLd(jsonld)}\n` : ''}
 </head>
 <body>
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>

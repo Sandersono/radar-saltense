@@ -291,3 +291,7 @@ h2 .contagem { font-size: .9rem; font-weight: 600; color: var(--suave); font-fam
 .s-nao, .p-sem { background: #9AA5B1; }
 .s-devolvida { background: var(--ambar); }
 .status-promessa { color: var(--rio); }
+
+/* Página de uma semana: anterior, próxima e todas as semanas. */
+.semana-nav { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; margin: 1.25rem 0; }
+.semana-todas { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }

@@ -84,5 +84,5 @@ ${areas}
 <p>${prefeito && prefeito.link ? `${seloFonte(prefeito.link, 'candidatura no DivulgaCandContas (TSE), com o plano em PDF')} ` : ''}${seloFonte(p.fonte, 'dados abertos do TSE (arquivo zip)')}</p>
 ${p.pdf ? `<p class="nota">No arquivo zip do TSE, o plano é o arquivo ${esc(p.pdf)}.</p>` : ''}
 </section>`;
-  return layout({ titulo: 'Promessas do prefeito: Radar Saltense', corpo, atualizadoEm: d.meta.atualizadoEm });
+  return layout({ titulo: 'Promessas do prefeito de Salto: Radar Saltense', descricao: 'As promessas do plano de governo do prefeito de Salto/SP, área por área, com o texto do plano registrado no TSE e o que já tem prova oficial.', caminho: 'promessas.html', corpo, atualizadoEm: d.meta.atualizadoEm });
 }
