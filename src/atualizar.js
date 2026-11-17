@@ -49,17 +49,18 @@ try { anterior = JSON.parse(await readFile('data/processado/meta.json', 'utf8'))
 const tceFora = coleta.receitas === null || coleta.despesas === null || coleta.siconfi === null;
 const dadosAnteriores = await doDisco('data/processado/dados.json');
 const dados = reaproveitarTce(processar(coleta), coleta, tceFora ? dadosAnteriores : null, anterior);
-// Dado do TCE repetido: aviso até 10 dias; passou disso, o robô não publica.
+// Dado do TCE repetido: nota para o leitor e linha de manutenção (passou de 10 dias, só avisa; nunca trava a publicação).
 dados.meta.tceColetadoEm = datasTce(coleta, anterior, dados.meta.atualizadoEm);
 const idade = idadeTce(dados.meta.tceColetadoEm, dados.meta.atualizadoEm);
 dados.avisos.push(...idade.avisos);
+dados.avisosManutencao.push(...idade.manutencao);
 // Resumo da semana: compara com os marcos da última versão publicada e guarda as novidades por 7 dias.
 dados.meta.marcosAnteriores = dadosAnteriores.vereadores ? marcos(dadosAnteriores) : ((anterior && anterior.marcosAnteriores) || null);
 const semana = semanaComHistorico(dados, hojeSP(dados.meta.atualizadoEm), dados.meta.marcosAnteriores, anterior && anterior.novidadesRecentes);
 dados.semana = semana.semana;
 dados.meta.novidadesRecentes = semana.novidadesRecentes;
 
-const problemas = [...conferir(dados, anterior, VEREADORES_ESPERADOS), ...idade.problemas];
+const problemas = conferir(dados, anterior, VEREADORES_ESPERADOS);
 const aumentos = aumentosDespesas(dados.meta, anterior);
 await writeFile('conferencia.md', relatorio(dados, problemas, aumentos));
 if (problemas.length) {

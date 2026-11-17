@@ -37,16 +37,24 @@ export const LIMITE_DIAS_TCE = 10;
 const NOMES_TCE = { receitas: 'Receitas', despesas: 'Despesas' };
 const diaBR = (iso) => new Date(iso).toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
 
-// Dado repetido até o limite: aviso. Mais velho que o limite: problema (o robô não publica).
+// Fonte do TCE-SP fora do ar nunca impede a publicação (regra do projeto). `datas` vem de datasTce:
+// igual a `agora` = coletado agora; outra data = repetido desde ela; null = repetido, sem data conhecida.
+// avisos: texto para o leitor (vai para fontes.html). manutencao: só no conferencia.md (inclui o limite de dias).
 export function idadeTce(datas, agora, limite = LIMITE_DIAS_TCE) {
-  const avisos = [];
-  const problemas = [];
-  for (const [k, nome] of Object.entries(NOMES_TCE)) {
-    const em = datas && datas[k];
-    if (!em || em === agora) continue;
+  const fora = Object.keys(NOMES_TCE).filter((k) => datas && k in datas && datas[k] !== agora);
+  const manutencao = [];
+  for (const k of fora) {
+    const em = datas[k];
+    if (!em) { manutencao.push(`${NOMES_TCE[k]} do TCE-SP: a fonte não respondeu e não há data da última coleta boa.`); continue; }
     const dias = Math.floor((Date.parse(agora) - Date.parse(em)) / 86400000);
-    if (dias > limite) problemas.push(`${nome} do TCE-SP: a fonte não responde há ${dias} dias (último dado de ${diaBR(em)}); o limite para repetir dado antigo é ${limite} dias. Confira o Portal da Transparência do TCE-SP e rode o robô de novo.`);
-    else avisos.push(`${nome} do TCE-SP: o site repete os dados de ${diaBR(em)} (${dias} ${dias === 1 ? 'dia' : 'dias'} atrás); o robô para de publicar se passar de ${limite} dias.`);
+    manutencao.push(dias > limite
+      ? `${NOMES_TCE[k]} do TCE-SP: a fonte não responde há ${dias} dias (último dado de ${diaBR(em)}), mais que o limite de ${limite} dias. O site segue publicando com a nota; confira o Portal da Transparência do TCE-SP.`
+      : `${NOMES_TCE[k]} do TCE-SP: o site repete os dados de ${diaBR(em)} (${dias} ${dias === 1 ? 'dia' : 'dias'}).`);
   }
-  return { avisos, problemas };
+  const quando = (k) => (datas[k] ? diaBR(datas[k]) : '');
+  const frase = (nome, dia) => `${nome} do TCE-SP${dia ? ` até ${dia}` : ''}: a fonte não respondeu nas últimas atualizações.`;
+  const avisos = fora.length === 2 && quando('receitas') === quando('despesas')
+    ? [frase('Receitas e gastos', quando('receitas'))]
+    : fora.map((k) => frase(k === 'receitas' ? 'Receitas' : 'Gastos', quando(k)));
+  return { avisos, manutencao };
 }

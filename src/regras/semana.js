@@ -9,6 +9,12 @@ export function janelaSemana(hojeISO) {
   return { inicio: iso(Date.parse(hojeISO) - 6 * DIA), fim: hojeISO };
 }
 
+// Segunda-feira da semana de um dia (AAAA-MM-DD, já no fuso de São Paulo): identifica o item semanal do feed.
+export function segundaDaSemana(diaISO) {
+  const ms = Date.parse(diaISO);
+  return iso(ms - ((new Date(ms).getUTCDay() + 6) % 7) * DIA);
+}
+
 const dentro = (data, j) => Boolean(data) && data >= j.inicio && data <= j.fim;
 const contar = (itens) => {
   const m = new Map();
@@ -34,10 +40,12 @@ export function marcos(d) {
 function novidades(atual, anterior) {
   if (!anterior) return [];
   const t = [];
-  if (atual.receitas && atual.receitas !== anterior.receitas) t.push(`Saiu um novo mês de receitas da Prefeitura no TCE-SP: ${atual.receitas.split('-').reverse().join('/')}.`);
-  if (atual.gastos && atual.gastos !== anterior.gastos) t.push(`Saiu um novo mês de gastos da Prefeitura no TCE-SP: ${atual.gastos.split('-').reverse().join('/')}.`);
-  if (atual.folha && atual.folha !== anterior.folha) t.push(`A Câmara publicou a folha de ${atual.folha.split('-').reverse().join('/')}.`);
-  if (atual.iegm && atual.iegm !== anterior.iegm) t.push(`O TCE-SP publicou a nota do IEGM de ${atual.iegm}.`);
+  // Marco anterior vazio (fonte fora do ar) não vira "novidade" quando a fonte volta.
+  const trocou = (k) => atual[k] && anterior[k] && atual[k] !== anterior[k];
+  if (trocou('receitas')) t.push(`Saiu um novo mês de receitas da Prefeitura no TCE-SP: ${atual.receitas.split('-').reverse().join('/')}.`);
+  if (trocou('gastos')) t.push(`Saiu um novo mês de gastos da Prefeitura no TCE-SP: ${atual.gastos.split('-').reverse().join('/')}.`);
+  if (trocou('folha')) t.push(`A Câmara publicou a folha de ${atual.folha.split('-').reverse().join('/')}.`);
+  if (trocou('iegm')) t.push(`O TCE-SP publicou a nota do IEGM de ${atual.iegm}.`);
   const antes = anterior.obras ?? {};
   const mudou = Object.entries(atual.obras).filter(([k, s]) => k in antes && antes[k] !== s).length;
   if (mudou) t.push(`${mudou === 1 ? 'Uma obra mudou' : `${mudou} obras mudaram`} de situação.`);

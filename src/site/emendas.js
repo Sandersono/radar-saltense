@@ -68,8 +68,9 @@ export function cartaoEmendas(v, d) {
   if (de25.length) {
     const x = a25.resumo.porVereador[v.id];
     const grupos = contarGrupos(x.situacoes);
+    const comValor25 = de25.filter((y) => typeof y.valor === 'number').length;
     partes.push(`<h3>${TITULO_2025}</h3>
-<p>Na legislatura anterior, indicou ${numero(de25.length)} ${de25.length === 1 ? 'emenda' : 'emendas'} para 2025, somando <strong>${reaisCentavos(x.total)}</strong>. Até ${dataBR(a25.atualizadoEm)}, foram pagos <strong>${reaisCentavos(x.pago)}</strong>.</p>
+<p>Na legislatura anterior, indicou ${comValor25 === de25.length ? `${numero(de25.length)} ${de25.length === 1 ? 'emenda' : 'emendas'}` : `${numero(comValor25)} ${comValor25 === 1 ? 'emenda' : 'emendas'} com valor (de ${numero(de25.length)})`} para 2025, somando <strong>${reaisCentavos(x.total)}</strong>. Até ${dataBR(a25.atualizadoEm)}, foram pagos <strong>${reaisCentavos(x.pago)}</strong>.</p>
 ${frasesGrupos(grupos) ? `<p>Situação: ${esc(frasesGrupos(grupos))}.</p>` : ''}
 <details><summary>Ver as ${numero(de25.length)} emendas de 2025</summary><ul class="lista">${de25.map(item2025).join('')}</ul></details>
 ${grupos.nao || grupos.devolvida ? aviso(FRASE_EMENDAS) : ''}

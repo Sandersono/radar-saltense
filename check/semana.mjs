@@ -67,13 +67,26 @@ assert.ok(t.split('\n').length <= 5);
 assert.ok(t.endsWith(url));
 assert.ok(textoWhatsApp(resumoSemana(vazio, '2026-11-16'), url).split('\n').length <= 5);
 
-// Feed: guid estável na semana, título com datas, XML escapado.
-const f1 = feedRss({ ...d, semana: r }, 'https://radarsaltense.com.br/');
-const f2 = feedRss({ ...d, semana: resumoSemana(d, '2026-11-16'), meta: { atualizadoEm: '2026-11-16T10:00:00Z' } }, 'https://radarsaltense.com.br/');
+// Feed: um item por semana, guid pela segunda-feira (SP), igual nos dias da mesma semana; XML escapado.
+const U = 'https://radarsaltense.com.br/';
+const f1 = feedRss({ ...d, semana: r }, U);
+const f2 = feedRss({ ...d, semana: resumoSemana(d, '2026-11-16'), meta: { atualizadoEm: '2026-11-16T10:00:00Z' } }, U);
 const guid = (x) => x.match(/<guid[^>]*>([^<]*)<\/guid>/)[1];
+const feedDoDia = (dia) => feedRss({ ...d, semana: resumoSemana(d, dia), meta: { atualizadoEm: `${dia}T15:00:00Z` } }, U);
 assert.equal(guid(f1), guid(f2));
-assert.equal(guid(f1), 'semana-2026-11-10');
-assert.match(f1, /Resumo da semana de 10\/11 a 16\/11/);
+assert.equal(guid(f1), 'semana-2026-11-16');
+assert.equal(guid(feedDoDia('2026-11-18')), 'semana-2026-11-16');
+assert.equal(guid(feedDoDia('2026-11-22')), 'semana-2026-11-16');
+assert.equal(guid(feedDoDia('2026-11-23')), 'semana-2026-11-23');
+assert.match(f1, /<title>Semana de 16\/11<\/title>/);
+assert.match(f1, /<pubDate>Mon, 16 Nov 2026 23:00:00 GMT<\/pubDate>/);
+assert.match(f1, /<atom:link href="https:\/\/radarsaltense\.com\.br\/feed\.xml" rel="self" type="application\/rss\+xml"\/>/);
+// Marco anterior vazio (fonte fora do ar): a volta da fonte não é "mês novo".
+const semReceita = { ...marcos(d), receitas: null };
+assert.ok(!resumoSemana(d2, '2026-11-16', semReceita).novidades.some((t) => /receitas/i.test(t)));
+// Cada bloco da página tem fonte.
+assert.match(pc, /portal de proposituras/);
+assert.match(pc, /votacoes\.html/);
 assert.match(f1, /<link>https:\/\/radarsaltense\.com\.br\/semana\.html<\/link>/);
 const fe = feedRss({ ...d, semana: { ...r, novidades: ['A & B <c>'] } }, 'https://radarsaltense.com.br/');
 assert.ok(fe.includes('A &amp; B &lt;c&gt;') && !fe.includes('<c>'));

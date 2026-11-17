@@ -20,8 +20,10 @@ export const aviso = (html) => `<p class="aviso"><span class="aviso-icone" aria-
 
 // Receitas ou despesas do TCE-SP repetidas da última coleta boa (a fonte não respondeu): o site diz até quando vão.
 export function avisoTce(d, fonte) {
-  const em = d.meta && d.meta.tceColetadoEm && d.meta.tceColetadoEm[fonte];
-  if (!em || em === d.meta.atualizadoEm) return '';
+  const datas = d.meta && d.meta.tceColetadoEm;
+  if (!datas || !(fonte in datas) || datas[fonte] === d.meta.atualizadoEm) return '';
+  const em = datas[fonte];
+  if (!em) return aviso('A fonte do TCE-SP não respondeu na última atualização; o site mostra o último dado salvo.');
   const dia = new Date(em).toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
   return aviso(`Dados do TCE-SP até ${esc(dia)}; a fonte não respondeu na última atualização.`);
 }

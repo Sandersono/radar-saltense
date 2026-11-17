@@ -8,7 +8,7 @@ import { resumirReceitas, montarImpostometro } from './regras/receitas.js';
 import { resumirDespesas, areasSiconfi } from './regras/despesas.js';
 import { resumoRespostas } from './regras/respostas.js';
 import { resumirEmendas } from './regras/emendas.js';
-import { validarPromessas, resumoPromessas } from './regras/promessas.js';
+import { validarPromessas, resumoPromessas, limparPromessas } from './regras/promessas.js';
 
 const doisDigitos = (n) => String(n).padStart(2, '0');
 const DIAS_RESPOSTAS_RECENTES = 14;
@@ -31,12 +31,15 @@ function montarEmendas(ref, vereadores, avisos) {
 }
 
 // Promessas (data/referencia/promessas.json, editado à mão). Item com status inválido ou sem prova aparece como "sem informação".
+// Área sem itens ou item vazio: aviso e fica de fora (nunca derruba o robô).
 function montarPromessas(ref, avisos) {
-  if (!ref || !Array.isArray(ref.areas)) return null;
+  if (!ref) return null;
   const problemas = validarPromessas(ref);
-  if (problemas.length) avisos.push(`Promessas (data/referencia/promessas.json): ${problemas.length} ${problemas.length === 1 ? 'problema' : 'problemas'}, mostrados como "sem informação": ${problemas.slice(0, 5).join('; ')}.`);
+  if (problemas.length) avisos.push(`Promessas (data/referencia/promessas.json): ${problemas.length} ${problemas.length === 1 ? 'problema' : 'problemas'}; itens com problema aparecem como "sem informação" e partes sem formato ficam de fora: ${problemas.slice(0, 5).join('; ')}.`);
+  const limpo = limparPromessas(ref);
+  if (!limpo.areas.length) return null;
   const valido = (it) => validarPromessas({ areas: [{ itens: [it] }] }).length === 0;
-  const areas = ref.areas.map((a) => ({ ...a, itens: a.itens.map((it) => (valido(it) ? it : { ...it, status: 'sem informação', provas: [] })) }));
+  const areas = limpo.areas.map((a) => ({ ...a, itens: a.itens.map((it) => (valido(it) ? it : { ...it, status: 'sem informação', provas: [] })) }));
   const dados = { ...ref, areas };
   return { ...dados, resumo: resumoPromessas(dados) };
 }

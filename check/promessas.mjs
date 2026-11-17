@@ -5,6 +5,9 @@ import { STATUS_PROMESSA, validarPromessas, resumoPromessas } from '../src/regra
 // O arquivo real (editado à mão) passa na validação.
 const real = JSON.parse(readFileSync(new URL('../data/referencia/promessas.json', import.meta.url), 'utf8'));
 assert.deepEqual(validarPromessas(real), []);
+// Formato torto vira problema, não erro: área sem itens e item nulo.
+assert.equal(validarPromessas({ areas: [{ area: 'X' }, { area: 'Y', itens: [null] }] }).length, 2);
+assert.equal(resumoPromessas({ areas: [{ area: 'X' }, { area: 'Y', itens: [null, { numero: '1', status: 'sem informação' }] }] }).total, 1);
 
 const I = (numero, status = 'sem informação', provas = []) => ({ numero, texto: `Item ${numero}`, status, provas });
 const D = (...areas) => ({ areas });
