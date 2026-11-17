@@ -46,7 +46,7 @@ function novidades(atual, anterior) {
 
 export function resumoSemana(d, hojeISO, anterior = null) {
   const j = janelaSemana(hojeISO);
-  const nome = Object.fromEntries(d.vereadores.map((v) => [v.id, v.nome]));
+  const nome = Object.fromEntries((d.vereadores ?? []).map((v) => [v.id, v.nome]));
   const porVer = (listas) => contar(listas.flat()).map(([id, total]) => ({ id, nome: nome[id] ?? id, total }));
   const props = (d.proposituras ?? []).filter((p) => dentro(p.data, j));
   const votacoes = [];
@@ -83,4 +83,19 @@ export function textoWhatsApp(r, url) {
   if (r.novidades.length) l.push(r.novidades[0]);
   if (l.length === 1) l.push('Sem novidades nesta semana.');
   return [...l.slice(0, 4), url].join('\n');
+}
+
+// Novidades achadas em cada execução ficam guardadas 7 dias (meta.novidadesRecentes), senão sumiriam no dia seguinte.
+export function acumularNovidades(recentes, novas, hojeISO) {
+  const j = janelaSemana(hojeISO);
+  const lista = (recentes ?? []).filter((n) => dentro(n.data, j));
+  for (const texto of novas) if (!lista.some((n) => n.texto === texto)) lista.push({ data: hojeISO, texto });
+  return lista;
+}
+
+// Resumo do dia com as novidades da semana inteira.
+export function semanaComHistorico(d, hojeISO, marcosAnteriores, recentes) {
+  const r = resumoSemana(d, hojeISO, marcosAnteriores);
+  const novidadesRecentes = acumularNovidades(recentes, r.novidades, hojeISO);
+  return { semana: { ...r, novidades: novidadesRecentes.map((n) => n.texto) }, novidadesRecentes };
 }

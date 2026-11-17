@@ -12,6 +12,19 @@ export function relatorio(d, problemas, aumentos = []) {
   l.push('## Avisos', '');
   l.push(...(d.avisos.length ? d.avisos.map((a) => `- ${a}`) : ['- nenhum']), '');
   if (d.avisosFotos?.length) l.push(...d.avisosFotos.map((a) => `- Fotos: ${a}`), '');
+  l.push('## Manutenção (só aqui, não vai para o site)', '');
+  l.push(...(d.avisosManutencao?.length ? d.avisosManutencao.map((a) => `- ${a}`) : ['- nada a fazer']), '');
+  l.push('## Emendas, promessas e resumo da semana', '');
+  const brlC = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  for (const ano of ['2025', '2026']) {
+    const a = d.emendas?.[ano];
+    l.push(a ? `- Emendas ${ano}: ${a.emendas.length} (${brlC(a.resumo.total)}${ano === '2025' ? `; pago ${brlC(a.resumo.pago)}` : ''}), PDF de ${a.atualizadoEm}` : `- Emendas ${ano}: sem dado`);
+  }
+  const pr = d.promessas?.resumo;
+  l.push(pr ? `- Promessas: ${pr.total} em ${pr.porArea.length} áreas; ${Object.entries(pr.porStatus).map(([s, n]) => `${s} ${n}`).join(', ')}` : '- Promessas: sem dado');
+  const s = d.semana;
+  if (s) l.push(`- Semana ${s.inicio} a ${s.fim}: ${s.proposituras.total} propostas, ${s.votacoes.length} votações, ${s.respondidos.total} respondidos, novidades: ${s.novidades.length ? s.novidades.join(' | ') : 'nenhuma'}`);
+  l.push('');
   l.push('## Propostas sem data no portal', '');
   const semData = d.proposituras.filter((p) => !p.data);
   l.push(...(semData.length ? semData.map((p) => `- ${p.categoria} ${p.numero} (${p.autoresTexto}): ${fichaOficial(p.id)}`) : ['- nenhuma']), '');

@@ -42,3 +42,17 @@ export function resumirEmendas(emendas) {
   for (const v of Object.values(porVereador)) { v.total = r2(v.total); v.pago = r2(v.pago); }
   return { porVereador, total: r2(total), pago: r2(pago), situacoes };
 }
+
+// Nomes (decodificados) dos PDFs linkados numa página de categoria da Câmara (Phoca Download).
+export function nomesPdf(html) {
+  const caminhos = [...String(html).matchAll(/href="(\/pdf\/[^"]+\.pdf)"/gi)].map((m) => m[1].replace(/&amp;/g, '&'));
+  return [...new Set(caminhos)].map((p) => { try { return decodeURIComponent(p); } catch { return p; } });
+}
+
+// PDFs da categoria que a ferramenta não viu quando rodou (lista `arquivos` gravada em emendas.json).
+// Sem a lista, só o PDF usado como fonte conta como conhecido.
+export function pdfsNovos(nomes, ano) {
+  const fonte = () => { try { return decodeURIComponent(new URL(ano.fonte).pathname); } catch { return ''; } };
+  const conhecidos = new Set(Array.isArray(ano.arquivos) ? ano.arquivos : [fonte()]);
+  return nomes.filter((n) => !conhecidos.has(n));
+}

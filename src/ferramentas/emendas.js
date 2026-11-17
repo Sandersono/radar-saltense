@@ -361,8 +361,9 @@ if (problemas.length) {
 
 const usadas = new Set(emendas2025.map((e) => e.vereador));
 const saida = {
-  2025: { fonte: pdf4t.url, pagina: CATEGORIA[2025], atualizadoEm: periodo4t.fim, emendas: emendas2025 },
-  2026: { fonte: pdf26.url, pagina: CATEGORIA[2026], atualizadoEm: pdf26.data, ajustes, emendas: emendas2026 },
+  // arquivos: PDFs da categoria quando a ferramenta rodou; o robô diário avisa quando aparece um que não está aqui.
+  2025: { fonte: pdf4t.url, pagina: CATEGORIA[2025], atualizadoEm: periodo4t.fim, arquivos: pdfs2025.map((p) => p.nome), emendas: emendas2025 },
+  2026: { fonte: pdf26.url, pagina: CATEGORIA[2026], atualizadoEm: pdf26.data, ajustes, arquivos: pdfs2026.map((p) => p.nome), emendas: emendas2026 },
   iniciaisConferidas: Object.fromEntries(Object.entries(confirmadas).filter(([, id]) => usadas.has(id)).sort()),
   vereadoresAnteriores: Object.fromEntries(Object.entries(anteriores).filter(([id]) => usadas.has(id)).sort()),
 };

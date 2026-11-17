@@ -9,6 +9,10 @@ import { paginaGastos } from './site/gastos.js';
 import { paginaCamara } from './site/camara.js';
 import { paginaPrefeitura } from './site/prefeitura.js';
 import { paginaFontes } from './site/fontes.js';
+import { paginaSemana } from './site/semana.js';
+import { paginaPromessas } from './site/promessas.js';
+import { feedRss } from './site/feed.js';
+import { ENDERECO } from './site/base.js';
 
 // Foto quadrada pequena (240 px, WebP), sem cortar a cabeça.
 async function recortarFoto(entrada, saida) {
@@ -36,6 +40,9 @@ export async function gerarSite(d, destino) {
   await writeFile(`${destino}/camara.html`, paginaCamara(d));
   await writeFile(`${destino}/prefeitura.html`, paginaPrefeitura(d));
   await writeFile(`${destino}/fontes.html`, paginaFontes(d));
+  await writeFile(`${destino}/semana.html`, paginaSemana(d, ENDERECO));
+  await writeFile(`${destino}/feed.xml`, feedRss(d, ENDERECO));
+  if (d.promessas) await writeFile(`${destino}/promessas.html`, paginaPromessas(d));
   if (d.receitas) await writeFile(`${destino}/impostometro.html`, paginaImpostometro(d));
   if (d.gastos) {
     await writeFile(`${destino}/gastos.html`, paginaGastos(d));

@@ -7,8 +7,9 @@ import { relatorio } from './relatorio.js';
 import { gerarSite } from './gerar-site.js';
 import { mesclarFolha } from './regras/folha.js';
 import { serializarRespostas } from './regras/respostas.js';
-import { reaproveitarTce } from './regras/tce-anterior.js';
+import { reaproveitarTce, datasTce, idadeTce } from './regras/tce-anterior.js';
 import { mesclarIegm, mesclarContratos, escolherObras } from './regras/prefeitura.js';
+import { hojeSP, marcos, semanaComHistorico } from './regras/semana.js';
 
 const usarCache = process.argv.includes('--usar-cache');
 const coleta = usarCache ? JSON.parse(await readFile('data/bruto/coleta.json', 'utf8')) : await coletarTudo();
@@ -27,6 +28,13 @@ for (const [id, e] of Object.entries(coleta.respostas || {})) {
   if (!d || (usarCache ? e.conferidoEm > d.conferidoEm : e.conferidoEm >= d.conferidoEm)) respostas[id] = e;
 }
 coleta.respostas = respostas;
+// Emendas e promessas são arquivos de referência editados à mão: com cache, vale o que está no disco agora.
+if (usarCache) {
+  for (const [campo, caminho] of [['emendas', 'data/referencia/emendas.json'], ['promessas', 'data/referencia/promessas.json']]) {
+    const ref = await doDisco(caminho);
+    coleta[campo] = Object.keys(ref).length ? ref : null;
+  }
+}
 // Nota do TCE, obras e compras: mesma regra (coleta nova vale mais que o disco; cache vale menos).
 const iegmDisco = await doDisco('data/processado/iegm.json');
 coleta.iegm = usarCache ? mesclarIegm(coleta.iegm, iegmDisco) : mesclarIegm(iegmDisco, coleta.iegm);
@@ -39,9 +47,19 @@ let anterior = null;
 try { anterior = JSON.parse(await readFile('data/processado/meta.json', 'utf8')); } catch (e) { if (e.code !== 'ENOENT') throw e; }
 // TCE-SP fora do ar: receitas/gastos não coletados repetem o último resultado publicado.
 const tceFora = coleta.receitas === null || coleta.despesas === null || coleta.siconfi === null;
-const dados = reaproveitarTce(processar(coleta), coleta, tceFora ? await doDisco('data/processado/dados.json') : null, anterior);
+const dadosAnteriores = await doDisco('data/processado/dados.json');
+const dados = reaproveitarTce(processar(coleta), coleta, tceFora ? dadosAnteriores : null, anterior);
+// Dado do TCE repetido: aviso até 10 dias; passou disso, o robô não publica.
+dados.meta.tceColetadoEm = datasTce(coleta, anterior, dados.meta.atualizadoEm);
+const idade = idadeTce(dados.meta.tceColetadoEm, dados.meta.atualizadoEm);
+dados.avisos.push(...idade.avisos);
+// Resumo da semana: compara com os marcos da última versão publicada e guarda as novidades por 7 dias.
+dados.meta.marcosAnteriores = dadosAnteriores.vereadores ? marcos(dadosAnteriores) : ((anterior && anterior.marcosAnteriores) || null);
+const semana = semanaComHistorico(dados, hojeSP(dados.meta.atualizadoEm), dados.meta.marcosAnteriores, anterior && anterior.novidadesRecentes);
+dados.semana = semana.semana;
+dados.meta.novidadesRecentes = semana.novidadesRecentes;
 
-const problemas = conferir(dados, anterior, VEREADORES_ESPERADOS);
+const problemas = [...conferir(dados, anterior, VEREADORES_ESPERADOS), ...idade.problemas];
 const aumentos = aumentosDespesas(dados.meta, anterior);
 await writeFile('conferencia.md', relatorio(dados, problemas, aumentos));
 if (problemas.length) {

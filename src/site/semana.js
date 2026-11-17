@@ -1,8 +1,6 @@
 import { esc } from '../util/texto.js';
-import { layout, dataBR, numero } from './base.js';
+import { layout, dataBR, numero, ENDERECO } from './base.js';
 import { hojeSP, resumoSemana, textoWhatsApp, tituloSemana } from '../regras/semana.js';
-
-export const URL_SEMANA = 'https://radarsaltense.com.br/semana.html';
 
 // Usa o resumo já calculado (d.semana) ou calcula com a data da última atualização.
 export const semanaDe = (d) => d.semana ?? resumoSemana(d, hojeSP(d.meta.atualizadoEm), d.meta.marcosAnteriores ?? null);
@@ -10,7 +8,8 @@ export const semanaDe = (d) => d.semana ?? resumoSemana(d, hojeSP(d.meta.atualiz
 const lista = (itens) => `<ul class="lista">${itens.map((i) => `<li>${i}</li>`).join('')}</ul>`;
 const verLista = (xs) => xs.map((x) => `${esc(x.nome)}: ${numero(x.total)}`);
 
-export function paginaSemana(d) {
+// url: endereço do site com barra final; o link do WhatsApp aponta para a página da semana.
+export function paginaSemana(d, url = ENDERECO) {
   const r = semanaDe(d);
   const s = [];
   if (r.proposituras.total) {
@@ -40,7 +39,7 @@ ${lista(verLista(r.respondidos.porVereador))}
 ${lista(r.novidades.map(esc))}
 </section>`);
   }
-  const zap = `https://wa.me/?text=${encodeURIComponent(textoWhatsApp(r, URL_SEMANA))}`;
+  const zap = `https://wa.me/?text=${encodeURIComponent(textoWhatsApp(r, `${url}semana.html`))}`;
   const corpo = `<h1>Resumo da semana</h1>
 <p>${esc(tituloSemana(r).replace('Resumo da semana de', 'De'))}. Só entra aqui o que mudou.</p>
 ${s.length ? s.join('\n') : '<section class="secao cartao"><p>Nada de novo nos dados oficiais desta semana.</p></section>'}

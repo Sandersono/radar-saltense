@@ -1,5 +1,10 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { STATUS_PROMESSA, validarPromessas, resumoPromessas } from '../src/regras/promessas.js';
+
+// O arquivo real (editado à mão) passa na validação.
+const real = JSON.parse(readFileSync(new URL('../data/referencia/promessas.json', import.meta.url), 'utf8'));
+assert.deepEqual(validarPromessas(real), []);
 
 const I = (numero, status = 'sem informação', provas = []) => ({ numero, texto: `Item ${numero}`, status, provas });
 const D = (...areas) => ({ areas });

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { iniciaisDe, casarIniciais, resumirEmendas } from '../src/regras/emendas.js';
+import { iniciaisDe, casarIniciais, resumirEmendas, nomesPdf, pdfsNovos } from '../src/regras/emendas.js';
 
 assert.equal(iniciaisDe('Almir de Melo Santos'), 'AMS');
 assert.equal(iniciaisDe('Graziela Costa Leite'), 'GCL');
@@ -25,4 +25,10 @@ assert.deepEqual(r.porVereador.graziela, { total: 200, pago: 200, quantidade: 1,
 assert.equal(r.total, 1700);
 assert.equal(r.pago, 1200);
 assert.deepEqual(r.situacoes, { 'CONCLUÍDA': 2, DEVOLVIDA: 1 });
+
+// Robô: PDFs da categoria que a ferramenta ainda não viu.
+const html = '<a href="/pdf/x/Tabela%20-%2031.08.2026.pdf">a</a> <a href="/pdf/x/Tabela%20-%2031.08.2026.pdf">b</a> <a href="/pdf/x/Nova.pdf">c</a> <a href="/outro.html">d</a>';
+assert.deepEqual(nomesPdf(html), ['/pdf/x/Tabela - 31.08.2026.pdf', '/pdf/x/Nova.pdf']);
+assert.deepEqual(pdfsNovos(nomesPdf(html), { arquivos: ['/pdf/x/Tabela - 31.08.2026.pdf'] }), ['/pdf/x/Nova.pdf']);
+assert.deepEqual(pdfsNovos(nomesPdf(html), { fonte: 'https://c.br/pdf/x/Nova.pdf' }), ['/pdf/x/Tabela - 31.08.2026.pdf']);
 console.log('emendas ok');

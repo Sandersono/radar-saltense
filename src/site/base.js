@@ -2,7 +2,7 @@ import { AUTOR } from '../config.js';
 import { esc } from '../util/texto.js';
 import { iniciais, fotoSite } from './util.js';
 
-const ENDERECO = 'https://radarsaltense.com.br/';
+export const ENDERECO = 'https://radarsaltense.com.br/';
 const DESCRICAO = 'O que fazem os vereadores e a Prefeitura de Salto/SP, quanto a cidade arrecada e onde gasta. Só dado oficial, com link para a fonte, atualizado todo dia.';
 
 export const GRUPOS_PUBLICOS = ['melhoria', 'cobranca', 'homenagem', 'lei', 'outros'];
@@ -17,6 +17,14 @@ export const link = (url, texto) => `<a href="${esc(url)}" target="_blank" rel="
 export const seloFonte = (url, texto = 'fonte oficial') =>
   `<a class="selo-fonte" href="${esc(url)}" target="_blank" rel="noopener">${esc(texto)} <span aria-hidden="true">↗</span></a>`;
 export const aviso = (html) => `<p class="aviso"><span class="aviso-icone" aria-hidden="true">i</span><span>${html}</span></p>`;
+
+// Receitas ou despesas do TCE-SP repetidas da última coleta boa (a fonte não respondeu): o site diz até quando vão.
+export function avisoTce(d, fonte) {
+  const em = d.meta && d.meta.tceColetadoEm && d.meta.tceColetadoEm[fonte];
+  if (!em || em === d.meta.atualizadoEm) return '';
+  const dia = new Date(em).toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+  return aviso(`Dados do TCE-SP até ${esc(dia)}; a fonte não respondeu na última atualização.`);
+}
 
 export const apelidoHtml = (v) => (v.apelido ? ` <span class="apelido">“${esc(v.apelido)}”</span>` : '');
 
@@ -66,6 +74,7 @@ export function layout({ titulo, corpo, prefixo = '', atualizadoEm, heroi = '' }
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Logo do Radar Saltense">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Radar Saltense: resumo da semana" href="${prefixo}feed.xml">
 <link rel="stylesheet" href="${prefixo}estilo.css">
 <script>document.documentElement.classList.add('js')</script>
 </head>
@@ -75,7 +84,7 @@ export function layout({ titulo, corpo, prefixo = '', atualizadoEm, heroi = '' }
 <div class="topo-faixa"><div class="topo-barra">
 <a class="marca" href="${prefixo}index.html"><img src="${prefixo}marca/logo.png" alt="Radar Saltense, página inicial" width="140" height="56"></a>
 <button class="menu-botao" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
-<nav id="menu-principal" class="menu" aria-label="Principal"><a href="${prefixo}index.html#bairro">Seu bairro</a><a href="${prefixo}camara.html">Câmara</a><a href="${prefixo}prefeitura.html">Prefeitura</a><a href="${prefixo}impostometro.html">Impostos</a><a href="${prefixo}fontes.html">Fontes</a></nav>
+<nav id="menu-principal" class="menu" aria-label="Principal"><a href="${prefixo}index.html#bairro">Seu bairro</a><a href="${prefixo}camara.html">Câmara</a><a href="${prefixo}prefeitura.html">Prefeitura</a><a href="${prefixo}impostometro.html">Impostos</a><a href="${prefixo}semana.html">Resumo da semana</a><a href="${prefixo}fontes.html">Fontes</a></nav>
 </div></div>
 ${heroi ? `<div class="heroi">${heroi}</div>` : ''}
 <svg class="onda" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 30C240 60 480 0 720 22S1200 50 1440 18V60H0Z"/></svg>

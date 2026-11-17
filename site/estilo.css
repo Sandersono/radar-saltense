@@ -233,3 +233,9 @@ a.cartao-numero:hover { border-color: var(--rio); }
   .tabela-empilha td::before { content: attr(data-rotulo); flex: 0 0 auto; white-space: nowrap; font-weight: 600; text-align: left; color: var(--suave); }
 }
 .situacao-paralisada { color: var(--falta); }
+/* Emendas de 2025 por situação e promessas por status: só azuis, amarelo e cinza (fato, não alarme) */
+.s-concluida, .p-cumprida { background: var(--rio); }
+.s-andamento, .p-andamento { background: #5AB0DE; }
+.s-nao, .p-sem { background: #9AA5B1; }
+.s-devolvida { background: var(--ambar); }
+.status-promessa { color: var(--rio); }

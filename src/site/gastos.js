@@ -1,7 +1,7 @@
 import { esc } from '../util/texto.js';
 import { LINKS_CREDOR, TCE_DESPESAS, SICONFI_RREO } from '../config.js';
 import { ORGAOS, GRUPOS_GASTO, LISTA_PUBLICOS, LISTA_NAO_PUBLICOS, formatarCnpj, NOVA_LIMITE } from '../regras/despesas.js';
-import { layout, reais, numero, aviso, link } from './base.js';
+import { layout, reais, numero, aviso, avisoTce, link } from './base.js';
 import { barras, NOMES_MES } from './impostometro.js';
 
 const ATENCAO = 'Isto é um fato tirado dos dados oficiais, não uma acusação. Há explicações comuns para cada caso.';
@@ -68,6 +68,7 @@ export function paginaGastos(d) {
   const ultimos = anos.map((ano) => `${ano}: ${esc(periodo(g.anos[ano]))}`).join('; ');
   const sic = anos.filter((ano) => g.anos[ano].areas).map((ano) => `${ano}: até ${NOMES_MES[g.anos[ano].areas.bimestre * 2 - 1]}`).join('; ') || 'nenhum';
   const corpo = `<h1>Raio-X dos gastos</h1>
+${avisoTce(d, 'despesas')}
 <p>Quanto a Prefeitura, a Câmara e o SAAE pagaram, para quais áreas e para quais empresas, ano a ano desde o início do mandato. Tudo sai do Tribunal de Contas do Estado (TCE-SP), que publica com cerca de um mês e meio de atraso, e do Tesouro Nacional.</p>
 ${seletor}
 ${anos.map((ano) => blocoAno(ano, g.anos[ano])).join('\n')}

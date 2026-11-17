@@ -1,7 +1,7 @@
 import { POPULACAO } from '../config.js';
 import { esc } from '../util/texto.js';
 import { GRUPOS_RECEITA, TIPOS_IMPOSTO } from '../regras/receitas.js';
-import { layout, dataBR, reais, reaisCentavos, seloFonte, aviso } from './base.js';
+import { layout, dataBR, reais, reaisCentavos, seloFonte, aviso, avisoTce } from './base.js';
 
 const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
 export const NOMES_MES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
@@ -50,6 +50,7 @@ export function paginaImpostometro(d) {
   const avisoPainel = r.anoPainel !== r.anoAtual ? aviso(`Ainda não há mês oficial de ${r.anoAtual}; os quadros abaixo mostram ${r.anoPainel}.`) : '';
 
   const corpo = `<h1>Impostômetro de Salto</h1>
+${avisoTce(d, 'receitas')}
 ${blocoContador(r, '', true)}
 <p>A parte oficial é o que a Prefeitura registrou no Tribunal de Contas do Estado (TCE-SP), que publica os números com cerca de um mês e meio de atraso. Depois do último mês oficial, o contador sobe no ritmo médio dos últimos ${r.mesesRitmo} meses publicados: é uma estimativa e se corrige sozinha quando sai um mês novo.</p>
 ${aviso(esc(fechamento))}

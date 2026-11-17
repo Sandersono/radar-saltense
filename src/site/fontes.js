@@ -29,6 +29,9 @@ export function paginaFontes(d) {
 <li><strong>Nota da gestão (IEGM):</strong> <a href="https://iegm.tce.sp.gov.br/">painel do IEG-M do TCE-SP</a>. Só a faixa (A, B+, B, C+ ou C) de Salto e de cinco cidades vizinhas.</li>
 <li><strong>Obras:</strong> <a href="https://paineldeobras.tce.sp.gov.br/">Painel de Obras do TCE-SP</a>. Só as obras que a Prefeitura cadastrou no sistema do Tribunal.</li>
 <li><strong>Compras da Prefeitura:</strong> <a href="https://pncp.gov.br/api/consulta/v1/">API pública do Portal Nacional de Contratações Públicas (PNCP)</a>, órgão CNPJ 46.634.507/0001-06. Só empresas com CNPJ aparecem pelo nome.</li>
+<li><strong>Emendas ao orçamento:</strong> <a href="https://www.camarasalto.sp.gov.br/orcamento-publico/emendas-impositivas">PDFs de emendas impositivas no site da Câmara</a>: o relatório do 4º trimestre de 2025 (execução) e a tabela de 2026 (planejado). Os PDFs são lidos por uma ferramenta rodada à mão quando a Câmara publica arquivo novo; o robô avisa quando isso acontece.</li>
+<li><strong>Promessas do prefeito:</strong> <a href="https://divulgacandcontas.tse.jus.br/divulga/">plano de governo registrado no TSE</a> em 2024 (dados abertos). O status de cada promessa é atualizado à mão, só com prova oficial.</li>
+<li><strong>Resumo da semana:</strong> <a href="semana.html">refeito todo dia</a> com os dados desta lista, também como <a href="feed.xml">feed RSS</a>.</li>
 <li><strong>Vereadores e partidos:</strong> <a href="https://www.camarasalto.sp.gov.br/">página inicial da Câmara</a>.</li>
 </ul>
 </section>

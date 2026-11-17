@@ -1,5 +1,5 @@
 {
-  "atualizadoEm": "2026-11-16T23:51:29.939Z",
+  "atualizadoEm": "2026-11-17T00:26:30.089Z",
   "duracaoPncpMs": null,
   "totalProposituras": 6182,
   "semLocal": 936,
@@ -68,5 +68,23 @@
     "2026-07": 456322.28,
     "2026-08": 478689.31,
     "2026-10": 465555.62
-  }
+  },
+  "tceColetadoEm": {
+    "receitas": "2026-11-17T00:26:30.089Z",
+    "despesas": "2026-11-17T00:26:30.089Z"
+  },
+  "marcosAnteriores": {
+    "receitas": "2026-09",
+    "gastos": "2026-09",
+    "folha": "2026-10",
+    "iegm": "2024",
+    "obras": {
+      "15049409000170|2024|Contratacao de empresa especializada na execucao de servicos de implantacao da i": "Paralisada",
+      "49601283000116|2023|Execução da barragem do ribeirão piraí etapa 1 município de salto estado de são ": "Em execução - no prazo",
+      "46571919000136|2025|Contratacao de empresa para execucao de obra de construcao da clinica de saude j": "Em execução - no prazo",
+      "43898972000158|2025|Execucao de obra de construcao da clinica de saude jardim tropical na cidade de ": "Em execução - no prazo",
+      "03802330000199|2023|Contratacao de pessoa juridica para execucao de servicos de construcao remanesce": "Em execução - no prazo"
+    }
+  },
+  "novidadesRecentes": []
 }

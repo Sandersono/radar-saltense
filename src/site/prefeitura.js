@@ -3,6 +3,7 @@ import { FAIXAS_IEGM, DIMENSOES_IEGM, MUNICIPIOS_IEGM } from '../regras/iegm.js'
 import { layout, reais, numero, quandoBR, seloFonte, aviso, cartaoNumero } from './base.js';
 import { cartaoCampanha } from './campanha.js';
 import { NOMES_MES } from './impostometro.js';
+import { cartaoPromessas } from './promessas.js';
 
 export const URL_IEGM = 'https://iegm.tce.sp.gov.br/';
 export const URL_OBRAS = 'https://paineldeobras.tce.sp.gov.br/';
@@ -127,6 +128,7 @@ function atalhos(d, p) {
     const a = anosC[0];
     c.push(cartaoNumero({ valor: numero(p.contratos[a].contratacoes.total.quantidade), rotulo: `contratações em ${esc(a)}`, href: '#compras' }));
   }
+  if (d.promessas) c.push(cartaoNumero({ valor: numero(d.promessas.resumo.total), rotulo: 'promessas do plano de governo', href: 'promessas.html' }));
   if (p.campanhaPrefeito) c.push(cartaoNumero({ valor: reais(p.campanhaPrefeito.total), rotulo: 'de campanha do prefeito em 2024', href: '#campanha' }));
   if (d.gastos) {
     const ano = Object.keys(d.gastos.anos).sort().pop();
@@ -144,9 +146,10 @@ export function paginaPrefeitura(d) {
     ? aviso('Os dados da Prefeitura ainda não foram coletados.')
     : '';
   const corpo = `<h1>A Prefeitura de Salto</h1>
-<p>A nota que o Tribunal de Contas dá à gestão, as obras, como a Prefeitura compra e de onde veio o dinheiro da campanha do prefeito.</p>
+<p>As promessas do prefeito, a nota que o Tribunal de Contas dá à gestão, as obras, como a Prefeitura compra e de onde veio o dinheiro da campanha do prefeito.</p>
 ${vazio}
 ${atalhos(d, p)}
+${cartaoPromessas(d)}
 ${secaoNota(p)}
 ${secaoObras(p)}
 ${secaoCompras(p)}

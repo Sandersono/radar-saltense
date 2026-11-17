@@ -3,6 +3,7 @@ import { GRUPOS } from '../regras/classificar.js';
 import { esc } from '../util/texto.js';
 import { layout, dataBR, link, aviso, foto, seloFonte, barraProporcao, cartaoNumero, reais, numero, GRUPOS_PUBLICOS, AVISO_NOMES, apelidoHtml } from './base.js';
 import { cartaoCampanha } from './campanha.js';
+import { cartaoEmendas } from './emendas.js';
 import { URL_RH_CAMARA, mesAno } from './camara.js';
 import { percentual } from './util.js';
 import { amostraBoa } from '../regras/respostas.js';
@@ -98,6 +99,7 @@ ${aviso(`Leitura do documento oficial de votações. Ele só cita quem votou con
 </section>
 ${cartaoSalario(v, d)}
 ${cartaoRespostas(v, d)}
+${cartaoEmendas(v, d)}
 ${cartaoCampanha(d.camara.campanha.candidatos[v.id])}`;
   return layout({ titulo: `${v.nome}: Radar Saltense`, corpo, prefixo: '../', atualizadoEm: d.meta.atualizadoEm });
 }

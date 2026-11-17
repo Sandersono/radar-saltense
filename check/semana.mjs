@@ -1,5 +1,9 @@
 import assert from 'node:assert/strict';
-import { janelaSemana, hojeSP, resumoSemana, marcos, textoWhatsApp } from '../src/regras/semana.js';
+import { janelaSemana, hojeSP, resumoSemana, marcos, textoWhatsApp, acumularNovidades } from '../src/regras/semana.js';
+
+// Novidades guardadas 7 dias, sem repetir o mesmo texto.
+const rec = acumularNovidades([{ data: '2026-11-09', texto: 'velha' }, { data: '2026-11-12', texto: 'A' }], ['A', 'B'], '2026-11-16');
+assert.deepEqual(rec, [{ data: '2026-11-12', texto: 'A' }, { data: '2026-11-16', texto: 'B' }]);
 import { paginaSemana } from '../src/site/semana.js';
 import { feedRss } from '../src/site/feed.js';
 

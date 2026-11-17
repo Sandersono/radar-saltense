@@ -7,10 +7,41 @@ import { normalizar, anoMesBR } from './util/texto.js';
 import { resumirReceitas, montarImpostometro } from './regras/receitas.js';
 import { resumirDespesas, areasSiconfi } from './regras/despesas.js';
 import { resumoRespostas } from './regras/respostas.js';
+import { resumirEmendas } from './regras/emendas.js';
+import { validarPromessas, resumoPromessas } from './regras/promessas.js';
 
 const doisDigitos = (n) => String(n).padStart(2, '0');
+const DIAS_RESPOSTAS_RECENTES = 14;
 
-export function processar({ vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, folhaCamara, respostas, campanha, iegm, obras, contratos, duracaoPncpMs, avisosFontes, coletadoEm }) {
+// Emendas impositivas (data/referencia/emendas.json, gravado pela ferramenta). 2025 = execução, 2026 = planejado.
+function montarEmendas(ref, vereadores, avisos) {
+  if (!ref || (!ref['2025'] && !ref['2026'])) return null;
+  const atuais = new Set(vereadores.map((v) => v.id));
+  const anteriores = ref.vereadoresAnteriores || {};
+  const saida = { anteriores };
+  for (const ano of ['2025', '2026']) {
+    const a = ref[ano];
+    if (!a || !Array.isArray(a.emendas)) continue;
+    const semCadastro = [...new Set(a.emendas.map((e) => e.vereador).filter((id) => !atuais.has(id) && !(id in anteriores)))];
+    if (semCadastro.length) avisos.push(`Emendas de ${ano}: vereador que não é atual nem está em vereadoresAnteriores (${semCadastro.join(', ')}); confira data/referencia/emendas.json.`);
+    const { arquivos, ...resto } = a;
+    saida[ano] = { ...resto, resumo: resumirEmendas(a.emendas) };
+  }
+  return saida;
+}
+
+// Promessas (data/referencia/promessas.json, editado à mão). Item com status inválido ou sem prova aparece como "sem informação".
+function montarPromessas(ref, avisos) {
+  if (!ref || !Array.isArray(ref.areas)) return null;
+  const problemas = validarPromessas(ref);
+  if (problemas.length) avisos.push(`Promessas (data/referencia/promessas.json): ${problemas.length} ${problemas.length === 1 ? 'problema' : 'problemas'}, mostrados como "sem informação": ${problemas.slice(0, 5).join('; ')}.`);
+  const valido = (it) => validarPromessas({ areas: [{ itens: [it] }] }).length === 0;
+  const areas = ref.areas.map((a) => ({ ...a, itens: a.itens.map((it) => (valido(it) ? it : { ...it, status: 'sem informação', provas: [] })) }));
+  const dados = { ...ref, areas };
+  return { ...dados, resumo: resumoPromessas(dados) };
+}
+
+export function processar({ vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, folhaCamara, respostas, campanha, emendas, promessas, iegm, obras, contratos, duracaoPncpMs, avisosFontes, avisosManutencao, coletadoEm }) {
   const casar = criarCasador(vereadores, OUTROS_NOMES);
   const inicio = `${ANO_INICIO}-01-01`;
   const naoAtribuidos = [];
@@ -204,6 +235,15 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
     avisos.push(`Receitas de ${impostometro.anoAnterior.ano}: só ${impostometro.anoAnterior.mesesPublicados} de 12 meses publicados pelo TCE-SP até agora.`);
   }
 
+  const manutencao = [...(avisosManutencao || [])];
+  const dadosEmendas = montarEmendas(emendas, vereadores, manutencao);
+  const dadosPromessas = montarPromessas(promessas, manutencao);
+  // Requerimentos respondidos nos últimos dias (para o resumo da semana).
+  const desdeRecentes = new Date(Date.parse(hojeISO) - DIAS_RESPOSTAS_RECENTES * 86400000).toISOString().slice(0, 10);
+  const respostasRecentes = proposituras
+    .filter((p) => p.respondidoEm && p.respondidoEm >= desdeRecentes)
+    .map((p) => ({ data: p.respondidoEm, vereadores: p.vereadores }));
+
   const vistosNA = new Set();
   return {
     vereadores: resumo,
@@ -219,6 +259,7 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
       return true;
     }),
     avisos: [...new Set(avisos)],
+    avisosManutencao: [...new Set(manutencao)],
     avisosFotos: avisosFotos || [],
     receitas: impostometro,
     gastos,
@@ -226,9 +267,11 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
     votacoesLidas: votacoes.map((v) => ({ ano: v.ano, blocos: v.blocos.length, semEventos: v.blocos.filter((b) => !b.eventos.length).length })),
     camara: {
       folha: { meses: mesesFolha, ultimoMes: completos.length ? completos[completos.length - 1] : null },
-      respostas: { geral: resumoResp.geral, porVereador: resumoResp.porVereador, pendentes: resumoResp.geral.feitos - resumoResp.geral.conferidos, conferidosHoje: Object.values(estadoRespostas).filter((e) => e.conferidoEm === hojeISO).length },
+      respostas: { geral: resumoResp.geral, porVereador: resumoResp.porVereador, pendentes: resumoResp.geral.feitos - resumoResp.geral.conferidos, conferidosHoje: Object.values(estadoRespostas).filter((e) => e.conferidoEm === hojeISO).length, recentes: respostasRecentes },
       campanha: { candidatos: (campanha && campanha.candidatos) || {} },
     },
+    emendas: dadosEmendas,
+    promessas: dadosPromessas,
     prefeitura: {
       iegm: iegm && iegm.anos && Object.keys(iegm.anos).length ? iegm : null,
       obras: obras && obras.obras ? obras : null,

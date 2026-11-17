@@ -58,3 +58,11 @@ export function ocultarDocumentos(s) {
     .replace(/(CPF(?:\/MF)?\s*(?:n[º°o.]*)?\s*:?\s*)\d{11}\b/gi, '$1[omitido]')
     .replace(/(\bRG\s*(?:n[º°o.]*)?\s*:?\s*)\d[\d.]{4,11}(?:-?[\dXx])?/g, '$1[omitido]');
 }
+
+// Erros de rede e do Playwright vêm em inglês e em várias linhas: vira uma linha curta em português.
+export function mensagemErro(e) {
+  const m = String(e && typeof e === 'object' && 'message' in e ? e.message : e).split('\n')[0].trim();
+  if ((e && e.name === 'TimeoutError') || /timeout|timed out/i.test(m)) return 'a fonte não respondeu a tempo (tempo esgotado)';
+  if (/fetch failed|ECONNRESET|ECONNREFUSED|ENOTFOUND|EAI_AGAIN|socket hang up|net::ERR_/i.test(m)) return 'não foi possível conectar à fonte';
+  return m;
+}

@@ -5,7 +5,7 @@ import { coletarVereadores } from './coleta/vereadores.js';
 import { coletarProposituras } from './coleta/proposituras.js';
 import { coletarPresencas } from './coleta/presenca.js';
 import { coletarVotacoes } from './coleta/votacoes.js';
-import { salvar } from './coleta/http.js';
+import { salvar, baixar } from './coleta/http.js';
 import { coletarReceitas } from './coleta/receitas.js';
 import { coletarDespesas } from './coleta/despesas.js';
 import { coletarSiconfi } from './coleta/siconfi.js';
@@ -19,7 +19,8 @@ import { mesclarIegm, mesclarContratos, escolherObras, dataBaseMaisVelha, anosPa
 import { lerCard } from './regras/apex.js';
 import { mesclarFolha } from './regras/folha.js';
 import { filaRespostas } from './regras/respostas.js';
-import { anoMesBR } from './util/texto.js';
+import { anoMesBR, mensagemErro } from './util/texto.js';
+import { nomesPdf, pdfsNovos } from './regras/emendas.js';
 
 const ORCAMENTO_RESPOSTAS = 150;
 const PRAZO_CONTRATOS_MS = 6 * 60 * 1000;
@@ -27,8 +28,8 @@ const PRAZO_PENTAHO_MS = 3 * 60 * 1000;
 const PRAZO_RECEITAS_MS = 4 * 60 * 1000;
 const PRAZO_DESPESAS_MS = 6 * 60 * 1000;
 const PRAZO_SICONFI_MS = 3 * 60 * 1000;
-// Mensagens do Playwright trazem o registro de chamadas em várias linhas; só a primeira vai para o site.
-const primeiraLinha = (m) => String(m).split('\n')[0].trim();
+// Mensagens do Playwright trazem o registro de chamadas em várias linhas; só a primeira vai para o site, em português.
+const primeiraLinha = (m) => mensagemErro(m);
 const doisDigitos = (n) => String(n).padStart(2, '0');
 
 async function lerJson(caminho, padrao, avisos) {
@@ -138,6 +139,23 @@ async function contratosDoPncp(salvo, hoje, avisos) {
   return { contratos: mesclarContratos(salvo, novos), duracaoMs: Date.now() - inicio };
 }
 
+// Emendas: o robô não lê os PDFs (a ferramenta é rodada à mão); só avisa quando a Câmara publica PDF novo
+// nas categorias de 2025 e 2026. Aviso de manutenção: vai para o conferencia.md, não para o site.
+async function emendasNaCamara(emendas, avisos) {
+  for (const ano of ['2025', '2026']) {
+    const a = emendas && emendas[ano];
+    if (!a || !a.pagina) continue;
+    try {
+      const nomes = nomesPdf((await baixar(`${a.pagina}?limit=0`, { rotulo: `Emendas de ${ano}` })).toString('utf8'));
+      if (!nomes.length) throw new Error('nenhum PDF na página da categoria (o site da Câmara mudou?)');
+      const novos = pdfsNovos(nomes, a);
+      if (novos.length) avisos.push(`Há PDF novo de emendas de ${ano} na Câmara (${novos.map((n) => n.split('/').pop()).join(' | ')}); rodar a ferramenta (npm run emendas) e conferir data/referencia/emendas.json.`);
+    } catch (e) {
+      avisos.push(`Emendas de ${ano}: não deu para conferir se a Câmara publicou PDF novo (${primeiraLinha(e.message)}); seguem os dados salvos.`);
+    }
+  }
+}
+
 export async function coletarTudo() {
   const lista = anos();
   const anoAtual = lista[lista.length - 1];
@@ -156,6 +174,10 @@ export async function coletarTudo() {
   const folhaSalva = await lerJson('data/processado/folha-camara.json', {}, avisosFontes);
   const respostasSalvas = await lerJson('data/processado/respostas.json', {}, avisosFontes);
   const campanha = await lerJson('data/referencia/campanha-2024.json', null, avisosFontes);
+  const emendas = await lerJson('data/referencia/emendas.json', null, avisosFontes);
+  const promessas = await lerJson('data/referencia/promessas.json', null, avisosFontes);
+  const avisosManutencao = [];
+  await emendasNaCamara(emendas, avisosManutencao);
   const iegmSalvo = await lerJson('data/processado/iegm.json', null, avisosFontes);
   const obrasSalvas = await lerJson('data/processado/obras.json', null, avisosFontes);
   const contratosSalvos = await lerJson('data/processado/contratos.json', {}, avisosFontes);
@@ -164,7 +186,7 @@ export async function coletarTudo() {
   const { contratos, duracaoMs: duracaoPncpMs } = await contratosDoPncp(contratosSalvos, hoje, avisosFontes);
   const folhaCamara = await folhaDaCamara(vereadores.map(({ id, nome, apelido }) => ({ id, nome, apelido })), hoje, folhaSalva, avisosFontes);
   const respostas = await respostasDaCamara(cardsPorAno, respostasSalvas, avisosFontes);
-  const coleta = { vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, folhaCamara, respostas, campanha, iegm, obras, contratos, duracaoPncpMs, avisosFontes, coletadoEm: new Date().toISOString() };
+  const coleta = { vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, folhaCamara, respostas, campanha, emendas, promessas, iegm, obras, contratos, duracaoPncpMs, avisosFontes, avisosManutencao, coletadoEm: new Date().toISOString() };
   await salvar('data/bruto/coleta.json', JSON.stringify(coleta));
   return coleta;
 }
@@ -182,4 +204,5 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   console.log(`Folha da Câmara: ${Object.keys(c.folhaCamara).length} meses; respostas conferidas: ${Object.keys(c.respostas).length}`);
   console.log(`Prefeitura: IEGM ${c.iegm ? Object.keys(c.iegm.anos).length : 0} anos; obras ${c.obras ? c.obras.obras.length : 0}; contratos ${Object.keys(c.contratos).join(', ') || 'nenhum'}`);
   for (const a of c.avisosFontes) console.log(`Aviso: ${a}`);
+  for (const a of c.avisosManutencao) console.log(`Manutenção: ${a}`);
 }
