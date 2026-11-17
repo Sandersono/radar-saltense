@@ -33,8 +33,19 @@
         {
           "numero": "1.6",
           "texto": "Incentivar pequenos negócios, em especial aqueles conduzidos por mulheres, para identificar as demandas e buscar linhas de crédito e de qualificação, visando o crescimento desse importante segmento gerador de empregos;",
-          "status": "sem informação",
-          "provas": []
+          "status": "em andamento",
+          "provas": [
+            {
+              "titulo": "Prefeitura, Ceunsp e Sebrae realizam o evento Empreendedoras em Ação, com palestra de capacitação e rodada de negócios",
+              "url": "https://salto.sp.gov.br/empreendedoras-em-acao/",
+              "data": "2025-03-31"
+            },
+            {
+              "titulo": "Secretaria de Desenvolvimento Econômico promove o 2º Salto Delas Summit, voltado ao empreendedorismo feminino",
+              "url": "https://salto.sp.gov.br/salto-delas-summit-promovera-troca-de-experiencias-e-novas-oportunidades-para-empreendedoras/",
+              "data": "2026-10-26"
+            }
+          ]
         },
         {
           "numero": "1.7",
@@ -56,8 +67,19 @@
         {
           "numero": "2.2",
           "texto": "Estruturar o Serviço Especializado em Abordagem Social, que vai identificar a incidência do trabalho infantil, pessoas em situação de rua, entre outras situações, envolvendo políticas públicas do SUAS;",
-          "status": "sem informação",
-          "provas": []
+          "status": "em andamento",
+          "provas": [
+            {
+              "titulo": "Prefeitura inicia ações permanentes de abordagem social à população em situação de rua e cria comitê intersetorial",
+              "url": "https://salto.sp.gov.br/prefeitura-de-salto-inicia-acoes-de-atendimento-a-populacao-em-situacao-de-rua/",
+              "data": "2026-10-23"
+            },
+            {
+              "titulo": "Comitê Intersetorial segue com novas abordagens à população em situação de rua",
+              "url": "https://salto.sp.gov.br/comite-intersetorial-intensifica-acoes-de-atendimento-a-populacao-em-situacao-de-rua/",
+              "data": "2026-11-09"
+            }
+          ]
         },
         {
           "numero": "2.3",
@@ -97,8 +119,14 @@
         {
           "numero": "3.2",
           "texto": "Promover capacitação e formação artística através de oficinas culturais gratuitas direcionadas para jovens, crianças e adultos, possibilitando o acesso ao universo cultural e apresentando os diversos segmentos artísticos de forma acessível;",
-          "status": "sem informação",
-          "provas": []
+          "status": "em andamento",
+          "provas": [
+            {
+              "titulo": "Secretaria da Cultura abre inscrições para oficina gratuita de street dance no Centro Cultural",
+              "url": "https://salto.sp.gov.br/secretaria-da-cultura-abre-inscricoes-para-oficina-gratuita-de-street-dance/",
+              "data": "2025-07-07"
+            }
+          ]
         },
         {
           "numero": "3.3",
@@ -115,8 +143,14 @@
         {
           "numero": "3.5",
           "texto": "Assegurar a promoção com qualidade dos eventos culturais e artísticos que fazem parte do calendário oficial do município, tais como a Festa Ítalo-Saltense, Festa do Salto, Festival de Teatro, Festival de Artes, Prêmio Moutonnée de Poesia, Prêmio de Música Canto do Taperá, Festival Hoje é Dia de Arte, Paixão de Cristo, Parada de Natal, Mostra Estudantil de Teatro, entre outros eventos tradicionais, implantando credenciamento permanente, com critérios objetivos de escolha, aos comerciantes/associações que atuam no segmento, o que proporcionará mais segurança e bom ambiente de negócios;",
-          "status": "sem informação",
-          "provas": []
+          "status": "em andamento",
+          "provas": [
+            {
+              "titulo": "Prefeitura abre edital de credenciamento permanente de entidades para a praça de alimentação da Festa do Salto",
+              "url": "https://salto.sp.gov.br/esta-aberto-o-edital-de-credenciamento-de-entidades-para-a-festa-do-salto/",
+              "data": "2025-06-18"
+            }
+          ]
         },
         {
           "numero": "3.6",
@@ -127,8 +161,14 @@
         {
           "numero": "3.7",
           "texto": "Promover, resguardar e modernizar os equipamentos culturais do município;",
-          "status": "sem informação",
-          "provas": []
+          "status": "em andamento",
+          "provas": [
+            {
+              "titulo": "Museu de Salto Ettore Liberalesso é reinaugurado após obras de acessibilidade e modernização",
+              "url": "https://salto.sp.gov.br/museu-de-salto-ettore-liberalesso-e-reinaugurado-apos-obras-de-acessibilidade-e-modernizacao/",
+              "data": "2026-06-08"
+            }
+          ]
         },
         {
           "numero": "3.8",
@@ -164,8 +204,19 @@
         {
           "numero": "4.1.3",
           "texto": "Propiciar o aumento da capacidade operacional das equipes de patrulhamento;",
-          "status": "sem informação",
-          "provas": [],
+          "status": "em andamento",
+          "provas": [
+            {
+              "titulo": "Reunião na Prefeitura anuncia remanejamento de efetivo da GCM e mais uma viatura para a ROMU",
+              "url": "https://salto.sp.gov.br/reuniao-na-prefeitura-integra-forcas-de-seguranca-e-anuncia-medidas/",
+              "data": "2025-01-16"
+            },
+            {
+              "titulo": "GCM inicia substituição de viaturas da Patrulha Maria da Penha, Anjos da Vida, Ronda Escolar e Comando",
+              "url": "https://salto.sp.gov.br/prefeitura-apresenta-programa-seguranca-comunitaria/",
+              "data": "2026-10-29"
+            }
+          ],
           "grupo": "Guarda Civil Municipal"
         },
         {
@@ -241,8 +292,19 @@
         {
           "numero": "4.1.14",
           "texto": "Reestruturar o projeto ‘Anjos da Vida’, para que em conjunto com a equipe do Canil, atuem nas escolas com palestras informativas sobre a prevenção do uso de drogas;",
-          "status": "sem informação",
-          "provas": [],
+          "status": "em andamento",
+          "provas": [
+            {
+              "titulo": "Prefeitura retoma o programa Anjos da Vida nas escolas municipais, com aulas que incluem conscientização sobre drogas",
+              "url": "https://salto.sp.gov.br/o-anjos-da-vida-esta-de-volta/",
+              "data": "2025-03-05"
+            },
+            {
+              "titulo": "Programa Anjos da Vida certifica mais 220 crianças da Rede Municipal",
+              "url": "https://salto.sp.gov.br/programa-anjos-da-vida-certifica-mais-220-criancas-da-rede-municipal/",
+              "data": "2025-08-08"
+            }
+          ],
           "grupo": "Guarda Civil Municipal"
         },
         {
@@ -318,8 +380,19 @@
         {
           "numero": "4.3.1",
           "texto": "Ampliar a capacidade operacional da Coordenadoria de Defesa Civil;",
-          "status": "sem informação",
-          "provas": [],
+          "status": "em andamento",
+          "provas": [
+            {
+              "titulo": "Defesa Civil recebe do Governo do Estado tanque de combate a incêndio de 400 litros",
+              "url": "https://salto.sp.gov.br/defesa-civil-ganha-novo-equipamento-para-combate-a-incendio/",
+              "data": "2026-03-06"
+            },
+            {
+              "titulo": "Defesa Civil recebe caminhão-pipa de 12 mil litros disponibilizado pela Defesa Civil do Estado",
+              "url": "https://salto.sp.gov.br/defesa-civil-de-salto-recebe-novo-caminhao-pipa-com-capacidade-para-12-mil-litros/",
+              "data": "2026-10-19"
+            }
+          ],
           "grupo": "Coordenadoria de Defesa Civil"
         },
         {
@@ -393,8 +466,19 @@
         {
           "numero": "6.1",
           "texto": "Ampliar vagas para creches e escolas de educação infantil, aumentando o investimento em prédios já existentes e na construção de novos, visando minimizar a demanda reprimida e os processos judiciais, prevalecendo a qualidade de ensino do município;",
-          "status": "sem informação",
-          "provas": []
+          "status": "em andamento",
+          "provas": [
+            {
+              "titulo": "Edital da Concorrência Eletrônica nº 06/2025 para construção de creche no Jardim das Constelações",
+              "url": "https://salto.sp.gov.br/wp-content/uploads/2025/07/Concorrencia-Eletronica-na-06-2025-Creche-no-Jd.-das-Constelacoes.pdf",
+              "data": "2025-07-30"
+            },
+            {
+              "titulo": "Lançada a pedra fundamental da Creche Constelações, com conclusão prevista para maio de 2027",
+              "url": "https://salto.sp.gov.br/prefeitura-de-salto-realiza-lancamento-da-pedra-fundamental-de-mais-uma-unidade-de-creche/",
+              "data": "2026-03-30"
+            }
+          ]
         },
         {
           "numero": "6.2",
@@ -411,8 +495,19 @@
         {
           "numero": "6.4",
           "texto": "Ampliar as ofertas de ensino em tempo integral, ampliando o número de unidades, com o objetivo de desenvolver as habilidades e competências que fundamentam o processo de aprendizagem dos alunos;",
-          "status": "sem informação",
-          "provas": []
+          "status": "em andamento",
+          "provas": [
+            {
+              "titulo": "Edital da Concorrência Eletrônica nº 05/2025 para construção de escola em tempo integral no Jardim Barnabé",
+              "url": "https://salto.sp.gov.br/wp-content/uploads/2025/07/Concorrencia-Eletronica-na-05-2025-Escola-Barnabe.pdf",
+              "data": "2025-07-30"
+            },
+            {
+              "titulo": "Plano de Expansão da Educação de Tempo Integral da Rede Municipal de Ensino",
+              "url": "https://salto.sp.gov.br/wp-content/uploads/2026/09/PLANO-DE-EXPANSAO-DA-EDUCACAO-DE-TEMPO-INTEGRAL.pdf",
+              "data": "2026-02-23"
+            }
+          ]
         },
         {
           "numero": "6.5",
@@ -896,8 +991,14 @@
         {
           "numero": "13.8",
           "texto": "Duplicar a Estrada do Lajeado, no trecho correspondente ao Jd. Santo Antônio até a Rodovia Santos Dumont;",
-          "status": "sem informação",
-          "provas": []
+          "status": "em andamento",
+          "provas": [
+            {
+              "titulo": "Prefeitura de Salto inicia obras de duplicação da Avenida Lajeado",
+              "url": "https://salto.sp.gov.br/prefeitura-de-salto-inicia-obras-de-duplicacao-da-avenida-lajeado/",
+              "data": "2026-06-26"
+            }
+          ]
         },
         {
           "numero": "13.9",
@@ -960,20 +1061,48 @@
         {
           "numero": "15.1",
           "texto": "Aumentar a capacidade de tratamento do rio Burú;",
-          "status": "sem informação",
-          "provas": []
+          "status": "em andamento",
+          "provas": [
+            {
+              "titulo": "SAAE: financiamento de R$ 38 milhões para a nova ETA João Jabour é assinado com a Caixa",
+              "url": "https://saaesalto.sp.gov.br/2026/05/22/mais-agua-para-salto-verba-para-a-construcao-da-nova-eta-joao-jabour-e-aprovada/",
+              "data": "2026-05-22"
+            },
+            {
+              "titulo": "Câmara aprova PL 06/2026, que autoriza operação de crédito com a Caixa para a nova ETA Buru (Lei 4264/2026)",
+              "url": "https://www.camarasalto.sp.gov.br/pdf/tramitacao-votacao-dos-projetos/votacao-dos-projetos-2026.pdf",
+              "data": "2026-03-17"
+            }
+          ]
         },
         {
           "numero": "15.2",
           "texto": "Implementar a captação do Rio Jundiaí e a construção de Estação de Tratamento de Água junto ao rio.",
-          "status": "sem informação",
-          "provas": []
+          "status": "em andamento",
+          "provas": [
+            {
+              "titulo": "Edital da Concorrência Eletrônica nº 11/2026 – Obras da ETA Jundiaí, Fase 1 (150 L/s)",
+              "url": "https://salto.sp.gov.br/edital-pregao-eletronico-no-11-2026-obras-eta-jundiai-fase-01/",
+              "data": "2026-08-28"
+            }
+          ]
         },
         {
           "numero": "15.3",
           "texto": "Implementar as fases 2 e 3 do CCO (Centro de Controle Operacional), com a inserção de equipamentos necessários para o controle de vazão de saída e entrada em cada reservatório e módulos de operação à distância de cada bomba, ou booster do sistema.",
-          "status": "sem informação",
-          "provas": []
+          "status": "em andamento",
+          "provas": [
+            {
+              "titulo": "Edital da Concorrência Eletrônica nº 04/2025 – Macromedidores de vazão na rede de distribuição de água",
+              "url": "https://salto.sp.gov.br/concorrencia-eletronica-na-04-2025-macromedidores",
+              "data": "2025-06-05"
+            },
+            {
+              "titulo": "SAAE inicia instalação de 21 macromedidores em reservatórios",
+              "url": "https://saaesalto.sp.gov.br/2026/04/09/combate-a-perdas-saae-instala-mais-macromedidores-em-reservatorios-de-salto/",
+              "data": "2026-04-09"
+            }
+          ]
         },
         {
           "numero": "15.4",
@@ -984,8 +1113,19 @@
         {
           "numero": "15.5",
           "texto": "Implementar o programa de perda de água tratada, trocando as redes antigas de abastecimento por novas.",
-          "status": "sem informação",
-          "provas": []
+          "status": "em andamento",
+          "provas": [
+            {
+              "titulo": "SAAE inicia troca de 5,4 km da rede de água de ferro por PEAD no Santa Lúcia",
+              "url": "https://saaesalto.sp.gov.br/2026/10/19/saae-inicia-troca-de-5-quilometros-da-rede-de-agua-do-santa-lucia/",
+              "data": "2026-10-19"
+            },
+            {
+              "titulo": "Edital da Concorrência Eletrônica nº 03/2025 – Ações de combate a perdas com setorização do setor 15 (Hospital)",
+              "url": "https://salto.sp.gov.br/wp-content/uploads/2025/04/Concorrencia-Eletronica-na-03-2025-Setorizacao-rede-de-agua.pdf",
+              "data": "2025-04-24"
+            }
+          ]
         },
         {
           "numero": "15.6",
