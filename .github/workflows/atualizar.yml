@@ -1,4 +1,6 @@
 name: Atualizar Radar Saltense
+# Nome de cada execução: separa a atualização completa do "só publicar" (a verificação de "já rodou hoje" usa isso).
+run-name: ${{ inputs.so_publicar && 'Só publicar Radar Saltense' || 'Atualizar Radar Saltense' }}
 
 on:
   schedule:
@@ -22,8 +24,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Execução agendada só roda se ainda não houve uma agendada com sucesso hoje (em Brasília).
-  # Assim a reserva das 11:00 não repete o trabalho, e a das 03:00 atrasada não roda depois da reserva.
+  # Execução agendada do GitHub só roda se ainda não houve uma atualização completa com sucesso hoje (em Brasília),
+  # seja a do despertador da VPS (03:00, disparo manual), seja uma agendada. Assim nada roda duas vezes no dia.
   hoje:
     runs-on: ubuntu-latest
     outputs:
@@ -36,10 +38,10 @@ jobs:
           pular=false
           if [ "${{ github.event_name }}" = "schedule" ]; then
             hoje=$(TZ=America/Sao_Paulo date +%F)
-            feitas=$(gh run list --repo "${{ github.repository }}" --workflow atualizar.yml --event schedule --status success --limit 10 --json createdAt -q '.[].createdAt' \
+            feitas=$(gh run list --repo "${{ github.repository }}" --workflow atualizar.yml --status success --limit 20 --json createdAt,displayTitle -q '.[] | select(.displayTitle == "Atualizar Radar Saltense") | .createdAt' \
               | while read -r d; do TZ=America/Sao_Paulo date -d "$d" +%F; done | grep -c "^$hoje$" || true)
             [ "$feitas" -gt 0 ] && pular=true
-            echo "Hoje: $hoje. Execuções agendadas com sucesso hoje: $feitas. Pular: $pular."
+            echo "Hoje: $hoje. Atualizações completas com sucesso hoje: $feitas. Pular: $pular."
           fi
           echo "pular=$pular" >> "$GITHUB_OUTPUT"
   atualizar:
