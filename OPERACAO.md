@@ -55,13 +55,27 @@ Quando a barreira barra, o site fica na última versão boa.
 
 **Bloqueia** a publicação se:
 - houver número com formato de CPF em qualquer página ou arquivo de dados;
-- faltar uma página obrigatória, ou ela estiver vazia.
+- faltar uma página obrigatória, ou ela estiver vazia;
+- aparecer "{{" em qualquer página (placeholder do Entenda que não foi trocado).
 
 **Avisa** sem bloquear quando há:
 - link interno quebrado;
 - "undefined", "NaN" ou "null" aparecendo para o leitor;
 - valor negativo;
 - página sem fonte oficial.
+
+### Páginas geradas além dos dados
+
+- `404.html`: o GitHub Pages a mostra para qualquer endereço que não existe (antes respondia 503). Usa caminhos absolutos (`/estilo.css`), tem `noindex` e fica fora do sitemap.
+- `sobre.html`: quem faz, independência, como os dados são coletados e como pedir correção.
+- `entenda.html`, `entenda/<slug>.html` e `perguntas-frequentes.html`: saem de `data/referencia/entenda.json`. Os números de Salto entram por placeholders (`{{custoCamaraMes}}` etc.), calculados dos dados do dia. Placeholder desconhecido ou sem dado: a frase sai da página e a manutenção avisa ("Entenda: placeholder ..."). Sem o arquivo, ou com um texto fora do contrato, aquele texto não sai e a manutenção avisa; o resto do site é publicado.
+- `marca/og/vereador-<id>.png`: prévia de link (1200x630) de cada vereador, com foto e nome. Se falhar, a página usa a prévia geral e a manutenção avisa.
+- `favicon.ico`, gerado de `site/marca/icone-32.png`.
+- Semana sem nenhum dado (0 propostas, 0 votações, 0 respostas, 0 novidades): a página existe, com `noindex`, e fica fora do sitemap.
+
+### Data real de mudança (`data/processado/lastmod.json`)
+
+Para cada página do sitemap, o gerador guarda o hash do conteúdo principal (`<main>`, sem "Atualizado em", datas de coleta e os números do contador), a data da última mudança (`quando`) e a da primeira vez que a página saiu (`criado`). A data só muda quando o hash muda; semana fechada usa o domingo. O sitemap usa essa data no `lastmod`, e os textos do Entenda e as semanas a usam no `dateModified`. O arquivo vai no commit diário (`git add data`). Se ele sumir ou estragar, as datas recomeçam do dia e nada trava.
 
 ### Relatório `conferencia.md`
 
@@ -129,12 +143,13 @@ Os alertas são issues com o rótulo `sentinela` no repositório e chegam por e-
 - `data/referencia/obras-ligacoes.json`: ligações entre obras do PNCP e do Obrasgov e as promessas. Uma ligação "pendente" pode ter um campo "buscar".
 - `data/referencia/bairros-apelidos.json`: grafias juntadas e nomes fixos dos bairros com página.
 - `data/referencia/emendas.json`: gerado pela ferramenta de emendas.
+- `data/referencia/entenda.json`: textos do Entenda e perguntas frequentes. Os números de Salto só por placeholder (lista em `src/site/entenda.js`, `PLACEHOLDERS`); `npm run checar` confere o contrato (`check/entenda.mjs`).
 - `data/referencia/fontes-recursos.json`: tabela oficial de fontes de recursos e códigos de acompanhamento (CO) do Tesouro (Portaria STN 710/2021). Trocar quando sair a tabela de um ano novo (a de 2027 vem da Portaria STN/MF 1.986/2026).
 - `src/config.js`: vereadores esperados, medição de audiência (Cloudflare e GA4), grafias de nomes nas votações.
 
 ## 8. Checagens antes de qualquer mudança
 
-- `npm run checar` roda todas as checagens (node:assert): regras, folha, respostas, campanha, TCE, contratos, emendas, promessas, semana, medição, obras, vistoria, bairros, sentinela e origem do dinheiro. O robô também as roda antes de começar.
+- `npm run checar` roda todas as checagens (node:assert): regras, folha, respostas, campanha, TCE, contratos, emendas, promessas, semana, medição, obras, vistoria, bairros, sentinela, origem do dinheiro, Entenda (contrato do `entenda.json`) e SEO (lastmod, placeholders, trilha, títulos com " | Radar Saltense" e até 70 caracteres, 404). O robô também as roda antes de começar.
 - **Processo de mudança:** um revisor separado lê o código; a vistoria e a conferência no navegador cobrem rolagem lateral (320 a 1440 px), âncoras e CPF; e só depois o dono dá o ok para publicar.
 
 ## 9. Acessos e chaves

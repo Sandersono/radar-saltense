@@ -2,7 +2,7 @@ import { esc } from '../util/texto.js';
 import { amostraBoa } from '../regras/respostas.js';
 import { ORIGENS_CAMPANHA } from '../regras/campanha.js';
 import { GRUPOS_FOLHA } from '../regras/folha.js';
-import { layout, CAMARA_JSONLD, reais, reaisCentavos, numero, link, seloFonte, aviso, cartaoNumero, sumario } from './base.js';
+import { layout, CAMARA_JSONLD, ORGANIZACAO, ENDERECO, reais, reaisCentavos, numero, link, seloFonte, aviso, cartaoNumero, sumario } from './base.js';
 import { barras, NOMES_MES } from './impostometro.js';
 import { secaoEmendas, total2026 } from './emendas.js';
 
@@ -117,17 +117,18 @@ ${secaoCampanha(d)}`;
 ${sumario(secoes, [['custo', 'Custo'], ['respostas', 'Respostas'], ['emendas', 'Emendas'], ['campanha', 'Campanha']])}
 <section class="secao">
 <div class="grade-numeros">
-${cartaoNumero({ valor: String(d.vereadores.length), rotulo: 'Os vereadores', href: 'index.html#vereadores' })}
+${cartaoNumero({ valor: String(d.vereadores.length), rotulo: 'Os vereadores', href: './#vereadores' })}
 ${cartaoNumero({ valor: numero(d.votacoes.length), rotulo: 'Votações', href: 'votacoes.html' })}
 ${total2026(d) ? cartaoNumero({ valor: reaisCentavos(total2026(d)), rotulo: 'em emendas dos vereadores para 2026 (planejado)', href: '#emendas' }) : ''}
 </div>
 </section>
 ${secoes}`;
   return layout({
-    titulo: 'A Câmara de Salto: custo, emendas e requerimentos',
+    titulo: 'Câmara de Salto/SP: custo, emendas e requerimentos',
+    mostrarAtualizado: true,
     descricao: 'Quanto custa a Câmara de Salto/SP, salários e folha, requerimentos respondidos pela Prefeitura, emendas dos vereadores e campanhas de 2024.',
     caminho: 'camara.html',
-    jsonld: { '@context': 'https://schema.org', ...CAMARA_JSONLD, areaServed: { '@type': 'City', name: 'Salto (SP)' } },
+    jsonld: { '@context': 'https://schema.org', '@type': 'WebPage', name: 'A Câmara de Salto', url: `${ENDERECO}camara.html`, inLanguage: 'pt-BR', about: { ...CAMARA_JSONLD, areaServed: { '@type': 'City', name: 'Salto (SP)' } }, publisher: ORGANIZACAO },
     corpo,
     atualizadoEm: d.meta.atualizadoEm,
   });

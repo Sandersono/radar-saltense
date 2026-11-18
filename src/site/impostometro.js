@@ -81,5 +81,5 @@ ${d.origem ? '<p><a class="botao" href="origem.html">De onde vem o dinheiro (por
 <li>Grupos: impostos da cidade (códigos 111 e 112), repasses do Estado (172 e 242), repasses da União (171 e 241), FUNDEB (175), empréstimos (21), água e esgoto (tudo o que entra no SAAE) e outras receitas (o resto).</li>
 </ul>
 </section>`;
-  return layout({ titulo: 'Impostômetro de Salto: Radar Saltense', descricao: 'Quanto Salto/SP arrecada de impostos no ano, mês a mês, de onde vem o dinheiro e quanto dá por morador. Dados do TCE-SP e do Tesouro Nacional.', caminho: 'impostometro.html', corpo, atualizadoEm: d.meta.atualizadoEm });
+  return layout({ titulo: 'Impostômetro de Salto/SP', trilha: [{ nome: 'Impostômetro', caminho: 'impostometro.html' }], mostrarAtualizado: true, descricao: 'Quanto Salto/SP arrecada de impostos no ano, mês a mês, de onde vem o dinheiro e quanto dá por morador. Dados do TCE-SP e do Tesouro Nacional.', caminho: 'impostometro.html', corpo, atualizadoEm: d.meta.atualizadoEm });
 }

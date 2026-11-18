@@ -1,5 +1,5 @@
 import { esc } from '../util/texto.js';
-import { layout, dataBR, numero, seloFonte, aviso, ENDERECO } from './base.js';
+import { layout, dataBR, numero, seloFonte, aviso, ENDERECO, ORGANIZACAO, isoSP } from './base.js';
 import { URL_PROPOSITURAS } from './camara.js';
 import { hojeSP, resumoSemana, textoWhatsApp, tituloSemana, segundaDaSemana, domingoDe } from '../regras/semana.js';
 
@@ -37,8 +37,13 @@ export function paginaDaNovidade(texto) {
   return null;
 }
 
+// Semana sem nenhum dado: fica fora do índice do Google e do sitemap.
+export const semanaVazia = (r) => !r.proposituras.total && !r.votacoes.length && !r.respondidos.total && !r.novidades.length;
+
 // Seções de um resumo (últimos 7 dias ou semana de calendário). prefixo: '' na raiz, '../' em semana/.
-function secoesSemana(r, d, prefixo) {
+// bairros: Map(nome visto nos dados -> slug) dos bairros com página.
+function secoesSemana(r, d, prefixo, bairros = null) {
+  const bairro = (nome) => (bairros && bairros.has(nome) ? `<a href="${prefixo}bairro/${esc(bairros.get(nome))}.html">${esc(nome)}</a>` : esc(nome));
   const atuais = new Set((d.vereadores ?? []).map((v) => v.id));
   const verLista = (xs) => xs.map((x) => `${atuais.has(x.id) ? `<a href="${prefixo}vereador/${esc(x.id)}.html">${esc(x.nome)}</a>` : esc(x.nome)}: ${numero(x.total)}`);
   const s = [];
@@ -47,7 +52,7 @@ function secoesSemana(r, d, prefixo) {
 <h2>Propostas novas</h2>
 <p><strong>${numero(r.proposituras.total)}</strong> ${r.proposituras.total === 1 ? 'proposta nova' : 'propostas novas'} na Câmara.</p>
 ${lista(verLista(r.proposituras.porVereador))}
-${r.proposituras.bairros.length ? `<p>Bairros mais citados: ${r.proposituras.bairros.map((b) => `${esc(b.nome)} (${numero(b.total)})`).join(', ')}.</p>` : ''}
+${r.proposituras.bairros.length ? `<p>Bairros mais citados: ${r.proposituras.bairros.map((b) => `${bairro(b.nome)} (${numero(b.total)})`).join(', ')}.</p>` : ''}
 <p>${seloFonte(URL_PROPOSITURAS, 'portal de proposituras da Câmara')}</p>
 </section>`);
   }
@@ -95,7 +100,7 @@ ${blocos || '<p>Ainda não há semanas anteriores.</p>'}
 
 // url: endereço do site com barra final; o link do WhatsApp aponta para a página da semana.
 // semanas: arquivo semanal ({ 'AAAA-MM-DD': resumo }), para o link da semana corrente e a lista das anteriores.
-export function paginaSemana(d, url = ENDERECO, semanas = {}) {
+export function paginaSemana(d, url = ENDERECO, semanas = {}, bairros = null) {
   const r = semanaDe(d);
   const atual = segundaDaSemana(r.fim);
   const temArquivo = Object.keys(semanas).length > 0;
@@ -106,12 +111,13 @@ export function paginaSemana(d, url = ENDERECO, semanas = {}) {
   const corpo = `<h1>Resumo da semana</h1>
 <p>${esc(tituloSemana(r).replace('Resumo da semana de', 'De'))}. Só entra aqui o que mudou.</p>
 ${daSemana}
-${secoesSemana(r, d, '')}
+${secoesSemana(r, d, '', bairros)}
 <p><a class="botao" href="${esc(zap)}">Compartilhar no WhatsApp</a></p>
 <p class="nota">O resumo é refeito todo dia com os dados oficiais da Câmara, da Prefeitura e do TCE-SP, sempre dos últimos 7 dias. <a href="feed.xml">Assinar por RSS</a> (um item por semana).</p>
 ${temArquivo ? secaoAnteriores(semanas, atual) : ''}`;
   return layout({
-    titulo: 'Resumo da semana em Salto: Radar Saltense',
+    titulo: 'Resumo da semana em Salto/SP',
+    mostrarAtualizado: true,
     descricao: 'O que mudou em Salto/SP nos últimos 7 dias: propostas novas na Câmara, votações, requerimentos respondidos e dados oficiais novos.',
     caminho: 'semana.html',
     corpo,
@@ -124,12 +130,16 @@ export const descricaoSemana = (r) =>
 
 // Página fixa de uma semana de calendário: semana/AAAA-MM-DD.html (a segunda-feira).
 // vizinhas: { anterior, proxima } com as segundas das semanas ao lado que têm página.
-export function paginaSemanaArquivo(r, d, vizinhas = {}, url = ENDERECO) {
+// opcoes: { bairros: Map(nome -> slug), modificado: ISO da última mudança do conteúdo (lastmod) }.
+export function paginaSemanaArquivo(r, d, vizinhas = {}, url = ENDERECO, opcoes = {}) {
   const caminho = `semana/${r.segunda}.html`;
   const permanente = `${url}${caminho}`;
   const h1 = `Semana de ${periodoExtenso(r.segunda, r.domingo)} em Salto`;
   const descricao = descricaoSemana(r);
   const zap = `https://wa.me/?text=${encodeURIComponent(textoWhatsApp(r, permanente))}`;
+  // Datas completas com o fuso de São Paulo; semana fechada termina no domingo.
+  const publicado = `${r.segunda}T00:00:00-03:00`;
+  const modificado = r.completa ? `${r.domingo}T23:59:59-03:00` : (opcoes.modificado || isoSP(d.meta.atualizadoEm));
   const nav = [
     vizinhas.anterior ? `<a class="botao-secundario" href="${esc(vizinhas.anterior)}.html" rel="prev"><span aria-hidden="true">←</span> Semana anterior</a>` : '',
     vizinhas.proxima ? `<a class="botao-secundario" href="${esc(vizinhas.proxima)}.html" rel="next">Próxima semana <span aria-hidden="true">→</span></a>` : '',
@@ -138,14 +148,17 @@ export function paginaSemanaArquivo(r, d, vizinhas = {}, url = ENDERECO) {
   const corpo = `<h1>${esc(h1)}</h1>
 <p>De segunda a domingo, o que mudou nos dados oficiais da Câmara, da Prefeitura e do TCE-SP.</p>
 ${r.completa ? '' : aviso('Semana em andamento: atualizada todo dia até domingo.')}
-${secoesSemana(r, d, '../')}
+${secoesSemana(r, d, '../', opcoes.bairros)}
 <p><a class="botao" href="${esc(zap)}">Compartilhar no WhatsApp</a></p>
 <nav class="semana-nav" aria-label="Outras semanas">
 ${nav}
 </nav>
 <p class="nota">Cada número vem dos dados oficiais, com o link da fonte em cada bloco. <a href="../fontes.html">De onde vêm os números</a>. <a href="../feed.xml">Assinar por RSS</a> (um item por semana).</p>`;
   return layout({
-    titulo: `Semana de ${periodoCurto(r.segunda, r.domingo)} em Salto: Radar Saltense`,
+    titulo: `Semana de ${periodoCurto(r.segunda, r.domingo)} em Salto`,
+    trilha: [{ nome: 'Resumo da semana', caminho: 'semana.html' }, { nome: `Semana de ${periodoCurto(r.segunda, r.domingo)}`, caminho }],
+    robots: semanaVazia(r) ? 'noindex,follow' : null,
+    artigo: { publicado, modificado, secao: 'Resumo da semana' },
     descricao,
     caminho,
     jsonld: {
@@ -155,11 +168,12 @@ ${nav}
       description: descricao,
       url: permanente,
       mainEntityOfPage: permanente,
-      datePublished: r.segunda,
-      dateModified: r.completa ? r.domingo : d.meta.atualizadoEm,
+      datePublished: publicado,
+      dateModified: modificado,
       inLanguage: 'pt-BR',
       about: { '@type': 'City', name: 'Salto (SP)' },
-      publisher: { '@type': 'Organization', name: 'Radar Saltense', url: ENDERECO },
+      author: ORGANIZACAO,
+      publisher: ORGANIZACAO,
     },
     corpo,
     prefixo: '../',

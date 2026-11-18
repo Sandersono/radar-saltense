@@ -16,10 +16,12 @@ export const barraCookies = (prefixo) => (MEDICAO.ga4
   : '');
 
 // "index.html" vira a raiz do site; o resto, endereço + caminho.
-export function sitemapXml(paginas, endereco, data) {
+// data: lastmod padrão; datas: { caminho: 'AAAA-MM-DD' }, a data real de mudança de cada página (lastmod.json).
+export function sitemapXml(paginas, endereco, data, datas = {}) {
   const urls = [...new Set(paginas)].map((p) => {
     const loc = p === 'index.html' ? endereco : `${endereco}${p}`;
-    return `<url><loc>${esc(loc)}</loc>${data ? `<lastmod>${esc(data)}</lastmod>` : ''}</url>`;
+    const dia = datas[p] || data;
+    return `<url><loc>${esc(loc)}</loc>${dia ? `<lastmod>${esc(dia)}</lastmod>` : ''}</url>`;
   });
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`;
 }

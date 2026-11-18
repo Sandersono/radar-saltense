@@ -10,14 +10,18 @@ import { paginaOrigem } from './site/origem.js';
 import { paginaCamara } from './site/camara.js';
 import { paginaPrefeitura } from './site/prefeitura.js';
 import { paginaFontes } from './site/fontes.js';
-import { paginaSemana, paginaSemanaArquivo } from './site/semana.js';
+import { paginaSemana, paginaSemanaArquivo, semanaVazia } from './site/semana.js';
 import { atualizarSemanas, hojeSP } from './regras/semana.js';
 import { paginaPromessas } from './site/promessas.js';
 import { paginaObras } from './site/obras.js';
 import { feedRss } from './site/feed.js';
 import { paginaBairro, paginaBairros } from './site/bairros.js';
+import { paginaSobre, pagina404 } from './site/sobre.js';
+import { paginaEntenda, paginaArtigo, paginaFaq, validarEntenda, errosArtigo, errosFaq, destinoValido, valoresEntenda } from './site/entenda.js';
+import { gerarCartaoVereador, icoDePng } from './site/og.js';
 import { montarBairros, bairrosComPagina, validarApelidos, validarNomes } from './regras/bairros.js';
-import { ENDERECO } from './site/base.js';
+import { hashConteudo, registrarLastmod, diaDe, serializarLastmod } from './regras/lastmod.js';
+import { ENDERECO, isoSP, definirPaginasAusentes } from './site/base.js';
 import { sitemapXml, robotsTxt } from './site/medicao.js';
 
 // Foto quadrada pequena (240 px, WebP), sem cortar a cabeça.
@@ -38,31 +42,75 @@ const FONTES = [
   ['node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2', 'inter-600.woff2'],
 ];
 
+export const ARQUIVO_ENTENDA = 'data/referencia/entenda.json';
+export const ARQUIVO_LASTMOD = 'data/processado/lastmod.json';
+
+async function lerJson(caminho) {
+  try { return JSON.parse(await readFile(caminho, 'utf8')); } catch (e) { if (e.code === 'ENOENT') return null; throw e; }
+}
+
 // semanas: arquivo semanal (data/processado/semanas.json); sem ele, é montado agora com os dados atuais.
-export async function gerarSite(d, destino, semanasSalvas = null) {
+// opcoes.lastmod: onde ler e gravar a data real de mudança de cada página (null = não grava).
+export async function gerarSite(d, destino, semanasSalvas = null, { lastmod: arquivoLastmod = ARQUIVO_LASTMOD, entenda: arquivoEntenda = ARQUIVO_ENTENDA } = {}) {
   const manutencao = []; // avisos de manutenção do próprio gerador (devolvidos a quem chamou)
+  const avisar = (texto) => { console.warn(texto); manutencao.push(texto); };
+  // Peça que falha nunca derruba o robô: ela sai desta vez e vira aviso de manutenção.
+  const tentar = async (nome, f) => { try { return await f(); } catch (e) { avisar(`${nome} não gerado: ${e.message}`); return null; } };
   let semanas = semanasSalvas && Object.keys(semanasSalvas).length ? semanasSalvas : null;
   if (!semanas) {
     // Erro no arquivo semanal nunca impede publicar: o site sai sem as páginas de semana desta vez.
     try { semanas = atualizarSemanas({}, d, hojeSP(d.meta.atualizadoEm), d.meta.novidadesRecentes); }
     catch (e) { console.warn(`Arquivo semanal não montado: ${e.message}`); semanas = {}; }
   }
-  for (const pasta of ['vereador', 'semana', 'bairro', 'dados', 'fontes', 'fotos', 'marca']) await mkdir(`${destino}/${pasta}`, { recursive: true });
-  const paginas = []; // vão para o sitemap.xml
-  const pagina = async (caminho, html) => { await writeFile(`${destino}/${caminho}`, html); paginas.push(caminho); };
-  await pagina('index.html', paginaInicial(d));
-  for (const v of d.vereadores) await pagina(`vereador/${v.id}.html`, paginaVereador(v, d));
-  await pagina('votacoes.html', paginaVotacoes(d));
-  await pagina('camara.html', paginaCamara(d));
-  await pagina('prefeitura.html', paginaPrefeitura(d));
-  await pagina('obras.html', paginaObras(d));
-  await pagina('fontes.html', paginaFontes(d));
-  await pagina('semana.html', paginaSemana(d, ENDERECO, semanas));
-  const segundas = Object.keys(semanas).sort();
-  for (const [i, s] of segundas.entries()) {
-    await pagina(`semana/${s}.html`, paginaSemanaArquivo(semanas[s], d, { anterior: segundas[i - 1], proxima: segundas[i + 1] }, ENDERECO));
+  for (const pasta of ['vereador', 'semana', 'bairro', 'dados', 'fontes', 'fotos', 'marca/og', 'entenda']) await mkdir(`${destino}/${pasta}`, { recursive: true });
+
+  // Entenda e perguntas frequentes (data/referencia/entenda.json): sem o arquivo, as páginas ficam de fora.
+  let entenda = null;
+  try { entenda = await lerJson(arquivoEntenda); } catch (e) { avisar(`Entenda: ${arquivoEntenda} ilegível (${e.message}); páginas Entenda e Perguntas frequentes não geradas.`); }
+  if (!entenda && !manutencao.some((m) => m.startsWith('Entenda'))) avisar(`Entenda: ${arquivoEntenda} não existe; páginas Entenda e Perguntas frequentes não geradas.`);
+  let artigos = [];
+  let faq = [];
+  if (entenda) {
+    for (const erro of validarEntenda(entenda)) avisar(`Entenda: ${erro}`);
+    const slugs = new Set((entenda.artigos || []).map((a) => a && a.slug));
+    const ok = destinoValido(slugs);
+    const vistos = new Set();
+    artigos = (Array.isArray(entenda.artigos) ? entenda.artigos : []).filter((a, i) => {
+      const bom = errosArtigo(a, i, ok).length === 0 && !vistos.has(a.slug);
+      if (bom) vistos.add(a.slug);
+      return bom;
+    });
+    faq = (Array.isArray(entenda.faq) ? entenda.faq : []).filter((q, i) => errosFaq(q, i, ok).length === 0);
   }
-  // Páginas por bairro (spec 2026-11-17): montadas aqui, a partir das propostas; nada novo em data/processado.
+
+  // Páginas que não saem nesta rodada somem do rodapé e das listas (links nunca quebram).
+  const ausentes = [
+    !d.promessas && 'promessas.html', !d.receitas && 'impostometro.html', !d.origem && 'origem.html', !d.gastos && 'gastos.html',
+    !artigos.length && 'entenda.html', !faq.length && 'perguntas-frequentes.html',
+  ].filter(Boolean);
+  const existentes = new Set(artigos.map((a) => `entenda/${a.slug}.html`));
+  definirPaginasAusentes(ausentes);
+  const existe = (c) => { const p = c.split('#')[0]; return p.startsWith('entenda/') ? existentes.has(p) : !ausentes.includes(p); };
+
+  // lastmod: a data só muda quando o conteúdo principal muda.
+  let lastmodAnterior = {};
+  try { lastmodAnterior = (arquivoLastmod && await lerJson(arquivoLastmod)) || {}; } catch (e) { avisar(`lastmod.json ilegível (${e.message}); datas recomeçam hoje.`); }
+  const agora = isoSP(d.meta.atualizadoEm);
+  const lastmod = {};
+  const paginas = []; // vão para o sitemap.xml
+  // html: texto ou função (datas) => texto, para páginas que mostram a própria data de mudança (dateModified).
+  // sitemap: false tira a página do sitemap (404, semana vazia); fixa: data imposta (semana fechada).
+  const pagina = async (caminho, html, { sitemap = true, fixa = null } = {}) => {
+    let texto = typeof html === 'function' ? html(null) : html;
+    if (sitemap) {
+      lastmod[caminho] = registrarLastmod(lastmodAnterior, caminho, hashConteudo(texto), agora, fixa);
+      if (typeof html === 'function') texto = html(lastmod[caminho]);
+      paginas.push(caminho);
+    }
+    await writeFile(`${destino}/${caminho}`, texto);
+  };
+
+  // Bairros (spec 2026-11-17): montados aqui, a partir das propostas; vêm antes porque vereador e semana linkam para eles.
   let ref = {};
   try { ref = JSON.parse(await readFile('data/referencia/bairros-apelidos.json', 'utf8')); }
   catch (e) { console.warn(`Lista de apelidos de bairro não lida: ${e.message}`); }
@@ -76,9 +124,35 @@ export async function gerarSite(d, destino, semanasSalvas = null) {
   // Bairro novo que passou do corte: a página sai com a grafia mais comum até o nome ser fixado na lista.
   for (const b of bairros) {
     if (b.fixo) continue;
-    const texto = `Bairro novo com página e sem nome fixo em data/referencia/bairros-apelidos.json (nomes): "${b.chave}" (${b.nome}).`;
-    console.warn(texto);
-    manutencao.push(texto);
+    avisar(`Bairro novo com página e sem nome fixo em data/referencia/bairros-apelidos.json (nomes): "${b.chave}" (${b.nome}).`);
+  }
+  // Nome visto nos dados (qualquer grafia) -> endereço da página do bairro.
+  const linksBairros = new Map(bairros.flatMap((b) => [b.nome, ...b.grafias].map((n) => [n, b.slug])));
+
+  // Prévia (og:image) por vereador; sem ela, a página usa a prévia geral.
+  const cartoes = new Set();
+  for (const v of d.vereadores) {
+    const ok = await tentar(`Prévia de ${v.id}`, async () => {
+      await gerarCartaoVereador(v, v.fotoLocal ? `data/bruto/${v.fotoLocal}` : null, `${destino}/marca/og/vereador-${v.id}.png`);
+      return true;
+    });
+    if (ok) cartoes.add(v.id);
+  }
+
+  await pagina('index.html', paginaInicial(d));
+  for (const v of d.vereadores) await pagina(`vereador/${v.id}.html`, paginaVereador(v, d, { bairros, cartao: cartoes.has(v.id) }));
+  await pagina('votacoes.html', paginaVotacoes(d));
+  await pagina('camara.html', paginaCamara(d));
+  await pagina('prefeitura.html', paginaPrefeitura(d));
+  await pagina('obras.html', paginaObras(d));
+  await pagina('fontes.html', paginaFontes(d));
+  await pagina('semana.html', paginaSemana(d, ENDERECO, semanas, linksBairros));
+  const segundas = Object.keys(semanas).sort();
+  for (const [i, s] of segundas.entries()) {
+    const r = semanas[s];
+    // Semana sem nenhum dado: noindex e fora do sitemap. Semana fechada: a data é o domingo.
+    await pagina(`semana/${s}.html`, (datas) => paginaSemanaArquivo(r, d, { anterior: segundas[i - 1], proxima: segundas[i + 1] }, ENDERECO, { bairros: linksBairros, modificado: datas && datas.quando }),
+      { sitemap: !semanaVazia(r), fixa: r.completa ? `${r.domingo}T23:59:59-03:00` : null });
   }
   await pagina('bairros.html', paginaBairros(bairros, d));
   for (const b of bairros) await pagina(`bairro/${b.slug}.html`, paginaBairro(b, d, todosBairros));
@@ -90,6 +164,21 @@ export async function gerarSite(d, destino, semanasSalvas = null) {
     await pagina('gastos.html', paginaGastos(d));
     await writeFile(`${destino}/dados/empresas.json`, JSON.stringify(d.gastos.empresas.map((e) => [e.cnpj, e.nome, e.porMes, e.porOrgao])));
   }
+  await tentar('Página Sobre', () => pagina('sobre.html', paginaSobre(d)));
+  await tentar('Página 404', () => pagina('404.html', pagina404(d), { sitemap: false }));
+
+  // Entenda e FAQ. Placeholder sem dado: a frase sai e o aviso vai para a manutenção.
+  if (artigos.length) {
+    const valores = valoresEntenda(d);
+    const faltas = new Set();
+    await tentar('Entenda', async () => {
+      for (const a of artigos) await pagina(`entenda/${a.slug}.html`, (datas) => paginaArtigo(a, artigos, d, valores, { datas, faltas, existe }));
+      await pagina('entenda.html', paginaEntenda(artigos, d, valores, { faltas, existe }));
+      if (faq.length) await pagina('perguntas-frequentes.html', paginaFaq(faq, artigos, d, valores, { faltas, existe }));
+    });
+    for (const k of faltas) avisar(`Entenda: placeholder {{${k}}} sem dado ou desconhecido; a frase foi omitida.`);
+  }
+
   const busca = {
     p: d.proposituras.map((p) => [p.id, p.data, p.grupo, p.autoresTexto, p.ementa, `${p.categoria} ${p.numero}`]),
     l: d.locais.map((l) => [l.nome, l.idx]),
@@ -100,8 +189,11 @@ export async function gerarSite(d, destino, semanasSalvas = null) {
   for (const [origem, nome] of FONTES) await copyFile(origem, `${destino}/fontes/${nome}`);
   for (const v of d.vereadores) if (v.fotoLocal) await recortarFoto(`data/bruto/${v.fotoLocal}`, `${destino}/${fotoSite(v.fotoLocal)}`);
   for (const nome of await readdir('site/marca')) await copyFile(`site/marca/${nome}`, `${destino}/marca/${nome}`);
-  await writeFile(`${destino}/sitemap.xml`, sitemapXml(paginas, ENDERECO, d.meta.atualizadoEm ? new Date(d.meta.atualizadoEm).toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' }) : ''));
+  await tentar('favicon.ico', async () => writeFile(`${destino}/favicon.ico`, icoDePng(await sharp('site/marca/icone-32.png').resize(32, 32).png().toBuffer(), 32)));
+  const dataPadrao = d.meta.atualizadoEm ? hojeSP(d.meta.atualizadoEm) : '';
+  await writeFile(`${destino}/sitemap.xml`, sitemapXml(paginas, ENDERECO, dataPadrao, Object.fromEntries(Object.entries(lastmod).map(([c, x]) => [c, diaDe(x.quando)]))));
   await writeFile(`${destino}/robots.txt`, robotsTxt(ENDERECO));
   await writeFile(`${destino}/.nojekyll`, '');
+  if (arquivoLastmod) await tentar('lastmod.json', () => writeFile(arquivoLastmod, serializarLastmod(lastmod)));
   return { manutencao };
 }

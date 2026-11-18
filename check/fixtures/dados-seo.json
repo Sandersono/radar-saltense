@@ -1,0 +1,185 @@
+{
+ "meta": {
+  "atualizadoEm": "2026-11-18T00:43:00.037Z"
+ },
+ "vereadores": [
+  {
+   "id": "v1",
+   "nome": "Pessoa 1"
+  },
+  {
+   "id": "v2",
+   "nome": "Pessoa 2"
+  },
+  {
+   "id": "v3",
+   "nome": "Pessoa 3"
+  },
+  {
+   "id": "v4",
+   "nome": "Pessoa 4"
+  },
+  {
+   "id": "v5",
+   "nome": "Pessoa 5"
+  },
+  {
+   "id": "v6",
+   "nome": "Pessoa 6"
+  },
+  {
+   "id": "v7",
+   "nome": "Pessoa 7"
+  },
+  {
+   "id": "v8",
+   "nome": "Pessoa 8"
+  },
+  {
+   "id": "v9",
+   "nome": "Pessoa 9"
+  },
+  {
+   "id": "v10",
+   "nome": "Pessoa 10"
+  },
+  {
+   "id": "v11",
+   "nome": "Pessoa 11"
+  }
+ ],
+ "camara": {
+  "folha": {
+   "ultimoMes": "2026-10",
+   "meses": {
+    "2026-10": {
+     "grupos": {
+      "vereadores": {
+       "total": 112500,
+       "pessoas": 11
+      },
+      "assessores": {
+       "total": 67512.82,
+       "pessoas": 11
+      },
+      "servidores": {
+       "total": 285542.8,
+       "pessoas": 22
+      }
+     },
+     "porVereador": {
+      "v1": 10000,
+      "v2": 10000,
+      "v3": 10000,
+      "v4": 12500,
+      "v5": 10000,
+      "v6": 10000,
+      "v7": 10000,
+      "v8": 10000,
+      "v9": 10000,
+      "v10": 10000,
+      "v11": 10000
+     }
+    }
+   }
+  }
+ },
+ "receitas": {
+  "anoAtual": 2026,
+  "oficialAno": 192825486.42999998,
+  "temOficialAno": true,
+  "ultimoMesOficial": "2026-09"
+ },
+ "gastos": {
+  "anos": {
+   "2026": {
+    "total": 599452214.37,
+    "ultimoMes": "2026-09"
+   }
+  }
+ },
+ "origem": {
+  "anos": {
+   "2026": {
+    "tipo": "MSCC",
+    "mes": 9,
+    "livre": 296957847.88,
+    "carimbado": 415074271.8,
+    "receita": {
+     "total": 712032119.68
+    }
+   }
+  }
+ },
+ "emendas": {
+  "2026": {
+   "atualizadoEm": "2026-08-31",
+   "resumo": {
+    "total": 6134372.6,
+    "porVereador": {
+     "v1": {
+      "total": 556306.6
+     },
+     "v2": {
+      "total": 556306.6
+     },
+     "v3": {
+      "total": 556306.6
+     },
+     "v4": {
+      "total": 556306.6
+     },
+     "v5": {
+      "total": 556306.6
+     },
+     "v6": {
+      "total": 556306.6
+     },
+     "v7": {
+      "total": 556306.6
+     },
+     "v8": {
+      "total": 556306.6
+     },
+     "v9": {
+      "total": 556306.6
+     },
+     "v10": {
+      "total": 556306.6
+     },
+     "v11": {
+      "total": 571306.6
+     }
+    }
+   }
+  }
+ },
+ "obras": {
+  "resumo": {
+   "porGrupo": {
+    "execucao": 21
+   },
+   "paralisadas": 3
+  }
+ },
+ "prefeitura": {
+  "iegm": {
+   "anos": {
+    "2024": {
+     "Salto": {
+      "iegm": "C"
+     }
+    }
+   }
+  }
+ },
+ "promessas": {
+  "resumo": {
+   "porStatus": {
+    "sem informação": 144,
+    "em andamento": 18,
+    "cumprida": 0
+   }
+  }
+ }
+}

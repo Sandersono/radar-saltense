@@ -143,7 +143,7 @@ export function paginaObras(d) {
     const corpo = `<h1>Obras em Salto</h1>
 <p>${esc(ABERTURA_OBRAS)}</p>
 ${aviso('Os dados de obras ainda não foram coletados.')}`;
-    return layout({ titulo: 'Obras em Salto: Radar Saltense', descricao: 'Licitações, contratos e obras de Salto/SP no PNCP e no Obrasgov.br, e a situação que o TCE-SP dá às obras declaradas: no prazo, atrasada ou paralisada.', caminho: 'obras.html', corpo, atualizadoEm: d.meta.atualizadoEm });
+    return layout({ titulo: 'Obras em Salto/SP', trilha: [{ nome: 'Prefeitura', caminho: 'prefeitura.html' }, { nome: 'Obras', caminho: 'obras.html' }], mostrarAtualizado: true, descricao: 'Licitações, contratos e obras de Salto/SP no PNCP e no Obrasgov.br, e a situação que o TCE-SP dá às obras declaradas: no prazo, atrasada ou paralisada.', caminho: 'obras.html', corpo, atualizadoEm: d.meta.atualizadoEm });
   }
   const r = o.resumo;
   const secoes = GRUPOS.map(([g, titulo, ancora, explica]) => {
@@ -177,5 +177,5 @@ ${cartaoNumero({ valor: numero(r.paralisadas), rotulo: `${r.paralisadas === 1 ? 
 </section>
 ${sumario(tudo, [...GRUPOS.map(([, titulo, ancora]) => [ancora, titulo.replace(/,.*$/, '')]), ['fontes-obras', 'Fontes']])}
 ${tudo}`;
-  return layout({ titulo: 'Obras em Salto: Radar Saltense', descricao: 'Licitações, contratos e obras de Salto/SP no PNCP e no Obrasgov.br, e a situação que o TCE-SP dá às obras declaradas: no prazo, atrasada ou paralisada.', caminho: 'obras.html', corpo, atualizadoEm: d.meta.atualizadoEm });
+  return layout({ titulo: 'Obras em Salto/SP', trilha: [{ nome: 'Prefeitura', caminho: 'prefeitura.html' }, { nome: 'Obras', caminho: 'obras.html' }], mostrarAtualizado: true, descricao: 'Licitações, contratos e obras de Salto/SP no PNCP e no Obrasgov.br, e a situação que o TCE-SP dá às obras declaradas: no prazo, atrasada ou paralisada.', caminho: 'obras.html', corpo, atualizadoEm: d.meta.atualizadoEm });
 }

@@ -92,5 +92,5 @@ ${SALARIO ? `<section class="secao cartao"><h2>Salário</h2><p>O contador multip
 <h2>Achou um erro?</h2>
 <p>Me chama no Instagram <a href="https://instagram.com/${AUTOR.instagram}">@${AUTOR.instagram}</a>. Se a Câmara corrigir o dado na fonte, o site se corrige sozinho na próxima atualização.</p>
 </section>`;
-  return layout({ titulo: 'De onde vêm os números do Radar Saltense', descricao: 'As fontes oficiais e as regras usadas para contar propostas, presença, votações, impostos e gastos de Salto/SP, para você conferir cada número.', caminho: 'fontes.html', corpo, atualizadoEm: d.meta.atualizadoEm });
+  return layout({ titulo: 'Fontes oficiais dos números de Salto/SP', descricao: 'As fontes oficiais e as regras usadas para contar propostas, presença, votações, impostos e gastos de Salto/SP, para você conferir cada número.', caminho: 'fontes.html', corpo, atualizadoEm: d.meta.atualizadoEm });
 }

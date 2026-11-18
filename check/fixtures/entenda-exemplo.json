@@ -1,0 +1,39 @@
+{
+  "artigos": [
+    {
+      "slug": "o-que-faz-um-vereador",
+      "titulo": "O que faz um vereador em Salto",
+      "descricao": "O vereador vota leis, fiscaliza a Prefeitura e leva pedidos dos moradores. Veja o que diz a Constituição.",
+      "resumo": "O vereador vota as leis da cidade e fiscaliza a Prefeitura. A Câmara de Salto tem {{numeroVereadores}} vereadores.",
+      "secoes": [
+        { "titulo": "Fazer leis", "paragrafos": ["Cabe ao município legislar sobre assuntos de interesse local (art. 30, I).", "A folha da Câmara foi de {{custoCamaraMes}}."] }
+      ],
+      "perguntas": [
+        { "pergunta": "Vereador pode fazer obra?", "resposta": "Não. Quem executa obras é a Prefeitura." }
+      ],
+      "fontes": [
+        { "titulo": "Constituição Federal, art. 29 e 30", "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm" }
+      ],
+      "relacionados": ["camara.html", "index.html#vereadores", "entenda/de-onde-vem-o-dinheiro.html"]
+    },
+    {
+      "slug": "de-onde-vem-o-dinheiro",
+      "titulo": "De onde vem o dinheiro da Prefeitura de Salto",
+      "descricao": "Impostos da cidade, repasses do Estado e da União e o Fundeb: de onde vem o dinheiro que a Prefeitura de Salto usa.",
+      "resumo": "Em impostos e taxas, a Prefeitura recebeu {{arrecadacaoAno}}. Até agora, foram pagos {{pagoAno}}.",
+      "secoes": [
+        { "titulo": "Livre e carimbado", "paragrafos": ["Do que entrou, {{percentualLivre}} era dinheiro livre."] }
+      ],
+      "perguntas": [],
+      "fontes": [
+        { "titulo": "Tesouro Nacional: SICONFI", "url": "https://siconfi.tesouro.gov.br/" }
+      ],
+      "relacionados": ["origem.html", "impostometro.html"]
+    }
+  ],
+  "faq": [
+    { "grupo": "Câmara", "pergunta": "Quantos vereadores tem Salto?", "resposta": "A Câmara de Salto tem {{numeroVereadores}} vereadores.", "link": "index.html#vereadores" },
+    { "grupo": "Câmara", "pergunta": "Quanto ganha um vereador de Salto?", "resposta": "O salário de vereador é {{salarioVereador}}.", "link": "camara.html#custo" },
+    { "grupo": "Prefeitura", "pergunta": "Qual a nota do TCE para Salto?", "resposta": "A nota do IEG-M de {{anoIegm}} foi {{notaIegm}}.", "link": "prefeitura.html#nota" }
+  ]
+}

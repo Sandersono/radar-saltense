@@ -1,7 +1,7 @@
 import { ANO_INICIO, fichaOficial } from '../config.js';
 import { GRUPOS } from '../regras/classificar.js';
 import { esc } from '../util/texto.js';
-import { layout, ENDERECO, CAMARA_JSONLD, dataBR, link, aviso, foto, seloFonte, barraProporcao, cartaoNumero, reais, numero, GRUPOS_PUBLICOS, AVISO_NOMES, apelidoHtml } from './base.js';
+import { layout, ENDERECO, CAMARA_JSONLD, SUFIXO, MAX_TITULO, dataBR, link, aviso, foto, seloFonte, barraProporcao, cartaoNumero, reais, numero, GRUPOS_PUBLICOS, AVISO_NOMES, apelidoHtml } from './base.js';
 import { cartaoCampanha } from './campanha.js';
 import { cartaoEmendas } from './emendas.js';
 import { URL_RH_CAMARA, mesAno } from './camara.js';
@@ -59,18 +59,23 @@ export const descricaoVereador = (v) => {
 };
 
 // O apelido abre o título (busca por apelido); o nome completo vem entre parênteses.
-// Com apelido, até 70 caracteres: o fim sai, e por último o nome completo. Sem gênero.
+// Com o sufixo " | Radar Saltense", até 70 caracteres: o fim sai aos poucos, e por último o nome completo. Sem gênero.
 export const tituloVereador = (v) => {
-  if (!v.apelido) {
-    const longo = `${v.nome} na Câmara de Salto: presença, votos e propostas`;
-    return longo.length <= 70 ? longo : `${v.nome} na Câmara de Salto`;
-  }
-  const opcoes = [
-    `${v.apelido} (${v.nome}) na Câmara de Salto: presença, votos e propostas`,
-    `${v.apelido} (${v.nome}) na Câmara de Salto`,
-  ];
-  return opcoes.find((t) => t.length <= 70) || `${v.apelido} na Câmara de Salto`;
+  const max = MAX_TITULO - SUFIXO.length;
+  const opcoes = v.apelido
+    ? [`${v.apelido} (${v.nome}) na Câmara de Salto`, `${v.apelido} (${v.nome}), Salto/SP`, `${v.apelido} (${v.nome})`, `${v.apelido} na Câmara de Salto`]
+    : [`${v.nome} na Câmara de Salto: presença e votos`, `${v.nome} na Câmara de Salto`, v.nome];
+  return opcoes.find((t) => t.length <= max) || opcoes[opcoes.length - 1];
 };
+
+// Os 5 bairros com página mais citados nas propostas da pessoa (b.idx = posições em d.proposituras).
+export function bairrosDoVereador(v, d, bairros = []) {
+  return bairros
+    .map((b) => ({ b, n: b.idx.filter((i) => d.proposituras[i] && d.proposituras[i].vereadores.includes(v.id)).length }))
+    .filter((x) => x.n > 0)
+    .sort((a, c) => c.n - a.n || a.b.nome.localeCompare(c.b.nome, 'pt-BR'))
+    .slice(0, 5);
+}
 
 // schema.org Person, sem cargo (jobTitle) e sem gênero.
 export function pessoaJsonLd(v) {
@@ -87,7 +92,8 @@ export function pessoaJsonLd(v) {
   };
 }
 
-export function paginaVereador(v, d) {
+// opcoes.bairros: bairros com página; opcoes.cartao: há prévia própria (marca/og/vereador-<id>.png).
+export function paginaVereador(v, d, opcoes = {}) {
   const props = d.proposituras.filter((p) => p.vereadores.includes(v.id));
   const pres = d.presenca[v.id];
   const sessoes = [...pres.sessoes].reverse().map((s) =>
@@ -108,8 +114,10 @@ export function paginaVereador(v, d) {
       `<li><span class="data">${dataBR(e.data)}</span> ${esc(pj.rotulo)}${e.turno ? ` (${esc(e.turno)})` : ''}: ${esc(e.resultado)} ${link(e.url, 'PDF')}</li>`)).join('') || '<li>Nenhum registro.</li>';
   const veja = d.avisos && d.avisos.length ? ' Veja os <a href="../fontes.html#avisos">avisos sobre os dados oficiais</a>.' : '';
 
+  const citados = bairrosDoVereador(v, d, opcoes.bairros || []);
+  const outros = d.vereadores.filter((x) => x.id !== v.id);
   const corpo = `<section class="perfil cartao">
-${foto(v, '../', 120)}
+${foto(v, '../', 120, true)}
 <div>
 <h1>${esc(v.nome)}${apelidoHtml(v)}</h1>
 <p class="partido">${esc(v.partido)}</p>
@@ -147,12 +155,24 @@ ${aviso(`Leitura do documento oficial de votações. Ele só cita quem votou con
 ${cartaoSalario(v, d)}
 ${cartaoRespostas(v, d)}
 ${cartaoEmendas(v, d)}
-${cartaoCampanha(d.camara.campanha.candidatos[v.id])}`;
+${cartaoCampanha(d.camara.campanha.candidatos[v.id])}
+${citados.length ? `<section id="bairros-citados" class="secao cartao">
+<h2>Bairros mais citados por ${esc(v.nome)}</h2>
+<ol class="lista lista-compacta">${citados.map(({ b, n }) => `<li><a href="../bairro/${esc(b.slug)}.html">${esc(b.nome)}</a> <span class="num">${numero(n)} ${n === 1 ? 'proposta' : 'propostas'}</span></li>`).join('')}</ol>
+<p class="nota">Só bairros com página própria. Proposta que cita mais de um bairro conta para cada um.</p>
+</section>` : ''}
+${outros.length ? `<nav class="secao" aria-labelledby="t-outros">
+<h2 id="t-outros">Outros vereadores</h2>
+<ul class="lista lista-compacta">${outros.map((x) => `<li><a href="${esc(x.id)}.html">${esc(x.nome)}${apelidoHtml(x)}</a></li>`).join('')}</ul>
+</nav>` : ''}`;
   return layout({
     titulo: tituloVereador(v),
     descricao: descricaoVereador(v),
     caminho: `vereador/${v.id}.html`,
-    jsonld: pessoaJsonLd(v),
+    jsonld: (() => { const { '@context': _, ...pessoa } = pessoaJsonLd(v); return { '@context': 'https://schema.org', '@type': 'ProfilePage', url: `${ENDERECO}vereador/${v.id}.html`, inLanguage: 'pt-BR', mainEntity: pessoa }; })(),
+    trilha: [{ nome: 'Câmara', caminho: 'camara.html' }, { nome: v.nome, caminho: `vereador/${v.id}.html` }],
+    mostrarAtualizado: true,
+    ...(opcoes.cartao ? { imagem: { url: `${ENDERECO}marca/og/vereador-${v.id}.png`, alt: `Foto e nome de ${v.nome}, Câmara de Salto` } } : {}),
     corpo,
     prefixo: '../',
     atualizadoEm: d.meta.atualizadoEm,

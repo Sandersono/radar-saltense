@@ -125,17 +125,20 @@ assert.equal(descricaoBairro('Jardim Celani', 70, false), 'Em Jardim Celani (Sal
 const lugar = lugarJsonLd({ nome: 'Jardim Celani', slug: 'jardim-celani' });
 assert.equal(lugar['@type'], 'Place');
 assert.equal(lugar.containedInPlace.name, 'Salto');
-assert.equal(lugar.containedInPlace.address.addressRegion, 'SP');
+assert.equal(lugar.containedInPlace.containedInPlace.name, 'São Paulo');
+assert.equal('address' in lugar.containedInPlace, false);
 
 // Vereador: o apelido abre o título e a descrição; sem gênero; nome completo no JSON-LD.
 const comApelido = { id: 'x', nome: 'Rogério dos Santos Filho', apelido: 'Dr. Rogério Pinheiro', partido: 'Solidariedade' };
 const semApelido = { id: 'y', nome: 'Arildo Guadagnini', apelido: null, partido: 'Democracia Cristã' };
-// Título com apelido: até 70 caracteres, encurtando em dois passos.
-assert.equal(tituloVereador({ ...comApelido, apelido: 'Preto', nome: 'Ana Lima' }), 'Preto (Ana Lima) na Câmara de Salto: presença, votos e propostas');
-assert.equal(tituloVereador(comApelido), 'Dr. Rogério Pinheiro (Rogério dos Santos Filho) na Câmara de Salto');
+// Título com apelido: com o sufixo " | Radar Saltense", até 70 caracteres, encurtando em passos.
+assert.equal(tituloVereador({ ...comApelido, apelido: 'Preto', nome: 'Ana Lima' }), 'Preto (Ana Lima) na Câmara de Salto');
+assert.equal(tituloVereador(comApelido), 'Dr. Rogério Pinheiro (Rogério dos Santos Filho)');
+assert.equal(tituloVereador({ ...comApelido, apelido: 'Chell', nome: 'Michel Oliveira Rodrigues da Silva' }), 'Chell (Michel Oliveira Rodrigues da Silva), Salto/SP');
 assert.equal(tituloVereador({ ...comApelido, nome: 'Nome Muito Comprido de Alguém da Silva Pereira Souza' }), 'Dr. Rogério Pinheiro na Câmara de Salto');
-for (const v of [comApelido, { ...comApelido, apelido: 'Chell', nome: 'Michel Oliveira Rodrigues da Silva' }]) assert.ok(tituloVereador(v).length <= 70);
-assert.equal(tituloVereador(semApelido), 'Arildo Guadagnini na Câmara de Salto: presença, votos e propostas');
+for (const v of [comApelido, semApelido, { ...comApelido, apelido: 'Chell', nome: 'Michel Oliveira Rodrigues da Silva' }]) assert.ok(`${tituloVereador(v)} | Radar Saltense`.length <= 70);
+assert.equal(tituloVereador(semApelido), 'Arildo Guadagnini na Câmara de Salto');
+assert.equal(tituloVereador({ ...semApelido, nome: 'Ana Lima' }), 'Ana Lima na Câmara de Salto: presença e votos');
 for (const v of [comApelido, { ...comApelido, apelido: 'Almir da Adega', nome: 'Almir de Melo Santos', partido: 'PRD' }, { ...comApelido, nome: 'Nome Muito Comprido de Alguém da Silva Pereira Souza', partido: 'Partido Muito Comprido' }]) {
   const t = descricaoVereador(v);
   assert.ok(t.startsWith(`${v.apelido} (${v.nome}, ${v.partido}) na Câmara de Salto/SP:`), t);

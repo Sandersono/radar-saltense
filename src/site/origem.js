@@ -1,7 +1,7 @@
 import { esc } from '../util/texto.js';
 import { SICONFI_MSC } from '../config.js';
 import { periodoOrigem } from '../regras/origem.js';
-import { layout, reais, aviso, seloFonte, link, barraProporcao, sumario, ENDERECO } from './base.js';
+import { layout, reais, aviso, seloFonte, link, barraProporcao, sumario, ENDERECO, ORGANIZACAO, isoSP } from './base.js';
 import { barras, NOMES_MES } from './impostometro.js';
 
 const TCE = 'https://transparencia.tce.sp.gov.br/';
@@ -147,7 +147,9 @@ ${seletor}
 ${secoes}`;
   const ultimo = anos[anos.length - 1];
   return layout({
-    titulo: 'De onde vem e para onde vai o dinheiro de Salto: Radar Saltense',
+    titulo: 'De onde vem e para onde vai o dinheiro de Salto/SP',
+    trilha: [{ nome: 'De onde vem o dinheiro', caminho: 'origem.html' }],
+    mostrarAtualizado: true,
     descricao: 'O dinheiro de Salto/SP por fonte de recurso: de onde vem, quanto é livre ou carimbado e em que áreas foi gasto, com dados do Tesouro Nacional.',
     caminho: 'origem.html',
     corpo,
@@ -160,6 +162,12 @@ ${secoes}`;
       url: `${ENDERECO}origem.html`,
       inLanguage: 'pt-BR',
       isBasedOn: SICONFI_MSC,
+      creator: ORGANIZACAO,
+      publisher: ORGANIZACAO,
+      dateModified: isoSP(d.meta.atualizadoEm),
+      isAccessibleForFree: true,
+      keywords: ['Salto', 'São Paulo', 'orçamento municipal', 'receita', 'despesa', 'fonte de recurso', 'Fundeb', 'emendas parlamentares', 'MSC', 'SICONFI'],
+      distribution: [{ '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: SICONFI_MSC, name: 'API da Matriz de Saldos Contábeis (SICONFI, Tesouro Nacional)' }],
       spatialCoverage: { '@type': 'City', name: 'Salto (SP)' },
       temporalCoverage: `${anos[0]}/${ultimo}`,
     },

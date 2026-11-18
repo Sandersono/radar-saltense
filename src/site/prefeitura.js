@@ -1,6 +1,6 @@
 import { esc } from '../util/texto.js';
 import { FAIXAS_IEGM, DIMENSOES_IEGM, MUNICIPIOS_IEGM } from '../regras/iegm.js';
-import { layout, reais, numero, quandoBR, seloFonte, aviso, cartaoNumero, sumario } from './base.js';
+import { layout, ORGANIZACAO, ENDERECO, reais, numero, quandoBR, seloFonte, aviso, cartaoNumero, sumario } from './base.js';
 import { cartaoCampanha } from './campanha.js';
 import { NOMES_MES } from './impostometro.js';
 import { cartaoPromessas } from './promessas.js';
@@ -162,10 +162,11 @@ ${vazio}
 ${atalhos(d, p)}
 ${secoes}`;
   return layout({
-    titulo: 'A Prefeitura de Salto: promessas, obras, compras e nota do TCE',
+    titulo: 'Prefeitura de Salto/SP: promessas, obras e TCE',
+    mostrarAtualizado: true,
     descricao: 'Promessas do prefeito de Salto/SP, obras, compras no PNCP, a nota do TCE-SP para a gestão e a campanha de 2024. Dados oficiais, com link para a fonte.',
     caminho: 'prefeitura.html',
-    jsonld: { '@context': 'https://schema.org', '@type': 'GovernmentOrganization', name: 'Prefeitura de Salto', url: URL_PREFEITURA, sameAs: URL_PREFEITURA, areaServed: { '@type': 'City', name: 'Salto (SP)' } },
+    jsonld: { '@context': 'https://schema.org', '@type': 'WebPage', name: 'A Prefeitura de Salto', url: `${ENDERECO}prefeitura.html`, inLanguage: 'pt-BR', about: { '@type': 'GovernmentOrganization', name: 'Prefeitura de Salto', url: URL_PREFEITURA, sameAs: URL_PREFEITURA, areaServed: { '@type': 'City', name: 'Salto (SP)' } }, publisher: ORGANIZACAO },
     corpo,
     atualizadoEm: d.meta.atualizadoEm,
   });

@@ -16,6 +16,13 @@ export const textoVisivel = (html) => html
   .replace(/<[^>]+>/g, ' ')
   .replace(/\s+/g, ' ');
 
+// Destino de um link interno: "/x" parte da raiz (404); pasta ("./", "../", "/") é o index.html dela.
+export function destinoLink(caminho, alvo) {
+  const pasta = alvo.endsWith('/') || alvo === '.' || alvo === '..';
+  const base = alvo.startsWith('/') ? '' : path.posix.dirname(caminho);
+  return path.posix.normalize(path.posix.join(base, alvo.replace(/^\/+/, ''), pasta ? 'index.html' : '')).replace(/^\.\//, '');
+}
+
 const ids = (html) => new Set([...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
 
 // paginas: [{ caminho: 'obras.html', html }]; arquivos: todos os caminhos de dist/ (com '/');
@@ -37,6 +44,8 @@ export function vistoriar(paginas, arquivos, dados = []) {
     const cpf = conteudo.match(CPF);
     if (cpf) bloqueios.push(`${caminho}: número com formato de CPF (${cpf[0].slice(0, 4)}…).`);
   }
+  // Placeholder do Entenda que escapou do gerador: nunca publica "{{".
+  for (const { caminho, html } of paginas) if (html.includes('{{')) bloqueios.push(`${caminho}: placeholder "{{" no HTML publicado.`);
   for (const { caminho, html } of paginas) {
     const texto = textoVisivel(html);
     const ruim = texto.match(/\b(undefined|NaN)\b|(?:^|[\s:(])null(?=[\s,.)]|$)/);
@@ -44,13 +53,13 @@ export function vistoriar(paginas, arquivos, dados = []) {
     if (/R\$\s*-\s*\d/.test(texto)) avisos.push(`${caminho}: valor em reais negativo.`);
     // Toda página de dados precisa levar a uma fonte oficial (link direto ou a página "De onde vêm os números").
     // A regra é por página: muitas seções usam a fonte citada no fim da própria página, de propósito.
-    if (caminho !== 'fontes.html' && !FONTE_OFICIAL.test(html) && !/href="(?:\.\.\/)?fontes\.html/.test(html)) avisos.push(`${caminho}: nenhum link para fonte oficial nem para "De onde vêm os números".`);
+    if (caminho !== 'fontes.html' && !FONTE_OFICIAL.test(html) && !/href="(?:\.\.\/|\/)?fontes\.html/.test(html)) avisos.push(`${caminho}: nenhum link para fonte oficial nem para "De onde vêm os números".`);
     const quebrados = new Set();
     for (const m of html.matchAll(/href="([^"]*)"/g)) {
       const href = m[1].replace(/&amp;/g, '&');
       if (!href || EXTERNO.test(href)) continue;
       const [alvo, ancora] = href.split('?')[0].split('#');
-      const destino = alvo ? path.posix.normalize(path.posix.join(path.posix.dirname(caminho), alvo)) : caminho;
+      const destino = alvo ? destinoLink(caminho, alvo) : caminho;
       if (alvo && !existe.has(destino)) { quebrados.add(href); continue; }
       if (ancora && destino.endsWith('.html') && porCaminho.has(destino) && !idsDaPagina(destino).has(ancora)) quebrados.add(href);
     }

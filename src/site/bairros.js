@@ -3,7 +3,7 @@ import { GRUPOS } from '../regras/classificar.js';
 import { TIPOS_NOME } from '../regras/local.js';
 import { CORTE_BAIRRO, resumoBairro } from '../regras/bairros.js';
 import { esc } from '../util/texto.js';
-import { layout, ENDERECO, dataBR, link, aviso, seloFonte, barraProporcao, cartaoNumero, numero, sumario, apelidoHtml, GRUPOS_PUBLICOS } from './base.js';
+import { layout, ENDERECO, SUFIXO, dataBR, link, aviso, seloFonte, barraProporcao, cartaoNumero, numero, sumario, apelidoHtml, GRUPOS_PUBLICOS } from './base.js';
 import { itensRepetidos } from './inicio.js';
 import { URL_PROPOSITURAS } from './camara.js';
 import { GRUPOS as GRUPOS_OBRA, tituloCurto } from './obras.js';
@@ -16,14 +16,18 @@ const rotuloObra = Object.fromEntries(GRUPOS_OBRA.map(([g, titulo]) => [g, titul
 export const descricaoBairro = (nome, total, temObras = false) =>
   `Em ${nome} (Salto/SP), os vereadores fizeram ${plural(total, 'pedido', 'pedidos')} desde ${ANO_INICIO}: veja os tipos de problema, as ruas mais citadas${temObras ? ', os pedidos repetidos e as obras.' : ' e os pedidos repetidos.'}`;
 
-// schema.org Place: só o nome do bairro e a cidade.
+// schema.org Place: só o nome do bairro, a cidade e o estado.
 export const lugarJsonLd = (b) => ({
   '@context': 'https://schema.org',
   '@type': 'Place',
   name: b.nome,
   url: `${ENDERECO}bairro/${b.slug}.html`,
-  containedInPlace: { '@type': 'City', name: 'Salto', address: { '@type': 'PostalAddress', addressLocality: 'Salto', addressRegion: 'SP', addressCountry: 'BR' } },
+  containedInPlace: { '@type': 'City', name: 'Salto', containedInPlace: { '@type': 'State', name: 'São Paulo' } },
 });
+
+// Título do bairro: com o sufixo, até 65 caracteres; encurta em passos.
+export const tituloBairro = (nome) => [`${nome}, Salto/SP: pedidos dos vereadores e obras`, `${nome}, Salto/SP: pedidos e obras`, `${nome}, Salto/SP`]
+  .find((t) => (t + SUFIXO).length <= 65) || nome;
 
 const itemPedido = (p) =>
   `<li><span class="data">${dataBR(p.data)}</span> <span class="tag">${esc(p.categoria)} ${esc(p.numero)}</span> <strong>${esc(p.autoresTexto)}</strong> ${esc(p.ementa)} ${link(fichaOficial(p.id), 'ficha oficial')}</li>`;
@@ -75,7 +79,7 @@ ${extras ? `<p><button type="button" class="botao-secundario" id="ver-mais-repet
 <section id="ultimos" class="secao cartao">
 <h2>Últimos pedidos</h2>
 <ul class="lista">${r.recentes.map(itemPedido).join('')}</ul>
-<p><a href="../index.html#bairro">Ver todos na busca</a></p>
+<p><a href="../#bairro">Ver todos na busca</a></p>
 </section>
 ${obras ? `<section id="obras" class="secao cartao">
 <h2>Obras que citam o bairro</h2>
@@ -87,14 +91,15 @@ ${obras ? `<section id="obras" class="secao cartao">
 <p>As propostas vêm do ${seloFonte(URL_PROPOSITURAS, 'portal de proposituras da Câmara')}. O bairro e a rua são lidos do texto de cada proposta. <a href="../fontes.html#ruas">Veja como</a>.</p>
 </section>`;
 
-  const corpo = `<p class="nota"><a href="../bairros.html">Todos os bairros</a></p>
-<h1>${esc(b.nome)}</h1>
+  const corpo = `<h1>${esc(b.nome)}, Salto: o que os vereadores pediram</h1>
 <p>O que os vereadores de Salto pediram ou perguntaram citando ${esc(b.nome)} desde ${ANO_INICIO}, com o documento oficial de cada proposta.</p>
 ${aviso(AVISO_BAIRRO)}
 ${sumario(secoes, [['numeros', 'Números'], ['tipos', 'Tipos de problema'], ['ruas', 'Ruas'], ['repetidos', 'Repetidos'], ['ultimos', 'Últimos pedidos'], ['obras', 'Obras']])}
 ${secoes}`;
   return layout({
-    titulo: `${b.nome}, Salto: pedidos dos vereadores, ruas e obras: Radar Saltense`,
+    titulo: tituloBairro(b.nome),
+    trilha: [{ nome: 'Bairros', caminho: 'bairros.html' }, { nome: b.nome, caminho: `bairro/${b.slug}.html` }],
+    mostrarAtualizado: true,
     descricao: descricaoBairro(b.nome, r.total, r.obras.length > 0),
     caminho: `bairro/${b.slug}.html`,
     jsonld: lugarJsonLd(b),
@@ -111,7 +116,7 @@ export function paginaBairros(lista, d) {
     `<li data-nome="${esc([b.nome, ...b.grafias].join(' | '))}"><a href="bairro/${esc(b.slug)}.html">${esc(b.nome)}</a> <span class="num">${plural(b.total, 'proposta', 'propostas')}</span></li>`).join('\n');
   const corpo = `<h1>Bairros de Salto</h1>
 <p>Escolha o bairro e veja o que os vereadores pediram para lá desde ${ANO_INICIO}: tipos de problema, ruas mais citadas, pedidos repetidos e obras.</p>
-<p>Só os ${numero(lista.length)} bairros com ${CORTE_BAIRRO} propostas ou mais têm página própria. Os outros estão na <a href="index.html#bairro">busca da página inicial</a>, junto com as ruas.</p>
+<p>Só os ${numero(lista.length)} bairros com ${CORTE_BAIRRO} propostas ou mais têm página própria. Os outros estão na <a href="./#bairro">busca da página inicial</a>, junto com as ruas.</p>
 ${aviso(AVISO_BAIRRO)}
 <div class="filtros">
 <label class="sr-only" for="filtro-bairros">Nome do bairro</label>
@@ -123,7 +128,9 @@ ${itens}
 </ul>
 <p>As propostas vêm do ${seloFonte(URL_PROPOSITURAS, 'portal de proposituras da Câmara')}. O bairro é lido do texto de cada proposta. <a href="fontes.html#ruas">Veja como</a>.</p>`;
   return layout({
-    titulo: 'Bairros de Salto: o que os vereadores pediram e as obras: Radar Saltense',
+    titulo: 'Bairros de Salto/SP: pedidos dos vereadores e obras',
+    trilha: [{ nome: 'Bairros', caminho: 'bairros.html' }],
+    mostrarAtualizado: true,
     descricao: `Os bairros de Salto/SP com ${CORTE_BAIRRO} propostas ou mais dos vereadores: pedidos, ruas mais citadas, pedidos repetidos e obras. Só dado oficial.`,
     caminho: 'bairros.html',
     jsonld: { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Bairros de Salto', url: `${ENDERECO}bairros.html`, inLanguage: 'pt-BR' },

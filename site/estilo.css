@@ -306,3 +306,26 @@ h2 .contagem { font-size: .9rem; font-weight: 600; color: var(--suave); font-fam
 /* Página de uma semana: anterior, próxima e todas as semanas. */
 .semana-nav { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; margin: 1.25rem 0; }
 .semana-todas { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+
+/* Trilha de navegação, data de atualização, rodapé com todas as seções, Entenda e FAQ (spec 2026-11-17). */
+.trilha { margin: .25rem 0 .5rem; font-size: .9rem; }
+.trilha ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 0 .5rem; }
+.trilha li { display: inline-flex; align-items: center; gap: .5rem; min-width: 0; overflow-wrap: anywhere; }
+.trilha li + li::before { content: '›' / ''; color: var(--suave); }
+.trilha a { display: inline-block; padding: .7rem 0; }
+.trilha [aria-current] { color: var(--suave); }
+main .atualizado { font-size: .88rem; color: var(--suave); margin: 0 0 1rem; }
+.rodape-nav { margin: 0 0 1.25rem; }
+.rodape-titulo { margin: .75rem 0 .25rem; font-weight: 600; color: #fff; }
+.rodape-nav ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1rem; }
+.rodape-nav a { display: inline-block; padding: .6rem 0; overflow-wrap: anywhere; }
+@media (min-width: 768px) { .rodape-nav ul { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.texto-entenda { max-width: 46rem; }
+.texto-entenda p, .faq p { overflow-wrap: anywhere; }
+.resumo-entenda { font-size: 1.1rem; }
+.lista-artigos { list-style: none; margin: 1rem 0; padding: 0; display: grid; gap: .9rem; }
+.lista-artigos li { margin: 0; }
+.lista-artigos a { display: inline-block; padding: .25rem 0; font-family: var(--titulo); font-size: 1.15rem; }
+.lista-artigos p { margin: .25rem 0 0; }
+@media (min-width: 768px) { .lista-artigos { grid-template-columns: 1fr 1fr; } }
+.faq h3 { margin-top: 1.5rem; }

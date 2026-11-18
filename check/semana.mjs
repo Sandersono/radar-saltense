@@ -137,7 +137,7 @@ assert.match(pa, /href="2026-11-09\.html" rel="prev"/);
 assert.ok(!/rel="next"/.test(pa));
 assert.match(pa, /Semana em andamento/);
 assert.match(pa, /<h1>Semana de 16 a 22 de novembro de 2026 em Salto<\/h1>/);
-assert.match(pa, /<title>Semana de 16\/11 a 22\/11\/2026 em Salto: Radar Saltense<\/title>/);
+assert.match(pa, /<title>Semana de 16\/11 a 22\/11\/2026 em Salto \| Radar Saltense<\/title>/);
 assert.match(pa, /"@type":"Article"/);
 assert.match(pa, /semana%2F2026-11-16\.html/); // WhatsApp com o link fixo
 assert.ok(!/Semana em andamento/.test(paginaSemanaArquivo(passada, d)));

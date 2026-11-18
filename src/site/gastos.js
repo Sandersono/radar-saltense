@@ -110,5 +110,5 @@ ${g.novas.length ? `<ol class="lista lista-empresas">${g.novas.map((e) => `<li><
 <li>Para conferir nomes de quem recebeu: ${link(LINKS_CREDOR.prefeitura, 'Portal da Transparência da Prefeitura')} e ${link(LINKS_CREDOR.tce, 'TCE-SP, Despesas por Fornecedor')}.</li>
 </ul>
 </section>`;
-  return layout({ titulo: 'Raio-X dos gastos de Salto: Radar Saltense', descricao: 'Para onde vai o dinheiro da Prefeitura de Salto/SP: gastos por área e por mês e as empresas que mais receberam, com dados do TCE-SP.', caminho: 'gastos.html', corpo, atualizadoEm: d.meta.atualizadoEm });
+  return layout({ titulo: 'Raio-X dos gastos da Prefeitura de Salto/SP', trilha: [{ nome: 'Prefeitura', caminho: 'prefeitura.html' }, { nome: 'Raio-X dos gastos', caminho: 'gastos.html' }], mostrarAtualizado: true, descricao: 'Para onde vai o dinheiro da Prefeitura de Salto/SP: gastos por área e por mês e as empresas que mais receberam, com dados do TCE-SP.', caminho: 'gastos.html', corpo, atualizadoEm: d.meta.atualizadoEm });
 }
