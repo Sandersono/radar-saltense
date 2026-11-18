@@ -29,6 +29,7 @@ Regra geral: fonte secundária que falha **não trava** o robô. O site mantém 
 | Receitas do TCE-SP | 4 min | Repete o último dado e mostra "Dados do TCE-SP até dd/mm"; acima de 10 dias, também entra na manutenção |
 | Despesas do TCE-SP | 6 min | Igual às receitas |
 | SICONFI (áreas do gasto) | 3 min | Mantém o último dado |
+| MSC do Tesouro (origem do dinheiro, `origem.html`) | 3 min, com nova tentativa | Mantém o último dado salvo em `data/processado/origem.json` e avisa. Ano fechado: matriz de encerramento (MSCE, mês 12), guardada e não consultada de novo. Ano corrente: a última matriz mensal, uma vez por dia |
 | Folha da Câmara | — | Mantém o último dado |
 | Respostas a requerimentos (até 150 fichas por dia) | Tempo reservado | Continua no dia seguinte |
 | IEGM e Painel de Obras do TCE | 3 min cada | Mantém o último dado |
@@ -45,6 +46,8 @@ Regra geral: fonte secundária que falha **não trava** o robô. O site mantém 
 - um mês de receita ou de despesa sumir, ou cair mais de 5%;
 - a folha da Câmara cair mais de 20%;
 - a soma das áreas do SICONFI não bater com o total.
+
+A origem do dinheiro (MSC) não barra a publicação: se o total arrecadado ou pago diferir mais de 3% do TCE-SP, a página mostra um aviso e a manutenção registra a diferença.
 
 Quando a barreira barra, o site fica na última versão boa.
 
@@ -96,6 +99,8 @@ Os alertas são issues com o rótulo `sentinela` no repositório e chegam por e-
 | Despertador não disparou | Na VPS: `tail /var/log/radar-saltense-despertador.log`. Testar com `/opt/radar-saltense/despertar.sh teste`. HTTP 401 significa chave inválida: gerar outra no GitHub (fine-grained, só o repositório, Actions: read and write) e colar em `/opt/radar-saltense/token`. |
 | PDF novo de emendas | Rodar `npm run emendas` (ver seção 6) e conferir `data/referencia/emendas.json`. |
 | Licitação da ETA João Jabour apareceu | Colocar o número do PNCP em `data/referencia/obras-ligacoes.json` (ligação `eta-joao-jabour`) e tirar o "pendente". |
+| Origem do dinheiro: MSC × TCE-SP acima de 3% | Abrir a consulta da MSC citada na manutenção e o TCE-SP do mesmo período. Se a Prefeitura reenviou a matriz, a próxima atualização corrige sozinha; se não, a diferença fica explicada na página. |
+| Origem do dinheiro: código sem nome | Baixar a planilha de fontes do ano no Tesouro (link em `data/referencia/fontes-recursos.json`) e acrescentar o código que faltou. |
 | Bairro novo passou de 10 pedidos | Colocar o nome fixo em `data/referencia/bairros-apelidos.json` (`nomes`). |
 
 ## 5. Rotina mensal das promessas
@@ -124,11 +129,12 @@ Os alertas são issues com o rótulo `sentinela` no repositório e chegam por e-
 - `data/referencia/obras-ligacoes.json`: ligações entre obras do PNCP e do Obrasgov e as promessas. Uma ligação "pendente" pode ter um campo "buscar".
 - `data/referencia/bairros-apelidos.json`: grafias juntadas e nomes fixos dos bairros com página.
 - `data/referencia/emendas.json`: gerado pela ferramenta de emendas.
+- `data/referencia/fontes-recursos.json`: tabela oficial de fontes de recursos e códigos de acompanhamento (CO) do Tesouro (Portaria STN 710/2021). Trocar quando sair a tabela de um ano novo (a de 2027 vem da Portaria STN/MF 1.986/2026).
 - `src/config.js`: vereadores esperados, medição de audiência (Cloudflare e GA4), grafias de nomes nas votações.
 
 ## 8. Checagens antes de qualquer mudança
 
-- `npm run checar` roda todas as checagens (node:assert): regras, folha, respostas, campanha, TCE, contratos, emendas, promessas, semana, medição, obras, vistoria, bairros e sentinela. O robô também as roda antes de começar.
+- `npm run checar` roda todas as checagens (node:assert): regras, folha, respostas, campanha, TCE, contratos, emendas, promessas, semana, medição, obras, vistoria, bairros, sentinela e origem do dinheiro. O robô também as roda antes de começar.
 - **Processo de mudança:** um revisor separado lê o código; a vistoria e a conferência no navegador cobrem rolagem lateral (320 a 1440 px), âncoras e CPF; e só depois o dono dá o ok para publicar.
 
 ## 9. Acessos e chaves

@@ -9,6 +9,8 @@ import { salvar, baixar } from './coleta/http.js';
 import { coletarReceitas } from './coleta/receitas.js';
 import { coletarDespesas } from './coleta/despesas.js';
 import { coletarSiconfi } from './coleta/siconfi.js';
+import { coletarMsc } from './coleta/msc.js';
+import { mesclarOrigem } from './regras/origem.js';
 import { coletarFotos } from './coleta/fotos.js';
 import { coletarFolha } from './coleta/folha-camara.js';
 import { coletarRespostas } from './coleta/respostas.js';
@@ -29,6 +31,7 @@ const PRAZO_PENTAHO_MS = 3 * 60 * 1000;
 const PRAZO_RECEITAS_MS = 4 * 60 * 1000;
 const PRAZO_DESPESAS_MS = 6 * 60 * 1000;
 const PRAZO_SICONFI_MS = 3 * 60 * 1000;
+const PRAZO_MSC_MS = 3 * 60 * 1000;
 const PRAZO_OBRAS_PNCP_MS = 6 * 60 * 1000;
 const PRAZO_OBRASGOV_MS = 5 * 60 * 1000;
 // Mensagens do Playwright trazem o registro de chamadas em várias linhas; só a primeira vai para o site, em português.
@@ -91,6 +94,17 @@ async function respostasDaCamara(cardsPorAno, salvo, avisos) {
   } catch (e) {
     avisos.push(`Respostas a requerimentos: ${primeiraLinha(e.message)}; mantido o último dado salvo.`);
     return salvo;
+  }
+}
+
+// Origem do dinheiro (MSC do Tesouro): ano fechado guardado; ano corrente uma vez por dia. Falha: fica o salvo e um aviso.
+async function origemDoTesouro(salvo, hoje, avisos) {
+  try {
+    return mesclarOrigem(salvo, { anos: await coletarMsc(salvo, hoje, { prazoMs: PRAZO_MSC_MS }) });
+  } catch (e) {
+    const parciais = e.parciais || {};
+    avisos.push(`MSC do Tesouro (origem do dinheiro): ${primeiraLinha(e.message)}; mantido o último dado salvo${Object.keys(parciais).length ? ` (anos atualizados: ${Object.keys(parciais).join(', ')})` : ''}.`);
+    return mesclarOrigem(salvo, { anos: parciais });
   }
 }
 
@@ -200,6 +214,8 @@ export async function coletarTudo() {
   const receitas = await fonteTce('Receitas do TCE-SP', () => coletarReceitas(hoje.ano, hoje.mes, { prazoMs: PRAZO_RECEITAS_MS }), avisosFontes);
   const despesas = await fonteTce('Despesas do TCE-SP', () => coletarDespesas(hoje.ano, hoje.mes, { prazoMs: PRAZO_DESPESAS_MS }), avisosFontes);
   const siconfi = await fonteTce('SICONFI', () => coletarSiconfi(hoje.ano, { prazoMs: PRAZO_SICONFI_MS }), avisosFontes);
+  const origem = await origemDoTesouro(await lerJson('data/processado/origem.json', null, avisosFontes), hoje, avisosFontes);
+  const fontesRecursos = await lerJson('data/referencia/fontes-recursos.json', null, avisosFontes);
   const cnpjs2024 = JSON.parse(await readFile('data/referencia/cnpjs-pagos-2024.json', 'utf8'));
   const folhaSalva = await lerJson('data/processado/folha-camara.json', {}, avisosFontes);
   const respostasSalvas = await lerJson('data/processado/respostas.json', {}, avisosFontes);
@@ -220,7 +236,7 @@ export async function coletarTudo() {
   const duracaoObrasMs = Date.now() - inicioObras;
   const folhaCamara = await folhaDaCamara(vereadores.map(({ id, nome, apelido }) => ({ id, nome, apelido })), hoje, folhaSalva, avisosFontes);
   const respostas = await respostasDaCamara(cardsPorAno, respostasSalvas, avisosFontes);
-  const coleta = { vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, folhaCamara, respostas, campanha, emendas, promessas, iegm, obras, contratos, duracaoPncpMs, obrasFontes, ligacoesObras, duracaoObrasMs, avisosFontes, avisosManutencao, coletadoEm: new Date().toISOString() };
+  const coleta = { vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, origem, fontesRecursos, cnpjs2024, fotos, avisosFotos, folhaCamara, respostas, campanha, emendas, promessas, iegm, obras, contratos, duracaoPncpMs, obrasFontes, ligacoesObras, duracaoObrasMs, avisosFontes, avisosManutencao, coletadoEm: new Date().toISOString() };
   await salvar('data/bruto/coleta.json', JSON.stringify(coleta));
   return coleta;
 }
@@ -234,6 +250,7 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   console.log(`Receitas: ${c.receitas ? `${Object.keys(c.receitas).length} meses publicados` : 'não coletadas'}`);
   console.log(`Despesas: ${c.despesas ? `${Object.keys(c.despesas).length} meses publicados` : 'não coletadas'}`);
   console.log(`SICONFI: ${c.siconfi ? Object.entries(c.siconfi).map(([a, s]) => `${a} bimestre ${s.bimestre}`).join(', ') || 'nada' : 'não coletado'}`);
+  console.log(`Origem do dinheiro (MSC): ${Object.entries(c.origem.anos).map(([a, x]) => `${a} ${x.tipo} mês ${x.mes}`).join(', ') || 'nada'}`);
   console.log(`Fotos: ${Object.keys(c.fotos).length} de ${c.vereadores.length}`);
   console.log(`Folha da Câmara: ${Object.keys(c.folhaCamara).length} meses; respostas conferidas: ${Object.keys(c.respostas).length}`);
   console.log(`Prefeitura: IEGM ${c.iegm ? Object.keys(c.iegm.anos).length : 0} anos; obras ${c.obras ? c.obras.obras.length : 0}; contratos ${Object.keys(c.contratos).join(', ') || 'nenhum'}`);

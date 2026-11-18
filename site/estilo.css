@@ -114,6 +114,8 @@ th, td { text-align: left; padding: .4rem; border-bottom: 1px solid var(--linha)
 .o-proprios { background: var(--ambar); }
 .o-coletivo { background: var(--presente); }
 .o-outros { background: #9AA5B1; }
+.d-livre { background: var(--rio); }
+.d-carimbado { background: var(--ambar); }
 .legenda { list-style: none; padding: 0; margin: 0 0 1rem; display: flex; flex-wrap: wrap; gap: .35rem 1rem; font-size: .9rem; }
 .ponto { display: inline-block; width: .8rem; height: .8rem; border-radius: 50%; margin-right: .35rem; vertical-align: -1px; }
 

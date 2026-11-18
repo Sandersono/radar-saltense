@@ -18,6 +18,8 @@ export const OUTROS_NOMES = {
 export const TCE_RECEITAS = 'https://transparencia.tce.sp.gov.br/api/json/receitas/salto';
 export const TCE_DESPESAS = 'https://transparencia.tce.sp.gov.br/api/json/despesas/salto';
 export const SICONFI_RREO = 'https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo';
+// Matriz de Saldos Contábeis (MSC) orçamentária: receita e despesa por fonte de recurso (página origem.html).
+export const SICONFI_MSC = 'https://apidatalake.tesouro.gov.br/ords/siconfi/tt/msc_orcamentaria';
 export const IBGE_SALTO = 3545209;
 // Onde o morador confere nomes de quem recebeu (o site não mostra nome de pessoa física).
 export const LINKS_CREDOR = {

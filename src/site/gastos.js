@@ -25,7 +25,7 @@ const dezMaiores = (a) => {
 
 const pessoasFisicas = (a) => `<p>Pessoas físicas: ${reais(a.pessoasFisicas.total)} para ${numero(a.pessoasFisicas.quantidade)} pessoas. Os nomes de pessoas físicas não aparecem aqui. Para conferir, use a consulta oficial por credor: ${link(LINKS_CREDOR.prefeitura, 'Portal da Transparência da Prefeitura (Despesa Detalhada por Credor)')}, escolhendo a instituição e o ano, ou ${link(LINKS_CREDOR.tce, 'TCE-SP, Despesas por Fornecedor')}.</p>`;
 
-function blocoAno(ano, a) {
+function blocoAno(ano, a, comOrigem) {
   const orgaos = Object.entries(a.porOrgao).filter(([, v]) => v > 0).map(([k, v]) => [ORGAOS[k], v]);
   const grupos = Object.entries(a.porGrupo).map(([k, v]) => [GRUPOS_GASTO[k], v]);
   const areas = a.areas
@@ -45,6 +45,7 @@ ${pessoasFisicas(a)}
 <section class="secao cartao">
 <h3>Para quais áreas</h3>
 ${areas}
+${comOrigem ? '<p><a href="origem.html#destino">De onde veio o dinheiro gasto →</a></p>' : ''}
 </section>
 <section class="secao cartao">
 <h3>Empresas e entidades que mais receberam</h3>
@@ -83,7 +84,7 @@ ${avisoTce(d, 'despesas')}
 <nav class="sumario" aria-label="Nesta página"><a class="chip" href="#por-ano">Por ano</a><a class="chip" href="#novas">Ponto de atenção</a><a class="chip" href="#busca-empresas">Buscar empresa</a><a class="chip" href="#fontes-gastos">Fontes</a></nav>
 <div id="por-ano">
 ${seletor}
-${anos.map((ano) => blocoAno(ano, g.anos[ano])).join('\n')}
+${anos.map((ano) => blocoAno(ano, g.anos[ano], Boolean(d.origem))).join('\n')}
 </div>
 <section id="novas" class="secao cartao" aria-labelledby="t-novas">
 <h2 id="t-novas">Ponto de atenção do mandato: novas com valor alto</h2>

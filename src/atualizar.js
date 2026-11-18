@@ -11,6 +11,7 @@ import { serializarRespostas } from './regras/respostas.js';
 import { reaproveitarTce, datasTce, idadeTce } from './regras/tce-anterior.js';
 import { mesclarIegm, mesclarContratos, escolherObras } from './regras/prefeitura.js';
 import { mesclarFontesObras } from './regras/obras-cidade.js';
+import { mesclarOrigem } from './regras/origem.js';
 import { hojeSP, marcos, semanaComHistorico, atualizarSemanas, serializarSemanas } from './regras/semana.js';
 
 const usarCache = process.argv.includes('--usar-cache');
@@ -32,7 +33,7 @@ for (const [id, e] of Object.entries(coleta.respostas || {})) {
 coleta.respostas = respostas;
 // Emendas e promessas são arquivos de referência editados à mão: com cache, vale o que está no disco agora.
 if (usarCache) {
-  for (const [campo, caminho] of [['emendas', 'data/referencia/emendas.json'], ['promessas', 'data/referencia/promessas.json'], ['ligacoesObras', 'data/referencia/obras-ligacoes.json']]) {
+  for (const [campo, caminho] of [['emendas', 'data/referencia/emendas.json'], ['promessas', 'data/referencia/promessas.json'], ['ligacoesObras', 'data/referencia/obras-ligacoes.json'], ['fontesRecursos', 'data/referencia/fontes-recursos.json']]) {
     const ref = await doDisco(caminho);
     coleta[campo] = Object.keys(ref).length ? ref : null;
   }
@@ -48,6 +49,9 @@ coleta.contratos = usarCache ? mesclarContratos(coleta.contratos, contratosDisco
 // Obras em Salto (PNCP, Obrasgov.br, paralisadas da Prefeitura): cada fonte fica com a coleta mais nova.
 const obrasFontesDisco = await doDisco('data/processado/obras-fontes.json');
 coleta.obrasFontes = usarCache ? mesclarFontesObras(coleta.obrasFontes, obrasFontesDisco) : mesclarFontesObras(obrasFontesDisco, coleta.obrasFontes);
+// Origem do dinheiro (MSC do Tesouro): por ano, fica a matriz mais completa (encerramento > mês mais novo).
+const origemDisco = await doDisco('data/processado/origem.json');
+coleta.origem = usarCache ? mesclarOrigem(coleta.origem, origemDisco) : mesclarOrigem(origemDisco, coleta.origem);
 let anterior = null;
 try { anterior = JSON.parse(await readFile('data/processado/meta.json', 'utf8')); } catch (e) { if (e.code !== 'ENOENT') throw e; }
 // TCE-SP fora do ar: receitas/gastos não coletados repetem o último resultado publicado.
@@ -91,6 +95,7 @@ const json = (v) => `${JSON.stringify(v, null, 2)}\n`;
 if (coleta.iegm && Object.keys(coleta.iegm.anos).length) await writeFile('data/processado/iegm.json', json(coleta.iegm));
 if (coleta.obras) await writeFile('data/processado/obras.json', json(coleta.obras));
 if (Object.keys(coleta.contratos).length) await writeFile('data/processado/contratos.json', json(coleta.contratos));
+if (Object.keys(coleta.origem.anos).length) await writeFile('data/processado/origem.json', json(coleta.origem));
 if (Object.values(coleta.obrasFontes).some(Boolean)) await writeFile('data/processado/obras-fontes.json', json(coleta.obrasFontes));
 const gerado = await gerarSite(dados, 'dist', semanas);
 // Avisos do gerador (ex.: bairro novo sem nome fixo) também vão para a manutenção e para a sentinela.

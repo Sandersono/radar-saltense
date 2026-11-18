@@ -70,6 +70,7 @@ ${barras(tipos, totalTipos)}
 <p>Toda a arrecadação oficial de ${r.anoPainel}, até o último mês publicado. Os repasses do Estado e da União vêm, em boa parte, de impostos que eles arrecadam (como ICMS, IPVA e Imposto de Renda) e dividem com as cidades por regras da lei.</p>
 ${barras(grupos, totalGrupos)}
 <p class="nota">Ficaram fora do total ${reais(r.foraPainel)} que só passaram de um órgão público da cidade para outro (receitas intraorçamentárias), para não contar o mesmo dinheiro duas vezes.</p>
+${d.origem ? '<p><a class="botao" href="origem.html">De onde vem o dinheiro (por fonte) →</a></p>' : ''}
 </section>
 <section id="fontes-impostometro" class="secao">
 <h2>De onde vêm os números</h2>

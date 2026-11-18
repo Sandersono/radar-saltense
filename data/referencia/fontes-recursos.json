@@ -1,0 +1,1173 @@
+{
+ "titulo": "Fontes ou Destinações de Recursos de Estados, DF e Municípios (Anexo I da Portaria STN/MF nº 710/2021) e Código de Acompanhamento da Execução Orçamentária - CO (Anexo II)",
+ "versao": "Tabela 2026 (planilha FR atualizada até a Portaria STN/MF nº 2.897, de 27/11/2025; aba CO até a Portaria STN/MF nº 963, de 08/04/2026). A tabela 2025 é idêntica exceto pela fonte 863 (nova em 2026) e pelos CO 1071, 1072, 3230 e 3240 (novos em 2026).",
+ "urls": {
+  "pagina": "https://www.gov.br/tesouronacional/pt-br/contabilidade-e-custos/federacao/fonte-ou-destinacao-de-recursos",
+  "tabela2026": "https://thot-arquivos.tesouro.gov.br/publicacao-anexo/28902",
+  "tabela2025": "https://thot-arquivos.tesouro.gov.br/publicacao-anexo/27165",
+  "portaria710Consolidada": "https://thot-arquivos.tesouro.gov.br/publicacao-anexo/28863"
+ },
+ "formatoNaMSC": {
+  "fonte_recursos": "4 dígitos: 1º dígito = identificação do exercício; 2º a 4º = código da fonte desta lista",
+  "primeiroDigito": {
+   "1": "Recursos do Exercício Corrente",
+   "2": "Recursos de Exercícios Anteriores (ex.: superávit financeiro reaberto)",
+   "9": "Recursos Condicionados"
+  },
+  "complemento_fonte": "Código de Acompanhamento da Execução Orçamentária (CO), 4 dígitos, lista \"complementos\" abaixo",
+  "ano_fonte_recursos": "na API vem 1 ou 2, igual ao 1º dígito da fonte"
+ },
+ "grupoDestino": "regra sugerida no relatório origem-dinheiro.md, seção 4; o CO prevalece: 1001/1070/1071/1072 -> educacao, 1002 -> saude, 3110-3140 e 3210-3240 -> convenios_emendas",
+ "fontes": [
+  {
+   "codigo": "500",
+   "nome": "Recursos não Vinculados de Impostos",
+   "especificacao": "Recursos de impostos e transferências de impostos de livre aplicação. Em atendimento ao disposto no inciso X do art. 4º da Lei Complementar nº 141, de 13 de janeiro de 2012, para identificação do percentual mínimo aplicado em ASPS, essa fonte de recursos deverá ser associada ao marcador que identifica as despesas que podem ser consideradas para esse limite. A mesma lógica será utilizada para a identificação do percentual mínimo de aplicação em MDE.",
+   "bloco": "RECURSOS LIVRES (NÃO VINCULADOS)",
+   "grupoDestino": "livre",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "501",
+   "nome": "Outros Recursos não Vinculados",
+   "especificacao": "Outros recursos não vinculados que não se enquadram na especificação acima.",
+   "bloco": "RECURSOS LIVRES (NÃO VINCULADOS)",
+   "grupoDestino": "livre",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "502",
+   "nome": "Recursos não vinculados da compensação de impostos.",
+   "especificacao": "Controle dos recursos não vinculados provenientes da compensação de impostos. Essa fonte de recursos deverá ser associada ao marcador que identifica as despesas que podem ser consideradas para cumprimento dos limites mínimos de aplicação em ASPS e em MDE.",
+   "bloco": "RECURSOS LIVRES (NÃO VINCULADOS)",
+   "grupoDestino": "livre",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "503",
+   "nome": "Apoio financeiro da União em decorrência de estado de calamidade pública.",
+   "especificacao": "Controle dos recursos transferidos pela União a título de apoio financeiro com o objetivo de enfrentar situações de calamidade pública e suas consequências sociais e econômicas, como o apoio financeiro decorrente da Medida Provisória nº 1.222, de 21 de maio de 2024.",
+   "bloco": "RECURSOS LIVRES (NÃO VINCULADOS)",
+   "grupoDestino": "livre",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "540",
+   "nome": "Transferências do FUNDEB - Impostos e Transferências de Impostos",
+   "especificacao": "Controle dos recursos recebidos do FUNDEB referente à repartição dentro de cada Estado, com base nos incisos I, II e III do art. 212-A da Constituição Federal. Na fase da despesa, quando for o caso, será necessário associar esta fonte ao marcador do percentual de aplicação no pagamento da remuneração dos profissionais da educação básica em efetivo exercício para identificar o cumprimento do percentual mínimo de 70% estabelecido no inciso XI do art. 212-A da CF.",
+   "bloco": "RECURSOS VINCULADOS À EDUCAÇÃO",
+   "grupoDestino": "educacao",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "541",
+   "nome": "Transferências do FUNDEB - Complementação da União - VAAF",
+   "especificacao": "Controle dos recursos de complementação da União ao FUNDEB - VAAF, com base na alínea a do inciso V do art. 212-A da Constituição Federal. Na fase da despesa, quando for o caso, será necessário associar esta fonte ao marcador do percentual de aplicação no pagamento da remuneração dos profissionais da educação básica em efetivo exercício para identificar o cumprimento do percentual mínimo de 70% estabelecido no inciso XI do art. 212-A da CF.",
+   "bloco": "RECURSOS VINCULADOS À EDUCAÇÃO",
+   "grupoDestino": "educacao",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "542",
+   "nome": "Transferências do FUNDEB - Complementação da União - VAAT",
+   "especificacao": "Controle dos recursos de complementação da União ao FUNDEB - VAAT, com base na alínea b do inciso V do art. 212-A da Constituição Federal. Na fase da despesa, quando for o caso, será necessário associar esta fonte ao marcador do percentual de aplicação no pagamento da remuneração dos profissionais da educação básica em efetivo exercício para identificar o cumprimento do percentual mínimo de 70% estabelecido no inciso XI do art. 212-A da CF.",
+   "bloco": "RECURSOS VINCULADOS À EDUCAÇÃO",
+   "grupoDestino": "educacao",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "543",
+   "nome": "Transferências do FUNDEB - Complementação da União - VAAR",
+   "especificacao": "Controle dos recursos de complementação da União ao FUNDEB - VAAR, com base na alínea c, inciso V do art. 212-A da Constituição Federal.",
+   "bloco": "RECURSOS VINCULADOS À EDUCAÇÃO",
+   "grupoDestino": "educacao",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "544",
+   "nome": "Recursos de Precatórios do FUNDEF",
+   "especificacao": "Controle dos recursos decorrentes do recebimento de precatórios derivados de ações judiciais associadas à complementação devida pela União ao Fundo de Manutenção e Desenvolvimento do Ensino Fundamental e de Valorização do Magistério dos demais entes federados (Precatórios Fundef).",
+   "bloco": "RECURSOS VINCULADOS À EDUCAÇÃO",
+   "grupoDestino": "educacao",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "545",
+   "nome": "Recursos de Precatórios do FUNDEB (2007- 2020)",
+   "especificacao": "Controle dos recursos decorrentes do recebimento de precatórios derivados de ações judiciais associadas aos repasses ao Fundo de Manutenção e Desenvolvimento da Educação Básica e de Valorização dos Profissionais da Educação (Fundeb) 2007-2020, para atendimento ao previsto no artigo 47-A da Lei nº 14.113, de 25 de dezembro de 2020.",
+   "bloco": "RECURSOS VINCULADOS À EDUCAÇÃO",
+   "grupoDestino": "educacao",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "546",
+   "nome": "Transferências do FUNDEB - Complementação da União - ETI",
+   "especificacao": "Controle dos recursos de complementação da União ao Fundeb destinados às ações de fomento à criação de matrículas em tempo integral na educação básica pública no âmbito do Fundeb, conforme disposto no art. 212-A, inciso XIV, da CF/88.",
+   "bloco": "RECURSOS VINCULADOS À EDUCAÇÃO",
+   "grupoDestino": "educacao",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "550",
+   "nome": "Transferência do Salário-Educação",
+   "especificacao": "Controle dos recursos originários de transferências recebidas do Fundo Nacional do Desenvolvimento da Educação – FNDE, relativos aos repasses referentes ao salário-educação.",
+   "bloco": "RECURSOS VINCULADOS À EDUCAÇÃO",
+   "grupoDestino": "educacao",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "551",
+   "nome": "Transferências de Recursos do FNDE referentes ao Programa Dinheiro Direto na Escola (PDDE)",
+   "especificacao": "Controle dos recursos originários de transferências do Fundo Nacional do Desenvolvimento da Educação – FNDE, destinados ao Programa Dinheiro Direto na Escola (PDDE).",
+   "bloco": "RECURSOS VINCULADOS À EDUCAÇÃO",
+   "grupoDestino": "educacao",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "552",
+   "nome": "Transferências de Recursos do FNDE referentes ao Programa Nacional de Alimentação Escolar (PNAE)",
+   "especificacao": "Controle dos recursos originários de transferências do Fundo Nacional do Desenvolvimento da Educação – FNDE, destinados ao Programa Nacional de Alimentação Escolar (PNAE).",
+   "bloco": "RECURSOS VINCULADOS À EDUCAÇÃO",
+   "grupoDestino": "educacao",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "553",
+   "nome": "Transferências de Recursos do FNDE Referentes ao Programa Nacional de Apoio ao Transporte Escolar (PNATE)",
+   "especificacao": "Controle dos recursos originários de transferências do Fundo Nacional do Desenvolvimento da Educação – FNDE, destinados ao Programa Nacional de Apoio ao Transporte Escolar (PNATE).",
+   "bloco": "RECURSOS VINCULADOS À EDUCAÇÃO",
+   "grupoDestino": "educacao",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "569",
+   "nome": "Outras Transferências de Recursos do FNDE",
+   "especificacao": "Controle dos demais recursos originários de transferências do Fundo Nacional do Desenvolvimento da Educação – FNDE.",
+   "bloco": "RECURSOS VINCULADOS À EDUCAÇÃO",
+   "grupoDestino": "educacao",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "570",
+   "nome": "Transferências do Governo Federal referentes a Convênios e Instrumentos Congêneres vinculados à Educação",
+   "especificacao": "Controle dos recursos originários de transferências em decorrência da celebração de convênios e instrumentos congêneres com a União, cuja destinação encontra-se vinculada a programas da educação.",
+   "bloco": "RECURSOS VINCULADOS À EDUCAÇÃO",
+   "grupoDestino": "educacao",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "571",
+   "nome": "Transferências do Estado referentes a Convênios e Instrumentos Congêneres vinculados à Educação",
+   "especificacao": "Controle dos recursos originários de transferências em decorrência da celebração de convênios e instrumentos congêneres com os Estados, cuja destinação encontra-se vinculada a programas da educação.",
+   "bloco": "RECURSOS VINCULADOS À EDUCAÇÃO",
+   "grupoDestino": "educacao",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "572",
+   "nome": "Transferências de Municípios referentes a Convênios e Instrumentos Congêneres vinculados à Educação",
+   "especificacao": "Controle dos recursos originários de transferências em decorrência da celebração de convênios e instrumentos congêneres com outros municípios, cuja destinação encontra-se vinculada a programas da educação.",
+   "bloco": "RECURSOS VINCULADOS À EDUCAÇÃO",
+   "grupoDestino": "educacao",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "573",
+   "nome": "Royalties e Participação Especial de Petróleo e Gás Natural Vinculados à Educação - Lei nº 12.858/2013",
+   "especificacao": "Controle dos recursos vinculados à Educação, originários de transferências recebidas pelos entes, relativos a Royalties e Participação Especial com base no art. 2º da Lei nº 12.858/2013.",
+   "bloco": "RECURSOS VINCULADOS À EDUCAÇÃO",
+   "grupoDestino": "educacao",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "574",
+   "nome": "Operações de Crédito Vinculadas à Educação",
+   "especificacao": "Controle dos recursos originários de operações de crédito, cuja destinação encontra-se vinculada a programas da educação.",
+   "bloco": "RECURSOS VINCULADOS À EDUCAÇÃO",
+   "grupoDestino": "financiamentos",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "575",
+   "nome": "Outras Transferências de Convênios e Instrumentos Congêneres vinculados à Educação",
+   "especificacao": "Controle dos recursos originários de transferências de entidades privadas, estrangeiras ou multigovernamentais em virtude de assinatura de convênios e instrumentos congêneres, cuja destinação encontra-se vinculada a programas de educação.",
+   "bloco": "RECURSOS VINCULADOS À EDUCAÇÃO",
+   "grupoDestino": "educacao",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "576",
+   "nome": "Transferências de Recursos dos Estados para programas de educação",
+   "especificacao": "Controle dos recursos transferidos pelos Estados para programas de educação, que não decorram de celebração de convênios, contratos de repasse e termos de parceria.",
+   "bloco": "RECURSOS VINCULADOS À EDUCAÇÃO",
+   "grupoDestino": "educacao",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "599",
+   "nome": "Outros Recursos Vinculados à Educação",
+   "especificacao": "Controle dos demais recursos vinculados à Educação, não enquadrados nas especificações anteriores.",
+   "bloco": "RECURSOS VINCULADOS À EDUCAÇÃO",
+   "grupoDestino": "educacao",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "600",
+   "nome": "Transferências Fundo a Fundo de Recursos do SUS provenientes do Governo Federal - Bloco de Manutenção das Ações e Serviços Públicos de Saúde",
+   "especificacao": "Controle dos recursos originários de transferências do Fundo Nacional de Saúde, referentes ao Sistema Único de Saúde (SUS) e relacionados ao Bloco de Manutenção das Ações e Serviços Públicos de Saúde.",
+   "bloco": "RECURSOS VINCULADOS À SAUDE",
+   "grupoDestino": "saude",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "601",
+   "nome": "Transferências Fundo a Fundo de Recursos do SUS provenientes do Governo Federal - Bloco de Estruturação da Rede de Serviços Públicos de Saúde",
+   "especificacao": "Controle dos recursos originários de transferências do Fundo Nacional de Saúde, referentes ao Sistema Único de Saúde (SUS) e relacionados ao Bloco de Estruturação na Rede de Serviços Públicos de Saúde.",
+   "bloco": "RECURSOS VINCULADOS À SAUDE",
+   "grupoDestino": "saude",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "602",
+   "nome": "Transferências Fundo a Fundo de Recursos do SUS provenientes do Governo Federal - Bloco de Manutenção das Ações e Serviços Públicos de Saúde – Recursos destinados ao enfrentamento da COVID-19 no bojo da ação 21C0.",
+   "especificacao": "Controle dos recursos originários de transferências do Fundo Nacional de Saúde, referentes ao Sistema Único de Saúde (SUS), relacionados ao Bloco de Manutenção das Ações e Serviços Públicos de Saúde, e destinados ao enfrentamento da COVID-19 no bojo da ação 21C0 do orçamento da União.",
+   "bloco": "RECURSOS VINCULADOS À SAUDE",
+   "grupoDestino": "saude",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "603",
+   "nome": "Transferências Fundo a Fundo de Recursos do SUS provenientes do Governo Federal - Bloco de Estruturação da Rede de Serviços Públicos de Saúde – Recursos destinados ao enfrentamento da COVID-19 no bojo da ação 21C0.",
+   "especificacao": "Controle dos recursos originários de transferências do Fundo Nacional de Saúde, referentes ao Sistema Único de Saúde (SUS), relacionados ao Bloco de Estruturação na Rede de Serviços Públicos de Saúde e destinados ao enfrentamento da COVID-19 no bojo da ação 21C0 do orçamento da União.",
+   "bloco": "RECURSOS VINCULADOS À SAUDE",
+   "grupoDestino": "saude",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "604",
+   "nome": "Transferências provenientes do Governo Federal destinadas ao vencimento dos agentes comunitários de saúde e dos agentes de combate às endemias",
+   "especificacao": "Controle dos recursos originários do Governo Federal, referentes ao Sistema Único de Saúde (SUS), relacionados ao vencimento dos agentes comunitários de saúde e dos agentes de combate às endemias, nos termos do art. 198, §7ª da Constituição Federal.",
+   "bloco": "RECURSOS VINCULADOS À SAUDE",
+   "grupoDestino": "saude",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "605",
+   "nome": "Assistência financeira da União destinada à complementação ao pagamento dos pisos salariais para profissionais da enfermagem.",
+   "especificacao": "Controle dos recursos transferidos pela União, a título de assistência financeira complementar, para o cumprimento dos pisos salariais profissionais nacionais para o enfermeiro, o técnico de enfermagem, o auxiliar de enfermagem e a parteira, conforme estabelecido pela CF/88, art. 198, §§12 a 15.",
+   "bloco": "RECURSOS VINCULADOS À SAUDE",
+   "grupoDestino": "saude",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "621",
+   "nome": "Transferências Fundo a Fundo de Recursos do SUS provenientes do Governo Estadual",
+   "especificacao": "Controle dos recursos originários de transferências do Fundo Estadual de Saúde, referentes ao Sistema Único de Saúde (SUS).",
+   "bloco": "RECURSOS VINCULADOS À SAUDE",
+   "grupoDestino": "saude",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "622",
+   "nome": "Transferências Fundo a Fundo de Recursos do SUS provenientes dos Governos Municipais",
+   "especificacao": "Controle dos recursos originários de transferências dos Fundos de Saúde de outros municípios, referentes ao Sistema Único de Saúde (SUS).",
+   "bloco": "RECURSOS VINCULADOS À SAUDE",
+   "grupoDestino": "saude",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "631",
+   "nome": "Transferências do Governo Federal referentes a Convênios e Instrumentos Congêneres vinculados à Saúde",
+   "especificacao": "Controle dos recursos originários de transferências em decorrência da celebração de convênios e instrumentos congêneres com a União, cuja destinação encontra-se vinculada a programas da saúde.",
+   "bloco": "RECURSOS VINCULADOS À SAUDE",
+   "grupoDestino": "saude",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "632",
+   "nome": "Transferências do Estado referentes a Convênios e Instrumentos Congêneres vinculados à Saúde",
+   "especificacao": "Controle dos recursos originários de transferências em decorrência da celebração de convênios e instrumentos congêneres com os Estados, cuja destinação encontra-se vinculada a programas da saúde.",
+   "bloco": "RECURSOS VINCULADOS À SAUDE",
+   "grupoDestino": "saude",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "633",
+   "nome": "Transferências de Municípios referentes a Convênios Instrumentos Congêneres vinculados à Saúde",
+   "especificacao": "Controle dos recursos originários de transferências em decorrência da celebração de convênios e instrumentos congêneres com outros Municípios, cuja destinação encontra-se vinculada a programas da saúde.",
+   "bloco": "RECURSOS VINCULADOS À SAUDE",
+   "grupoDestino": "saude",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "634",
+   "nome": "Operações de Crédito vinculadas à Saúde",
+   "especificacao": "Controle dos recursos originários de operações de crédito, cuja destinação encontra-se vinculada a programas da saúde.",
+   "bloco": "RECURSOS VINCULADOS À SAUDE",
+   "grupoDestino": "financiamentos",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "635",
+   "nome": "Royalties e Participação Especial de Petróleo e Gás Natural vinculados à Saúde - Lei nº 12.858/2013",
+   "especificacao": "Controle dos recursos vinculados à Saúde, originários de transferências recebidas pelos entes, relativos a Royalties e Participação Especial com base no art. 2º da Lei nº 12.858/2013.",
+   "bloco": "RECURSOS VINCULADOS À SAUDE",
+   "grupoDestino": "saude",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "636",
+   "nome": "Outras Transferências de Convênios e Instrumentos Congêneres vinculados à Saúde",
+   "especificacao": "Controle dos recursos originários de transferências de entidades privadas, estrangeiras ou multigovernamentais em virtude de assinatura de convênios e instrumentos congêneres, cuja destinação encontra-se vinculada a programas de saúde.",
+   "bloco": "RECURSOS VINCULADOS À SAUDE",
+   "grupoDestino": "saude",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "659",
+   "nome": "Outros Recursos Vinculados à Saúde",
+   "especificacao": "Controle dos demais recursos vinculados à Saúde, não enquadrados nas especificações anteriores.",
+   "bloco": "RECURSOS VINCULADOS À SAUDE",
+   "grupoDestino": "saude",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "660",
+   "nome": "Transferência de Recursos do Fundo Nacional de Assistência Social - FNAS",
+   "especificacao": "Controle os recursos originários de transferências do Fundo Nacional de Assistência Social - Lei Federal nº 8.742, 07/12/1993.",
+   "bloco": "RECURSOS VINCULADOS À ASSISTÊNCIA SOCIAL",
+   "grupoDestino": "assistencia",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "661",
+   "nome": "Transferência de Recursos dos Fundos Estaduais de Assistência Social",
+   "especificacao": "Controle dos recursos originários de transferências dos fundos estaduais de assistência social.",
+   "bloco": "RECURSOS VINCULADOS À ASSISTÊNCIA SOCIAL",
+   "grupoDestino": "assistencia",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "662",
+   "nome": "Transferências de Recursos dos Fundos Municipais de Assistência Social",
+   "especificacao": "Controle os recursos originários de transferência dos fundos municipais de assistência social.",
+   "bloco": "RECURSOS VINCULADOS À ASSISTÊNCIA SOCIAL",
+   "grupoDestino": "assistencia",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "665",
+   "nome": "Transferências de Convênios e Instrumentos Congêneres vinculados à Assistência Social",
+   "especificacao": "Controle dos recursos originários de transferências em decorrência da celebração de convênios e instrumentos congêneres cuja destinação encontra-se vinculada a programas da assistência social.",
+   "bloco": "RECURSOS VINCULADOS À ASSISTÊNCIA SOCIAL",
+   "grupoDestino": "assistencia",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "669",
+   "nome": "Outros Recursos Vinculados à Assistência Social",
+   "especificacao": "Controle dos demais recursos vinculados à Assistência Social, não enquadrados nas especificações anteriores.",
+   "bloco": "RECURSOS VINCULADOS À ASSISTÊNCIA SOCIAL",
+   "grupoDestino": "assistencia",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "700",
+   "nome": "Outras Transferências de Convênios ou Instrumentos Congêneres da União",
+   "especificacao": "Controle dos recursos originários de transferências federais em decorrência da celebração de convênios e instrumentos congêneres cuja destinação encontra-se vinculada aos seus objetos. Não serão controlados por esta fonte os recursos de convênios vinculados a programas da educação, da saúde e da assistência social.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "convenios_emendas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "701",
+   "nome": "Outras Transferências de Convênios ou Instrumentos Congêneres dos Estados",
+   "especificacao": "Controle dos recursos originários de transferências estaduais em decorrência da celebração de convênios e instrumentos congêneres, cuja destinação encontra-se vinculada aos seus objetos. Não serão controlados por esta fonte os recursos de convênios ou contratos de repasse vinculados a programas da educação, da saúde e da assistência social.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "convenios_emendas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "702",
+   "nome": "Outras Transferências de Convênios ou Instrumentos Congêneres dos Municípios",
+   "especificacao": "Controle dos recursos originários de transferências de municípios em decorrência da celebração de convênios e instrumentos congêneres, cuja destinação encontra-se vinculada aos seus objetos. Não serão controlados por esta fonte os recursos de convênios ou contratos de repasse vinculados a programas da educação, da saúde e da assistência social.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "convenios_emendas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "703",
+   "nome": "Outras Transferências de Convênios ou Instrumentos Congêneres de outras Entidades",
+   "especificacao": "Controle dos recursos originários de transferências de entidades privadas, estrangeiras ou multigovernamentais em virtude de assinatura de convênios e instrumentos congêneres, cuja destinação encontra-se vinculada aos seus objetos. Não serão controlados por esta fonte os recursos de convênios ou contratos de repasse vinculados a programas da educação, da saúde e da assistência social.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "convenios_emendas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "704",
+   "nome": "Transferências da União Referentes a Compensações Financeiras pela Exploração de Recursos Naturais",
+   "especificacao": "Controle dos recursos transferidos pela União, originários da arrecadação de royalties do petróleo, do gás natural, da cota-parte do bônus de assinatura de contrato de partilha de produção, exceto os recursos provenientes da Lei nº 12.858/2013, destinados às áreas da saúde ou da educação, e exceto os recursos classificados na FR 720 e na FR 721.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "705",
+   "nome": "Transferências dos Estados Referentes a Compensações Financeiras pela Exploração de Recursos Naturais",
+   "especificacao": "Controle dos recursos transferidos pelos Estados, originários da arrecadação de royalties do petróleo, do gás natural, da cota-parte do bônus de assinatura de contrato de partilha de produção.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "706",
+   "nome": "Transferência Especial da União",
+   "especificacao": "Controle dos recursos transferidos pela União provenientes de emendas individuais impositivas ao orçamento da União, por meio de transferências especiais, nos termos do art. 166-A da Constituição Federal.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "convenios_emendas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "707",
+   "nome": "Transferências da União – inciso I do art. 5º da Lei Complementar 173/2020",
+   "especificacao": "Controle dos recursos provenientes de transferência da União com base no disposto no inciso I do art. 5º da Lei Complementar 173, de 27 de maio de 2020.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "708",
+   "nome": "Transferência da União Referente à Compensação Financeira de Recursos Minerais",
+   "especificacao": "Controle dos recursos transferidos pela União, referentes à compensação financeira pela exploração de recursos minerais em atendimento às destinações e vedações previstas na legislação.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "709",
+   "nome": "Transferência da União referente à Compensação Financeira de Recursos Hídricos",
+   "especificacao": "Controle dos recursos transferidos pela União, referentes à compensação financeira de recursos hídricos em atendimento às destinações e vedações previstas na legislação.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "710",
+   "nome": "Transferência Especial dos Estados",
+   "especificacao": "Controle dos recursos transferidos pelos Estados provenientes de emendas individuais impositivas ao orçamento desses entes, por meio de transferências especiais, nos termos das constituições estaduais que reproduziram o disposto no art. 166-A da Constituição Federal.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "convenios_emendas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "711",
+   "nome": "Demais Transferências Obrigatórias não Decorrentes de Repartições de Receitas.",
+   "especificacao": "Controla os recursos originários de transferências obrigatórias da União que não decorram de repartição de receitas, como as transferências a título de auxílio ou apoio financeiro, e para os quais não tenha sido criada fonte ou destinação de receitas específica.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "712",
+   "nome": "Transferências Fundo a Fundo de Recursos do Fundo Penitenciário - FUNPEN",
+   "especificacao": "Controla as transferências obrigatórias de recursos do Fundo Penitenciário Nacional - FUNPEN.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "713",
+   "nome": "Transferências Fundo a Fundo de Recursos do Fundo de Segurança Pública - FSP",
+   "especificacao": "Controla as transferências obrigatórias de recursos do Fundo de Segurança Pública - FSP",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "714",
+   "nome": "Transferências Fundo a Fundo de Recursos do Fundo de Amparo ao Trabalhador - FAT",
+   "especificacao": "Controla as transferências obrigatórias de recursos do Fundo de Amparo ao Trabalhador - FAT",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "715",
+   "nome": "Transferências Destinadas ao Setor Cultural - LC nº 195/2022 – Art. 5º - Audiovisual",
+   "especificacao": "Controla a parcela dos recursos provenientes das transferências efetuadas pela União destinadas ao setor cultural, especificamente ao setor audiovisual, como ação emergencial adotada em decorrência dos efeitos econômicos e sociais da pandemia da covid-19, em cumprimento ao Art. 5º da Lei Complementar nº 195, de 8 de julho de 2022.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "716",
+   "nome": "Transferências Destinadas ao Setor cultural - LC nº 195/2022 – Art. 8º - Demais Setores da Cultura",
+   "especificacao": "Controla a parcela dos recursos provenientes das transferências efetuadas pela União destinadas ao setor cultural, como ação emergencial adotada em decorrência dos efeitos econômicos e sociais da pandemia da covid-19, em cumprimento ao Art. 8º da Lei Complementar nº 195, de 8 de julho de 2022",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "717",
+   "nome": "Assistência Financeira Transporte Coletivo – Art. 5º, Inciso IV, EC nº 123/2022",
+   "especificacao": "Controla os recursos provenientes das transferências da União a título de assistência financeira a serem utilizados no custeio da garantia prevista no §2º do art. 230 da CF, de gratuidade dos transportes coletivos urbanos aos maiores de 65 anos, conforme prevê o inciso IV, art. 5º, da Emenda Constitucional nº 123/2022.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "718",
+   "nome": "Auxílio Financeiro – Outorga Crédito Tributário ICMS – Art. 5º, Inciso V, EC nº 123/2022",
+   "especificacao": "Controla os recursos provenientes das transferências da União a título de auxílio financeiro para os Estados e o Distrito Federal que outorgarem créditos tributários do Imposto sobre Operações relativas à Circulação de Mercadorias e sobre Prestações de Serviços de Transporte Interestadual e Intermunicipal e de Comunicação (ICMS) aos produtores ou distribuidores de etanol hidratado em seu território, em montante equivalente ao valor recebido, conforme prevê o Inciso V, art. 5º, da Emenda Constitucional nº 123/2022.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "719",
+   "nome": "Transferências da Política Nacional Aldir Blanc de Fomento à Cultura - Lei nº 14.399/2022",
+   "especificacao": "Controla os recursos provenientes de transferências efetuadas pela União em decorrência da Política Nacional Aldir Blanc de Fomento à Cultura previstas no art. 6º da Lei nº 14.399, de 8 de julho de 2022.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "720",
+   "nome": "Transferências da União Referentes às participações na exploração de Petróleo e Gás Natural destinadas ao FEP - Lei 9.478/1997",
+   "especificacao": "Transferências da União referentes às participações na exploração de petróleo, gás natural e outros hidrocarbonetos fluidos, destinadas ao Fundo Especial - FEP, conforme estabelece o art. 50-F da Lei 9.478/97, exceto os recursos obrigatórios para educação e saúde de que trata a Lei 12.858/2013.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "721",
+   "nome": "Transferências da União Referentes a Cessão Onerosa de Petróleo – Lei nº 13.885/2019",
+   "especificacao": "Controle dos recursos transferidos pela União, provenientes da cessão onerosa à Petróleo Brasileiro S.A. - PETROBRAS, do exercício das atividades de pesquisa e lavra de petróleo, gás natural e outros hidrocarbonetos fluidos, originários dos leilões dos volumes excedentes ao limite a que se refere o § 2º do art. 1º da Lei nº 12.276, conforme estabelecido na Lei nº 13.885/2019.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "722",
+   "nome": "Transferências do Fundo de Equalização Federativa (FEF) - LC nº 212/2025 – Propag",
+   "especificacao": "Controla os recursos recebidos pelos Estados provenientes das transferências do FEF, em observância ao disposto no art. 9º, §2º da Lei Complementar nº 212, de 13 de janeiro de 2025.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "747",
+   "nome": "Outras Vinculações de Transferências da União",
+   "especificacao": "Controle dos recursos de outras transferências vinculadas da União, não enquadrados nas especificações anteriores.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "748",
+   "nome": "Outras Vinculações de Transferências dos Estados",
+   "especificacao": "Controle dos recursos de outras transferências vinculadas dos Estados, não enquadrados nas especificações anteriores.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "749",
+   "nome": "Outras vinculações de transferências",
+   "especificacao": "Controle dos recursos de outras transferências vinculadas, não enquadrados nas especificações anteriores.",
+   "bloco": "DEMAIS VINCULAÇÕES DECORRENTES DE TRANSFERÊNCIAS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "750",
+   "nome": "Recursos da Contribuição de Intervenção no Domínio Econômico - CIDE",
+   "especificacao": "Controle dos recursos recebidos pelos Estados, Distrito Federal e Municípios, decorrentes da distribuição da arrecadação da União com a CIDE - Combustíveis, com base no disposto na Lei nº 10.336/2001.",
+   "bloco": "DEMAIS VINCULAÇÕES LEGAIS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "751",
+   "nome": "Recursos da Contribuição para o Custeio do Serviço de Iluminação Pública - COSIP",
+   "especificacao": "Controle dos recursos da COSIP, nos termos do artigo 149-A da Constituição Federal da República.",
+   "bloco": "DEMAIS VINCULAÇÕES LEGAIS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "752",
+   "nome": "Recursos Vinculados ao Trânsito",
+   "especificacao": "Controle dos recursos com a cobrança das multas de trânsito nos termos do art. 320 da Lei nº 9.503/1997 - Código de Trânsito Brasileiro.",
+   "bloco": "DEMAIS VINCULAÇÕES LEGAIS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "753",
+   "nome": "Recursos Provenientes de Taxas, Contribuições e Preços Públicos",
+   "especificacao": "Controle dos recursos de taxas, contribuições e preços públicos vinculados conforme legislações específicas.",
+   "bloco": "DEMAIS VINCULAÇÕES LEGAIS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "754",
+   "nome": "Recursos de Operações de Crédito",
+   "especificacao": "Controle dos recursos originários de operações de crédito, exceto as operações cuja aplicação esteja destinada a programas de educação e saúde.",
+   "bloco": "DEMAIS VINCULAÇÕES LEGAIS",
+   "grupoDestino": "financiamentos",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "755",
+   "nome": "Recursos de Alienação de Bens/Ativos - Administração Direta",
+   "especificacao": "Controle dos recursos decorrentes da alienação de bens da Administração Direta, nos termos do art. 44 da Lei Complementar nº 101/2000.",
+   "bloco": "DEMAIS VINCULAÇÕES LEGAIS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "756",
+   "nome": "Recursos de Alienação de Bens/Ativos - Administração Indireta",
+   "especificacao": "Controle dos recursos decorrentes da alienação de bens da Administração Indireta, nos termos do art. 44 da Lei Complementar nº 101/2000.",
+   "bloco": "DEMAIS VINCULAÇÕES LEGAIS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "757",
+   "nome": "Recursos de Depósitos Judiciais – Lides das quais o Ente faz parte",
+   "especificacao": "Controle dos recursos de depósitos judiciais apropriados pelo ente de lides das quais o ente faz parte, com base na Lei Complementar nº 151/2015, no art. 101 do ADCT da Constituição Federal.",
+   "bloco": "DEMAIS VINCULAÇÕES LEGAIS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "758",
+   "nome": "Recursos de Depósitos Judiciais – Lides das quais o Ente não faz parte",
+   "especificacao": "Controle dos recursos de depósitos judiciais apropriados pelo ente de lides das quais o ente não faz parte, com base no art. 101 do ADCT da Constituição Federal.",
+   "bloco": "DEMAIS VINCULAÇÕES LEGAIS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "759",
+   "nome": "Recursos Vinculados a Fundos",
+   "especificacao": "Controle dos recursos vinculados a fundos, com exceção dos fundos relacionados à saúde, à educação, à assistência social e aos regimes de previdência.",
+   "bloco": "DEMAIS VINCULAÇÕES LEGAIS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "760",
+   "nome": "Recursos de Emolumentos, Taxas e Custas",
+   "especificacao": "Controle dos recursos de emolumentos, taxas e outros recursos arrecadados, judiciais ou extrajudiciais, observado o disposto em legislações específicas.",
+   "bloco": "DEMAIS VINCULAÇÕES LEGAIS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "761",
+   "nome": "Recursos Vinculados ao Fundo de Combate e Erradicação da Pobreza",
+   "especificacao": "Controle dos recursos vinculados ao Fundo de Combate e Erradicação da Pobreza, na forma prevista nos art. 82 do ADCT e da Lei Complementar nº 111, de 6 de julho de 2001.",
+   "bloco": "DEMAIS VINCULAÇÕES LEGAIS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "762",
+   "nome": "Recursos de Alienação de Ativos - Cessão de Direitos Creditórios",
+   "especificacao": "Controle dos recursos recebidos em razão da alienação de ativos no âmbito de cessão de direitos creditórios, de acordo com o disposto no §6º, art. 39-A, da Lei nº 4.320/64, que faz referência ao art. 44 da LRF.",
+   "bloco": "DEMAIS VINCULAÇÕES LEGAIS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "763",
+   "nome": "Recursos Próprios dos Estados Vinculados ao Propag - LC nº 212/2025",
+   "especificacao": "Controla os recursos próprios dos estados relativos ao percentual do saldo devedor atualizado das dívidas elencadas no art. 2º, § 1º, da Lei Complementar nº 212, de 13 de janeiro de 2025, e respectivos rendimentos, que o estado e comprometeu a aplicar diretamente nas finalidades previstas no art. 5º, § 2º, da referida Lei Complementar, conforme inciso I e III do art. 65 do Decreto nº12.433, de 14 de abril de 2025. FR a ser utilizada quando o estado optar pela contabilização dos recursos do art. 65 do Decreto nº 12.433/2025 por meio de fundo público específico.",
+   "bloco": "DEMAIS VINCULAÇÕES LEGAIS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "799",
+   "nome": "Outras Vinculações Legais",
+   "especificacao": "Controle de outros recursos vinculados por lei, não enquadrados nas especificações anteriores.",
+   "bloco": "DEMAIS VINCULAÇÕES LEGAIS",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "800",
+   "nome": "Recursos Vinculados ao RPPS - Fundo em Capitalização (Plano Previdenciário)",
+   "especificacao": "Controle dos recursos vinculados ao fundo em capitalização do RPPS. Esse plano existe tanto nos entes que segregaram quanto nos que não segregaram a massa dos segurados, observando-se o disposto na Portaria MF nº 464/2018. Na fase das despesas, será necessário associar esta fonte ao marcador que identifica a qual Poder ou Órgão se refere a despesa quando ela é executada no PO RPPS.",
+   "bloco": "RECURSOS VINCULADOS À PREVIDÊNCIA SOCIAL",
+   "grupoDestino": "previdencia",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "801",
+   "nome": "Recursos Vinculados ao RPPS - Fundo em Repartição (Plano Financeiro)",
+   "especificacao": "Controle dos recursos vinculados ao fundo em repartição do RPPS. Esse plano deve existir somente nos entes que segregaram a massa dos segurados, observando-se o disposto na Portaria MF nº 464/2018. Na fase da despesa, será necessário associar esta fonte ao marcador que identifica a qual Poder ou Órgão se refere a despesa quando ela é executada no PO RPPS.",
+   "bloco": "RECURSOS VINCULADOS À PREVIDÊNCIA SOCIAL",
+   "grupoDestino": "previdencia",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "802",
+   "nome": "Recursos Vinculados ao RPPS - Taxa de Administração",
+   "especificacao": "Controle dos recursos destinados ao custeio das despesas necessárias à organização e ao funcionamento da unidade gestora do RPPS, observando-se o disposto na Portaria MPS nº 402/2008 e na Portaria MF nº 464/2018, ambas alteradas pela Portaria ME nº 19.451/2020.",
+   "bloco": "RECURSOS VINCULADOS À PREVIDÊNCIA SOCIAL",
+   "grupoDestino": "previdencia",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "803",
+   "nome": "Recursos Vinculados ao Sistema de Proteção Social dos Militares (SPSM)",
+   "especificacao": "Controle dos recursos vinculados ao Sistema de Proteção Social dos Militares (SPSM), com base na Lei nº 6.880/1980 (Estatuto dos Militares), alterada pela Lei nº 13.954/2019.",
+   "bloco": "RECURSOS VINCULADOS À PREVIDÊNCIA SOCIAL",
+   "grupoDestino": "previdencia",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "804",
+   "nome": "Demais Recursos Previdenciários",
+   "especificacao": "Controle de demais recursos vinculados a benefícios previdenciários, como os benefícios mantidos sob responsabilidade financeira direta do Tesouro do ente Federativo, concedidos em atendimento a legislações específicas e que não foram incorporados ao RPPS.",
+   "bloco": "RECURSOS VINCULADOS À PREVIDÊNCIA SOCIAL",
+   "grupoDestino": "previdencia",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "860",
+   "nome": "Recursos Extraorçamentários Vinculados a Precatórios",
+   "especificacao": "Controle dos recursos financeiros junto aos tribunais de justiça vinculados ao pagamento de precatórios.",
+   "bloco": "RECURSOS EXTRAORÇAMENTÁRIOS",
+   "grupoDestino": "extraorcamentario",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "861",
+   "nome": "Recursos Extraorçamentários Vinculados a Depósitos Judiciais",
+   "especificacao": "Controle dos recursos financeiros junto aos tribunais de justiça vinculados aos depósitos judiciais.",
+   "bloco": "RECURSOS EXTRAORÇAMENTÁRIOS",
+   "grupoDestino": "extraorcamentario",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "862",
+   "nome": "Recursos de Depósitos de Terceiros",
+   "especificacao": "Controle dos recursos financeiros decorrentes de depósitos de terceiros.",
+   "bloco": "RECURSOS EXTRAORÇAMENTÁRIOS",
+   "grupoDestino": "extraorcamentario",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "863",
+   "nome": "Recursos a Distribuir - Comitê Gestor IBS",
+   "especificacao": "Controle dos recursos financeiros do IBS sob responsabilidade do Comitê Gestor a serem geridos e, após cumpridos os requisitos legais pertinentes, distribuídos aos estados, DF e municípios.",
+   "bloco": "RECURSOS EXTRAORÇAMENTÁRIOS",
+   "grupoDestino": "extraorcamentario",
+   "vigencia": "2026"
+  },
+  {
+   "codigo": "869",
+   "nome": "Outros Recursos Extraorçamentários",
+   "especificacao": "Controle dos demais recursos financeiros extraorçamentários, como, por exemplo, retenções e consignações.",
+   "bloco": "RECURSOS EXTRAORÇAMENTÁRIOS",
+   "grupoDestino": "extraorcamentario",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "880",
+   "nome": "Recursos Próprios dos Consórcios",
+   "especificacao": "Controle dos recursos próprios dos Consórcios Públicos (utilizada pelos consórcios públicos)",
+   "bloco": "OUTRAS VINCULAÇÕES",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "898",
+   "nome": "Recursos a Classificar",
+   "especificacao": "Classificação temporária enquanto não se identifica a correta vinculação.",
+   "bloco": "OUTRAS VINCULAÇÕES",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "899",
+   "nome": "Outros Recursos Vinculados",
+   "especificacao": "Controle dos recursos cuja aplicação seja vinculada e não tenha sido enquadrado em outras especificações.",
+   "bloco": "OUTRAS VINCULAÇÕES",
+   "grupoDestino": "outras_vinculadas",
+   "vigencia": "2025-2026"
+  }
+ ],
+ "complementos": [
+  {
+   "codigo": "1001",
+   "nome": "Identificação das despesas com manutenção e desenvolvimento do ensino",
+   "especificacao": "Identificação das despesas com MDE consideradas para o cumprimento do limite constitucional. Observa o disposto nos art. 70 e 71 da Lei nº 9.394, de 20 de dezembro de 1996. Identificação associada à Fonte de Recursos não Vinculados de Impostos, bem como à Fonte de Recursos não vinculados da compensação de impostos para verificação dos limites estabelecidos no artigo 212 da Constituição Federal.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "1002",
+   "nome": "Identificação das despesas com ações e serviços públicos de saúde",
+   "especificacao": "Identificação das despesas com ASPS consideradas para o cumprimento do limite constitucional. Observa o disposto nos art. 2º e 3º da Lei Complementar nº 141, de 13 de janeiro de 2012. Identificação associada à Fonte de Recursos não Vinculados de Impostos, bem como à Fonte de Recursos não vinculados da compensação de impostos para verificação do cumprimento dos limites estabelecidos na LC 141/2012 e na Constituição Federal.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "1010",
+   "nome": "Identificação das despesas custeadas com os recursos decorrentes da postergação do pagamento da dívida com a União em razão de calamidade pública.",
+   "especificacao": "Identifica as despesas custeadas com os recursos decorrentes da postergação do pagamento da dívida dos entes federativos afetados por calamidade pública reconhecida pelo Congresso Nacional, mediante proposta do Poder Executivo federal, nos termos da Lei Complementar nº 206, de 16 de maio de 2024. Esse marcador será associado às fontes de recursos na fase de execução das despesas custeadas com esses recursos.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "1070",
+   "nome": "Identificação do percentual aplicado no pagamento da remuneração dos profissionais da educação básica em efetivo exercício",
+   "especificacao": "Observa o disposto no inciso XI do art. 212-A da Constituição Federal. Identificação associada à Fonte de Recursos do FUNDEB para verificação da aplicação mínima estabelecida nesse dispositivo.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "1071",
+   "nome": "Identificação do percentual aplicado na criação de matrículas em tempo integral (ETI) na educação básica",
+   "especificacao": "Observa o disposto no inciso XV do art. 212-A da Constituição Federal, com identificação vinculada às fontes ou destinações de recursos do FUNDEB, para fins de verificação da aplicação mínima destinada à criação de matrículas em tempo integral na educação básica, conforme estabelecido no referido dispositivo.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2026"
+  },
+  {
+   "codigo": "1072",
+   "nome": "Identificação do percentual aplicado no pagamento da remuneração dos profissionais da educação básica em efetivo exercício e na criação de matrículas em tempo integral (ETI) na educação básica",
+   "especificacao": "Observa, simultaneamente, o disposto nos incisos XI e XV do art. 212-A da Constituição Federal, com identificação vinculada às fontes ou destinações de recursos do FUNDEB, para fins de verificação da aplicação mínima destinada à remuneração dos profissionais da educação básica em efetivo exercício, no contexto da criação de matrículas em tempo integral na educação básica, conforme estabelecido nos referidos dispositivos.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2026"
+  },
+  {
+   "codigo": "1111",
+   "nome": "Benefícios previdenciários - Poder Executivo – Fundo em Capitalização (Plano Previdenciário)",
+   "especificacao": "Identificam a qual Poder ou Órgão se refere a despesa quando ela é executada no Poder ou Órgão - PO RPPS, possibilitando a geração automática dos valores das linhas referentes a “Pessoal Inativo e Pensionista” no quadro da “Despesa Bruta com Pessoal” do Demonstrativo da Despesa com Pessoal, bem como a identificação das despesas com benefícios previdenciários efetuados em cada plano quando há segregação das massas. Serão associado às fontes de recursos utilizadas para pagamento de benefícios previdenciários.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "1121",
+   "nome": "Benefícios previdenciários - Poder Legislativo – Fundo em Capitalização (Plano Previdenciário)",
+   "especificacao": "",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "1122",
+   "nome": "Benefícios previdenciários - Tribunal de Contas – Fundo em Capitalização (Plano Previdenciário)",
+   "especificacao": "",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "1123",
+   "nome": "Benefícios previdenciários - Tribunal de Contas dos Municípios – Fundo em Capitalização (Plano Previdenciário)",
+   "especificacao": "",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "1124",
+   "nome": "Benefícios previdenciários - Ministério Público de Contas – Fundo em Capitalização (Plano Previdenciário)",
+   "especificacao": "",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "1125",
+   "nome": "Benefícios previdenciários - Ministério Público de Contas dos Municípios – Fundo em Capitalização (Plano Previdenciário)",
+   "especificacao": "",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "1131",
+   "nome": "Benefícios previdenciários - Tribunal de Justiça – Fundo em Capitalização (Plano Previdenciário)",
+   "especificacao": "",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "1132",
+   "nome": "Benefícios previdenciários - Tribunal de Justiça Militar – Fundo em Capitalização (Plano Previdenciário)",
+   "especificacao": "",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "1141",
+   "nome": "Benefícios previdenciários - Ministério Público – Fundo em Capitalização (Plano Previdenciário)",
+   "especificacao": "",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "1151",
+   "nome": "Benefícios previdenciários - Defensoria Pública - Fundo em Capitalização (Plano Previdenciário)",
+   "especificacao": "",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "2111",
+   "nome": "Benefícios previdenciários - Poder Executivo - Fundo em Repartição (Plano Financeiro)",
+   "especificacao": "Identificam a qual Poder ou Órgão se refere a despesa quando ela é executada no PO RPPS, possibilitando a geração automática dos valores das linhas referentes a “Pessoal Inativo e Pensionista” no quadro da “Despesa Bruta com Pessoal” do Demonstrativo da Despesa com Pessoal, bem como a identificação das despesas com benefícios previdenciários efetuados em cada plano quando há segregação das massas. Serão associados às fontes de recursos utilizadas para pagamento de benefícios previdenciários.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "2121",
+   "nome": "Benefícios previdenciários - Poder Legislativo - Fundo em Repartição (Plano Financeiro)",
+   "especificacao": "",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "2122",
+   "nome": "Benefícios previdenciários - Tribunal de Contas - Fundo em Repartição (Plano Financeiro)",
+   "especificacao": "",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "2123",
+   "nome": "Benefícios previdenciários - Tribunal de Contas dos Municípios - Fundo em Repartição (Plano Financeiro)",
+   "especificacao": "",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "2124",
+   "nome": "Benefícios previdenciários - Ministério Público de Contas - Fundo em Repartição (Plano Financeiro)",
+   "especificacao": "",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "2125",
+   "nome": "Benefícios previdenciários - Ministério Público de Contas dos Municípios - Fundo em Repartição (Plano Financeiro)",
+   "especificacao": "",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "2131",
+   "nome": "Benefícios previdenciários - Tribunal de Justiça - Fundo em Repartição (Plano Financeiro)",
+   "especificacao": "",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "2132",
+   "nome": "Benefícios previdenciários - Tribunal de Justiça Militar - Fundo em Repartição (Plano Financeiro)",
+   "especificacao": "",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "2141",
+   "nome": "Benefícios previdenciários - Ministério Público - Fundo em Repartição (Plano Financeiro)",
+   "especificacao": "",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "2151",
+   "nome": "Benefícios previdenciários - Defensoria Pública - Fundo em Repartição (Plano Financeiro)",
+   "especificacao": "",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "2211",
+   "nome": "Benefícios Previdenciários - Militares SPSM",
+   "especificacao": "Identifica as despesas com inatividade e pensões militares do Sistema de Proteção Social dos Militares (SPSM), conforme prevê a Lei 13.954, de 16 de dezembro de 2019. Será associado à execução orçamentária na fase de execução da despesa.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "2301",
+   "nome": "Identificação das despesas com implementação e expansão de matrículas da educação profissional técnica de nível médio – Propag",
+   "especificacao": "Identificação da aplicação dos recursos estinados à implementação e à expansão de matrículas da educação profissional técnica de nível médio, em atendimento ao disposto no art. 5º, § 2º, da Lei Complementar nº 212, de 13 de janeiro de 2025, e nos arts. 68 a 71 do Decreto nº 12.433, de 14 de abril de 2025. Identificação associada às subfunções 362 - Ensino Médio, 363 - Ensino Profissional e 366 - Educação de Jovens e Adultos, da Função 12 - Educação, definidas pela Portaria MOG nº 42, de 14 de abril de 1999. Código de utilização exclusiva pelos estados que aderirem ao Propag (LC 212/2025)",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "2302",
+   "nome": "Identificação dos investimentos em infraestrutura para universalização do ensino infantil – Propag",
+   "especificacao": "Identificação das despesas com investimentos em infraestrutura para universalização do ensino infantil em atendimento ao disposto no art. 5º, § 2º, da Lei Complementar nº 212, de 13 de janeiro de 2025, e no art. 78 do Decreto nº 12.433, de 14 de abril de 2025",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "2303",
+   "nome": "Identificação dos investimentos em infraestrutura para universalização da educação em tempo integral – Propag",
+   "especificacao": "Identificação das despesas com investimentos em infraestrutura para universalização da educação em tempo integral em atendimento ao disposto no art. 5º, § 2º, da Lei Complementar nº 212, de 13 de janeiro de 2025, e no art. 78 do Decreto nº 12.433, de 14 de abril de 2025. Identificação associada às subfunções 361 - Ensino Fundamental, 362 - Ensino Médio da Função 12 - Educação, 365 - Educação Infantil e 367 - Educação Especial, definidas pela Portaria MOG nº 42, de 14 de abril de 1999. Código de utilização exclusiva pelos estados que aderirem ao Propag (LC 212/2025)",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "2304",
+   "nome": "Identificação dos investimentos em adaptação às mudanças climáticas – Propag",
+   "especificacao": "Identificação das despesas com investimentos em adaptação às mudanças climáticas em atendimento ao disposto no art. 5º, § 2º, da Lei Complementar nº 212, de 13 de janeiro de 2025, e no art. 78 do Decreto nº 12.433, de 14 de abril de 2025. Código de utilização exclusiva pelos estados que aderirem ao Propag (LC 212/2025)",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "2305",
+   "nome": "Identificação dos investimentos em universidades estaduais – Propag",
+   "especificacao": "Identificação das despesas com investimentos em universidades estaduais em atendimento ao disposto no art. 5º, § 2º, da Lei Complementar nº 212, de 13 de janeiro de 2025, e no art. 78 do Decreto nº 12.433, de 14 de abril de 2025. Identificação associada à subfunção 364 - Ensino Superior, da Função 12 - Educação, definida pela Portaria MOG nº 42, de 14 de abril de 1999. Código de utilização exclusiva pelos estados que aderirem ao Propag (LC 212/2025)",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "2306",
+   "nome": "Identificação dos investimentos em saneamento – Propag",
+   "especificacao": "Identificação das despesas com investimentos em saneamento em atendimento ao disposto no art. 5º, § 2º, da Lei Complementar nº 212, de 13 de janeiro de 2025, e no art. 78 do Decreto nº 12.433, de 14 de abril de 2025. Identificação associada à Função 17 - Saneamento, definida pela Portaria MOG nº 42, de 14 de abril de 1999. Código de utilização exclusiva pelos estados que aderirem ao Propag (LC 212/2025)",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "2307",
+   "nome": "Identificação dos investimentos em habitação – Propag",
+   "especificacao": "Identificação das despesas com investimentos em habitação em atendimento ao disposto no art. 5º, § 2º, da Lei Complementar nº 212, de 13 de janeiro de 2025, e no art. 78 do Decreto nº 12.433, de 14 de abril de 2025. Identificação associada à Função 16 - Habitação, definida pela Portaria MOG nº 42, de 14 de abril de 1999. Código de utilização exclusiva pelos estados que aderirem ao Propag (LC 212/2025)",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "2308",
+   "nome": "Identificação dos investimentos em transportes – Propag",
+   "especificacao": "Identificação das despesas com investimentos em transportes em atendimento ao disposto no art. 5º, § 2º, da Lei Complementar nº 212, de 13 de janeiro de 2025, e no art. 78 do Decreto nº 12.433, de 14 de abril de 2025. Identificação associada à Função 26 - Transporte, definida pela Portaria MOG nº 42, de 14 de abril de 1999 Código de utilização exclusiva pelos estados que aderirem ao Propag (LC 212/2025)",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "2309",
+   "nome": "Identificação dos investimentos em segurança pública – Propag",
+   "especificacao": "Identificação das despesas com investimentos em segurança pública em atendimento ao disposto no art. 5º, § 2º, da Lei Complementar nº 212, de 13 de janeiro de 2025, e no art. 78 do Decreto nº 12.433, de 14 de abril de 2025. Identificação associada à Função 06 - Segurança Pública, definida pela Portaria MOG nº 42, de 14 de abril de 1999 Código de utilização exclusiva pelos estados que aderirem ao Propag (LC 212/2025)",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA EXECUÇÃO DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "3101",
+   "nome": "Identificação das transferências da União para enfrentamento à calamidade pública.",
+   "especificacao": "Identifica as transferências e a aplicação dos recursos transferidos pela União aos estados e aos municípios em decorrência de situações de calamidade pública e de emergência. Esse marcador será associado às fontes de recursos referentes às transferências na fase da arrecadação da receita, no controle dos ativos e passivos e na fase de execução das despesas custeadas com esses recursos.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NAS FASES EXECUÇÃO DA RECEITA E DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "3110",
+   "nome": "Identificação das Transferências da União decorrentes de emendas parlamentares individuais",
+   "especificacao": "Transferências decorrentes de emendas parlamentares individuais, na forma previstas no parágrafo 9º do art. 166, da CF/88, acrescido pela Emenda Constitucional nº 86/2015. Esse marcador será associado às fontes de recursos referentes às transferências decorrentes de emendas obrigatórias, na fase da arrecadação da receita, no controle dos ativos e passivos e na fase de execução das despesas custeadas com esses recursos.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NAS FASES EXECUÇÃO DA RECEITA E DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "3111",
+   "nome": "Identificação das Transferências da União decorrentes de emendas parlamentares individuais - calamidade pública.",
+   "especificacao": "Identifica as transferências e a aplicação dos recursos transferidos pela União em decorrência de situações de calamidade pública e de emergência por meio de emendas parlamentares individuais, na forma prevista no parágrafo 9º do art. 166, da CF/88. Esse marcador será associado às fontes de recursos referentes às transferências decorrentes de emendas obrigatórias, na fase da arrecadação da receita, no controle dos ativos e passivos e na fase de execução das despesas custeadas com esses recursos.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NAS FASES EXECUÇÃO DA RECEITA E DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "3120",
+   "nome": "Identificação das Transferências da União decorrentes de emendas parlamentares de bancada",
+   "especificacao": "Transferências decorrentes de emendas parlamentares de bancada, na forma prevista no parágrafo 11 do art. 166, da CF/88, acrescido pela Emenda Constitucional nº 100/2019. Esse marcador deverá ser associado às fontes de recursos referentes às transferências decorrentes de emendas obrigatórias, na fase de arrecadação da receita, no controle dos ativos e passivos e na fase de execução das despesas custeadas com esses recursos.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NAS FASES EXECUÇÃO DA RECEITA E DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "3121",
+   "nome": "Identificação das Transferências da União decorrentes de emendas parlamentares de bancada - calamidade pública.",
+   "especificacao": "Identifica as transferências e a aplicação dos recursos transferidos pela União em decorrência de situações de calamidade pública e de emergência por meio de emendas parlamentares de bancada, na forma prevista no parágrafo 12 do art. 166, da CF/88. Esse marcador deverá ser associado às fontes de recursos referentes às transferências decorrentes de emendas obrigatórias, na fase de arrecadação da receita, no controle dos ativos e passivos e na fase de execução das despesas custeadas com esses recursos.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NAS FASES EXECUÇÃO DA RECEITA E DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "3130",
+   "nome": "Identificação das Transferências da União decorrentes de emendas parlamentares de comissão.",
+   "especificacao": "Identifica as transferências da União decorrentes de emendas parlamentares de comissão, na forma prevista no art. 44 da Resolução Nº 1, de 2006-CN. Esse marcador será associado às fontes de recursos referentes às transferências decorrentes dessas emendas, na fase da arrecadação da receita, no controle dos ativos e passivos e na fase de execução das despesas custeadas com esses recursos.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NAS FASES EXECUÇÃO DA RECEITA E DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "3140",
+   "nome": "Identificação das Transferências da União decorrentes de emendas parlamentares de relator.",
+   "especificacao": "Identifica as transferências da União decorrentes de emendas parlamentares de relator, na forma prevista no art. 53 da Resolução Nº 1, de 2006-CN. Esse marcador será associado às fontes de recursos referentes às transferências decorrentes dessas emendas, na fase da arrecadação da receita, no controle dos ativos e passivos e na fase de execução das despesas custeadas com esses recursos.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NAS FASES EXECUÇÃO DA RECEITA E DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "3201",
+   "nome": "Identificação das transferências do Estado para enfrentamento à calamidade pública.",
+   "especificacao": "Identifica as transferências e a aplicação dos recursos transferidos pelos Estados aos municípios em decorrência de situações de calamidade pública e de emergência. Esse marcador será associado às fontes de recursos referentes às transferências na fase da arrecadação da receita, no controle dos ativos e passivos e na fase de execução das despesas custeadas com esses recursos.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NAS FASES EXECUÇÃO DA RECEITA E DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "3202",
+   "nome": "Identificação das transferências de municípios e de demais instituições para enfrentamento à calamidade pública.",
+   "especificacao": "Identifica as transferências e a aplicação dos recursos transferidos ou doados por municípios e por outras entidades públicas ou privadas em decorrência de situações de calamidade pública e de emergência. Esse marcador será associado às fontes de recursos referentes às transferências na fase da arrecadação da receita, no controle dos ativos e passivos e na fase de execução das despesas custeadas com esses recursos.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NAS FASES EXECUÇÃO DA RECEITA E DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "3210",
+   "nome": "Identificação das Transferências dos Estados decorrentes de emendas parlamentares individuais",
+   "especificacao": "Transferências decorrentes de emendas parlamentares individuais, na forma prevista nas Constituições Estaduais de forma similar ao previsto no parágrafo 9º do art. 166, da CF/88. Esse marcador, de utilização pelos municípios, será associado às fontes de recursos referentes às transferências decorrentes de emendas obrigatórias dos estados, devendo ser utilizado na fase da arrecadação da receita, no controle dos ativos e passivos e na fase de execução das despesas custeadas com esses recursos.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NAS FASES EXECUÇÃO DA RECEITA E DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "3211",
+   "nome": "Identificação das Transferências dos Estados decorrentes de emendas parlamentares individuais - calamidade pública.",
+   "especificacao": "Identifica as transferências e a aplicação dos recursos transferidos pelos estados em decorrência de situações de calamidade pública e de emergência por meio de emendas parlamentares individuais, na forma prevista nas Constituições Estaduais de forma similar ao previsto no parágrafo 9º do art. 166, da CF/88. Esse marcador, de utilização pelos municípios, será associado às fontes de recursos referentes às transferências decorrentes de emendas obrigatórias dos estados, devendo ser utilizado na fase da arrecadação da receita, no controle dos ativos e passivos e na fase de execução das despesas custeadas com esses recursos.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NAS FASES EXECUÇÃO DA RECEITA E DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "3220",
+   "nome": "Identificação das Transferências dos Estados decorrentes de emendas parlamentares de bancada",
+   "especificacao": "Transferências decorrentes de emendas parlamentares de bancada, na forma prevista nas Constituições Estaduais, de forma similar ao previsto no parágrafo 11 do art. 166, da CF/88. Esse marcador, de utilização pelos municípios, deverá ser associado às fontes de recursos referentes às transferências decorrentes de emendas obrigatórias dos estados, devendo ser utilizado na fase de arrecadação da receita, no controle dos ativos e passivos e na fase de execução das despesas custeadas com esses recursos.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NAS FASES EXECUÇÃO DA RECEITA E DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "3221",
+   "nome": "Identificação das Transferências dos Estados decorrentes de emendas parlamentares de bancada - calamidade pública.",
+   "especificacao": "Identifica as transferências e a aplicação dos recursos transferidos pelos estados em decorrência de situações de calamidade pública e de emergência por meio de emendas parlamentares de bancada, na forma prevista nas Constituições Estaduais, de forma similar ao previsto no parágrafo 12 do art. 166, da CF/88. Esse marcador, de utilização pelos municípios, deverá ser associado às fontes de recursos referentes às transferências decorrentes de emendas obrigatórias dos estados, devendo ser utilizado na fase de arrecadação da receita, no controle dos ativos e passivos e na fase de execução das despesas custeadas com esses recursos.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NAS FASES EXECUÇÃO DA RECEITA E DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  },
+  {
+   "codigo": "3230",
+   "nome": "Identificação das Transferências dos estados decorrentes de emendas parlamentares de comissão",
+   "especificacao": "Identifica as transferências dos estados decorrentes de emendas parlamentares de comissão, na forma prevista nos regulamentos internos. Esse marcador, de utilização pelos municípios será associado às fontes de recursos referentes às transferências decorrentes dessas emendas, na fase da arrecadação da receita, no controle dos ativos e passivos e na fase de execução das despesas custeadas com esses recursos.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NAS FASES EXECUÇÃO DA RECEITA E DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2026"
+  },
+  {
+   "codigo": "3240",
+   "nome": "Identificação das Transferências dos estados decorrentes de emendas parlamentares de relator",
+   "especificacao": "Identifica as transferências dos estados decorrentes de emendas parlamentares de relator, na forma prevista nos regulamentos internos. Esse marcador, de utilização pelos municípios, será associado às fontes de recursos referentes às transferências decorrentes dessas emendas, na fase da arrecadação da receita, no controle dos ativos e passivos e na fase de execução das despesas custeadas com esses recursos.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NAS FASES EXECUÇÃO DA RECEITA E DA DESPESA ORÇAMENTÁRIA",
+   "vigencia": "2026"
+  },
+  {
+   "codigo": "5001",
+   "nome": "Identificação das receitas de compensação de precatórios com dívida ativa - Art. 105 ADCT - CF, de 1988",
+   "especificacao": "Identifica as receitas decorrentes da compensação de débitos de natureza tributária ou de outra natureza com precatórios devidos pelo ente público que se enquadram no que estabelece o art. 105 do ADCT da Constituição Federal de 1988, para que seja possível identificar as receitas às quais não se aplicarão vinculações, conforme prevê o § 1º do artigo citado. Será associado à execução somente na fase de arrecadação da receita orçamentária.",
+   "uso": "CÓDIGOS PARA UTILIZAÇÃO NA FASE DE EXECUÇÃO DA RECEITA ORÇAMENTÁRIA",
+   "vigencia": "2025-2026"
+  }
+ ]
+}

@@ -10,6 +10,7 @@ import { resumoRespostas } from './regras/respostas.js';
 import { resumirEmendas } from './regras/emendas.js';
 import { validarPromessas, resumoPromessas, limparPromessas } from './regras/promessas.js';
 import { montarObras, validarLigacoes, numerosDePromessas } from './regras/obras-cidade.js';
+import { montarOrigem } from './regras/origem.js';
 
 const doisDigitos = (n) => String(n).padStart(2, '0');
 const DIAS_RESPOSTAS_RECENTES = 14;
@@ -45,7 +46,7 @@ function montarPromessas(ref, avisos) {
   return { ...dados, resumo: resumoPromessas(dados) };
 }
 
-export function processar({ vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, cnpjs2024, fotos, avisosFotos, folhaCamara, respostas, campanha, emendas, promessas, iegm, obras, contratos, duracaoPncpMs, obrasFontes, ligacoesObras, duracaoObrasMs, avisosFontes, avisosManutencao, coletadoEm }) {
+export function processar({ vereadores, cardsPorAno, presencas, votacoes, receitas, despesas, siconfi, origem, fontesRecursos, cnpjs2024, fotos, avisosFotos, folhaCamara, respostas, campanha, emendas, promessas, iegm, obras, contratos, duracaoPncpMs, obrasFontes, ligacoesObras, duracaoObrasMs, avisosFontes, avisosManutencao, coletadoEm }) {
   const casar = criarCasador(vereadores, OUTROS_NOMES);
   const inicio = `${ANO_INICIO}-01-01`;
   const naoAtribuidos = [];
@@ -256,6 +257,10 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
     if (p.candidatos && p.candidatos.length) manutencao.push(`Obra pendente "${p.nome}": possível obra já na lista (${p.candidatos.join(', ')}). Conferir e colocar o número do PNCP/Obrasgov em data/referencia/obras-ligacoes.json.`);
   }
   if (fo.pncp && fo.pncp.comprasPendentes) manutencao.push(`Obras no PNCP: ${fo.pncp.comprasPendentes} contratações ainda sem modalidade conferida; ficam para as próximas atualizações.`);
+  // Origem do dinheiro (MSC do Tesouro), conferida com as receitas e os pagamentos do TCE-SP no mesmo período.
+  const dadosOrigem = montarOrigem({ origem, ref: fontesRecursos, receitasMeses: resumoReceitas ? resumoReceitas.meses : null, despesasMensais: resumoDespesas ? resumoDespesas.mensal : null });
+  avisos.push(...dadosOrigem.avisos);
+  manutencao.push(...dadosOrigem.manutencao);
   // Requerimentos respondidos nos últimos dias (para o resumo da semana).
   const desdeRecentes = new Date(Date.parse(hojeISO) - DIAS_RESPOSTAS_RECENTES * 86400000).toISOString().slice(0, 10);
   const respostasRecentes = proposituras
@@ -289,6 +294,7 @@ export function processar({ vereadores, cardsPorAno, presencas, votacoes, receit
       campanha: { candidatos: (campanha && campanha.candidatos) || {} },
     },
     emendas: dadosEmendas,
+    origem: dadosOrigem.dados,
     promessas: dadosPromessas,
     obras: montadas.lista.length || fo.pncp || fo.obrasgov ? { lista: montadas.lista, resumo: montadas.resumo, fontes: montadas.fontes, pendentes: montadas.pendentes } : null,
     prefeitura: {

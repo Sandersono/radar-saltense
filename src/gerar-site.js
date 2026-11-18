@@ -6,6 +6,7 @@ import { paginaVereador } from './site/vereador.js';
 import { paginaVotacoes } from './site/votacoes.js';
 import { paginaImpostometro } from './site/impostometro.js';
 import { paginaGastos } from './site/gastos.js';
+import { paginaOrigem } from './site/origem.js';
 import { paginaCamara } from './site/camara.js';
 import { paginaPrefeitura } from './site/prefeitura.js';
 import { paginaFontes } from './site/fontes.js';
@@ -84,6 +85,7 @@ export async function gerarSite(d, destino, semanasSalvas = null) {
   await writeFile(`${destino}/feed.xml`, feedRss(d, ENDERECO, semanas));
   if (d.promessas) await pagina('promessas.html', paginaPromessas(d));
   if (d.receitas) await pagina('impostometro.html', paginaImpostometro(d));
+  if (d.origem) await pagina('origem.html', paginaOrigem(d));
   if (d.gastos) {
     await pagina('gastos.html', paginaGastos(d));
     await writeFile(`${destino}/dados/empresas.json`, JSON.stringify(d.gastos.empresas.map((e) => [e.cnpj, e.nome, e.porMes, e.porOrgao])));
