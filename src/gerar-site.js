@@ -28,12 +28,13 @@ import { sitemapXml, robotsTxt } from './site/medicao.js';
 async function recortarFoto(entrada, saida) {
   const { width, height } = await sharp(entrada).metadata();
   const g = geometriaRecorte(width, height);
-  await sharp(entrada)
+  // Recorte + folga primeiro (quadrado), redimensiona depois: no mesmo pipeline o sharp redimensiona antes de estender
+  // e a foto saía 240x293 (o CSS cortava em cima e embaixo).
+  const quadrado = await sharp(entrada)
     .extract({ left: g.esquerda, top: 0, width: g.lado, height: g.alturaCorpo })
     .extend({ top: g.folga, extendWith: 'copy' })
-    .resize(240, 240)
-    .webp({ quality: 78 })
-    .toFile(saida);
+    .toBuffer();
+  await sharp(quadrado).resize(240, 240).webp({ quality: 78 }).toFile(saida);
 }
 
 const FONTES = [

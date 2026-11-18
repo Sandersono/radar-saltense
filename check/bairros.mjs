@@ -117,7 +117,10 @@ for (const [k, n] of Object.entries(apelidos)) assert.equal(numeroFinal(k), nume
 // Todo bairro com página tem nome fixo (o endereço não muda quando a grafia mais comum muda).
 const todos = montarBairros(dados.proposituras, apelidos, nomes);
 assert.deepEqual(validarNomes(nomes, todos), []);
-assert.deepEqual(bairrosComPagina(todos).filter((b) => !b.fixo).map((b) => b.chave), []);
+// Bairro novo que passa do corte com os dados reais não pode travar o robô (o checar roda antes dele):
+// vira aviso aqui e aviso de manutenção no gerador (a sentinela leva ao e-mail). Os testes acima seguem como assert.
+const semNome = bairrosComPagina(todos).filter((b) => !b.fixo).map((b) => b.chave);
+if (semNome.length) console.warn(`Aviso: bairro com página e sem nome fixo em bairros-apelidos.json: ${semNome.join(', ')}`);
 
 // Textos da página de bairro: "e as obras" só com obras.
 assert.equal(descricaoBairro('Jardim Celani', 70, true), 'Em Jardim Celani (Salto/SP), os vereadores fizeram 70 pedidos desde 2025: veja os tipos de problema, as ruas mais citadas, os pedidos repetidos e as obras.');
