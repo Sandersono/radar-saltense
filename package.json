@@ -6,10 +6,11 @@
     "doc": "docs"
   },
   "scripts": {
-    "checar": "node check/regras.mjs && node check/folha.mjs && node check/respostas.mjs && node check/campanha.mjs && node check/tce.mjs && node check/contratos.mjs && node check/tce-anterior.mjs && node check/emendas.mjs && node check/promessas.mjs && node check/semana.mjs && node check/medicao.mjs && node check/obras.mjs && node check/bairros.mjs && node check/vistoria.mjs && node check/sentinela.mjs && node check/origem.mjs && node check/entenda.mjs && node check/seo.mjs && node check/painel.mjs",
+    "checar": "node check/regras.mjs && node check/folha.mjs && node check/respostas.mjs && node check/campanha.mjs && node check/tce.mjs && node check/contratos.mjs && node check/tce-anterior.mjs && node check/emendas.mjs && node check/promessas.mjs && node check/semana.mjs && node check/medicao.mjs && node check/obras.mjs && node check/bairros.mjs && node check/vistoria.mjs && node check/sentinela.mjs && node check/origem.mjs && node check/entenda.mjs && node check/seo.mjs && node check/painel.mjs && node check/osm.mjs",
     "coletar": "node src/coletar.js",
     "emendas": "node src/ferramentas/emendas.js",
     "promessas": "node src/ferramentas/promessas.js",
+    "osm": "node src/ferramentas/osm.js",
     "atualizar": "node src/atualizar.js",
     "processar": "node src/atualizar.js --usar-cache",
     "gerar": "node src/gerar.js",

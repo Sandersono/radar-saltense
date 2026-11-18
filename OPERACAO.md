@@ -115,7 +115,7 @@ Os alertas são issues com o rótulo `sentinela` no repositório e chegam por e-
 | Licitação da ETA João Jabour apareceu | Colocar o número do PNCP em `data/referencia/obras-ligacoes.json` (ligação `eta-joao-jabour`) e tirar o "pendente". |
 | Origem do dinheiro: MSC × TCE-SP acima de 3% | Abrir a consulta da MSC citada na manutenção e o TCE-SP do mesmo período. Se a Prefeitura reenviou a matriz, a próxima atualização corrige sozinha; se não, a diferença fica explicada na página. |
 | Origem do dinheiro: código sem nome | Baixar a planilha de fontes do ano no Tesouro (link em `data/referencia/fontes-recursos.json`) e acrescentar o código que faltou. |
-| Bairro novo passou de 10 pedidos | Colocar o nome fixo em `data/referencia/bairros-apelidos.json` (`nomes`). Depois, procurar o nome em `data/referencia/bairros-oficiais.json` e registrar em `oficial` (chave → nome oficial; `[]` se não consta) ou em `oficial_ligados` (quando o cadastro divide a área em vários nomes). Só registrar correspondência conferida. |
+| Bairro novo passou de 10 pedidos | Colocar o nome fixo em `data/referencia/bairros-apelidos.json` (`nomes`). Depois, procurar o nome em `data/referencia/bairros-oficiais.json` e registrar em `oficial` (chave → nome oficial; `[]` se não consta) ou em `oficial_ligados` (quando o cadastro divide a área em vários nomes). Só registrar correspondência conferida. Em dúvida, seção 8. |
 | Bairros oficiais: arquivo não lido ou com erro | As páginas saem sem a linha do nome oficial. Corrigir o JSON de `data/referencia/bairros-oficiais.json` (ver seção 7). |
 
 ## 5. Rotina mensal das promessas
@@ -134,6 +134,7 @@ Os alertas são issues com o rótulo `sentinela` no repositório e chegam por e-
 |---|---|
 | `npm run emendas` | Lê os PDFs de emendas da Câmara e gera `data/referencia/emendas.json`. Para em qualquer inconsistência. |
 | `node src/ferramentas/promessas.js` | Reextrai o plano de governo (TSE). Não roda no dia a dia: o status é editado à mão ou pela rotina mensal. |
+| `npm run osm` | Uma vez por mês: compara as páginas de bairro e a lista oficial com o OpenStreetMap (seção 8). Não faz parte do robô. |
 | `node src/ferramentas/campanha-2024.js` | Totais da campanha de 2024 (TSE). Dado fixo. |
 | `node src/ferramentas/base-2024.js` | Base de 2024 do Raio-X (empresas "novas"). Dado fixo. |
 | `node src/ferramentas/tce-paineis.js`, `contratos.js`, `folha-camara.js`, `respostas.js` | Cargas completas ou testes das fontes, fora do robô. |
@@ -149,12 +150,37 @@ Os alertas são issues com o rótulo `sentinela` no repositório e chegam por e-
 - `data/referencia/fontes-recursos.json`: tabela oficial de fontes de recursos e códigos de acompanhamento (CO) do Tesouro (Portaria STN 710/2021). Trocar quando sair a tabela de um ano novo (a de 2027 vem da Portaria STN/MF 1.986/2026).
 - `src/config.js`: vereadores esperados, medição de audiência (Cloudflare e GA4), grafias de nomes nas votações.
 
-## 8. Checagens antes de qualquer mudança
+## 8. Bairros: conferência
 
-- `npm run checar` roda todas as checagens (node:assert): regras, folha, respostas, campanha, TCE, contratos, emendas, promessas, semana, medição, obras, vistoria, bairros, sentinela, origem do dinheiro, Entenda (contrato do `entenda.json`) e SEO (lastmod, placeholders, trilha, títulos com " | Radar Saltense" e até 70 caracteres, 404). O robô também as roda antes de começar.
+O nome oficial de um bairro só vem de ato oficial. O OpenStreetMap e o Google Maps ajudam a achar o que conferir, mas nunca viram afirmação no site.
+
+### a) Lista oficial e como atualizar
+
+- Base: `data/referencia/bairros-oficiais.json` (PGV da Lei 3.227/2013, consolidada até 2017, mais os loteamentos de decretos e leis posteriores, cada um com o ato e o link). Detalhes na seção 7.
+- Atualizar: procurar na Imprensa Oficial (imprensaoficialmunicipal.com.br/salto) os decretos de loteamento ("loteamento denominado", "Valor Básico Unitário da Face de Quadra", "denominação das ruas do loteamento") e acrescentar o loteamento com o ato e o link. Outro caminho: pedir por LAI (e-SIC) à Prefeitura a relação de bairros e loteamentos do cadastro imobiliário.
+- A conferência de cada página fica em `data/referencia/bairros-apelidos.json`: `oficial` (chave → nomes oficiais; `[]` = conferido e não consta), `oficial_ligados` e o registro em `_leia_oficial`.
+
+### b) OpenStreetMap, uma vez por mês (`npm run osm`)
+
+- Rodar à mão (uma vez por mês, ou antes de revisar bairros). Não faz parte do robô diário e não trava nada.
+- Faz 3 consultas ao Overpass (com identificação, prazo e nova tentativa com espera em 429/5xx) e grava:
+  - `data/osm/salto.json`: lugares (nome, tipo, polígono ou ponto, centróide), problemas do OSM, contagem de `addr:suburb` e ruas (bairro quando o ponto médio cai num polígono; senão só "perto"). Vai para o repositório, separado de `data/referencia` por causa da licença ODbL (campo `licenca`). O site não lê esse arquivo; os centróides ficam para um mapa futuro, que então precisará mostrar "© colaboradores do OpenStreetMap" com link para openstreetmap.org/copyright.
+  - `relatorio-osm.md` na raiz (fora do repositório): grafias divergentes entre página, nome oficial e OSM; OSM × lista oficial; loteamentos só no OSM (fila de investigação: conferir no decreto antes de qualquer página); páginas sem nada no OSM; correções que valem a pena no próprio OSM (ex.: "Jardim da Ciudade II").
+- Ler o relatório e decidir o que muda em `bairros-apelidos.json`. Só muda com ato oficial ou com a conferência manual (item c) registrada. Nunca copiar nome, rua → bairro ou coordenada do OSM para `data/referencia`.
+- Se o Overpass falhar, rodar de novo outro dia: o arquivo anterior fica como está. Resposta suspeita (poucos lugares ou ruas) também não troca o arquivo.
+
+### c) Conferência manual no navegador (quando houver dúvida)
+
+- Quando: a sentinela ou a manutenção do `conferencia.md` avisam bairro sem correspondência oficial, ou o `relatorio-osm.md` mostra o oficial e o OSM discordando.
+- Como: abrir uma sessão do Claude e pedir para "conferir bairros em dúvida". O Claude abre o Google Maps e as fontes oficiais (Imprensa Oficial, PGV, decretos) no navegador embutido, decide caso a caso e registra só a decisão e a data em `_leia_oficial` e no mapeamento (`oficial` / `oficial_ligados`). Nada é copiado do Google (os termos de uso proíbem): nem nome, nem coordenada, nem traçado.
+- Exemplo (18/11/2026): "Jardim Alvorada" → Residencial Alvorada, confirmado pelo Google Maps e ligado; "Jardim Iracema" e "Barnabé" ficaram sem confirmação e seguem sem correspondência.
+
+## 9. Checagens antes de qualquer mudança
+
+- `npm run checar` roda todas as checagens (node:assert): regras, folha, respostas, campanha, TCE, contratos, emendas, promessas, semana, medição, obras, vistoria, bairros, sentinela, origem do dinheiro, Entenda (contrato do `entenda.json`) e SEO (lastmod, placeholders, trilha, títulos com " | Radar Saltense" e até 70 caracteres, 404) e as regras de comparação com o OpenStreetMap (`check/osm.mjs`, só com dados inventados). O robô também as roda antes de começar.
 - **Processo de mudança:** um revisor separado lê o código; a vistoria e a conferência no navegador cobrem rolagem lateral (320 a 1440 px), âncoras e CPF; e só depois o dono dá o ok para publicar.
 
-## 9. Acessos e chaves
+## 10. Acessos e chaves
 
 - **GitHub Actions:** usa a chave automática do próprio GitHub. Nada para renovar.
 - **Despertador:** chave fine-grained só para disparar o robô deste repositório, sem vencimento, em `/opt/radar-saltense/token` na VPS.
