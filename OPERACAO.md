@@ -135,6 +135,15 @@ Os alertas são issues com o rótulo `sentinela` no repositório e chegam por e-
 - **O que entrega:** um PR com tabela, provas e itens descartados. Ao juntar o PR, o robô publica no dia seguinte.
 - **Se não aparecer nada no dia 15:** ver a execução em claude.ai/code/routines.
 
+### 5b. Outras rotinas na nuvem do Claude (cada uma com disparo próprio, sem conectores)
+
+| Rotina | Quando (Brasília) | O que faz | O que entrega |
+|---|---|---|---|
+| Revisão semanal do site (`trig_018Fb3LRdAqgF4c4v81d5WeG`) | Segundas, 10:00 | Só lê o site no ar: números que não batem entre páginas, saltos estranhos, datas paradas, seções vazias, links oficiais quebrados, texto que soe como acusação, gênero de pessoa, CPF. Não muda nada. | Relatório na sessão; issue `revisao-semanal` se o GitHub CLI estiver disponível (fecha quando tudo certo). |
+| Revisão anual dos textos Entenda (`trig_01YZZNbcnarGgsUicTnugwuV`) | 10 de fevereiro, 09:00 | Confere na fonte oficial cada lei citada em `data/referencia/entenda.json` (reforma tributária, CF 29-A, 166, 212, Fundeb, LAI, Lei Orgânica e Regimento de Salto). | Se algo mudou: PR no ramo `entenda/<ano>` para aprovação; se nada mudou: "Nada mudou nas leis citadas". Nunca publica sozinha. |
+
+Gerenciar (pausar, rodar agora, mudar horário): claude.ai/code/routines.
+
 ## 6. Ferramentas manuais (só quando um aviso pedir)
 
 | Comando | Para quê |
@@ -171,8 +180,8 @@ O nome oficial de um bairro só vem de ato oficial. O OpenStreetMap e o Google M
 
 - Rodar à mão (uma vez por mês, ou antes de revisar bairros). Não faz parte do robô diário e não trava nada.
 - Faz 3 consultas ao Overpass (com identificação, prazo e nova tentativa com espera em 429/5xx) e grava:
-  - `data/osm/salto.json`: lugares (nome, tipo, polígono ou ponto, centróide), problemas do OSM, contagem de `addr:suburb` e ruas (bairro quando o ponto médio cai num polígono; senão só "perto"). Vai para o repositório, separado de `data/referencia` por causa da licença ODbL (campo `licenca`). O site não lê esse arquivo; os centróides ficam para um mapa futuro, que então precisará mostrar "© colaboradores do OpenStreetMap" com link para openstreetmap.org/copyright.
-  - `relatorio-osm.md` na raiz (fora do repositório): grafias divergentes entre página, nome oficial e OSM; OSM × lista oficial; loteamentos só no OSM (fila de investigação: conferir no decreto antes de qualquer página); páginas sem nada no OSM; correções que valem a pena no próprio OSM (ex.: "Jardim da Ciudade II").
+ - `data/osm/salto.json`: lugares (nome, tipo, polígono ou ponto, centróide), problemas do OSM, contagem de `addr:suburb` e ruas (bairro quando o ponto médio cai num polígono; senão só "perto"). Vai para o repositório, separado de `data/referencia` por causa da licença ODbL (campo `licenca`). O site não lê esse arquivo; os centróides ficam para um mapa futuro, que então precisará mostrar "© colaboradores do OpenStreetMap" com link para openstreetmap.org/copyright.
+ - `relatorio-osm.md` na raiz (fora do repositório): grafias divergentes entre página, nome oficial e OSM; OSM × lista oficial; loteamentos só no OSM (fila de investigação: conferir no decreto antes de qualquer página); páginas sem nada no OSM; correções que valem a pena no próprio OSM (ex.: "Jardim da Ciudade II").
 - Ler o relatório e decidir o que muda em `bairros-apelidos.json`. Só muda com ato oficial ou com a conferência manual (item c) registrada. Nunca copiar nome, rua → bairro ou coordenada do OSM para `data/referencia`.
 - Se o Overpass falhar, rodar de novo outro dia: o arquivo anterior fica como está. Resposta suspeita (poucos lugares ou ruas) também não troca o arquivo.
 
