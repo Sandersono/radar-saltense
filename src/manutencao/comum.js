@@ -51,7 +51,8 @@ export async function publicar({ nome, titulo, texto, precisa, agora }) {
   const abertos = JSON.parse(gh(['issue', 'list', '--label', rotulo, '--state', 'open', '--json', 'number']));
   const aberto = abertos.length ? String(abertos[0].number) : null;
   if (!precisa) {
-    if (aberto) gh(['issue', 'close', aberto, '--comment', `Tudo certo na verificação de ${dataBR(diaSP(agora))}. Encerrado.`]);
+    // Fecha todos os abertos com o rótulo (pode haver um alerta e um "a verificação falhou").
+    for (const i of abertos) gh(['issue', 'close', String(i.number), '--comment', `Tudo certo na verificação de ${dataBR(diaSP(agora))}. Encerrado.`]);
     return;
   }
   const arquivo = join(await mkdtemp(join(tmpdir(), 'manutencao-')), 'corpo.md');
