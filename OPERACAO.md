@@ -12,8 +12,13 @@ Registro de todas as rotinas que mantêm o site atualizado, de como cada uma é 
 | 11:00 | Horário reserva do GitHub (reserva 2) | `atualizar.yml` | Igual à reserva 1 |
 | 12:30 | **Sentinela** confere tudo | `.github/workflows/sentinela.yml` | Abre alerta (issue "sentinela") por e-mail se algo estiver errado |
 | Dia 15, 09:00 | **Rotina das promessas** procura provas oficiais | Rotina na nuvem do Claude (claude.ai/code/routines) | Abre PR em `promessas/AAAA-MM`; nada publica sozinha |
+| Dia 5, 09:00 | **Manutenção: população** (IBGE) | `.github/workflows/populacao.yml` | Issue `manutencao-populacao` (seção 11) |
+| Dia 6, 09:00 | **Manutenção: domínio** (vencimento no Registro.br) | `.github/workflows/dominio.yml` | Issue `manutencao-dominio` |
+| Dia 7, 09:00 | **Manutenção: arquivos de referência** | `.github/workflows/referencias.yml` | Issue `manutencao-referencias` |
+| 10 de janeiro, 09:00 | **Manutenção: virada do ano** | `.github/workflows/virada-do-ano.yml` | Sempre abre o issue `manutencao-virada-do-ano` com a lista de conferência |
+| Uma vez por mês | **Dependabot** propõe atualizar dependências | `.github/dependabot.yml` | PR com o rótulo `dependencias` (seção 12) |
 
-O GitHub atrasa horários agendados, às vezes por horas. Por isso existem o despertador e as reservas.
+O GitHub atrasa horários agendados, às vezes por horas. Por isso existem o despertador e as reservas. As verificações de manutenção não têm reserva: se uma atrasar, roda mais tarde no mesmo dia, e nada depende dela.
 
 ## 2. O robô diário (`npm run atualizar`)
 
@@ -117,6 +122,8 @@ Os alertas são issues com o rótulo `sentinela` no repositório e chegam por e-
 | Origem do dinheiro: código sem nome | Baixar a planilha de fontes do ano no Tesouro (link em `data/referencia/fontes-recursos.json`) e acrescentar o código que faltou. |
 | Bairro novo passou de 10 pedidos | Colocar o nome fixo em `data/referencia/bairros-apelidos.json` (`nomes`). Depois, procurar o nome em `data/referencia/bairros-oficiais.json` e registrar em `oficial` (chave → nome oficial; `[]` se não consta) ou em `oficial_ligados` (quando o cadastro divide a área em vários nomes). Só registrar correspondência conferida. Em dúvida, seção 8. |
 | Bairros oficiais: arquivo não lido ou com erro | As páginas saem sem a linha do nome oficial. Corrigir o JSON de `data/referencia/bairros-oficiais.json` (ver seção 7). |
+| Issue `manutencao-*` | Ver a seção 11: cada verificação diz no próprio issue o que fazer e em qual arquivo. |
+| "Manutenção, …: a verificação falhou" | A própria verificação quebrou (ex.: IBGE ou Registro.br fora do ar). Abrir o log pelo link do issue; se foi a rede, rodar de novo pelo botão "Run workflow" do workflow e fechar o issue. O site não é afetado. |
 
 ## 5. Rotina mensal das promessas
 
@@ -144,11 +151,11 @@ Os alertas são issues com o rótulo `sentinela` no repositório e chegam por e-
 - `data/referencia/promessas.json`: status das promessas, sempre com prova oficial.
 - `data/referencia/obras-ligacoes.json`: ligações entre obras do PNCP e do Obrasgov e as promessas. Uma ligação "pendente" pode ter um campo "buscar".
 - `data/referencia/bairros-apelidos.json`: grafias juntadas, nomes fixos dos bairros com página e a conferência com o cadastro oficial (`oficial` e `oficial_ligados`).
-- `data/referencia/bairros-oficiais.json`: nomes oficiais de bairros e loteamentos. Base: Anexo I da Planta Genérica de Valores (Lei 3.227/2013, consolidada até a Lei 3.683/2017), coluna "Bairro", com a grafia literal em `nome_na_lei`; mais os loteamentos de decretos e leis de 2015 a 2021 (`loteamentos_posteriores`, cada um com o ato e o link). Salto não tem bairros no IBGE (Censo 2022). Para atualizar: procurar na Imprensa Oficial (imprensaoficialmunicipal.com.br/salto) "loteamento denominado", "Valor Básico Unitário da Face de Quadra" e "denominação das ruas do loteamento", e acrescentar o loteamento novo com o ato e o link; se sair nova Planta Genérica de Valores, refazer a lista. Outro caminho: pedir por LAI (e-SIC) à Prefeitura a relação de bairros e loteamentos do cadastro imobiliário. Pesquisa completa em `.superpowers/pesquisa/bairros-oficiais.md`.
+- `data/referencia/bairros-oficiais.json`: nomes oficiais de bairros e loteamentos. Base: Anexo I da Planta Genérica de Valores (Lei 3.227/2013, consolidada até a Lei 3.683/2017), coluna "Bairro", com a grafia literal em `nome_na_lei`; mais os loteamentos de decretos e leis de 2015 a 2021 (`loteamentos_posteriores`, cada um com o ato e o link). Salto não tem bairros no IBGE (Censo 2022). Campo opcional `lai_pedido_em` (AAAA-MM-DD): data do último pedido por LAI da lista do cadastro; a verificação mensal de referências lembra o pedido quando a data mais nova (`data` ou `lai_pedido_em`) passa de um ano. Para atualizar: procurar na Imprensa Oficial (imprensaoficialmunicipal.com.br/salto) "loteamento denominado", "Valor Básico Unitário da Face de Quadra" e "denominação das ruas do loteamento", e acrescentar o loteamento novo com o ato e o link; se sair nova Planta Genérica de Valores, refazer a lista. Outro caminho: pedir por LAI (e-SIC) à Prefeitura a relação de bairros e loteamentos do cadastro imobiliário. Pesquisa completa em `.superpowers/pesquisa/bairros-oficiais.md`.
 - `data/referencia/emendas.json`: gerado pela ferramenta de emendas.
 - `data/referencia/entenda.json`: textos do Entenda e perguntas frequentes. Os números de Salto só por placeholder (lista em `src/site/entenda.js`, `PLACEHOLDERS`); `npm run checar` confere o contrato (`check/entenda.mjs`).
 - `data/referencia/fontes-recursos.json`: tabela oficial de fontes de recursos e códigos de acompanhamento (CO) do Tesouro (Portaria STN 710/2021). Trocar quando sair a tabela de um ano novo (a de 2027 vem da Portaria STN/MF 1.986/2026).
-- `src/config.js`: vereadores esperados, medição de audiência (Cloudflare e GA4), grafias de nomes nas votações.
+- `src/config.js`: vereadores esperados, medição de audiência (Cloudflare e GA4), grafias de nomes nas votações e a população (`POPULACAO`, divisor do "por morador" do impostômetro; o campo `ano` é opcional e serve à verificação mensal da população).
 
 ## 8. Bairros: conferência
 
@@ -177,7 +184,7 @@ O nome oficial de um bairro só vem de ato oficial. O OpenStreetMap e o Google M
 
 ## 9. Checagens antes de qualquer mudança
 
-- `npm run checar` roda todas as checagens (node:assert): regras, folha, respostas, campanha, TCE, contratos, emendas, promessas, semana, medição, obras, vistoria, bairros, sentinela, origem do dinheiro, Entenda (contrato do `entenda.json`) e SEO (lastmod, placeholders, trilha, títulos com " | Radar Saltense" e até 70 caracteres, 404) e as regras de comparação com o OpenStreetMap (`check/osm.mjs`, só com dados inventados). O robô também as roda antes de começar.
+- `npm run checar` roda todas as checagens (node:assert): regras, folha, respostas, campanha, TCE, contratos, emendas, promessas, semana, medição, obras, vistoria, bairros, sentinela, origem do dinheiro, Entenda (contrato do `entenda.json`) e SEO (lastmod, placeholders, trilha, títulos com " | Radar Saltense" e até 70 caracteres, 404) e as regras de comparação com o OpenStreetMap (`check/osm.mjs`, só com dados inventados) e as regras das verificações de manutenção (`check/manutencao.mjs`, só com dados inventados). O robô também as roda antes de começar.
 - **Processo de mudança:** um revisor separado lê o código; a vistoria e a conferência no navegador cobrem rolagem lateral (320 a 1440 px), âncoras e CPF; e só depois o dono dá o ok para publicar.
 
 ## 10. Acessos e chaves
@@ -186,3 +193,23 @@ O nome oficial de um bairro só vem de ato oficial. O OpenStreetMap e o Google M
 - **Despertador:** chave fine-grained só para disparar o robô deste repositório, sem vencimento, em `/opt/radar-saltense/token` na VPS.
 - **Domínio:** radarsaltense.com.br, registrado no Registro.br, com DNS na Cloudflare.
 - **Medição:** Cloudflare Web Analytics e GA4 `G-MBXN096LL3`, este só com consentimento.
+
+## 11. Verificações de manutenção (mensais e anuais)
+
+Cada verificação é um workflow separado, com horário e rótulo de issue próprios. Nenhuma mexe no site, nos dados ou no robô diário: só leem e abrem, comentam ou fecham um issue. Usam só a chave automática do GitHub (`GITHUB_TOKEN`).
+
+| Verificação | Quando (Brasília) | Script e workflow | Abre o issue quando |
+|---|---|---|---|
+| População | Dia 5, 09:00 (12:00 UTC) | `src/manutencao/populacao.js`, `populacao.yml` | A população do IBGE (estimativa, tabela 6579, ou Censo, tabela 4709, o que for mais novo) é diferente de `POPULACAO` em `src/config.js`, ou é de um ano mais novo que `POPULACAO.ano`. O issue traz o número, o ano, o link oficial e a linha exata a trocar. |
+| Domínio | Dia 6, 09:00 (12:00 UTC) | `src/manutencao/dominio.js`, `dominio.yml` | Faltam menos de 60 dias para o vencimento de radarsaltense.com.br (RDAP do Registro.br), o RDAP não traz a data ou o domínio não está ativo. A data de vencimento sai sempre no log. |
+| Arquivos de referência | Dia 7, 09:00 (12:00 UTC) | `src/manutencao/referencias.js`, `referencias.yml` | (a) código de fonte ou CO em `data/processado/origem.json` sem nome em `data/referencia/fontes-recursos.json`; (b) bairro com página sem nome fixo ou sem conferência no cadastro oficial (`bairros-apelidos.json`); (c) a lista oficial de bairros (`bairros-oficiais.json`) passou de um ano sem pedido por LAI registrado em `lai_pedido_em`; (d) erro de contrato ou placeholder desconhecido em `data/referencia/entenda.json`. Sem rede. |
+| Virada do ano | 10 de janeiro, 09:00 (12:00 UTC) | `src/manutencao/virada-do-ano.js`, `virada-do-ano.yml` | Sempre: lista de conferência com ✅ e ⚠️ (robô rodando no ano novo; receitas e despesas do ano novo, onde "ainda sem mês oficial" é normal; ano anterior fechado nas receitas, nos gastos e na origem, onde a MSCE pendente é normal; resumo da semana de 1º de janeiro; emendas do ano novo, com `npm run emendas` quando a Câmara publicar; promessas e obras; tabela de fontes do Tesouro do ano) e os lembretes do ano: população, tabela do Tesouro, renovação do domínio, revisão jurídica anual do Entenda (rotina na nuvem de fevereiro) e pedido por LAI dos bairros. Sem rede. |
+
+**Como o issue funciona** (igual à sentinela): rótulo `manutencao-<nome>`, menção ao dono na abertura, e chega por e-mail. Se já houver um aberto, só comenta quando o conteúdo muda (a data da 1ª linha não conta). Quando tudo volta ao normal, a verificação do mês seguinte fecha o issue. Se a própria verificação quebrar, o workflow abre um issue "a verificação falhou" com o link do log (seção 4).
+
+**Rodar à mão:** botão "Run workflow" do workflow na aba Actions; ou, no computador, `DRY_RUN=1 node src/manutencao/<nome>.js` mostra o corpo do issue sem chamar o GitHub. Na virada do ano, `AGORA=2027-01-10T12:00:00Z` simula a data.
+
+## 12. Dependências (Dependabot)
+
+- `.github/dependabot.yml`: uma vez por mês, um PR para as dependências do npm (raiz) e outro para as ações do GitHub (cada um agrupado), no máximo 2 abertos de cada, com o rótulo `dependencias`. Criar o rótulo uma vez no repositório (`gh label create dependencias`), senão o Dependabot abre o PR sem ele.
+- **Nunca juntar sozinho (sem auto-merge).** Antes de juntar: o PR precisa passar no `npm run checar` e ser revisado (o que mudou na dependência e se o robô e o site continuam iguais, seção 9). Mudança de versão principal (Playwright, pdfjs-dist, sharp) pede uma execução do robô com "Run workflow" depois de juntar.

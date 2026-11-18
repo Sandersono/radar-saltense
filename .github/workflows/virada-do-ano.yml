@@ -1,0 +1,36 @@
+name: "Manutenção: virada do ano"
+# Lista de conferência da virada do ano (sempre abre um issue em janeiro), sem rede.
+# Todo 10 de janeiro, às 12:00 UTC (09:00 em Brasília).
+# Roda separado do robô diário (atualizar.yml): não mexe no site nem nos dados, só abre, comenta ou fecha
+# o issue com o rótulo "manutencao-virada-do-ano". Ver OPERACAO.md, seção 11.
+
+on:
+  schedule:
+    - cron: '0 12 10 1 *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      DONO: ${{ github.repository_owner }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - run: node src/manutencao/virada-do-ano.js
+      - name: A própria verificação falhou
+        if: failure()
+        run: |
+          gh label create manutencao-virada-do-ano --color FBCA04 --description "Verificação de manutenção: virada-do-ano" --force >/dev/null || true
+          gh issue create --label manutencao-virada-do-ano \
+            --title "Manutenção, virada do ano: a verificação falhou ($(TZ=America/Sao_Paulo date +%d/%m/%Y))" \
+            --body "A verificação de manutenção \"virada-do-ano\" não conseguiu terminar. Veja o log em ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} e a seção 11 do OPERACAO.md. @${{ github.repository_owner }}"

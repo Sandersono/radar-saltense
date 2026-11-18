@@ -1,0 +1,22 @@
+# Dependabot: uma vez por mês, um PR por ecossistema (npm e GitHub Actions), no máximo 2 abertos.
+# Nunca juntar sozinho: o PR precisa passar no `npm run checar` e ser revisado antes (OPERACAO.md, seção 12).
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 2
+    labels: [dependencias]
+    groups:
+      npm:
+        patterns: ['*']
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 2
+    labels: [dependencias]
+    groups:
+      github-actions:
+        patterns: ['*']
