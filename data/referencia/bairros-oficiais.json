@@ -1,0 +1,1659 @@
+{
+ "_leia": "Nomes oficiais de bairros e loteamentos de Salto. \"bairros\": cadastro fiscal da Prefeitura (Anexo I da PGV, coluna \"Bairro\"). nome = forma expandida (abreviações desfeitas e acentos editoriais); nome_na_lei = grafia literal do Anexo I. Não é lei de bairros: o cadastro mistura bairros, loteamentos, condomínios e chácaras. \"loteamentos_posteriores\": loteamentos que não estão na PGV, com o ato oficial e o link. Como atualizar: OPERACAO.md, seção 7.",
+ "fonte": "Prefeitura da Estância Turística de Salto — Lei Municipal nº 3.227, de 23/10/2013 (Planta Genérica de Valores), Anexo I, coluna \"Bairro\" (cadastro imobiliário fiscal), consolidada até a Lei 3.683/2017",
+ "url": "https://salto.sp.gov.br/download/leis/Lei_3227_de_2013-PGV-Consolidada.pdf",
+ "data": "2013-10-23 (texto consolidado; arquivo publicado em 2018-10-04)",
+ "ibge": "Salto (3545209) não tem bairros na base do Censo 2022: 0 linhas em Agregados_por_bairros_basico_BR_20260520 (17.576 bairros no país). O IBGE só usa bairros instituídos por lei municipal.",
+ "bairros": [
+  {
+   "nome": "Bairro Atuau",
+   "nome_na_lei": "BAIRRO ATUAU",
+   "tipo": "bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    8
+   ],
+   "faces_de_quadra": 1
+  },
+  {
+   "nome": "Bairro Buru",
+   "nome_na_lei": "BAIRRO BURU",
+   "tipo": "bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    6,
+    7,
+    8,
+    9
+   ],
+   "faces_de_quadra": 25
+  },
+  {
+   "nome": "Bairro Canjica",
+   "nome_na_lei": "BAIRRO CANJICA",
+   "tipo": "bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    5
+   ],
+   "faces_de_quadra": 19
+  },
+  {
+   "nome": "Bairro Conte",
+   "nome_na_lei": "BAIRRO CONTE",
+   "tipo": "bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    5
+   ],
+   "faces_de_quadra": 1
+  },
+  {
+   "nome": "Bairro da Estação",
+   "nome_na_lei": "BAIRRO DA ESTACAO",
+   "tipo": "bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 24
+  },
+  {
+   "nome": "Bairro do Ajudante",
+   "nome_na_lei": "BAIRRO DO AJUDANTE",
+   "tipo": "bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    2,
+    7
+   ],
+   "faces_de_quadra": 12
+  },
+  {
+   "nome": "Bairro Guaraú",
+   "nome_na_lei": "BAIRRO GUARAU",
+   "tipo": "bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    5
+   ],
+   "faces_de_quadra": 39
+  },
+  {
+   "nome": "Bairro Guarujá",
+   "nome_na_lei": "BAIRRO GUARUJA",
+   "tipo": "bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 4
+  },
+  {
+   "nome": "Bairro Ituau",
+   "nome_na_lei": "BAIRRO ITUAU",
+   "tipo": "bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    8
+   ],
+   "faces_de_quadra": 2
+  },
+  {
+   "nome": "Bairro Joana Leite",
+   "nome_na_lei": "BAIRRO JOANA LEITE",
+   "tipo": "bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    9
+   ],
+   "faces_de_quadra": 13
+  },
+  {
+   "nome": "Bairro Lageado",
+   "nome_na_lei": "BAIRRO LAGEADO",
+   "tipo": "bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    6,
+    9
+   ],
+   "faces_de_quadra": 20
+  },
+  {
+   "nome": "Bairro Loatt",
+   "nome_na_lei": "BAIRRO LOATT",
+   "tipo": "bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    2
+   ],
+   "faces_de_quadra": 9
+  },
+  {
+   "nome": "Bairro Nossa Senhora do Monte Serrat",
+   "nome_na_lei": "BAIRRO N.S.MONTE SERRAT",
+   "tipo": "bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 30
+  },
+  {
+   "nome": "Bairro Olaria",
+   "nome_na_lei": "BAIRRO OLARIA",
+   "tipo": "bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    3,
+    6,
+    9
+   ],
+   "faces_de_quadra": 45
+  },
+  {
+   "nome": "Bairro Pedregulho",
+   "nome_na_lei": "BAIRRO PEDREGULHO",
+   "tipo": "bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 27
+  },
+  {
+   "nome": "Bairro Porto Góes",
+   "nome_na_lei": "BAIRRO PORTO GOES",
+   "tipo": "bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    5
+   ],
+   "faces_de_quadra": 13
+  },
+  {
+   "nome": "Bairro Santa Cruz",
+   "nome_na_lei": "BAIRRO SANTA CRUZ",
+   "tipo": "bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 10
+  },
+  {
+   "nome": "Bairro Três Cruzes",
+   "nome_na_lei": "BAIRRO TRES CRUZES",
+   "tipo": "bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    8
+   ],
+   "faces_de_quadra": 1
+  },
+  {
+   "nome": "Centro",
+   "nome_na_lei": "CENTRO",
+   "tipo": "centro",
+   "zonas_fiscais": [
+    1,
+    2,
+    5
+   ],
+   "faces_de_quadra": 195
+  },
+  {
+   "nome": "Chácara Araújo",
+   "nome_na_lei": "CHACARA ARAUJO",
+   "tipo": "chácaras/sítios",
+   "zonas_fiscais": [
+    6
+   ],
+   "faces_de_quadra": 11
+  },
+  {
+   "nome": "Chácara São Luiz",
+   "nome_na_lei": "CHACARA SAO LUIZ",
+   "tipo": "chácaras/sítios",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 3
+  },
+  {
+   "nome": "Chácaras de Recreio",
+   "nome_na_lei": "CHACARAS DE RECREIO",
+   "tipo": "chácaras/sítios",
+   "zonas_fiscais": [
+    9
+   ],
+   "faces_de_quadra": 1
+  },
+  {
+   "nome": "Chácaras Halter",
+   "nome_na_lei": "CHACARAS HALTER",
+   "tipo": "chácaras/sítios",
+   "zonas_fiscais": [
+    9
+   ],
+   "faces_de_quadra": 4
+  },
+  {
+   "nome": "Chácaras Iracema",
+   "nome_na_lei": "CHACARAS IRACEMA",
+   "tipo": "chácaras/sítios",
+   "zonas_fiscais": [
+    8
+   ],
+   "faces_de_quadra": 28
+  },
+  {
+   "nome": "Chácaras Maracajá",
+   "nome_na_lei": "CHACARAS MARACAJA",
+   "tipo": "chácaras/sítios",
+   "zonas_fiscais": [
+    8
+   ],
+   "faces_de_quadra": 22
+  },
+  {
+   "nome": "Chácaras Novo Horizonte",
+   "nome_na_lei": "CHACARAS NOVO HORIZONTE",
+   "tipo": "chácaras/sítios",
+   "zonas_fiscais": [
+    8
+   ],
+   "faces_de_quadra": 2
+  },
+  {
+   "nome": "Chácaras Vendramini",
+   "nome_na_lei": "CHAC. VENDRAMINI",
+   "tipo": "chácaras/sítios",
+   "zonas_fiscais": [
+    2
+   ],
+   "faces_de_quadra": 10
+  },
+  {
+   "nome": "Condomínio Fazenda Palmeiras Imperiais",
+   "nome_na_lei": "CON. FAZ. PAL. IMPERIAIS",
+   "tipo": "condomínio/loteamento fechado",
+   "zonas_fiscais": [
+    5
+   ],
+   "faces_de_quadra": 49
+  },
+  {
+   "nome": "Condomínio Fechado Moradas São Luiz",
+   "nome_na_lei": "COND.FEC.MORADAS SAO LUIZ",
+   "tipo": "condomínio/loteamento fechado",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 57
+  },
+  {
+   "nome": "Condomínio Haras São Luis",
+   "nome_na_lei": "COND. HARAS SAO LUIS",
+   "tipo": "condomínio/loteamento fechado",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 49
+  },
+  {
+   "nome": "Condomínio Hermenegildo Milioni",
+   "nome_na_lei": "COND.HERMENEGILDO MILIONI",
+   "tipo": "condomínio/loteamento fechado",
+   "zonas_fiscais": [
+    3
+   ],
+   "faces_de_quadra": 11
+  },
+  {
+   "nome": "Condomínio Monte Belo",
+   "nome_na_lei": "COND. MONTE BELO",
+   "tipo": "condomínio/loteamento fechado",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 62
+  },
+  {
+   "nome": "Condomínio Piccolo Paese",
+   "nome_na_lei": "COND. PICCOLO PAESE",
+   "tipo": "condomínio/loteamento fechado",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 27
+  },
+  {
+   "nome": "Condomínio Residencial Bonatti",
+   "nome_na_lei": "COND. RESIDENCIAL BONATTI",
+   "tipo": "condomínio/loteamento fechado",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 3
+  },
+  {
+   "nome": "Condomínio Residencial Rio Branco",
+   "nome_na_lei": "COND. RESID. RIO BRANCO",
+   "tipo": "condomínio/loteamento fechado",
+   "zonas_fiscais": [
+    9
+   ],
+   "faces_de_quadra": 1
+  },
+  {
+   "nome": "Condomínio Residencial Vila Conte 1",
+   "nome_na_lei": "COND. RESID. VILA CONTE 1",
+   "tipo": "condomínio/loteamento fechado",
+   "zonas_fiscais": [
+    5
+   ],
+   "faces_de_quadra": 5
+  },
+  {
+   "nome": "Condomínio Terras de Santa Rosa",
+   "nome_na_lei": "COND. TERRAS DE STA. ROSA",
+   "tipo": "condomínio/loteamento fechado",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 40
+  },
+  {
+   "nome": "Condomínio Terras Santa Rosa II",
+   "nome_na_lei": "COND. TERRAS STA ROSA II",
+   "tipo": "condomínio/loteamento fechado",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 20
+  },
+  {
+   "nome": "Condomínio Village Zuleika Jabour",
+   "nome_na_lei": "COND. VIL. ZULEIKA JABOUR",
+   "tipo": "condomínio/loteamento fechado",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 85
+  },
+  {
+   "nome": "Condomínio Villaggio Milioni",
+   "nome_na_lei": "COND. VILLAGGIO MILIONI",
+   "tipo": "condomínio/loteamento fechado",
+   "zonas_fiscais": [
+    3
+   ],
+   "faces_de_quadra": 5
+  },
+  {
+   "nome": "Condomínio Villagio Migrantes",
+   "nome_na_lei": "CONDOMINIO VILLAGIO MIGRANTES",
+   "tipo": "condomínio/loteamento fechado",
+   "zonas_fiscais": [
+    3
+   ],
+   "faces_de_quadra": 2
+  },
+  {
+   "nome": "Conjunto Habitacional Nova Era",
+   "nome_na_lei": "CONJ. HAB. NOVA ERA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 77
+  },
+  {
+   "nome": "Conjunto Residencial Jardim da Cidade",
+   "nome_na_lei": "CONJ. RES. JD. DA CIDADE",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 20
+  },
+  {
+   "nome": "Conjunto Residencial Jardim Montecarlo",
+   "nome_na_lei": "CONJ. RES. JD. MONTECARLO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 3
+  },
+  {
+   "nome": "Conjunto Residencial Porto Seguro",
+   "nome_na_lei": "CONJ.RES.PORTO SEGURO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    6
+   ],
+   "faces_de_quadra": 37
+  },
+  {
+   "nome": "Conjunto Residencial Vilas d'Icaraí",
+   "nome_na_lei": "CONJ. RES. VILAS D'ICARAI",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 14
+  },
+  {
+   "nome": "Distrito Industrial",
+   "nome_na_lei": "DISTRITO INDUSTRIAL",
+   "tipo": "distrito/loteamento industrial",
+   "zonas_fiscais": [
+    2,
+    7,
+    9
+   ],
+   "faces_de_quadra": 39
+  },
+  {
+   "nome": "Distrito Industrial do Lageado",
+   "nome_na_lei": "DISTRITO INDUSTR. DO LAGEADO / DISTRITO INDUSTRIAL DO LAGEADO",
+   "tipo": "distrito/loteamento industrial",
+   "zonas_fiscais": [
+    6,
+    9
+   ],
+   "faces_de_quadra": 6
+  },
+  {
+   "nome": "Distrito Industrial dos Bandeirantes",
+   "nome_na_lei": "DISTR. INDUS. DOS BANDEIRANTES",
+   "tipo": "distrito/loteamento industrial",
+   "zonas_fiscais": [
+    2
+   ],
+   "faces_de_quadra": 9
+  },
+  {
+   "nome": "Estância da Colina",
+   "nome_na_lei": "ESTANCIA DA COLINA",
+   "tipo": "chácaras/sítios",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 11
+  },
+  {
+   "nome": "Fazenda Elizabeth",
+   "nome_na_lei": "FAZENDA ELIZABETH",
+   "tipo": "chácaras/sítios",
+   "zonas_fiscais": [
+    2
+   ],
+   "faces_de_quadra": 1
+  },
+  {
+   "nome": "Granja Santa Lúcia",
+   "nome_na_lei": "GRANJA SANTA LUCIA",
+   "tipo": "chácaras/sítios",
+   "zonas_fiscais": [
+    6
+   ],
+   "faces_de_quadra": 4
+  },
+  {
+   "nome": "Jardim Arco Íris",
+   "nome_na_lei": "JD. ARCO IRIS",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 13
+  },
+  {
+   "nome": "Jardim Armando Barcella",
+   "nome_na_lei": "JD. ARMANDO BARCELLA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    1,
+    6
+   ],
+   "faces_de_quadra": 30
+  },
+  {
+   "nome": "Jardim Arquidiocesano",
+   "nome_na_lei": "JD. ARQUIDIOCESANO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    8
+   ],
+   "faces_de_quadra": 16
+  },
+  {
+   "nome": "Jardim Bandeirantes",
+   "nome_na_lei": "JD. BANDEIRANTES",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    3
+   ],
+   "faces_de_quadra": 33
+  },
+  {
+   "nome": "Jardim Bom Retiro",
+   "nome_na_lei": "JD. BOM RETIRO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 1
+  },
+  {
+   "nome": "Jardim Bom Retiro II",
+   "nome_na_lei": "JD. BOM RETIRO II",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 45
+  },
+  {
+   "nome": "Jardim Brasil",
+   "nome_na_lei": "JD. BRASIL",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    3
+   ],
+   "faces_de_quadra": 21
+  },
+  {
+   "nome": "Jardim Buru",
+   "nome_na_lei": "JARDIM BURU",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    2,
+    7,
+    8,
+    9
+   ],
+   "faces_de_quadra": 69
+  },
+  {
+   "nome": "Jardim Cecap III",
+   "nome_na_lei": "JD. CECAP III",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 10
+  },
+  {
+   "nome": "Jardim Celani",
+   "nome_na_lei": "JD. CELANI",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    2
+   ],
+   "faces_de_quadra": 52
+  },
+  {
+   "nome": "Jardim Celani II",
+   "nome_na_lei": "JD. CELANI II",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    2
+   ],
+   "faces_de_quadra": 18
+  },
+  {
+   "nome": "Jardim Celani III",
+   "nome_na_lei": "JARDIM CELANI III",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    2
+   ],
+   "faces_de_quadra": 10
+  },
+  {
+   "nome": "Jardim Christina",
+   "nome_na_lei": "JD. CHRISTINA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    6
+   ],
+   "faces_de_quadra": 3
+  },
+  {
+   "nome": "Jardim d'Icaraí",
+   "nome_na_lei": "JD. D'ICARAI",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 14
+  },
+  {
+   "nome": "Jardim da Cidade II",
+   "nome_na_lei": "JD. DA CIDADE II",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 18
+  },
+  {
+   "nome": "Jardim da Cidade III",
+   "nome_na_lei": "JD. DA CIDADE III",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 12
+  },
+  {
+   "nome": "Jardim da Cidade IV",
+   "nome_na_lei": "JD. DA CIDADE IV",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 19
+  },
+  {
+   "nome": "Jardim das Nações",
+   "nome_na_lei": "JD. DAS NACOES",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    3
+   ],
+   "faces_de_quadra": 168
+  },
+  {
+   "nome": "Jardim das Nações II",
+   "nome_na_lei": "JD. DAS NACOES II",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    3
+   ],
+   "faces_de_quadra": 20
+  },
+  {
+   "nome": "Jardim do Divino",
+   "nome_na_lei": "JD. DO DIVINO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    6
+   ],
+   "faces_de_quadra": 15
+  },
+  {
+   "nome": "Jardim Donalísio",
+   "nome_na_lei": "JD. DONALISIO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    6
+   ],
+   "faces_de_quadra": 17
+  },
+  {
+   "nome": "Jardim Eldorado",
+   "nome_na_lei": "JD. ELDORADO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 18
+  },
+  {
+   "nome": "Jardim Elizabeth",
+   "nome_na_lei": "JD. ELIZABETH",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    2
+   ],
+   "faces_de_quadra": 46
+  },
+  {
+   "nome": "Jardim Europa",
+   "nome_na_lei": "JD. EUROPA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    6
+   ],
+   "faces_de_quadra": 25
+  },
+  {
+   "nome": "Jardim Independência",
+   "nome_na_lei": "JD. INDEPENDENCIA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    6
+   ],
+   "faces_de_quadra": 7
+  },
+  {
+   "nome": "Jardim Independência II",
+   "nome_na_lei": "JD. INDEPENDENCIA II",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    6
+   ],
+   "faces_de_quadra": 13
+  },
+  {
+   "nome": "Jardim Isaura Maria",
+   "nome_na_lei": "JD. ISAURA MARIA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    6
+   ],
+   "faces_de_quadra": 8
+  },
+  {
+   "nome": "Jardim Itaguaçu",
+   "nome_na_lei": "JD. ITAGUAÇU",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 84
+  },
+  {
+   "nome": "Jardim Jomar",
+   "nome_na_lei": "JD. JOMAR",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    6
+   ],
+   "faces_de_quadra": 8
+  },
+  {
+   "nome": "Jardim Maria José",
+   "nome_na_lei": "JD. MARIA JOSE",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    2
+   ],
+   "faces_de_quadra": 62
+  },
+  {
+   "nome": "Jardim Marília",
+   "nome_na_lei": "JD. MARILIA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 183
+  },
+  {
+   "nome": "Jardim Monte Paschoal",
+   "nome_na_lei": "JD. MONTE PASCHOAL",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 36
+  },
+  {
+   "nome": "Jardim Municipal",
+   "nome_na_lei": "JD. MUNICIPAL",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    3
+   ],
+   "faces_de_quadra": 10
+  },
+  {
+   "nome": "Jardim Nair Maria",
+   "nome_na_lei": "JD. NAIR MARIA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    3
+   ],
+   "faces_de_quadra": 87
+  },
+  {
+   "nome": "Jardim Panorama",
+   "nome_na_lei": "JD. PANORAMA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    3
+   ],
+   "faces_de_quadra": 70
+  },
+  {
+   "nome": "Jardim Paraíso",
+   "nome_na_lei": "JD. PARAISO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    6
+   ],
+   "faces_de_quadra": 14
+  },
+  {
+   "nome": "Jardim Planalto",
+   "nome_na_lei": "JD. PLANALTO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    3
+   ],
+   "faces_de_quadra": 83
+  },
+  {
+   "nome": "Jardim Primavera",
+   "nome_na_lei": "JD. PRIMAVERA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    6
+   ],
+   "faces_de_quadra": 15
+  },
+  {
+   "nome": "Jardim Saltense",
+   "nome_na_lei": "JD. SALTENSE",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 54
+  },
+  {
+   "nome": "Jardim Santa Cruz I",
+   "nome_na_lei": "JD. STA. CRUZ I",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 126
+  },
+  {
+   "nome": "Jardim Santa Cruz II",
+   "nome_na_lei": "JD. STA. CRUZ II",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 30
+  },
+  {
+   "nome": "Jardim Santa Cruz III",
+   "nome_na_lei": "JD. STA CRUZ III",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 9
+  },
+  {
+   "nome": "Jardim Santa Edwiges",
+   "nome_na_lei": "JARDIM SANTA EDWIGES",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 13
+  },
+  {
+   "nome": "Jardim Santa Efigênia",
+   "nome_na_lei": "JD. SANTA EFIGENIA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 56
+  },
+  {
+   "nome": "Jardim Santa Lúcia",
+   "nome_na_lei": "JD. STA. LUCIA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    6
+   ],
+   "faces_de_quadra": 67
+  },
+  {
+   "nome": "Jardim Santa Marta",
+   "nome_na_lei": "JD. SANTA MARTA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 21
+  },
+  {
+   "nome": "Jardim Santa Marta II",
+   "nome_na_lei": "JD SANTA MARTA II",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 28
+  },
+  {
+   "nome": "Jardim Santa Marta III",
+   "nome_na_lei": "JD. SANTA MARTA III",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 54
+  },
+  {
+   "nome": "Jardim Santa Rita",
+   "nome_na_lei": "JD STA RITA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 21
+  },
+  {
+   "nome": "Jardim Santa Terezinha",
+   "nome_na_lei": "JD. STA. TEREZINHA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    2
+   ],
+   "faces_de_quadra": 29
+  },
+  {
+   "nome": "Jardim Santo Antônio",
+   "nome_na_lei": "JD. STO. ANTONIO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    6
+   ],
+   "faces_de_quadra": 24
+  },
+  {
+   "nome": "Jardim Santo Inácio",
+   "nome_na_lei": "JD. STO. INACIO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    6
+   ],
+   "faces_de_quadra": 19
+  },
+  {
+   "nome": "Jardim São Francisco",
+   "nome_na_lei": "JD. SAO FRANCISCO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    2
+   ],
+   "faces_de_quadra": 33
+  },
+  {
+   "nome": "Jardim São João",
+   "nome_na_lei": "JD. SAO JOAO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 46
+  },
+  {
+   "nome": "Jardim São Judas Tadeu",
+   "nome_na_lei": "JD. SAO JUDAS TADEU",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 28
+  },
+  {
+   "nome": "Jardim Servilha",
+   "nome_na_lei": "JD. SERVILHA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    2
+   ],
+   "faces_de_quadra": 25
+  },
+  {
+   "nome": "Jardim Soberano",
+   "nome_na_lei": "JD. SOBERANO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 24
+  },
+  {
+   "nome": "Jardim Sontag",
+   "nome_na_lei": "JD. SONTAG",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    3
+   ],
+   "faces_de_quadra": 30
+  },
+  {
+   "nome": "Jardim Três Marias",
+   "nome_na_lei": "JD. TRES MARIAS",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    1,
+    2
+   ],
+   "faces_de_quadra": 85
+  },
+  {
+   "nome": "Jardim União",
+   "nome_na_lei": "JARDIM UNIAO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 26
+  },
+  {
+   "nome": "Jardim Villela",
+   "nome_na_lei": "JD. VILLELA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 8
+  },
+  {
+   "nome": "Loteamento Alberto Cintra Filho",
+   "nome_na_lei": "LOT. ALBERTO C. FILHO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    6
+   ],
+   "faces_de_quadra": 10
+  },
+  {
+   "nome": "Loteamento Clementino Assol",
+   "nome_na_lei": "LOT. CLEMENTINO ASSOL",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    2
+   ],
+   "faces_de_quadra": 3
+  },
+  {
+   "nome": "Loteamento Costa das Areias",
+   "nome_na_lei": "LOTEAMENTO COSTA DAS AREIAS",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    3
+   ],
+   "faces_de_quadra": 12
+  },
+  {
+   "nome": "Loteamento Industrial Comercial Santos Dumont",
+   "nome_na_lei": "LOT. IND. COM. SANTOS DUMONT",
+   "tipo": "distrito/loteamento industrial",
+   "zonas_fiscais": [
+    5
+   ],
+   "faces_de_quadra": 8
+  },
+  {
+   "nome": "Loteamento Residencial Lagos d'Icaraí",
+   "nome_na_lei": "LOT. RESID. LAGOS D'ICARAI",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 22
+  },
+  {
+   "nome": "Loteamento São Pedro/São Paulo",
+   "nome_na_lei": "LOT. SAO PEDRO/SAO PAULO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    5
+   ],
+   "faces_de_quadra": 99
+  },
+  {
+   "nome": "Loteamento Sol d'Icaraí",
+   "nome_na_lei": "LOT. SOL D' ICARAÍ",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 36
+  },
+  {
+   "nome": "Núcleo Industrial Alert",
+   "nome_na_lei": "NUCLEO IND. ALERT",
+   "tipo": "distrito/loteamento industrial",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 3
+  },
+  {
+   "nome": "Parque Bela Vista",
+   "nome_na_lei": "PQ. BELA VISTA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    6
+   ],
+   "faces_de_quadra": 85
+  },
+  {
+   "nome": "Parque Júlio Ustrito",
+   "nome_na_lei": "PARQUE JULIO USTRITO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 10
+  },
+  {
+   "nome": "Parque Residencial Rondon",
+   "nome_na_lei": "PQ. RES. RONDON",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 66
+  },
+  {
+   "nome": "Parque Residencial Serra dos Ipês",
+   "nome_na_lei": "PQ. RES. SERRA DOS IPES",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 12
+  },
+  {
+   "nome": "Recanto do Guaraú",
+   "nome_na_lei": "RECANTO DO GUARAU",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    5
+   ],
+   "faces_de_quadra": 16
+  },
+  {
+   "nome": "Residencial Alvorada",
+   "nome_na_lei": "RESIDENCIAL ALVORADA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 18
+  },
+  {
+   "nome": "Residencial Central Parque",
+   "nome_na_lei": "RESIDENCIAL CENTRAL PARQUE",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    2
+   ],
+   "faces_de_quadra": 47
+  },
+  {
+   "nome": "Residencial Delega",
+   "nome_na_lei": "RESIDENCIAL DELEGA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 9
+  },
+  {
+   "nome": "Residencial Esplanada",
+   "nome_na_lei": "RESIDENCIAL ESPLANADA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    6
+   ],
+   "faces_de_quadra": 10
+  },
+  {
+   "nome": "Residencial Fabbri",
+   "nome_na_lei": "RESIDENCIAL FABBRI",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 20
+  },
+  {
+   "nome": "Residencial Haras Paineiras",
+   "nome_na_lei": "RES. HARAS PAINEIRAS",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    5
+   ],
+   "faces_de_quadra": 47
+  },
+  {
+   "nome": "Residencial Ítalo Fabbri",
+   "nome_na_lei": "RESIDENCIAL ITALO FABBRI",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 12
+  },
+  {
+   "nome": "Residencial Parque Laguna",
+   "nome_na_lei": "RES. PARQUE LAGUNA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 54
+  },
+  {
+   "nome": "Residencial Piccolino",
+   "nome_na_lei": "RESIDENCIAL PICCOLINO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 11
+  },
+  {
+   "nome": "Residencial Primavera",
+   "nome_na_lei": "RESIDENCIAL PRIMAVERA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    9
+   ],
+   "faces_de_quadra": 37
+  },
+  {
+   "nome": "Residencial Primavera II",
+   "nome_na_lei": "RESIDENCIAL PRIMAVERA II",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    9
+   ],
+   "faces_de_quadra": 27
+  },
+  {
+   "nome": "Residencial Salto Ville",
+   "nome_na_lei": "RESIDENCIAL SALTO VILLE",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 18
+  },
+  {
+   "nome": "Residencial Santa Madre Paulina",
+   "nome_na_lei": "RESID. SANTA MADRE PAULINA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    5
+   ],
+   "faces_de_quadra": 37
+  },
+  {
+   "nome": "Residencial Santo Stefano",
+   "nome_na_lei": "RESIDENCIAL SANTO STEFANO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    4
+   ],
+   "faces_de_quadra": 17
+  },
+  {
+   "nome": "Residencial São Bento",
+   "nome_na_lei": "RESIDENCIAL SAO BENTO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    3
+   ],
+   "faces_de_quadra": 27
+  },
+  {
+   "nome": "Residencial São Gabriel",
+   "nome_na_lei": "RESIDENCIAL SAO GABRIEL",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 72
+  },
+  {
+   "nome": "Residencial São Gabriel II",
+   "nome_na_lei": "RESID. SAO GABRIEL II",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 24
+  },
+  {
+   "nome": "Terras de Mont Serrat",
+   "nome_na_lei": "TERRAS DE MONT SERRAT",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 49
+  },
+  {
+   "nome": "Terras de Santa Izabel",
+   "nome_na_lei": "TERRAS DE SANTA IZABEL",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    8
+   ],
+   "faces_de_quadra": 22
+  },
+  {
+   "nome": "Terras Romanas",
+   "nome_na_lei": "TERRAS ROMANAS",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    8
+   ],
+   "faces_de_quadra": 4
+  },
+  {
+   "nome": "Torre de Pedra",
+   "nome_na_lei": "TORRE DE PEDRA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    5
+   ],
+   "faces_de_quadra": 1
+  },
+  {
+   "nome": "Urbanização Salto de São José",
+   "nome_na_lei": "URB. SALTO DE SAO JOSE",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    5
+   ],
+   "faces_de_quadra": 87
+  },
+  {
+   "nome": "Vila Flora",
+   "nome_na_lei": "VILA FLORA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    6
+   ],
+   "faces_de_quadra": 57
+  },
+  {
+   "nome": "Vila Guarujá",
+   "nome_na_lei": "VILA GUARUJA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 1
+  },
+  {
+   "nome": "Vila Henrique",
+   "nome_na_lei": "VILA HENRIQUE",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    1,
+    6
+   ],
+   "faces_de_quadra": 73
+  },
+  {
+   "nome": "Vila Ideal",
+   "nome_na_lei": "VILA IDEAL",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    1
+   ],
+   "faces_de_quadra": 32
+  },
+  {
+   "nome": "Vila Marília",
+   "nome_na_lei": "VILA MARILIA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    1
+   ],
+   "faces_de_quadra": 4
+  },
+  {
+   "nome": "Vila Norma",
+   "nome_na_lei": "VILA NORMA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 27
+  },
+  {
+   "nome": "Vila Nova",
+   "nome_na_lei": "VILA NOVA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    1,
+    3,
+    6
+   ],
+   "faces_de_quadra": 165
+  },
+  {
+   "nome": "Vila Progresso",
+   "nome_na_lei": "VILA PROGRESSO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    6
+   ],
+   "faces_de_quadra": 46
+  },
+  {
+   "nome": "Vila Roma",
+   "nome_na_lei": "VILA ROMA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    6
+   ],
+   "faces_de_quadra": 46
+  },
+  {
+   "nome": "Vila Romão",
+   "nome_na_lei": "VILA ROMAO",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    2
+   ],
+   "faces_de_quadra": 22
+  },
+  {
+   "nome": "Vila Teixeira",
+   "nome_na_lei": "VILA TEIXEIRA",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    1,
+    2
+   ],
+   "faces_de_quadra": 151
+  },
+  {
+   "nome": "Village João Jabour",
+   "nome_na_lei": "VILLAGE JOAO JABOUR",
+   "tipo": "loteamento/bairro (cadastro fiscal)",
+   "zonas_fiscais": [
+    7
+   ],
+   "faces_de_quadra": 75
+  }
+ ],
+ "loteamentos_posteriores": {
+  "fonte": "Decretos e leis municipais publicados no site da Prefeitura (salto.sp.gov.br), de 2015 a 2021; leis de 2017 na Gazeta de S. Paulo (edição de Salto) arquivada no mesmo site.",
+  "itens": [
+   {
+    "nome": "Residencial Vila Martins",
+    "tipo": "loteamento",
+    "ato": "Decreto nº 393/2015",
+    "descricao": "aceita as obras do loteamento",
+    "data": "2015-12-15",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2017/08/Decreto-n%C2%BA-393-2015-Aceita-as-obras-de-implanta%C3%A7%C3%A3o-de-Loteamento-Residencial-Vila-Martins-e-d%C3%A1-outras-provid%C3%AAncias-de-15-de-Dezembro-de-2015.pdf"
+   },
+   {
+    "nome": "Mirante dos Ipês",
+    "tipo": "loteamento",
+    "ato": "Decreto nº 404/2015",
+    "descricao": "libera lotes do loteamento",
+    "data": "2015-12-23",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2017/08/Decreto-n%C2%BA-404-2015-Libera-lotes-que-restavam-caucionados-do-Loteamento-Mirante-dos-Ip%C3%AAs-de-23-de-Dezembro-de-2015.pdf"
+   },
+   {
+    "nome": "Portal dos Bandeirantes",
+    "tipo": "loteamento",
+    "ato": "Decreto nº 02/2017",
+    "descricao": "aceita parcialmente o loteamento",
+    "data": "2017",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2017/08/Decreto-02-Aceita-parcialmente-o-loteamento-denominado-Portal-dos-Bandeirantes-Salto.pdf"
+   },
+   {
+    "nome": "Jardim Guarujá",
+    "tipo": "loteamento",
+    "ato": "Lei nº 3.676/2017",
+    "descricao": "nomes de rua do loteamento (também Decreto nº 179/2019, loteamento fechado)",
+    "data": "2017-06-30",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2019/08/Decreto-n%C2%BA-179-2019-Permiss%C3%A3o-de-Uso-das-%C3%A1reas-P%C3%BAblicas-do-Loteamento-Fechado-denominado-%E2%80%9CJARDIM-GUARUJ%C3%81%E2%80%9D-e-d%C3%A1-outras-providencias-publicado-em-15-de-Agosto-de-2019.pdf"
+   },
+   {
+    "nome": "Jardim Taquaral",
+    "tipo": "loteamento",
+    "ato": "Lei nº 3.681/2017",
+    "descricao": "nomes de rua do loteamento",
+    "data": "2017-07-14",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2017/08/07-Edi%C3%A7%C3%A3o-15-07-2017-GazetaSP-Salto-Pag-12-a-Pag-16-Regional.pdf"
+   },
+   {
+    "nome": "Costa Rica",
+    "tipo": "loteamento",
+    "ato": "Lei nº 3.702/2017",
+    "descricao": "denominação de rua no loteamento",
+    "data": "2017-11-22",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2017/08/11-Edi%C3%A7%C3%A3o-25-11-2017-GazetaSP-Salto-Pag-40-C24.pdf"
+   },
+   {
+    "nome": "Village Moutonnée",
+    "tipo": "loteamento",
+    "ato": "Lei nº 3.704/2017",
+    "descricao": "denominação de rua no loteamento",
+    "data": "2017-11-22",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2017/08/11-Edi%C3%A7%C3%A3o-25-11-2017-GazetaSP-Salto-Pag-40-C24.pdf"
+   },
+   {
+    "nome": "Jardim América",
+    "tipo": "loteamento",
+    "ato": "Lei nº 3.705/2017",
+    "descricao": "denominação das ruas",
+    "data": "2017-11-22",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2017/08/11-Edi%C3%A7%C3%A3o-25-11-2017-GazetaSP-Salto-Pag-40-C24.pdf"
+   },
+   {
+    "nome": "Loteamento Morro da Mata",
+    "tipo": "loteamento",
+    "ato": "Lei nº 3.706/2017",
+    "descricao": "denominação das vias do loteamento",
+    "data": "2017-11-22",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2017/08/11-Edi%C3%A7%C3%A3o-25-11-2017-GazetaSP-Salto-Pag-40-C24.pdf"
+   },
+   {
+    "nome": "Residencial Parque Imperial",
+    "tipo": "loteamento",
+    "ato": "Lei nº 3.707/2017",
+    "descricao": "denominação das vias públicas",
+    "data": "2017-11-22",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2017/08/11-Edi%C3%A7%C3%A3o-25-11-2017-GazetaSP-Salto-Pag-40-C24.pdf"
+   },
+   {
+    "nome": "Residencial do Bosque",
+    "tipo": "loteamento",
+    "ato": "Decreto nº 242/2019",
+    "descricao": "recebe e libera o loteamento (ruas: Lei nº 3.709/2017)",
+    "data": "2019-10-30",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2019/11/Decreto-n%C2%BA-242-2019-Disp%C3%B5e-sobre-recebimento-e-libera%C3%A7%C3%A3o-do-Loteamento-denominado-%E2%80%9CJardim-%E2%80%9CResidencial-do-Bosque%E2%80%9D-e-d%C3%A1-outras-provid%C3%AAncias-publicado-em-30-de-Outubro-de-2019.pdf"
+   },
+   {
+    "nome": "Sítio Santa Terezinha",
+    "tipo": "loteamento",
+    "ato": "Lei nº 3.766/2019",
+    "descricao": "denominação das ruas do loteamento",
+    "data": "2019-01-17",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2019/04/Lei-Municipal-n%C2%BA-3766-2019-Revoga-as-Leis-Municipais-n%C2%BAs-3146-2012-e-3150-2012-e-d%C3%A1-nova-denomina%C3%A7%C3%A3o-as-Ruas-do-Loteamento-S%C3%ADtio-Santa-Terezinha-publicado-em-17-de-Janeiro-de-2019.pdf"
+   },
+   {
+    "nome": "Loteamento Industrial Jaraguá",
+    "tipo": "loteamento",
+    "ato": "Decreto nº 75/2019",
+    "descricao": "valor da face de quadra do loteamento",
+    "data": "2019-03-21",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2019/03/Decreto-n%C2%BA-75-2019-Estabelece-Valor-B%C3%A1sico-Unit%C3%A1rio-da-Face-de-Quadra-para-o-Loteamento-Industrial-Jaragu%C3%A1-publicado-em-21-de-Mar%C3%A7o-de-2019.pdf"
+   },
+   {
+    "nome": "Jardim Novo São Pedro",
+    "tipo": "loteamento",
+    "ato": "Decreto nº 130/2019",
+    "descricao": "reaprova o projeto de loteamento",
+    "data": "2019-05-28",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2019/06/Decreto-n%C2%BA-130-2019-Reaprova-o-projeto-de-loteamento-denominado-%E2%80%9CJARDIM-NOVO-S%C3%83O-PEDRO%E2%80%9D-e-d%C3%A1-outras-providencias-publicado-em-28-de-Maio-de-2019.pdf"
+   },
+   {
+    "nome": "Jardim das Constelações",
+    "tipo": "loteamento",
+    "ato": "Decreto nº 143/2019",
+    "descricao": "valor da face de quadra do loteamento",
+    "data": "2019-06-26",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2019/08/Decreto-n%C2%BA-143-2019-Estabelece-Valor-B%C3%A1sico-Unit%C3%A1rio-da-Face-de-Quadra-para-o-Jd.-das-Constela%C3%A7%C3%B5es-publicado-em-26-de-Junho-de-2019.pdf"
+   },
+   {
+    "nome": "Residencial Barnabé",
+    "tipo": "loteamento",
+    "ato": "Decreto nº 155/2019",
+    "descricao": "aprova o projeto de loteamento",
+    "data": "2019-07-03",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2019/08/Decreto-n%C2%BA-155-2019-Disp%C3%B5e-sobre-aprova%C3%A7%C3%A3o-do-projeto-de-Loteamento-denominado-RESIDENCIAL-BARNAB%C3%89-e-d%C3%A1-outras-provid%C3%AAncias-publicado-em-3-de-Julho-de-2019.pdf"
+   },
+   {
+    "nome": "Jardim Jambeiro",
+    "tipo": "loteamento",
+    "ato": "Decreto nº 156/2019",
+    "descricao": "aprova o projeto de loteamento",
+    "data": "2019-07-03",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2019/08/Decreto-n%C2%BA-156-2019-Disp%C3%B5e-sobre-aprova%C3%A7%C3%A3o-do-projeto-de-Loteamento-denominado-JARDIM-JAMBEIRO-e-d%C3%A1-outras-provid%C3%AAncias-publicado-em-3-de-Julho-de-2019.pdf"
+   },
+   {
+    "nome": "Residencial Monte Cristo",
+    "tipo": "loteamento",
+    "ato": "Decreto nº 173/2019",
+    "descricao": "loteamento fechado: permissão de uso das áreas públicas",
+    "data": "2019-08-02",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2019/08/Decreto-n%C2%BA-173-2019-Disp%C3%B5e-sobre-Permiss%C3%A3o-de-Uso-das-%C3%A1reas-P%C3%BAblicas-do-Loteamento-Fechado-denominado-%E2%80%9CRESIDENCIAL-MONTE-CRISTO%E2%80%9D-e-d%C3%A1-outras-providencias-publicado-em-2-de-Agosto-de-2019.pdf"
+   },
+   {
+    "nome": "Terras de São Gabriel",
+    "tipo": "loteamento",
+    "ato": "Decreto nº 174/2019",
+    "descricao": "aprova o projeto de loteamento",
+    "data": "2019-08-06",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2019/08/Decreto-n%C2%BA-174-2019-Disp%C3%B5e-sobre-aprova%C3%A7%C3%A3o-do-projeto-de-Loteamento-denominado-%E2%80%9CTERRAS-DE-S%C3%83O-GABRIEL%E2%80%9D-e-d%C3%A1-outras-provid%C3%AAncias-publicado-em-6-de-Agosto-de-2019.pdf"
+   },
+   {
+    "nome": "Industrial Vanguarda",
+    "tipo": "loteamento",
+    "ato": "Decreto nº 262/2019",
+    "descricao": "aprova o projeto de loteamento",
+    "data": "2019-11-16",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2019/11/Decreto-n%C2%BA-262-2019-Disp%C3%B5e-sobre-aprova%C3%A7%C3%A3o-do-projeto-de-Loteamento-denominado-%E2%80%9CINDUSTRIAL-VANGUARDA%E2%80%9D-e-d%C3%A1-outras-provid%C3%AAncias-publicado-em-16-de-Novembro-de-2019.pdf"
+   },
+   {
+    "nome": "Jardim dos Ipês",
+    "tipo": "loteamento",
+    "ato": "Decreto nº 263/2019",
+    "descricao": "aprova o projeto de loteamento",
+    "data": "2019-11-23",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2019/11/Decreto-n%C2%BA-263-2019-Disp%C3%B5e-sobre-aprova%C3%A7%C3%A3o-do-projeto-de-Loteamento-denominado-%E2%80%9CJARDIM-DOS-IP%C3%8AS%E2%80%9D-e-d%C3%A1-outras-provid%C3%AAncias-publicado-em-23-de-Novembro-de-2019.pdf"
+   },
+   {
+    "nome": "Parque Alto da Boa Vista",
+    "tipo": "loteamento",
+    "ato": "Decreto nº 287/2019",
+    "descricao": "aprova o projeto de loteamento",
+    "data": "2019-12-07",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2019/12/Decreto-n%C2%BA-287-2019-%E2%80%9CDisp%C3%B5e-sobre-aprova%C3%A7%C3%A3o-do-projeto-de-Loteamento-denominado-%E2%80%9CPARQUE-ALTO-DA-BOA-VISTA%E2%80%9D-e-d%C3%A1-outras-provid%C3%AAncias-publicado-em-7-de-Dezembro-de-2019.pdf"
+   },
+   {
+    "nome": "Loteamento Industrial Mazetto e Murakami",
+    "tipo": "loteamento",
+    "ato": "Decreto nº 216/2021",
+    "descricao": "aprova o loteamento",
+    "data": "2021-07",
+    "url": "https://salto.sp.gov.br/wp-content/uploads/2021/07/Decreto-216-Dispoe-sobre-Aprovacao-de-Loteamento-Industrial-MAZETTO-E-MURAKAMI.pdf"
+   }
+  ]
+ }
+}

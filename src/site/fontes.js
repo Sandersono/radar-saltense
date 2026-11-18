@@ -33,6 +33,7 @@ ${d.origem ? '<li><strong>De onde vem e para onde vai o dinheiro:</strong> <a hr
 <li><strong>Emendas ao orçamento:</strong> <a href="https://www.camarasalto.sp.gov.br/orcamento-publico/emendas-impositivas">PDFs de emendas impositivas no site da Câmara</a>: o relatório do 4º trimestre de 2025 (execução) e a tabela de 2026 (planejado). Os PDFs são lidos por uma ferramenta rodada à mão quando a Câmara publica arquivo novo; o robô avisa quando isso acontece.</li>
 <li><strong>Promessas do prefeito:</strong> <a href="https://divulgacandcontas.tse.jus.br/divulga/">plano de governo registrado no TSE</a> em 2024 (dados abertos). O status de cada promessa é atualizado à mão, só com prova oficial.</li>
 <li><strong>Resumo da semana:</strong> <a href="semana.html">refeito todo dia</a> com os dados desta lista, também como <a href="feed.xml">feed RSS</a>.</li>
+<li><strong>Nome oficial dos bairros:</strong> cadastro da Prefeitura no Anexo I da <a href="https://salto.sp.gov.br/download/leis/Lei_3227_de_2013-PGV-Consolidada.pdf">Planta Genérica de Valores (Lei 3.227/2013, atualizada até 2017)</a>, mais os decretos e leis de loteamento publicados no site da Prefeitura de 2015 a 2021. Não achamos lei de Salto que delimite os bairros, e o IBGE não tem bairros de Salto no Censo 2022.</li>
 <li><strong>Vereadores e partidos:</strong> <a href="https://www.camarasalto.sp.gov.br/">página inicial da Câmara</a>.</li>
 </ul>
 </section>
@@ -53,6 +54,7 @@ ${d.origem ? '<li><strong>De onde vem e para onde vai o dinheiro:</strong> <a hr
 <section id="ruas" class="secao cartao">
 <h2>Ruas e bairros</h2>
 <p>O nome da rua e do bairro é lido do próprio texto do pedido. Quando o texto não deixa claro o lugar, o pedido continua no site, mas fica fora da busca por bairro. "O problema que não some" junta pedidos do mesmo tipo (buraco, asfalto, iluminação, limpeza, bueiro, sinalização, poda, lixo) para a mesma rua, a partir de 2 pedidos.</p>
+<p>A página de cada bairro usa o nome que aparece nos documentos da Câmara. Quando o nome está no cadastro oficial da Prefeitura, a página diz; quando o cadastro escreve de outro jeito, a página mostra os dois; quando o nome não está no cadastro, a página diz isso também. A conferência é feita à mão, com a lista oficial.</p>
 ${aviso('Pedido repetido não prova que a Prefeitura ignorou. Pedido não é obra feita.')}
 </section>
 <section id="presenca" class="secao cartao">

@@ -20,6 +20,7 @@ import { paginaSobre, pagina404 } from './site/sobre.js';
 import { paginaEntenda, paginaArtigo, paginaFaq, validarEntenda, errosArtigo, errosFaq, destinoValido, valoresEntenda } from './site/entenda.js';
 import { gerarCartaoVereador, icoDePng } from './site/og.js';
 import { montarBairros, bairrosComPagina, validarApelidos, validarNomes } from './regras/bairros.js';
+import { indiceOficial, situacoesOficiais, avisosOficiais } from './regras/bairros-oficiais.js';
 import { hashConteudo, registrarLastmod, diaDe, serializarLastmod } from './regras/lastmod.js';
 import { ENDERECO, isoSP, definirPaginasAusentes } from './site/base.js';
 import { sitemapXml, robotsTxt } from './site/medicao.js';
@@ -45,6 +46,7 @@ const FONTES = [
 
 export const ARQUIVO_ENTENDA = 'data/referencia/entenda.json';
 export const ARQUIVO_LASTMOD = 'data/processado/lastmod.json';
+export const ARQUIVO_OFICIAIS = 'data/referencia/bairros-oficiais.json';
 
 async function lerJson(caminho) {
   try { return JSON.parse(await readFile(caminho, 'utf8')); } catch (e) { if (e.code === 'ENOENT') return null; throw e; }
@@ -127,6 +129,19 @@ export async function gerarSite(d, destino, semanasSalvas = null, { lastmod: arq
     if (b.fixo) continue;
     avisar(`Bairro novo com página e sem nome fixo em data/referencia/bairros-apelidos.json (nomes): "${b.chave}" (${b.nome}).`);
   }
+  // Nome oficial (cadastro da Prefeitura, data/referencia/bairros-oficiais.json). Nunca trava: arquivo ausente ou
+  // ilegível vira aviso e as páginas saem sem a linha do nome oficial; bairro novo sem conferência também vira aviso.
+  let situacoes = new Map();
+  let pgvUrl = '';
+  try {
+    const { indice, erros } = indiceOficial(JSON.parse(await readFile(ARQUIVO_OFICIAIS, 'utf8')));
+    for (const e of erros) avisar(`Bairros oficiais: ${e}`);
+    if (indice.size) {
+      pgvUrl = [...indice.values()][0].url;
+      situacoes = situacoesOficiais(bairros, ref, indice);
+      for (const a of avisosOficiais(bairros, situacoes)) avisar(a);
+    }
+  } catch (e) { avisar(`Bairros oficiais: ${ARQUIVO_OFICIAIS} não lido (${e.message}); páginas de bairro sem o nome oficial.`); }
   // Nome visto nos dados (qualquer grafia) -> endereço da página do bairro.
   const linksBairros = new Map(bairros.flatMap((b) => [b.nome, ...b.grafias].map((n) => [n, b.slug])));
 
@@ -155,8 +170,11 @@ export async function gerarSite(d, destino, semanasSalvas = null, { lastmod: arq
     await pagina(`semana/${s}.html`, (datas) => paginaSemanaArquivo(r, d, { anterior: segundas[i - 1], proxima: segundas[i + 1] }, ENDERECO, { bairros: linksBairros, modificado: datas && datas.quando }),
       { sitemap: !semanaVazia(r), fixa: r.completa ? `${r.domingo}T23:59:59-03:00` : null });
   }
-  await pagina('bairros.html', paginaBairros(bairros, d));
-  for (const b of bairros) await pagina(`bairro/${b.slug}.html`, paginaBairro(b, d, todosBairros));
+  await pagina('bairros.html', paginaBairros(bairros, d, situacoes, pgvUrl));
+  for (const b of bairros) {
+    const s = situacoes.get(b.chave);
+    await pagina(`bairro/${b.slug}.html`, paginaBairro(b, d, todosBairros, s ? { situacao: s, url: pgvUrl } : null));
+  }
   await writeFile(`${destino}/feed.xml`, feedRss(d, ENDERECO, semanas));
   if (d.promessas) await pagina('promessas.html', paginaPromessas(d));
   if (d.receitas) await pagina('impostometro.html', paginaImpostometro(d));

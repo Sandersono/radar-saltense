@@ -2,6 +2,7 @@ import { ANO_INICIO, fichaOficial } from '../config.js';
 import { GRUPOS } from '../regras/classificar.js';
 import { TIPOS_NOME } from '../regras/local.js';
 import { CORTE_BAIRRO, resumoBairro } from '../regras/bairros.js';
+import { ROTULO_PGV, TEXTO_SEM_OFICIAL, porFonte, juntarNomes } from '../regras/bairros-oficiais.js';
 import { esc } from '../util/texto.js';
 import { layout, ENDERECO, SUFIXO, dataBR, link, aviso, seloFonte, barraProporcao, cartaoNumero, numero, sumario, apelidoHtml, GRUPOS_PUBLICOS } from './base.js';
 import { itensRepetidos } from './inicio.js';
@@ -29,10 +30,37 @@ export const lugarJsonLd = (b) => ({
 export const tituloBairro = (nome) => [`${nome}, Salto/SP: pedidos dos vereadores e obras`, `${nome}, Salto/SP: pedidos e obras`, `${nome}, Salto/SP`]
   .find((t) => (t + SUFIXO).length <= 65) || nome;
 
+// Linha do nome oficial na página do bairro (situacao de situacoesOficiais). Sem situação ou "pendente": nada.
+// pgvUrl: link da lei para a frase "não consta". prefixo: caminho até a raiz do site (links para outras páginas).
+export function htmlOficial(s, pgvUrl, prefixo = '../') {
+  if (!s || s.tipo === 'pendente') return '';
+  const grupos = porFonte(s.oficiais);
+  const soPgv = grupos.every((g) => g.rotulo === ROTULO_PGV);
+  const fontes = grupos.map((g) => `<strong>${esc(juntarNomes(g.nomes))}</strong> (${seloFonte(g.url, g.rotulo)})`).join('; ');
+  let frase;
+  if (s.tipo === 'sem') frase = `${esc(TEXTO_SEM_OFICIAL)}${pgvUrl ? ` ${seloFonte(pgvUrl, 'Lei 3.227/2013')}` : ''}`;
+  else if (s.tipo === 'igual') frase = `Este nome consta ${soPgv ? 'no cadastro oficial' : 'em ato oficial'} da Prefeitura (${grupos.map((g) => seloFonte(g.url, g.rotulo)).join('; ')}).`;
+  else if (s.tipo === 'grafia') frase = `${soPgv ? 'No cadastro oficial da Prefeitura' : 'Nome oficial na Prefeitura'}: ${fontes}.`;
+  else frase = `Nomes ligados a este bairro ${soPgv ? 'no cadastro oficial' : 'nos registros oficiais'} da Prefeitura: ${fontes}.`;
+  const outras = (s.mesmoOficial || []).map((o) => `<a href="${prefixo}bairro/${esc(o.slug)}.html">${esc(o.nome)}</a>`);
+  const mesmo = outras.length ? ` ${outras.length === 1 ? 'Outra página deste site com o mesmo nome oficial' : 'Outras páginas deste site com o mesmo nome oficial'}: ${juntarNomes(outras)}.` : '';
+  return `<p class="nome-oficial">${frase}${mesmo}</p>`;
+}
+
+// Marca no índice de bairros: "oficial" quando o nome é o do cadastro; o nome oficial embaixo quando é outro.
+export function marcaOficial(s) {
+  if (!s) return '';
+  if (s.tipo === 'igual') return ' <span class="tag tag-oficial">oficial</span>';
+  if (s.tipo === 'grafia' || s.tipo === 'ligados') return `<span class="nota nome-cadastro">no cadastro: ${esc(juntarNomes(s.oficiais.map((o) => o.nome)))}</span>`;
+  return '';
+}
+
 const itemPedido = (p) =>
   `<li><span class="data">${dataBR(p.data)}</span> <span class="tag">${esc(p.categoria)} ${esc(p.numero)}</span> <strong>${esc(p.autoresTexto)}</strong> ${esc(p.ementa)} ${link(fichaOficial(p.id), 'ficha oficial')}</li>`;
 
-export function paginaBairro(b, d, todos = []) {
+// oficial: { situacao, url } do cadastro oficial (null: arquivo ausente ou bairro não conferido; a página sai sem a linha).
+export function paginaBairro(b, d, todos = [], oficial = null) {
+  const linhaOficial = oficial ? htmlOficial(oficial.situacao, oficial.url) : '';
   const r = resumoBairro(b, d, todos);
   const porId = new Map(d.vereadores.map((v) => [v.id, v]));
   const quem = r.vereadores.map(({ id, n }) => {
@@ -89,10 +117,12 @@ ${obras ? `<section id="obras" class="secao cartao">
 <section id="fontes-bairro" class="secao cartao">
 <h2>Fontes</h2>
 <p>As propostas vêm do ${seloFonte(URL_PROPOSITURAS, 'portal de proposituras da Câmara')}. O bairro e a rua são lidos do texto de cada proposta. <a href="../fontes.html#ruas">Veja como</a>.</p>
+${linhaOficial ? `<p>O nome do bairro nesta página é o usado nos documentos da Câmara. O nome oficial vem do cadastro da Prefeitura (${seloFonte(oficial.url, ROTULO_PGV)}) e de decretos e leis de loteamento.</p>` : ''}
 </section>`;
 
   const corpo = `<h1>${esc(b.nome)}, Salto: o que os vereadores pediram</h1>
 <p>O que os vereadores de Salto pediram ou perguntaram citando ${esc(b.nome)} desde ${ANO_INICIO}, com o documento oficial de cada proposta.</p>
+${linhaOficial}
 ${aviso(AVISO_BAIRRO)}
 ${sumario(secoes, [['numeros', 'Números'], ['tipos', 'Tipos de problema'], ['ruas', 'Ruas'], ['repetidos', 'Repetidos'], ['ultimos', 'Últimos pedidos'], ['obras', 'Obras']])}
 ${secoes}`;
@@ -109,11 +139,18 @@ ${secoes}`;
   });
 }
 
-// Índice de A a Z. O filtro (busca.js) procura também nas outras grafias do nome.
-export function paginaBairros(lista, d) {
+// Índice de A a Z. O filtro (busca.js) procura também nas outras grafias do nome e nos nomes oficiais.
+// situacoes: Map chave -> situação no cadastro oficial (vazio: arquivo oficial ausente; o índice sai sem marcas).
+export function paginaBairros(lista, d, situacoes = new Map(), pgvUrl = '') {
   const az = [...lista].sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
-  const itens = az.map((b) =>
-    `<li data-nome="${esc([b.nome, ...b.grafias].join(' | '))}"><a href="bairro/${esc(b.slug)}.html">${esc(b.nome)}</a> <span class="num">${plural(b.total, 'proposta', 'propostas')}</span></li>`).join('\n');
+  const itens = az.map((b) => {
+    const s = situacoes.get(b.chave);
+    const nomes = [b.nome, ...b.grafias, ...(s ? s.oficiais.map((o) => o.nome) : [])];
+    return `<li data-nome="${esc([...new Set(nomes)].join(' | '))}"><span class="bairro-nome"><a href="bairro/${esc(b.slug)}.html">${esc(b.nome)}</a>${marcaOficial(s)}</span> <span class="num">${plural(b.total, 'proposta', 'propostas')}</span></li>`;
+  }).join('\n');
+  const legenda = situacoes.size && pgvUrl
+    ? `<p class="nota"><span class="tag tag-oficial">oficial</span> nome igual ao do cadastro oficial da Prefeitura (${seloFonte(pgvUrl, ROTULO_PGV)}) ou de um decreto ou lei de loteamento. Sem a marca, o nome é o usado nos documentos da Câmara; quando o cadastro usa outro nome, ele aparece embaixo.</p>`
+    : '';
   const corpo = `<h1>Bairros de Salto</h1>
 <p>Escolha o bairro e veja o que os vereadores pediram para lá desde ${ANO_INICIO}: tipos de problema, ruas mais citadas, pedidos repetidos e obras.</p>
 <p>Só os ${numero(lista.length)} bairros com ${CORTE_BAIRRO} propostas ou mais têm página própria. Os outros estão na <a href="./#bairro">busca da página inicial</a>, junto com as ruas.</p>
@@ -122,6 +159,7 @@ ${aviso(AVISO_BAIRRO)}
 <label class="sr-only" for="filtro-bairros">Nome do bairro</label>
 <input id="filtro-bairros" class="busca busca-pequena" type="search" placeholder="Digite o nome do bairro" autocomplete="off">
 </div>
+${legenda}
 <p id="contagem-bairros" class="nota" aria-live="polite"></p>
 <ul id="lista-bairros" class="lista cartao lista-bairros">
 ${itens}

@@ -98,7 +98,7 @@ Fica no artefato "conferencia" de cada execução do robô, na aba Actions. As s
 **Atenção** (abrem alerta de "algo a fazer"):
 - a atualização não veio do despertador da VPS;
 - a atualização ainda está rodando às 12:30, porque o GitHub atrasou;
-- avisos de manutenção do robô, incluindo obra pendente com possível licitação já na lista e bairro novo sem nome fixo.
+- avisos de manutenção do robô, incluindo obra pendente com possível licitação já na lista e bairro novo sem nome fixo ou sem conferência no cadastro oficial.
 
 Os alertas são issues com o rótulo `sentinela` no repositório e chegam por e-mail ao dono. Se já houver um alerta aberto, ela comenta nele, mas só quando o conteúdo muda, para não repetir e-mail todo dia. Quando tudo volta ao normal, ela fecha o alerta. Se a própria sentinela falhar, ela abre um alerta dizendo isso.
 
@@ -115,7 +115,8 @@ Os alertas são issues com o rótulo `sentinela` no repositório e chegam por e-
 | Licitação da ETA João Jabour apareceu | Colocar o número do PNCP em `data/referencia/obras-ligacoes.json` (ligação `eta-joao-jabour`) e tirar o "pendente". |
 | Origem do dinheiro: MSC × TCE-SP acima de 3% | Abrir a consulta da MSC citada na manutenção e o TCE-SP do mesmo período. Se a Prefeitura reenviou a matriz, a próxima atualização corrige sozinha; se não, a diferença fica explicada na página. |
 | Origem do dinheiro: código sem nome | Baixar a planilha de fontes do ano no Tesouro (link em `data/referencia/fontes-recursos.json`) e acrescentar o código que faltou. |
-| Bairro novo passou de 10 pedidos | Colocar o nome fixo em `data/referencia/bairros-apelidos.json` (`nomes`). |
+| Bairro novo passou de 10 pedidos | Colocar o nome fixo em `data/referencia/bairros-apelidos.json` (`nomes`). Depois, procurar o nome em `data/referencia/bairros-oficiais.json` e registrar em `oficial` (chave → nome oficial; `[]` se não consta) ou em `oficial_ligados` (quando o cadastro divide a área em vários nomes). Só registrar correspondência conferida. |
+| Bairros oficiais: arquivo não lido ou com erro | As páginas saem sem a linha do nome oficial. Corrigir o JSON de `data/referencia/bairros-oficiais.json` (ver seção 7). |
 
 ## 5. Rotina mensal das promessas
 
@@ -141,7 +142,8 @@ Os alertas são issues com o rótulo `sentinela` no repositório e chegam por e-
 
 - `data/referencia/promessas.json`: status das promessas, sempre com prova oficial.
 - `data/referencia/obras-ligacoes.json`: ligações entre obras do PNCP e do Obrasgov e as promessas. Uma ligação "pendente" pode ter um campo "buscar".
-- `data/referencia/bairros-apelidos.json`: grafias juntadas e nomes fixos dos bairros com página.
+- `data/referencia/bairros-apelidos.json`: grafias juntadas, nomes fixos dos bairros com página e a conferência com o cadastro oficial (`oficial` e `oficial_ligados`).
+- `data/referencia/bairros-oficiais.json`: nomes oficiais de bairros e loteamentos. Base: Anexo I da Planta Genérica de Valores (Lei 3.227/2013, consolidada até a Lei 3.683/2017), coluna "Bairro", com a grafia literal em `nome_na_lei`; mais os loteamentos de decretos e leis de 2015 a 2021 (`loteamentos_posteriores`, cada um com o ato e o link). Salto não tem bairros no IBGE (Censo 2022). Para atualizar: procurar na Imprensa Oficial (imprensaoficialmunicipal.com.br/salto) "loteamento denominado", "Valor Básico Unitário da Face de Quadra" e "denominação das ruas do loteamento", e acrescentar o loteamento novo com o ato e o link; se sair nova Planta Genérica de Valores, refazer a lista. Outro caminho: pedir por LAI (e-SIC) à Prefeitura a relação de bairros e loteamentos do cadastro imobiliário. Pesquisa completa em `.superpowers/pesquisa/bairros-oficiais.md`.
 - `data/referencia/emendas.json`: gerado pela ferramenta de emendas.
 - `data/referencia/entenda.json`: textos do Entenda e perguntas frequentes. Os números de Salto só por placeholder (lista em `src/site/entenda.js`, `PLACEHOLDERS`); `npm run checar` confere o contrato (`check/entenda.mjs`).
 - `data/referencia/fontes-recursos.json`: tabela oficial de fontes de recursos e códigos de acompanhamento (CO) do Tesouro (Portaria STN 710/2021). Trocar quando sair a tabela de um ano novo (a de 2027 vem da Portaria STN/MF 1.986/2026).

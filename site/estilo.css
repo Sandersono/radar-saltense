@@ -296,7 +296,10 @@ h2 .contagem { font-size: .9rem; font-weight: 600; color: var(--suave); font-fam
 
 /* Índice de bairros: lista de A a Z em cartão; 2 colunas a partir de 768px. */
 .lista-bairros > li { display: flex; justify-content: space-between; align-items: baseline; gap: .75rem; }
-.lista-bairros > li > a { min-width: 0; font-weight: 600; padding: .2rem 0; }
+.lista-bairros .bairro-nome { min-width: 0; overflow-wrap: anywhere; }
+.lista-bairros .bairro-nome > a { font-weight: 600; padding: .2rem 0; }
+.lista-bairros .nome-cadastro { display: block; }
+.tag-oficial { font-size: .7rem; margin: 0 0 0 .35rem; padding: .05rem .45rem; vertical-align: .1em; }
 .lista-bairros .num { float: none; flex: 0 0 auto; font-size: .9rem; }
 @media (min-width: 768px) {
   .lista-bairros { columns: 2; column-gap: 2.5rem; }

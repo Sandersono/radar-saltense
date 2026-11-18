@@ -5,7 +5,8 @@ import {
   atribuirSlugs, limparRua, resumoBairro, CORTE_BAIRRO,
 } from '../src/regras/bairros.js';
 import { tituloVereador, descricaoVereador, pessoaJsonLd } from '../src/site/vereador.js';
-import { descricaoBairro, lugarJsonLd } from '../src/site/bairros.js';
+import { descricaoBairro, lugarJsonLd, htmlOficial, marcaOficial } from '../src/site/bairros.js';
+import { indiceOficial, situacoesOficiais, avisosOficiais, chaveOficial, juntarNomes, TEXTO_SEM_OFICIAL, ROTULO_PGV } from '../src/regras/bairros-oficiais.js';
 
 // Sobras na rua lida do texto.
 assert.equal(limparRua('Rua Japão e o'), 'Rua Japão');
@@ -124,6 +125,58 @@ if (errosNomes.length) console.warn(`Aviso: nomes fixos de bairro: ${errosNomes.
 // vira aviso aqui e aviso de manutenção no gerador (a sentinela leva ao e-mail). Os testes acima seguem como assert.
 const semNome = bairrosComPagina(todos).filter((b) => !b.fixo).map((b) => b.chave);
 if (semNome.length) console.warn(`Aviso: bairro com página e sem nome fixo em bairros-apelidos.json: ${semNome.join(', ')}`);
+
+// Nome oficial (cadastro da Prefeitura): só fixtures aqui; com os dados reais, só aviso (o checar não pode travar o robô).
+const refOf = { url: 'https://x/pgv.pdf', bairros: [{ nome: 'Jardim Monte Paschoal' }, { nome: 'Jardim Celani' }, { nome: 'Loteamento São Pedro/São Paulo' }, { nome: 'Jardim Santa Cruz I' }, { nome: 'Bairro Santa Cruz' }],
+  loteamentos_posteriores: { itens: [{ nome: 'Jardim dos Ipês', ato: 'Decreto nº 263/2019', url: 'https://x/263.pdf' }, { nome: 'Sem Link', ato: 'Decreto 1' }] } };
+const { indice: idxOf, erros: errosOf } = indiceOficial(refOf);
+assert.equal(idxOf.size, 6);
+assert.deepEqual(errosOf, ['"Sem Link": ato sem nome ou sem link.']);
+assert.deepEqual(indiceOficial(null).indice.size, 0);
+assert.ok(indiceOficial({ bairros: 'x' }).erros.length > 0);
+assert.ok(indiceOficial({ url: 'u', bairros: [{ nome: 'A' }, { nome: 'A' }] }).erros.some((e) => e.includes('duas vezes')));
+assert.equal(chaveOficial('Jardim Arco-Íris'), chaveOficial('JD. ARCO IRIS'));
+const conf = { oficial: { 'jardim celani': ['Jardim Celani'], 'jardim monte pascoal': ['Jardim Monte Paschoal'], 'smart city': [], 'jardim dos ipes': ['Jardim dos Ipês'],
+  'jardim sao pedro': ['Loteamento São Pedro/São Paulo'], 'terras de sao pedro': ['Loteamento São Pedro/São Paulo'], 'jardim x': ['Inexistente'] },
+  oficial_ligados: { 'jardim santa cruz': ['Jardim Santa Cruz I', 'Bairro Santa Cruz'] } };
+const bx = (chave, nome) => ({ chave, nome, slug: chave.replace(/ /g, '-') });
+const pags = [bx('jardim celani', 'Jardim Celani'), bx('jardim monte pascoal', 'Jardim Monte Pascoal'), bx('smart city', 'Smart City'), bx('jardim dos ipes', 'Jardim dos Ipês'),
+  bx('jardim sao pedro', 'Jardim São Pedro e São Paulo'), bx('terras de sao pedro', 'Terras de São Pedro e São Paulo'), bx('jardim santa cruz', 'Jardim Santa Cruz'), bx('vila nova', 'Vila Nova'), bx('jardim x', 'Jardim X')];
+const sits = situacoesOficiais(pags, conf, idxOf);
+const tipoDe = (k) => sits.get(k).tipo;
+assert.equal(tipoDe('jardim celani'), 'igual');
+assert.equal(tipoDe('jardim monte pascoal'), 'grafia');
+assert.equal(tipoDe('smart city'), 'sem');
+assert.equal(tipoDe('jardim dos ipes'), 'igual');
+assert.equal(tipoDe('jardim santa cruz'), 'ligados');
+assert.equal(tipoDe('vila nova'), 'pendente'); // bairro novo, ainda sem conferência
+assert.equal(tipoDe('jardim x'), 'pendente'); // nome oficial inexistente não vira correspondência
+assert.deepEqual(sits.get('jardim sao pedro').mesmoOficial.map((b) => b.chave), ['terras de sao pedro']);
+const avOf = avisosOficiais(pags, sits);
+assert.equal(avOf.length, 3); // vila nova pendente; jardim x: nome inexistente + pendente
+assert.ok(avOf.some((a) => a.includes('"vila nova"')));
+assert.ok(avOf.some((a) => a.includes('Inexistente')));
+// Textos: fato, com link da fonte; nome escapado.
+assert.ok(htmlOficial(sits.get('jardim monte pascoal'), 'https://x/pgv.pdf').includes('No cadastro oficial da Prefeitura: <strong>Jardim Monte Paschoal</strong> ('));
+assert.ok(htmlOficial(sits.get('jardim celani'), 'https://x/pgv.pdf').startsWith('<p class="nome-oficial">Este nome consta no cadastro oficial da Prefeitura ('));
+assert.ok(htmlOficial(sits.get('jardim dos ipes'), 'u').includes('em ato oficial da Prefeitura'));
+assert.ok(htmlOficial(sits.get('smart city'), 'https://x/pgv.pdf').includes(TEXTO_SEM_OFICIAL));
+assert.ok(htmlOficial(sits.get('jardim santa cruz'), 'u').includes('Nomes ligados a este bairro no cadastro oficial da Prefeitura: <strong>Jardim Santa Cruz I e Bairro Santa Cruz</strong>'));
+assert.ok(htmlOficial(sits.get('jardim sao pedro'), 'u').includes('Outra página deste site com o mesmo nome oficial: <a href="../bairro/terras-de-sao-pedro.html">Terras de São Pedro e São Paulo</a>.'));
+assert.equal(htmlOficial(sits.get('vila nova'), 'u'), '');
+assert.equal(htmlOficial(null, 'u'), '');
+assert.ok(!htmlOficial({ tipo: 'grafia', oficiais: [{ nome: '<b>', rotulo: ROTULO_PGV, url: 'u' }] }, 'u').includes('<b>'));
+assert.ok(marcaOficial(sits.get('jardim celani')).includes('oficial'));
+assert.ok(marcaOficial(sits.get('jardim monte pascoal')).includes('no cadastro: Jardim Monte Paschoal'));
+assert.equal(marcaOficial(sits.get('smart city')), '');
+assert.equal(juntarNomes(['A', 'B', 'C']), 'A, B e C');
+// Arquivo real: conferência inexistente ou nome que sumiu vira aviso, nunca assert.
+try {
+  const { indice: idxReal, erros: errosReal } = indiceOficial(JSON.parse(readFileSync('data/referencia/bairros-oficiais.json', 'utf8')));
+  const refReal = JSON.parse(readFileSync('data/referencia/bairros-apelidos.json', 'utf8'));
+  const avisosReal = [...errosReal, ...avisosOficiais(bairrosComPagina(todos), situacoesOficiais(bairrosComPagina(todos), refReal, idxReal))];
+  if (avisosReal.length) console.warn(`Aviso: bairros oficiais: ${avisosReal.join(' | ')}`);
+} catch (e) { console.warn(`Aviso: bairros oficiais não lidos: ${e.message}`); }
 
 // Textos da página de bairro: "e as obras" só com obras.
 assert.equal(descricaoBairro('Jardim Celani', 70, true), 'Em Jardim Celani (Salto/SP), os vereadores fizeram 70 pedidos desde 2025: veja os tipos de problema, as ruas mais citadas, os pedidos repetidos e as obras.');
