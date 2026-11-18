@@ -3042,7 +3042,7 @@
       "tipo": "MSCC",
       "mes": 9,
       "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/msc_orcamentaria?id_ente=3545209&an_referencia=2026&me_referencia=9&co_tipo_matriz=MSCC&classe_conta=6&id_tv=ending_balance",
-      "consultadoEm": "2026-11-18T00:12:22.200Z",
+      "consultadoEm": "2026-11-18T10:39:10.800Z",
       "linhas": [
         [
           "621200000",

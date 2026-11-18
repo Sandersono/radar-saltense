@@ -1,7 +1,7 @@
 {
-  "atualizadoEm": "2026-11-18T00:43:00.037Z",
+  "atualizadoEm": "2026-11-18T10:44:24.311Z",
   "duracaoPncpMs": null,
-  "duracaoObrasMs": 25653,
+  "duracaoObrasMs": 40828,
   "totalProposituras": 6220,
   "semLocal": 940,
   "receitasMensais": {
@@ -71,8 +71,8 @@
     "2026-10": 465555.62
   },
   "tceColetadoEm": {
-    "receitas": "2026-11-18T00:43:00.037Z",
-    "despesas": "2026-11-18T00:43:00.037Z"
+    "receitas": "2026-11-18T10:44:24.311Z",
+    "despesas": "2026-11-18T10:44:24.311Z"
   },
   "marcosAnteriores": {
     "receitas": "2026-09",
