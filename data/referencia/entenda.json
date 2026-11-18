@@ -1,0 +1,957 @@
+{
+  "artigos": [
+    {
+      "slug": "o-que-faz-um-vereador",
+      "titulo": "O que faz um vereador em Salto (e o que não faz)",
+      "descricao": "Vereador vota leis, fiscaliza a Prefeitura e leva pedidos dos moradores. Não executa obras nem contrata. Veja o que dizem a lei e a Lei Orgânica de Salto.",
+      "resumo": "O vereador vota as leis da cidade, fiscaliza a Prefeitura e leva à Prefeitura os pedidos dos moradores. Quem executa obras, contrata e paga é a Prefeitura. A Câmara de Salto tem {{numeroVereadores}} vereadores.",
+      "secoes": [
+        {
+          "titulo": "As três tarefas da Câmara",
+          "paragrafos": [
+            "Fazer leis. A Constituição diz que cabe ao município legislar sobre assuntos de interesse local (art. 30, I). Em Salto, quem vota essas leis são os vereadores, em plenário. O orçamento da cidade também passa pela Câmara.",
+            "Fiscalizar. A Lei Orgânica de Salto dá à Câmara a tarefa de fiscalizar e controlar os atos do Poder Executivo (art. 8º, IX). A Constituição chama isso de controle externo, feito com a ajuda do Tribunal de Contas do Estado (art. 31).",
+            "Julgar as contas do prefeito. O Tribunal de Contas dá um parecer sobre as contas de cada ano. A Câmara vota esse parecer, e só derruba a opinião do Tribunal com o voto de dois terços dos vereadores (Constituição, art. 31, § 2º)."
+          ]
+        },
+        {
+          "titulo": "O que o vereador não faz",
+          "paragrafos": [
+            "O vereador não executa obra, não contrata empresa e não paga serviço. Pela Lei Orgânica, o Poder Executivo é exercido pelo prefeito (art. 57), e é a Prefeitura que decide e executa.",
+            "O que o vereador pode fazer é pedir. A indicação é a proposta que sugere à Prefeitura uma medida de interesse público (Regimento Interno, art. 163). O requerimento de informação cobra uma resposta sobre um assunto que a Câmara fiscaliza (art. 170)."
+          ]
+        },
+        {
+          "titulo": "Quantos são e quanto dura o mandato",
+          "paragrafos": [
+            "O mandato de vereador é de quatro anos (Constituição, art. 29, I). A Lei Orgânica fixa o número de vereadores dentro dos limites que a Constituição dá para cada faixa de população (art. 29, IV).",
+            "A Câmara de Salto tem {{numeroVereadores}} vereadores."
+          ]
+        },
+        {
+          "titulo": "Quando o vereador perde o mandato",
+          "paragrafos": [
+            "O Regimento Interno da Câmara lista os casos. Um deles é faltar a um terço das reuniões ordinárias do ano legislativo, salvo licença ou missão autorizada (art. 101, III).",
+            "No Radar, a presença de cada vereador sai dos PDFs oficiais de presença da Câmara. Ausência justificada aparece separada da ausência sem justificativa."
+          ]
+        },
+        {
+          "titulo": "Como ver o trabalho de cada vereador",
+          "paragrafos": [
+            "A página de cada vereador no Radar mostra presença, propostas, votações, requerimentos respondidos e emendas ao orçamento. Cada número tem link para o documento oficial da Câmara.",
+            "A busca por bairro mostra o que os vereadores pediram para cada lugar da cidade. Pedido não é obra feita: a decisão de executar é da Prefeitura."
+          ]
+        }
+      ],
+      "perguntas": [
+        {
+          "pergunta": "Vereador pode fazer obra no meu bairro?",
+          "resposta": "Não. O vereador pode pedir a obra à Prefeitura por meio de uma indicação, ou destinar parte do orçamento com uma emenda impositiva. Quem decide e executa é a Prefeitura."
+        },
+        {
+          "pergunta": "Quantos vereadores tem Salto?",
+          "resposta": "A Câmara de Salto tem {{numeroVereadores}} vereadores. O número é fixado pela Lei Orgânica do Município (art. 6º), dentro do limite do art. 29 da Constituição."
+        },
+        {
+          "pergunta": "Qual a diferença entre vereador e prefeito?",
+          "resposta": "Os vereadores formam o Poder Legislativo: votam leis e fiscalizam. O prefeito chefia o Poder Executivo: administra a cidade, contrata, executa obras e paga as despesas."
+        },
+        {
+          "pergunta": "Como o vereador fiscaliza a Prefeitura?",
+          "resposta": "Com requerimentos de informação, que a Prefeitura deve responder, e com a convocação de secretários municipais para dar explicações na Câmara (Lei Orgânica, art. 8º, XI). A Câmara também vota as contas anuais do prefeito, com parecer do Tribunal de Contas."
+        }
+      ],
+      "fontes": [
+        {
+          "titulo": "Constituição Federal, arts. 29, 30 e 31",
+          "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm"
+        },
+        {
+          "titulo": "Lei Orgânica do Município de Salto, arts. 6º, 8º e 57",
+          "url": "https://www.camarasalto.sp.gov.br/pdf/lei-organica/lei_organica.pdf"
+        },
+        {
+          "titulo": "Regimento Interno da Câmara de Salto, arts. 101, 163 e 170",
+          "url": "https://www.camarasalto.sp.gov.br/pdf/regimento-interno/regimento_interno_camara_municipal_salto.pdf"
+        }
+      ],
+      "relacionados": [
+        "camara.html",
+        "votacoes.html",
+        "bairros.html",
+        "fontes.html"
+      ]
+    },
+    {
+      "slug": "quanto-custa-a-camara",
+      "titulo": "Quanto custa a Câmara de Salto e quanto ganha um vereador",
+      "descricao": "Folha de pagamento da Câmara de Salto, salário de vereador e os limites de gasto que a Constituição impõe às câmaras municipais.",
+      "resumo": "A folha de pagamento da Câmara de Salto foi de {{custoCamaraMes}} no último mês publicado. O salário (subsídio) de vereador é de {{salarioVereador}} por mês, antes dos descontos. A Constituição limita quanto a Câmara pode gastar e quanto os vereadores podem ganhar.",
+      "secoes": [
+        {
+          "titulo": "O que entra no custo",
+          "paragrafos": [
+            "A maior parte do gasto da Câmara é a folha de pagamento: salários dos vereadores, dos assessores e dos servidores da Câmara. O Radar soma o valor bruto, antes dos descontos, como está no portal da Transparência da Câmara.",
+            "A folha de pagamento da Câmara de Salto foi de {{custoCamaraMes}} no último mês publicado.",
+            "Diárias e viagens são publicadas pela Câmara em PDFs separados, com link na página da Câmara no Radar."
+          ]
+        },
+        {
+          "titulo": "Quem decide o salário de vereador",
+          "paragrafos": [
+            "O salário de vereador se chama subsídio. A Constituição manda que a própria Câmara o fixe em cada legislatura para valer na seguinte (art. 29, VI). Ou seja, os vereadores não aumentam o salário do mandato em curso.",
+            "Em cidades de 100.001 a 300.000 habitantes, o subsídio não pode passar de 50% do subsídio de deputado estadual (art. 29, VI, d).",
+            "O salário de vereador em Salto é de {{salarioVereador}} por mês, antes dos descontos."
+          ]
+        },
+        {
+          "titulo": "Os limites da Constituição",
+          "paragrafos": [
+            "O gasto total da Câmara, incluindo os subsídios, tem teto. Ele é um percentual da receita de impostos e de algumas transferências do ano anterior. Para cidades entre 100 mil e 300 mil habitantes, o teto é de 6% (art. 29-A, II).",
+            "A Câmara não pode gastar mais de 70% da receita dela com folha de pagamento, incluindo os subsídios dos vereadores (art. 29-A, § 1º).",
+            "Somados, os subsídios de todos os vereadores não podem passar de 5% da receita do município (art. 29, VII)."
+          ]
+        },
+        {
+          "titulo": "O limite da Lei de Responsabilidade Fiscal",
+          "paragrafos": [
+            "A Lei de Responsabilidade Fiscal limita o gasto com pessoal. No município, o Legislativo pode usar até 6% da receita corrente líquida, e o Executivo até 54% (Lei Complementar 101/2000, art. 20, III)."
+          ]
+        }
+      ],
+      "perguntas": [
+        {
+          "pergunta": "Quanto ganha um vereador de Salto?",
+          "resposta": "O subsídio de vereador em Salto é de {{salarioVereador}} por mês, antes dos descontos. O valor vem da folha publicada no portal da Transparência da Câmara."
+        },
+        {
+          "pergunta": "Quanto custa a Câmara de Salto por mês?",
+          "resposta": "A folha de pagamento foi de {{custoCamaraMes}} no último mês publicado. A página da Câmara no Radar mostra o valor mês a mês e a divisão entre vereadores, assessores e servidores."
+        },
+        {
+          "pergunta": "Vereador pode aumentar o próprio salário?",
+          "resposta": "Não para o mandato em curso. A Constituição manda fixar o subsídio em uma legislatura para valer na seguinte (art. 29, VI)."
+        },
+        {
+          "pergunta": "Existe limite para o gasto da Câmara?",
+          "resposta": "Sim. Para cidades entre 100 mil e 300 mil habitantes, o gasto total da Câmara não pode passar de 6% da receita de impostos e transferências do ano anterior (Constituição, art. 29-A). A folha não pode passar de 70% do que a Câmara recebe."
+        }
+      ],
+      "fontes": [
+        {
+          "titulo": "Constituição Federal, arts. 29 e 29-A",
+          "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm"
+        },
+        {
+          "titulo": "Lei Complementar 101/2000 (Lei de Responsabilidade Fiscal), art. 20",
+          "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp101.htm"
+        },
+        {
+          "titulo": "Câmara Municipal da Estância Turística de Salto",
+          "url": "https://www.camarasalto.sp.gov.br"
+        }
+      ],
+      "relacionados": [
+        "camara.html",
+        "fontes.html",
+        "origem.html"
+      ]
+    },
+    {
+      "slug": "indicacao-requerimento-e-mocao",
+      "titulo": "Indicação, requerimento e moção: o que é cada um na Câmara de Salto",
+      "descricao": "Indicação sugere, requerimento cobra resposta e moção expressa a opinião da Câmara. Veja o Regimento de Salto e o prazo de resposta da Prefeitura.",
+      "resumo": "Indicação é uma sugestão do vereador à Prefeitura. Requerimento de informação é uma pergunta oficial, que a Prefeitura deve responder. Moção é uma manifestação da Câmara sobre um assunto, como apoio, protesto ou pesar.",
+      "secoes": [
+        {
+          "titulo": "Indicação: a sugestão",
+          "paragrafos": [
+            "O Regimento Interno define indicação como a proposta que sugere ao município medidas de interesse público que não caibam em projeto de iniciativa da Câmara (art. 163). Exemplos comuns: tapar um buraco, trocar uma lâmpada, podar uma árvore.",
+            "A indicação é lida na sessão e enviada pelo presidente da Câmara, sem votação (art. 164). O Regimento a trata como sugestão: cabe à Prefeitura decidir se executa.",
+            "No Radar, as indicações aparecem como pedidos de melhoria nos bairros. O portal da Câmara não registra resposta a elas."
+          ]
+        },
+        {
+          "titulo": "Requerimento: a pergunta oficial",
+          "paragrafos": [
+            "O requerimento de informação é escrito, não depende de votação e só pode tratar de proposta em andamento ou de assunto que a Câmara fiscaliza (Regimento, art. 170).",
+            "A Lei Orgânica de Salto manda o prefeito responder aos requerimentos de informação enviados pela Câmara. Na redação atual, o prazo é de 30 dias (art. 69, XIII).",
+            "Se a resposta não vier em 30 dias, o presidente da Câmara reitera o pedido por ofício (Regimento, art. 170, § 2º). A resposta recebida fica disponível no site da Câmara (§ 3º)."
+          ]
+        },
+        {
+          "titulo": "Moção: a opinião da Câmara",
+          "paragrafos": [
+            "Moção é a proposta em que se sugere que a Câmara se manifeste sobre um assunto: protesto, repúdio, apoio, pesar por falecimento ou congratulação (Regimento, art. 159).",
+            "A moção passa pela Comissão de Justiça e Redação, é votada e, se aprovada, é enviada ao destinatário (art. 161)."
+          ]
+        },
+        {
+          "titulo": "E o projeto de lei?",
+          "paragrafos": [
+            "Projeto de lei é diferente: ele cria ou muda uma regra da cidade. Precisa ser discutido e votado em plenário e, depois, vai para sanção ou veto do prefeito.",
+            "O Regimento lista os tipos de proposta: emendas à Lei Orgânica, projetos de lei complementar e ordinária, projetos de decreto legislativo e de resolução, moções, requerimentos, emendas e indicações (art. 141)."
+          ]
+        }
+      ],
+      "perguntas": [
+        {
+          "pergunta": "A indicação obriga a Prefeitura a fazer o que foi pedido?",
+          "resposta": "Não. Pelo Regimento Interno, a indicação é uma sugestão de medida à Prefeitura (art. 163). A decisão de executar é da Prefeitura."
+        },
+        {
+          "pergunta": "Quanto tempo a Prefeitura tem para responder a um requerimento?",
+          "resposta": "A Lei Orgânica de Salto fixa 30 dias na redação atual (art. 69, XIII). Sem resposta nesse prazo, o presidente da Câmara reitera o pedido por ofício."
+        },
+        {
+          "pergunta": "Para que serve uma moção?",
+          "resposta": "Para registrar a posição da Câmara sobre um assunto, como apoio, protesto, repúdio, pesar ou congratulação. A moção é votada e enviada ao destinatário."
+        },
+        {
+          "pergunta": "Onde vejo se um requerimento foi respondido?",
+          "resposta": "Na página da Câmara no Radar, que conta os requerimentos com resposta anexada no portal oficial. Cada requerimento tem link para a ficha na Câmara."
+        }
+      ],
+      "fontes": [
+        {
+          "titulo": "Regimento Interno da Câmara de Salto, arts. 141, 159 a 170",
+          "url": "https://www.camarasalto.sp.gov.br/pdf/regimento-interno/regimento_interno_camara_municipal_salto.pdf"
+        },
+        {
+          "titulo": "Lei Orgânica do Município de Salto, art. 69, XIII",
+          "url": "https://www.camarasalto.sp.gov.br/pdf/lei-organica/lei_organica.pdf"
+        }
+      ],
+      "relacionados": [
+        "camara.html#respostas",
+        "fontes.html#regras",
+        "bairros.html",
+        "votacoes.html"
+      ]
+    },
+    {
+      "slug": "emenda-impositiva-e-emenda-parlamentar",
+      "titulo": "Emenda impositiva e emenda parlamentar: qual a diferença em Salto",
+      "descricao": "Emenda impositiva é a parte do orçamento de Salto que cada vereador indica. Emenda parlamentar vem de deputados e senadores. Entenda as duas.",
+      "resumo": "Emenda impositiva é a parte do orçamento da Prefeitura que cada vereador de Salto indica para onde vai, e a Prefeitura é obrigada a executar. Emenda parlamentar é a mesma ideia no orçamento federal, feita por deputados e senadores, e pode trazer dinheiro para Salto. Nas votações, emenda também é a mudança feita num projeto de lei.",
+      "secoes": [
+        {
+          "titulo": "Emenda impositiva dos vereadores",
+          "paragrafos": [
+            "A Lei Orgânica de Salto torna obrigatória a execução das emendas individuais dos vereadores ao orçamento (art. 112, § 5º). Pelo menos metade do valor vai para ações e serviços de saúde, e o total é dividido de forma igual entre os vereadores.",
+            "O percentual da receita usado no cálculo mudou com emendas à Lei Orgânica. Parte da redação aprovada em 2026 está com a vigência suspensa por decisão do Tribunal de Justiça de São Paulo, como informa o próprio texto da Lei Orgânica.",
+            "Para 2026, as emendas dos vereadores somam {{emendas2026Total}}.",
+            "Cada vereador indicou {{emendasPorVereador2026}} para 2026."
+          ]
+        },
+        {
+          "titulo": "O dinheiro não é do vereador",
+          "paragrafos": [
+            "A emenda impositiva não é dinheiro do vereador. É dinheiro do orçamento da Prefeitura, e o vereador só indica o destino: uma entidade, um projeto ou uma secretaria.",
+            "Quem paga é a Prefeitura. A Lei Orgânica prevê prazos para a Prefeitura apontar impedimentos técnicos e para a Câmara indicar um novo destino quando a emenda não puder ser executada."
+          ]
+        },
+        {
+          "titulo": "Emenda parlamentar de deputados e senadores",
+          "paragrafos": [
+            "No orçamento federal, as emendas individuais de deputados e senadores somam até 2% da receita corrente líquida do ano anterior, e metade vai para a saúde (Constituição, art. 166, § 9º). A execução é obrigatória (§ 11).",
+            "Essas emendas podem chegar à cidade como transferência especial ou como transferência com finalidade definida (art. 166-A). No Radar, as que entraram nos cofres de Salto aparecem na página De onde vem o dinheiro."
+          ]
+        },
+        {
+          "titulo": "Emenda a um projeto de lei",
+          "paragrafos": [
+            "Na lista de votações, emenda tem outro sentido: é uma proposta que muda um projeto em discussão (Regimento Interno, art. 176).",
+            "Ela pode ser aditiva (acrescenta), supressiva (retira), modificativa, substitutiva ou aglutinativa (art. 177)."
+          ]
+        }
+      ],
+      "perguntas": [
+        {
+          "pergunta": "Quanto cada vereador de Salto pode indicar em emendas?",
+          "resposta": "Para 2026, cada vereador indicou {{emendasPorVereador2026}}. Pela Lei Orgânica, o valor é dividido de forma igual entre os vereadores, com pelo menos metade para a saúde."
+        },
+        {
+          "pergunta": "Emenda impositiva é dinheiro do vereador?",
+          "resposta": "Não. É dinheiro do orçamento da Prefeitura. O vereador indica o destino e a Prefeitura executa e paga."
+        },
+        {
+          "pergunta": "Como sei se a emenda foi paga?",
+          "resposta": "A Câmara publica relatórios de execução das emendas impositivas no site oficial. A página da Câmara no Radar resume o que foi indicado, pago, concluído e devolvido."
+        },
+        {
+          "pergunta": "O que é emenda aditiva ou supressiva nas votações?",
+          "resposta": "É uma mudança num projeto de lei. A aditiva acrescenta um trecho e a supressiva retira um trecho (Regimento Interno, art. 177)."
+        }
+      ],
+      "fontes": [
+        {
+          "titulo": "Lei Orgânica do Município de Salto, art. 112, § 5º",
+          "url": "https://www.camarasalto.sp.gov.br/pdf/lei-organica/lei_organica.pdf"
+        },
+        {
+          "titulo": "Câmara de Salto: emendas impositivas",
+          "url": "https://www.camarasalto.sp.gov.br/orcamento-publico/emendas-impositivas"
+        },
+        {
+          "titulo": "Constituição Federal, arts. 166 e 166-A",
+          "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm"
+        },
+        {
+          "titulo": "Regimento Interno da Câmara de Salto, arts. 176 e 177",
+          "url": "https://www.camarasalto.sp.gov.br/pdf/regimento-interno/regimento_interno_camara_municipal_salto.pdf"
+        }
+      ],
+      "relacionados": [
+        "camara.html#emendas",
+        "origem.html#emendas-recebidas",
+        "votacoes.html"
+      ]
+    },
+    {
+      "slug": "de-onde-vem-o-dinheiro",
+      "titulo": "De onde vem o dinheiro da Prefeitura de Salto",
+      "descricao": "IPTU, ISS e ITBI são da cidade. ICMS, IPVA e FPM chegam do Estado e da União. Veja como a Constituição divide os impostos com Salto.",
+      "resumo": "O dinheiro da Prefeitura de Salto vem de impostos da própria cidade (IPTU, ISS e ITBI), de repasses do Estado (ICMS e IPVA) e da União (FPM), do Fundeb e de convênios. A Constituição define quanto de cada imposto fica com a cidade.",
+      "secoes": [
+        {
+          "titulo": "Os impostos da cidade",
+          "paragrafos": [
+            "A Constituição dá aos municípios três impostos: o IPTU, sobre imóveis urbanos; o ITBI, sobre a venda de imóveis; e o ISS, sobre serviços (art. 156). A cidade também cobra taxas.",
+            "Os impostos e taxas pagos à Prefeitura de Salto somam {{arrecadacaoAno}} no ano."
+          ]
+        },
+        {
+          "titulo": "O que vem do Estado",
+          "paragrafos": [
+            "Do ICMS arrecadado pelo Estado, 25% pertencem aos municípios (Constituição, art. 158, IV).",
+            "Do IPVA dos veículos licenciados na cidade, 50% ficam com o município (art. 158, III)."
+          ]
+        },
+        {
+          "titulo": "O que vem da União",
+          "paragrafos": [
+            "O Fundo de Participação dos Municípios (FPM) recebe 22,5% de impostos federais, mais três parcelas de 1% entregues em julho, setembro e dezembro (Constituição, art. 159, I).",
+            "O Imposto de Renda que a Prefeitura retém nos pagamentos que faz fica com a cidade (art. 158, I). Metade do ITR, o imposto sobre imóveis rurais, também (art. 158, II)."
+          ]
+        },
+        {
+          "titulo": "O Fundeb",
+          "paragrafos": [
+            "O Fundeb é um fundo da educação básica, um em cada Estado (Lei 14.113/2020, art. 1º). Ele é formado por 20% de receitas como ICMS, IPVA, FPM e ITR (art. 3º).",
+            "Parte do que chegaria a Salto fica retida no Fundeb e volta à cidade pelas regras do fundo, só para a educação básica. A União complementa o fundo (art. 5º)."
+          ]
+        },
+        {
+          "titulo": "Convênios, financiamentos e tarifas",
+          "paragrafos": [
+            "Também entram dinheiro de convênios e de emendas parlamentares, para fins definidos, e de financiamentos.",
+            "A conta de água e esgoto paga ao SAAE entra nas contas da cidade, porque o SAAE é um órgão do município. No Radar, a página De onde vem o dinheiro separa cada origem, com dados do Tesouro Nacional."
+          ]
+        }
+      ],
+      "perguntas": [
+        {
+          "pergunta": "Quanto Salto arrecada de impostos?",
+          "resposta": "Os impostos e taxas pagos à Prefeitura somam {{arrecadacaoAno}} no ano. O Impostômetro do Radar mostra o valor mês a mês, com dados do TCE-SP."
+        },
+        {
+          "pergunta": "Quais impostos são da Prefeitura?",
+          "resposta": "IPTU, ITBI e ISS, além das taxas (Constituição, art. 156). O Imposto de Renda retido pela Prefeitura nos pagamentos que faz também fica com a cidade."
+        },
+        {
+          "pergunta": "O que é o FPM?",
+          "resposta": "É o Fundo de Participação dos Municípios, formado por impostos federais e dividido entre as cidades. A Constituição fixa a parte do fundo no art. 159, I."
+        },
+        {
+          "pergunta": "Quanto do ICMS fica com Salto?",
+          "resposta": "Os municípios paulistas recebem juntos 25% do ICMS do Estado (Constituição, art. 158, IV). A parte de cada cidade segue regras da lei, e parte vai para o Fundeb."
+        }
+      ],
+      "fontes": [
+        {
+          "titulo": "Constituição Federal, arts. 156, 158 e 159",
+          "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm"
+        },
+        {
+          "titulo": "Lei 14.113/2020 (Fundeb), arts. 1º, 3º e 5º",
+          "url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm"
+        },
+        {
+          "titulo": "SICONFI, Tesouro Nacional",
+          "url": "https://siconfi.tesouro.gov.br/siconfi/index.jsf"
+        }
+      ],
+      "relacionados": [
+        "origem.html#de-onde-vem",
+        "impostometro.html",
+        "gastos.html"
+      ]
+    },
+    {
+      "slug": "dinheiro-livre-e-carimbado",
+      "titulo": "Dinheiro livre e carimbado: os mínimos de educação e saúde em Salto",
+      "descricao": "A Prefeitura precisa aplicar ao menos 25% dos impostos na educação e 15% na saúde. Entenda o que é dinheiro livre e dinheiro carimbado.",
+      "resumo": "Dinheiro livre pode ir para qualquer área; dinheiro carimbado só pode ser usado na finalidade dele. A lei carimba parte dos impostos: a Prefeitura deve aplicar ao menos 25% em educação e 15% em saúde.",
+      "secoes": [
+        {
+          "titulo": "O que é dinheiro carimbado",
+          "paragrafos": [
+            "Parte do dinheiro que entra já chega com destino certo: o Fundeb só pode ir para a educação básica, um convênio só pode pagar a obra ou o serviço combinado, uma emenda com finalidade definida só pode ser usada naquela finalidade.",
+            "O resto é dinheiro livre, que a Prefeitura distribui no orçamento aprovado pela Câmara.",
+            "Em Salto, o dinheiro livre foi {{percentualLivre}} do que entrou no período."
+          ]
+        },
+        {
+          "titulo": "Educação: no mínimo 25%",
+          "paragrafos": [
+            "A Constituição manda os municípios aplicarem, todo ano, no mínimo 25% da receita de impostos, incluídas as transferências, na manutenção e no desenvolvimento do ensino (art. 212).",
+            "Do Fundeb, ao menos 70% devem pagar os profissionais da educação básica em efetivo exercício (Lei 14.113/2020, art. 26)."
+          ]
+        },
+        {
+          "titulo": "Saúde: no mínimo 15%",
+          "paragrafos": [
+            "A Constituição exige um mínimo para a saúde (art. 198, § 2º, III). A Lei Complementar 141/2012 fixa esse mínimo para os municípios em 15% da arrecadação dos impostos da cidade e de transferências como ICMS, IPVA e FPM (art. 7º)."
+          ]
+        },
+        {
+          "titulo": "Por que o percentual muda",
+          "paragrafos": [
+            "Cada receita é registrada pela Prefeitura numa fonte de recursos, pela tabela oficial do Tesouro Nacional. Por isso o mesmo tipo de receita pode mudar de grupo de um ano para outro.",
+            "O Radar soma as fontes de recursos informadas pela Prefeitura ao Tesouro Nacional (SICONFI)."
+          ]
+        }
+      ],
+      "perguntas": [
+        {
+          "pergunta": "Quanto Salto precisa gastar com educação?",
+          "resposta": "No mínimo 25% da receita de impostos, incluídas as transferências, todo ano (Constituição, art. 212)."
+        },
+        {
+          "pergunta": "Quanto Salto precisa gastar com saúde?",
+          "resposta": "No mínimo 15% da arrecadação dos impostos da cidade e de transferências como ICMS, IPVA e FPM (Lei Complementar 141/2012, art. 7º)."
+        },
+        {
+          "pergunta": "O que é dinheiro carimbado?",
+          "resposta": "É o dinheiro que só pode ser usado numa finalidade, como o Fundeb na educação ou um convênio numa obra. Dinheiro livre pode ir para qualquer área do orçamento."
+        },
+        {
+          "pergunta": "Quanto do dinheiro de Salto é livre?",
+          "resposta": "O dinheiro livre foi {{percentualLivre}} do que entrou no período. A página De onde vem o dinheiro mostra a divisão por ano."
+        }
+      ],
+      "fontes": [
+        {
+          "titulo": "Constituição Federal, arts. 198 e 212",
+          "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm"
+        },
+        {
+          "titulo": "Lei Complementar 141/2012, art. 7º",
+          "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp141.htm"
+        },
+        {
+          "titulo": "Lei 14.113/2020 (Fundeb), art. 26",
+          "url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm"
+        },
+        {
+          "titulo": "SICONFI, Tesouro Nacional",
+          "url": "https://siconfi.tesouro.gov.br/siconfi/index.jsf"
+        }
+      ],
+      "relacionados": [
+        "origem.html#livre-carimbado",
+        "origem.html#destino",
+        "gastos.html"
+      ]
+    },
+    {
+      "slug": "empenho-liquidacao-e-pagamento",
+      "titulo": "Empenho, liquidação e pagamento: como a Prefeitura de Salto gasta",
+      "descricao": "Toda despesa pública passa por três etapas: empenho, liquidação e pagamento. Entenda cada uma e por que empenhado não quer dizer pago.",
+      "resumo": "Antes de gastar, a Prefeitura reserva o dinheiro (empenho). Depois confere se o serviço foi feito ou a compra entregue (liquidação). Só então o dinheiro sai do caixa (pagamento).",
+      "secoes": [
+        {
+          "titulo": "Empenho: a reserva",
+          "paragrafos": [
+            "Empenho é o ato da autoridade que cria para o poder público a obrigação de pagar (Lei 4.320/1964, art. 58). A lei proíbe despesa sem empenho prévio (art. 60).",
+            "O empenho não pode passar do valor autorizado no orçamento (art. 59). Para cada empenho é emitida uma nota de empenho, com o nome do credor e o valor (art. 61)."
+          ]
+        },
+        {
+          "titulo": "Liquidação: a conferência",
+          "paragrafos": [
+            "Liquidação é a verificação de que o credor tem direito a receber, com base nos documentos (art. 63). Ela confere a origem e o objeto do pagamento, o valor exato e a quem pagar (art. 63, § 1º).",
+            "Na prática: a obra foi medida, o produto foi entregue, o serviço foi prestado."
+          ]
+        },
+        {
+          "titulo": "Pagamento: o dinheiro sai do caixa",
+          "paragrafos": [
+            "O pagamento só pode ser feito depois da liquidação (art. 62), por ordem de pagamento de autoridade competente (art. 64).",
+            "Em {{dataAtualizacao}}, a Prefeitura de Salto tinha pago {{pagoAno}} no ano."
+          ]
+        },
+        {
+          "titulo": "Onde acompanhar",
+          "paragrafos": [
+            "A Lei de Responsabilidade Fiscal exige que a execução do orçamento seja publicada em tempo real, com detalhes, em meio eletrônico (Lei Complementar 101/2000, art. 48, § 1º, II).",
+            "O Raio-X dos gastos do Radar usa os dados de despesa que a Prefeitura envia ao TCE-SP e ao Tesouro Nacional, com busca por empresa."
+          ]
+        }
+      ],
+      "perguntas": [
+        {
+          "pergunta": "O que é empenho?",
+          "resposta": "É a reserva do dinheiro para uma despesa, que cria a obrigação de pagar (Lei 4.320/1964, art. 58). Sem empenho, a despesa é proibida."
+        },
+        {
+          "pergunta": "Empenhado quer dizer pago?",
+          "resposta": "Não. Depois do empenho vêm a liquidação, que confere se o serviço foi feito, e só então o pagamento."
+        },
+        {
+          "pergunta": "Por que o valor pago é menor que o empenhado?",
+          "resposta": "Porque parte do que foi empenhado ainda não foi entregue, conferido ou pago. Contratos longos, como obras, são pagos aos poucos, conforme a medição."
+        },
+        {
+          "pergunta": "Onde vejo quanto a Prefeitura de Salto pagou?",
+          "resposta": "No Raio-X dos gastos do Radar, por ano e por empresa. A Prefeitura pagou {{pagoAno}} no ano."
+        }
+      ],
+      "fontes": [
+        {
+          "titulo": "Lei 4.320/1964, arts. 58 a 65",
+          "url": "https://www.planalto.gov.br/ccivil_03/leis/l4320.htm"
+        },
+        {
+          "titulo": "Lei Complementar 101/2000, art. 48",
+          "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp101.htm"
+        }
+      ],
+      "relacionados": [
+        "gastos.html",
+        "origem.html#destino",
+        "prefeitura.html#compras"
+      ]
+    },
+    {
+      "slug": "como-acompanhar-uma-obra",
+      "titulo": "Como acompanhar uma obra pública em Salto",
+      "descricao": "Onde achar a licitação, o contrato e a situação de uma obra em Salto: PNCP, Painel de Obras do TCE-SP, Obrasgov.br e a página da Prefeitura.",
+      "resumo": "Toda licitação e todo contrato de obra da Prefeitura vão para o Portal Nacional de Contratações Públicas (PNCP). Obras com dinheiro federal aparecem no Obrasgov.br, e o TCE-SP mostra as obras que a Prefeitura declarou ao Tribunal. O Radar junta essas fontes na página de obras.",
+      "secoes": [
+        {
+          "titulo": "PNCP: licitação e contrato",
+          "paragrafos": [
+            "A Lei de Licitações criou o PNCP como site oficial para a divulgação centralizada e obrigatória dos atos que ela exige (Lei 14.133/2021, art. 174, I). Ali estão os editais e os contratos.",
+            "No contrato dá para ver a empresa, o valor, o prazo e o objeto da obra."
+          ]
+        },
+        {
+          "titulo": "Obrasgov.br: obras com dinheiro federal",
+          "paragrafos": [
+            "O Obrasgov.br é o cadastro do governo federal para obras pagas com o orçamento federal, criado pelo Decreto 10.496/2020. Ele mostra a situação da obra e quanto já foi feito, segundo o que foi informado ao governo federal."
+          ]
+        },
+        {
+          "titulo": "Painel de Obras do TCE-SP e página da Prefeitura",
+          "paragrafos": [
+            "O Painel de Obras do Tribunal de Contas do Estado mostra se uma obra está no prazo, atrasada ou paralisada. Ele só cobre as obras que a Prefeitura declarou ao Tribunal.",
+            "A Prefeitura de Salto mantém uma página de consulta de obras paralisadas no site oficial."
+          ]
+        },
+        {
+          "titulo": "O que o Radar mostra",
+          "paragrafos": [
+            "A página de obras junta as quatro fontes e é refeita todo dia.",
+            "Há {{obrasEmExecucao}} obras em execução ou contratadas em Salto.",
+            "Há {{obrasParalisadas}} obras paralisadas, segundo a Prefeitura, o TCE-SP ou o Obrasgov.br."
+          ]
+        },
+        {
+          "titulo": "Se a informação não estiver lá",
+          "paragrafos": [
+            "Qualquer pessoa pode pedir informação sobre uma obra à Prefeitura pela Lei de Acesso à Informação. Os vereadores também podem cobrar por requerimento de informação."
+          ]
+        }
+      ],
+      "perguntas": [
+        {
+          "pergunta": "Como saber se uma obra está parada em Salto?",
+          "resposta": "Veja a lista de obras paralisadas no Radar, que junta a Prefeitura, o TCE-SP e o Obrasgov.br. Cada obra cita a fonte que a declarou paralisada."
+        },
+        {
+          "pergunta": "Obra paralisada quer dizer irregularidade?",
+          "resposta": "Não necessariamente. A palavra é da fonte oficial; o motivo, quando existe, aparece no próprio sistema ou pode ser pedido à Prefeitura."
+        },
+        {
+          "pergunta": "Onde vejo a licitação de uma obra?",
+          "resposta": "No PNCP, o portal nacional onde a Prefeitura e o SAAE publicam editais e contratos. A página de obras do Radar tem o link de cada uma."
+        },
+        {
+          "pergunta": "Como pedir uma obra para o meu bairro?",
+          "resposta": "Os vereadores podem pedir à Prefeitura por indicação ou destinar uma emenda impositiva. A decisão de fazer a obra é da Prefeitura."
+        }
+      ],
+      "fontes": [
+        {
+          "titulo": "Lei 14.133/2021 (Lei de Licitações), art. 174",
+          "url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14133.htm"
+        },
+        {
+          "titulo": "Portal Nacional de Contratações Públicas (PNCP)",
+          "url": "https://pncp.gov.br/app/"
+        },
+        {
+          "titulo": "Obrasgov.br: perguntas frequentes",
+          "url": "https://www.gov.br/obrasgov/pt-br/perguntas-frequentes"
+        },
+        {
+          "titulo": "Painel de Obras do TCE-SP",
+          "url": "https://paineldeobras.tce.sp.gov.br/"
+        },
+        {
+          "titulo": "Prefeitura de Salto: consulta de obras paralisadas",
+          "url": "https://salto.sp.gov.br/consulta-de-obras-paralisadas/"
+        }
+      ],
+      "relacionados": [
+        "obras.html",
+        "prefeitura.html#obras",
+        "prefeitura.html#compras"
+      ]
+    },
+    {
+      "slug": "nota-do-tce-iegm",
+      "titulo": "O que é a nota do TCE (IEG-M) e qual a nota de Salto",
+      "descricao": "O IEG-M é a nota que o Tribunal de Contas de SP dá à gestão de cada cidade, de A a C, em sete áreas. Entenda o índice e a nota de Salto.",
+      "resumo": "O IEG-M é um índice do Tribunal de Contas do Estado de São Paulo (TCE-SP) que mede a qualidade da gestão das prefeituras. A nota vai de A (altamente efetiva) a C (baixo nível de adequação). Salto teve nota {{notaIegm}} no ano-base {{anoIegm}}.",
+      "secoes": [
+        {
+          "titulo": "O que o índice mede",
+          "paragrafos": [
+            "O Índice de Efetividade da Gestão Municipal (IEG-M) foi criado pelo TCE-SP para medir a qualidade dos gastos municipais e avaliar as políticas públicas das prefeituras.",
+            "O índice é calculado a partir de um questionário anual do TCE-SP, sobre o ano anterior. Por isso cada nota tem um ano-base e é divulgada no ano seguinte."
+          ]
+        },
+        {
+          "titulo": "As sete áreas",
+          "paragrafos": [
+            "Planejamento, gestão fiscal, educação, saúde, meio ambiente, cidades protegidas (defesa civil) e governança em tecnologia da informação.",
+            "Cada área recebe uma nota, e a combinação delas forma a nota geral."
+          ]
+        },
+        {
+          "titulo": "As faixas",
+          "paragrafos": [
+            "A: altamente efetiva. B+: muito efetiva. B: efetiva. C+: em fase de adequação. C: baixo nível de adequação."
+          ]
+        },
+        {
+          "titulo": "A nota de Salto",
+          "paragrafos": [
+            "Salto teve nota {{notaIegm}} no ano-base {{anoIegm}}.",
+            "A página da Prefeitura no Radar mostra a nota ano a ano, por área, e a comparação com cidades vizinhas."
+          ]
+        }
+      ],
+      "perguntas": [
+        {
+          "pergunta": "Qual a nota de Salto no IEG-M?",
+          "resposta": "Salto teve nota {{notaIegm}} no ano-base {{anoIegm}}. O histórico e a nota por área estão na página da Prefeitura no Radar."
+        },
+        {
+          "pergunta": "O que significa nota C no IEG-M?",
+          "resposta": "C é a faixa mais baixa, chamada pelo TCE-SP de baixo nível de adequação. C+ significa em fase de adequação."
+        },
+        {
+          "pergunta": "Quem dá a nota do IEG-M?",
+          "resposta": "O Tribunal de Contas do Estado de São Paulo, a partir de um questionário anual sobre a gestão de cada prefeitura."
+        }
+      ],
+      "fontes": [
+        {
+          "titulo": "TCE-SP: Manual IEG-M 2026",
+          "url": "https://tce.sp.gov.br/publicacoes/manual-ieg-m-2026"
+        },
+        {
+          "titulo": "TCE-SP: notícia sobre as faixas do IEG-M",
+          "url": "https://tce.sp.gov.br/6524-menos-10-prefeituras-sao-paulo-tem-administracoes-efetivas-mostra-indicador-tcesp"
+        },
+        {
+          "titulo": "Painel do IEG-M (TCE-SP)",
+          "url": "https://iegm.tce.sp.gov.br/"
+        }
+      ],
+      "relacionados": [
+        "prefeitura.html#nota",
+        "fontes.html"
+      ]
+    },
+    {
+      "slug": "lei-de-acesso-a-informacao",
+      "titulo": "Como pedir informação à Prefeitura de Salto pela Lei de Acesso à Informação",
+      "descricao": "Qualquer pessoa pode pedir informação à Prefeitura de Salto, sem dizer o motivo. O prazo é de 20 dias. Veja como fazer o pedido pelo e-SIC.",
+      "resumo": "Qualquer pessoa pode pedir informação pública à Prefeitura de Salto, sem explicar o motivo, pelo e-SIC no site da Prefeitura. A resposta deve vir em até 20 dias, prorrogáveis por mais 10 com justificativa. O pedido é gratuito.",
+      "secoes": [
+        {
+          "titulo": "Quem pode pedir e o quê",
+          "paragrafos": [
+            "A Lei de Acesso à Informação vale para a União, os Estados e os Municípios (Lei 12.527/2011, art. 1º). Qualquer interessado pode fazer um pedido (art. 10).",
+            "Não é permitido exigir que a pessoa diga por que quer a informação (art. 10, § 3º).",
+            "A lei também manda os órgãos publicarem, sem pedido, as informações de interesse coletivo (art. 8º). Por isso vale olhar antes o Portal da Transparência."
+          ]
+        },
+        {
+          "titulo": "Como fazer o pedido em Salto",
+          "paragrafos": [
+            "A Prefeitura de Salto tem uma página do e-SIC no site oficial, com o link para o sistema de pedidos on-line. A mesma página traz o telefone e o e-mail da Ouvidoria.",
+            "Escreva o pedido de forma clara e específica: o que você quer saber, de qual período e de qual secretaria, se souber. Guarde o número do protocolo.",
+            "A Câmara tem canal próprio de acesso à informação, com link no site da Câmara."
+          ]
+        },
+        {
+          "titulo": "Prazos",
+          "paragrafos": [
+            "Se a informação não puder ser dada na hora, a resposta deve vir em até 20 dias (art. 11, § 1º). O prazo pode ser prorrogado por mais 10 dias, com justificativa expressa (art. 11, § 2º)."
+          ]
+        },
+        {
+          "titulo": "Custo",
+          "paragrafos": [
+            "A busca e o fornecimento da informação são gratuitos (art. 12). Só pode ser cobrado o custo de reprodução, como cópias, quando houver (art. 12, § 1º)."
+          ]
+        },
+        {
+          "titulo": "Se o pedido for negado",
+          "paragrafos": [
+            "Dá para recorrer em até 10 dias depois da resposta (art. 15). Segundo a página do e-SIC da Prefeitura, o recurso é feito pelo mesmo protocolo do pedido."
+          ]
+        }
+      ],
+      "perguntas": [
+        {
+          "pergunta": "Preciso dizer por que quero a informação?",
+          "resposta": "Não. A Lei de Acesso à Informação proíbe exigir o motivo do pedido (art. 10, § 3º)."
+        },
+        {
+          "pergunta": "Quanto tempo a Prefeitura tem para responder?",
+          "resposta": "Até 20 dias, prorrogáveis por mais 10 com justificativa (Lei 12.527/2011, art. 11)."
+        },
+        {
+          "pergunta": "Pedir informação custa alguma coisa?",
+          "resposta": "Não. O serviço é gratuito; só pode ser cobrado o custo de cópias, quando houver (art. 12)."
+        },
+        {
+          "pergunta": "E se a Prefeitura negar o pedido?",
+          "resposta": "Você pode recorrer em até 10 dias (art. 15). Na Prefeitura de Salto, o recurso é feito pelo mesmo protocolo do pedido."
+        }
+      ],
+      "fontes": [
+        {
+          "titulo": "Lei 12.527/2011 (Lei de Acesso à Informação)",
+          "url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12527.htm"
+        },
+        {
+          "titulo": "Prefeitura de Salto: e-SIC",
+          "url": "https://salto.sp.gov.br/e-sic/"
+        },
+        {
+          "titulo": "Prefeitura de Salto: Portal da Transparência",
+          "url": "https://salto.sp.gov.br/portal-de-transparencia/"
+        },
+        {
+          "titulo": "Câmara Municipal da Estância Turística de Salto",
+          "url": "https://www.camarasalto.sp.gov.br"
+        }
+      ],
+      "relacionados": [
+        "prefeitura.html",
+        "obras.html",
+        "fontes.html"
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "grupo": "Câmara",
+      "pergunta": "Quanto custa a Câmara de Salto?",
+      "resposta": "A folha de pagamento da Câmara foi de {{custoCamaraMes}} no último mês publicado. A página da Câmara mostra o valor mês a mês e a divisão entre vereadores, assessores e servidores.",
+      "link": "camara.html#custo"
+    },
+    {
+      "grupo": "Câmara",
+      "pergunta": "Quantos vereadores tem Salto?",
+      "resposta": "A Câmara de Salto tem {{numeroVereadores}} vereadores. O número é fixado pela Lei Orgânica do Município, dentro do limite do art. 29 da Constituição.",
+      "link": "index.html#vereadores"
+    },
+    {
+      "grupo": "Câmara",
+      "pergunta": "Como funciona uma sessão da Câmara de Salto?",
+      "resposta": "As reuniões ordinárias são às terças-feiras (Regimento Interno, art. 108). Começam com a leitura da ata e dos documentos, seguem com os discursos dos vereadores e terminam na Ordem do Dia, quando os projetos são votados.",
+      "link": "votacoes.html"
+    },
+    {
+      "grupo": "Câmara",
+      "pergunta": "Como acompanhar as votações da Câmara?",
+      "resposta": "A página de votações do Radar lista cada projeto votado, o resultado e quem votou contra ou faltou, com link para o PDF oficial. O site da Câmara também tem a TV Web da Câmara.",
+      "link": "votacoes.html"
+    },
+    {
+      "grupo": "Câmara",
+      "pergunta": "Existe limite para o gasto da Câmara?",
+      "resposta": "Sim. Para cidades entre 100 mil e 300 mil habitantes, o gasto total da Câmara não pode passar de 6% da receita de impostos e transferências do ano anterior (Constituição, art. 29-A).",
+      "link": "camara.html#custo"
+    },
+    {
+      "grupo": "Vereadores",
+      "pergunta": "Quanto ganha um vereador de Salto?",
+      "resposta": "O subsídio de vereador em Salto é de {{salarioVereador}} por mês, antes dos descontos. A Câmara fixa o valor numa legislatura para valer na seguinte (Constituição, art. 29, VI).",
+      "link": "camara.html#custo"
+    },
+    {
+      "grupo": "Vereadores",
+      "pergunta": "Qual a diferença entre indicação, requerimento e projeto de lei?",
+      "resposta": "Indicação é uma sugestão à Prefeitura. Requerimento de informação é uma pergunta oficial que a Prefeitura deve responder. Projeto de lei cria ou muda uma regra da cidade e precisa ser votado.",
+      "link": "fontes.html#regras"
+    },
+    {
+      "grupo": "Vereadores",
+      "pergunta": "Quais vereadores mais faltam às sessões?",
+      "resposta": "A página inicial do Radar mostra quem mais faltou sem justificativa, a partir dos PDFs oficiais de presença. A página de cada vereador traz presenças, faltas e faltas justificadas.",
+      "link": "index.html#t-numeros"
+    },
+    {
+      "grupo": "Vereadores",
+      "pergunta": "Vereador pode perder o mandato por faltar?",
+      "resposta": "Sim. Pelo Regimento Interno, perde o mandato quem faltar a um terço das reuniões ordinárias do ano legislativo, salvo licença ou missão autorizada (art. 101, III).",
+      "link": "fontes.html#presenca"
+    },
+    {
+      "grupo": "Vereadores",
+      "pergunta": "Como pedir uma obra ao vereador?",
+      "resposta": "Procure um vereador e explique o pedido com o endereço. O vereador pode enviar uma indicação à Prefeitura ou destinar uma emenda impositiva; a decisão de fazer a obra é da Prefeitura.",
+      "link": "index.html#bairro"
+    },
+    {
+      "grupo": "Vereadores",
+      "pergunta": "O que os vereadores pediram para o meu bairro?",
+      "resposta": "Digite o nome do bairro ou da rua na busca da página inicial. Cada pedido tem link para a ficha oficial na Câmara.",
+      "link": "index.html#bairro"
+    },
+    {
+      "grupo": "Vereadores",
+      "pergunta": "A Prefeitura responde aos requerimentos dos vereadores?",
+      "resposta": "A Lei Orgânica de Salto manda responder em 30 dias (art. 69, XIII). A página da Câmara mostra quantos requerimentos de cada vereador tiveram resposta anexada no portal oficial.",
+      "link": "camara.html#respostas"
+    },
+    {
+      "grupo": "Prefeitura",
+      "pergunta": "Quanto tempo dura o mandato do prefeito?",
+      "resposta": "Quatro anos, como o dos vereadores (Constituição, art. 29, I). O prefeito chefia o Poder Executivo, que administra a cidade e executa obras e serviços.",
+      "link": "prefeitura.html"
+    },
+    {
+      "grupo": "Prefeitura",
+      "pergunta": "Quais foram as promessas do prefeito de Salto?",
+      "resposta": "O Radar lista as promessas do plano de governo registrado no TSE em 2024, por área. O status só muda com prova oficial. Há {{promessasEmAndamento}} promessas em andamento com prova oficial.",
+      "link": "promessas.html"
+    },
+    {
+      "grupo": "Prefeitura",
+      "pergunta": "Qual a nota de Salto no Tribunal de Contas?",
+      "resposta": "Salto teve nota {{notaIegm}} no IEG-M do TCE-SP, ano-base {{anoIegm}}. A nota vai de A (altamente efetiva) a C (baixo nível de adequação).",
+      "link": "prefeitura.html#nota"
+    },
+    {
+      "grupo": "Prefeitura",
+      "pergunta": "Como ver o salário dos servidores da Prefeitura?",
+      "resposta": "O caminho é o Portal da Transparência da Prefeitura, com link no site oficial. Se a informação não estiver lá, dá para pedir pelo e-SIC, com base na Lei de Acesso à Informação.",
+      "link": "prefeitura.html"
+    },
+    {
+      "grupo": "Prefeitura",
+      "pergunta": "Como a Prefeitura de Salto faz compras e licitações?",
+      "resposta": "Toda licitação e todo contrato vão para o Portal Nacional de Contratações Públicas (Lei 14.133/2021, art. 174). A página da Prefeitura no Radar mostra as contratações por modalidade, inclusive as feitas sem licitação, que a lei permite em alguns casos.",
+      "link": "prefeitura.html#compras"
+    },
+    {
+      "grupo": "Dinheiro",
+      "pergunta": "Quanto Salto arrecada de impostos?",
+      "resposta": "Os impostos e taxas pagos à Prefeitura somam {{arrecadacaoAno}} no ano. O Impostômetro mostra o valor mês a mês e por imposto.",
+      "link": "impostometro.html#impostos-ano"
+    },
+    {
+      "grupo": "Dinheiro",
+      "pergunta": "Quais impostos ficam com a Prefeitura?",
+      "resposta": "IPTU, ITBI e ISS são impostos da cidade (Constituição, art. 156). A Prefeitura também recebe parte do ICMS, do IPVA e do FPM, por regras da Constituição.",
+      "link": "impostometro.html#impostos-ano"
+    },
+    {
+      "grupo": "Dinheiro",
+      "pergunta": "De onde vem o dinheiro da Prefeitura de Salto?",
+      "resposta": "De impostos da cidade, repasses do Estado e da União, Fundeb, convênios, emendas parlamentares e financiamentos. A página De onde vem o dinheiro separa cada origem, com dados do Tesouro Nacional.",
+      "link": "origem.html#de-onde-vem"
+    },
+    {
+      "grupo": "Dinheiro",
+      "pergunta": "Quanto a Prefeitura já pagou neste ano?",
+      "resposta": "A Prefeitura de Salto pagou {{pagoAno}} no ano. O Raio-X dos gastos mostra os pagamentos por ano e por empresa.",
+      "link": "gastos.html#por-ano"
+    },
+    {
+      "grupo": "Dinheiro",
+      "pergunta": "Quanto uma empresa recebeu da Prefeitura?",
+      "resposta": "Use a busca por empresa no Raio-X dos gastos, pelo nome ou CNPJ. Só empresas com CNPJ aparecem pelo nome.",
+      "link": "gastos.html#busca-empresa"
+    },
+    {
+      "grupo": "Dinheiro",
+      "pergunta": "O que são as emendas impositivas dos vereadores?",
+      "resposta": "É a parte do orçamento da Prefeitura que cada vereador indica para onde vai, com execução obrigatória e pelo menos metade para a saúde. Para 2026, cada vereador indicou {{emendasPorVereador2026}}.",
+      "link": "camara.html#emendas"
+    },
+    {
+      "grupo": "Obras",
+      "pergunta": "Quais obras estão paradas em Salto?",
+      "resposta": "Há {{obrasParalisadas}} obras paralisadas, segundo a Prefeitura, o TCE-SP ou o Obrasgov.br. A página de obras cita a fonte de cada uma.",
+      "link": "obras.html#paralisadas"
+    },
+    {
+      "grupo": "Obras",
+      "pergunta": "Quais obras estão em andamento em Salto?",
+      "resposta": "Há {{obrasEmExecucao}} obras em execução ou contratadas. A página de obras mostra a empresa, o valor e a situação de cada uma.",
+      "link": "obras.html#em-execucao"
+    },
+    {
+      "grupo": "Obras",
+      "pergunta": "Onde ver as licitações de obras da Prefeitura?",
+      "resposta": "No Portal Nacional de Contratações Públicas (PNCP), onde a Prefeitura e o SAAE publicam editais e contratos. A página de obras do Radar lista as que estão em licitação.",
+      "link": "obras.html#em-licitacao"
+    },
+    {
+      "grupo": "Como participar",
+      "pergunta": "Como pedir informação à Prefeitura de Salto?",
+      "resposta": "Pelo e-SIC, no site da Prefeitura, com base na Lei de Acesso à Informação. Não é preciso dizer o motivo, e a resposta deve vir em até 20 dias, prorrogáveis por mais 10.",
+      "link": "prefeitura.html"
+    },
+    {
+      "grupo": "Como participar",
+      "pergunta": "Morador pode falar na sessão da Câmara?",
+      "resposta": "Sim, na Tribuna Livre. É preciso se inscrever na Câmara com pelo menos 7 dias de antecedência, com documentos e o assunto (Regimento Interno, art. 126).",
+      "link": "camara.html"
+    },
+    {
+      "grupo": "Como participar",
+      "pergunta": "Morador pode propor uma lei em Salto?",
+      "resposta": "Sim. A Lei Orgânica permite apresentar à Câmara um projeto de lei assinado por pelo menos 5% do eleitorado do município (art. 43).",
+      "link": "votacoes.html"
+    },
+    {
+      "grupo": "Como participar",
+      "pergunta": "Achei um erro no Radar Saltense. O que faço?",
+      "resposta": "Avise pelo Instagram do Radar. Os números vêm de fontes oficiais, e o site se corrige quando a fonte corrige.",
+      "link": "fontes.html"
+    }
+  ]
+}
