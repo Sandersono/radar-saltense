@@ -8,7 +8,30 @@ export const NOMES_MES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'ju
 const instanteBR = (dia) => Date.parse(`${dia}T00:00:00-03:00`);
 
 // Contador: o HTML traz o valor OFICIAL (sem JavaScript, nada é estimado); busca.js troca pelo valor correndo.
-export function blocoContador(r, prefixo, grande) {
+const MESES_LONGOS = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+const pct = (v, t) => `${((v / t) * 100).toFixed(0)}%`;
+
+// "A cidade não vive só de impostos": todas as origens oficiais do ano (TCE-SP, até o último mês publicado) e o total pago
+// no mesmo período (Raio-X). Só valores oficiais, sem estimativa. Na home: barras; no impostômetro: uma frase (as barras já estão abaixo).
+export function blocoOrigens(r, gastos, prefixo, resumido) {
+  const grupos = Object.entries(r.gruposPainel || {}).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]);
+  const total = grupos.reduce((s, [, v]) => s + v, 0);
+  if (!total || !r.temOficialAno) return '';
+  const mes = Number(String(r.fimOficial).slice(5, 7));
+  const periodo = `de janeiro a ${MESES_LONGOS[mes - 1]} de ${r.anoPainel}`;
+  const impostos = (r.gruposPainel || {}).impostos || 0;
+  const g = gastos && gastos.anos && gastos.anos[r.anoPainel];
+  const mesmoPeriodo = g && g.ultimoMes === String(r.fimOficial).slice(0, 7);
+  const pago = mesmoPeriodo
+    ? `<p>No mesmo período, a Prefeitura, a Câmara e o SAAE pagaram <strong>${reais(g.total)}</strong>, com dinheiro de todas essas fontes. <a href="${prefixo}gastos.html">Raio-X dos gastos</a></p>`
+    : '';
+  const titulo = `<p class="origens-titulo"><strong>A cidade não vive só de impostos.</strong> ${esc(periodo[0].toUpperCase() + periodo.slice(1))} (último mês oficial), entraram <strong>${reais(total)}</strong> no total; os impostos e taxas da cidade são ${pct(impostos, total)} disso.</p>`;
+  if (resumido) return `<div class="origens">${titulo}${pago}</div>`;
+  const pares = grupos.map(([k, v]) => [GRUPOS_RECEITA[k] || k, v]);
+  return `<div class="origens">${titulo}${barras(pares, total)}${pago}<p class="nota">Valores oficiais do TCE-SP até ${dataBR(r.fimOficial)}, sem estimativa. <a href="${prefixo}origem.html">De onde vem e para onde vai o dinheiro</a></p></div>`;
+}
+
+export function blocoContador(r, prefixo, grande, gastos = null) {
   const ritmo = `estimativa pelo ritmo dos últimos ${r.mesesRitmo} meses publicados`;
   const oficialAte = r.temOficialAno
     ? `Oficial até ${dataBR(r.fimOficial)}: ${reaisCentavos(r.oficialAno)} · daqui em diante é ${ritmo}.`
@@ -18,8 +41,8 @@ export function blocoContador(r, prefixo, grande) {
 <p class="valor" aria-live="off">${reaisCentavos(r.oficialAno)}</p>
 <p class="nota">(parte oficial + estimativa)</p>
 <p class="por-morador">Isso dá <strong>${reaisCentavos(r.oficialAno / POPULACAO.valor)}</strong> por morador <small>(${POPULACAO.valor.toLocaleString('pt-BR')} moradores)</small></p>
-<p class="nesta-visita" hidden>Enquanto você está nesta página, Salto arrecadou <strong>R$ 0,00</strong></p>
 <p class="nota">${esc(oficialAte)}</p>
+${blocoOrigens(r, gastos, prefixo, grande)}
 <p>${seloFonte('https://transparencia.tce.sp.gov.br/', 'fonte: TCE-SP')}</p>
 ${grande ? '' : `<p><a class="botao" href="${prefixo}impostometro.html">De onde vem o dinheiro de Salto →</a></p>`}
 </div>`;
@@ -52,7 +75,7 @@ export function paginaImpostometro(d) {
   const corpo = `<h1>Impostômetro de Salto</h1>
 <nav class="sumario" aria-label="Nesta página"><a class="chip" href="#impostos-ano">Impostos do ano</a><a class="chip" href="#mes-a-mes">Mês a mês</a><a class="chip" href="#origem">De onde vem</a><a class="chip" href="#fontes-impostometro">Fontes</a></nav>
 ${avisoTce(d, 'receitas')}
-${blocoContador(r, '', true)}
+${blocoContador(r, '', true, d.gastos)}
 <p>A parte oficial é o que a Prefeitura registrou no Tribunal de Contas do Estado (TCE-SP), que publica os números com cerca de um mês e meio de atraso. Depois do último mês oficial, o contador sobe no ritmo médio dos últimos ${r.mesesRitmo} meses publicados: é uma estimativa e se corrige sozinha quando sai um mês novo.</p>
 ${aviso(esc(fechamento))}
 ${avisoPainel}

@@ -167,8 +167,6 @@ a.cartao-numero:hover { border-color: var(--rio); }
 .contador-impostos.grande .valor { font-size: clamp(1.35rem, 7.4vw, 3rem); }
 .contador-impostos .por-morador { margin: .3rem 0; }
 .contador-impostos .por-morador small { color: var(--suave); }
-.contador-impostos .nesta-visita { margin: .5rem auto; padding: .45rem .9rem; display: inline-block; border-radius: var(--raio-caixa); background: var(--rio-claro); font-size: .95rem; }
-.contador-impostos .nesta-visita strong { font-variant-numeric: tabular-nums; color: var(--rio-escuro); }
 .contador-impostos .botao { margin-top: .5rem; }
 .barras, .meses { list-style: none; padding: 0; }
 .barras li { display: grid; grid-template-columns: minmax(0, 1fr); gap: .25rem; margin: .7rem 0; }
@@ -332,3 +330,7 @@ main .atualizado { font-size: .88rem; color: var(--suave); margin: 0 0 1rem; }
 .lista-artigos p { margin: .25rem 0 0; }
 @media (min-width: 768px) { .lista-artigos { grid-template-columns: 1fr 1fr; } }
 .faq h3 { margin-top: 1.5rem; }
+/* Painel do impostômetro: todas as origens do dinheiro (a cidade não vive só de impostos) */
+.contador-impostos .origens { text-align: left; margin: 1rem 0 .5rem; padding-top: .9rem; border-top: 1px solid var(--linha); }
+.contador-impostos .origens .barras { margin: .6rem 0; }
+.contador-impostos .origens-titulo { margin: 0 0 .4rem; }

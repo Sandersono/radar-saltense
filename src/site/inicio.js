@@ -90,7 +90,7 @@ export function paginaInicial(d) {
 <p class="atualizado">Atualizado em ${esc(quandoBR(d.meta.atualizadoEm))}</p>`;
 
   const corpo = `${salario}
-${d.receitas ? blocoContador(d.receitas, '', false) : ''}
+${d.receitas ? blocoContador(d.receitas, '', false, d.gastos) : ''}
 ${gradeTopicos(d)}
 ${d.gastos ? chamadaGastos(d.gastos) : ''}
 <section id="bairro" class="secao">
