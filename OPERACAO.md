@@ -68,7 +68,7 @@ Quando a barreira barra, o site fica na última versão boa.
 
 - `404.html`: o GitHub Pages a mostra para qualquer endereço que não existe (antes respondia 503). Usa caminhos absolutos (`/estilo.css`), tem `noindex` e fica fora do sitemap.
 - `sobre.html`: quem faz, independência, como os dados são coletados e como pedir correção.
-- `entenda.html`, `entenda/<slug>.html` e `perguntas-frequentes.html`: saem de `data/referencia/entenda.json`. Os números de Salto entram por placeholders (`{{custoCamaraMes}}` etc.), calculados dos dados do dia. Placeholder desconhecido ou sem dado: a frase sai da página e a manutenção avisa ("Entenda: placeholder ..."). Sem o arquivo, ou com um texto fora do contrato, aquele texto não sai e a manutenção avisa; o resto do site é publicado.
+- `entenda.html`, `entenda/<slug>.html` e `perguntas-frequentes.html`: saem de `data/referencia/entenda.json`. Os números de Salto entram por placeholders (`{{custoCamaraMes}}` etc.), calculados dos dados do dia. Placeholder conhecido sem dado no dia: só a frase sai da página e a manutenção avisa ("Entenda: placeholder..."). Placeholder desconhecido (erro de digitação no arquivo) tira o texto inteiro e avisa; o `check/entenda.mjs` pega isso antes do commit. Sem o arquivo, ou com um texto fora do contrato, aquele texto não sai e a manutenção avisa; o resto do site é publicado.
 - `marca/og/vereador-<id>.png`: prévia de link (1200x630) de cada vereador, com foto e nome. Se falhar, a página usa a prévia geral e a manutenção avisa.
 - `favicon.ico`, gerado de `site/marca/icone-32.png`.
 - Semana sem nenhum dado (0 propostas, 0 votações, 0 respostas, 0 novidades): a página existe, com `noindex`, e fica fora do sitemap.

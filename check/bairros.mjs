@@ -107,7 +107,9 @@ assert.ok(validarApelidos({ 'Santa Cruz': 'Jardim Santa Cruz' }, ['Jardim Santa 
 const { apelidos, nomes } = JSON.parse(readFileSync('data/referencia/bairros-apelidos.json', 'utf8'));
 const dados = JSON.parse(readFileSync('data/processado/dados.json', 'utf8'));
 const vistos = dados.proposituras.flatMap((p) => (p.locais || []).filter((l) => l.tipo === 'bairro').map((l) => l.nome));
-assert.deepEqual(validarApelidos(apelidos, vistos), []);
+// Dados reais mudam todo dia: aqui é aviso, não assert (o checar roda antes do robô e não pode travá-lo).
+const errosApelidos = validarApelidos(apelidos, vistos);
+if (errosApelidos.length) console.warn(`Aviso: apelidos de bairro: ${errosApelidos.join('; ')}`);
 // Nunca juntar "X II" com "X" (nem "X 2" com "X"): apelido e destino têm o mesmo número no fim (romano de i a x, ou arábico), ou nenhum.
 const numeroFinal = (s) => (chaveBairro(s).match(/ (i{1,3}|iv|vi{0,3}|ix|x|\d+)$/) || [''])[0];
 assert.equal(numeroFinal('Jardim Y VI'), ' vi');
@@ -116,7 +118,8 @@ assert.equal(numeroFinal('Jardim Y'), '');
 for (const [k, n] of Object.entries(apelidos)) assert.equal(numeroFinal(k), numeroFinal(n), `${k} → ${n}`);
 // Todo bairro com página tem nome fixo (o endereço não muda quando a grafia mais comum muda).
 const todos = montarBairros(dados.proposituras, apelidos, nomes);
-assert.deepEqual(validarNomes(nomes, todos), []);
+const errosNomes = validarNomes(nomes, todos);
+if (errosNomes.length) console.warn(`Aviso: nomes fixos de bairro: ${errosNomes.join('; ')}`);
 // Bairro novo que passa do corte com os dados reais não pode travar o robô (o checar roda antes dele):
 // vira aviso aqui e aviso de manutenção no gerador (a sentinela leva ao e-mail). Os testes acima seguem como assert.
 const semNome = bairrosComPagina(todos).filter((b) => !b.fixo).map((b) => b.chave);

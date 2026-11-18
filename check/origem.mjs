@@ -180,6 +180,10 @@ assert.deepEqual(maioresAreas({ 10: 5, 12: 4, '04': 3, 17: 2, 28: 1.5, '06': 1, 
 assert.deepEqual(codigosSemNome({ fontesUsadas: ['500', '123'], cosUsados: ['9999'] }, { fontes: [{ codigo: '500' }], complementos: [] }), ['fonte 123', 'CO 9999']);
 const ref = JSON.parse(readFileSync('data/referencia/fontes-recursos.json', 'utf8'));
 const salvo = JSON.parse(readFileSync('data/processado/origem.json', 'utf8'));
-for (const [ano, a] of Object.entries(salvo.anos)) assert.deepEqual(codigosSemNome(resumirMsc(expandirMsc(a.linhas)), ref), [], `códigos sem nome em ${ano}`);
+// Dado real (fonte nova do Tesouro) vira aviso, não assert: o checar roda antes do robô e não pode travá-lo.
+for (const [ano, a] of Object.entries(salvo.anos)) {
+  const sem = codigosSemNome(resumirMsc(expandirMsc(a.linhas)), ref);
+  if (sem.length) console.warn(`Aviso: códigos sem nome em ${ano}: ${sem.join(', ')} (completar data/referencia/fontes-recursos.json)`);
+}
 
 console.log('check/origem.mjs ok');
