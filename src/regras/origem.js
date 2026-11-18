@@ -75,8 +75,9 @@ export function origemReceita(i) {
 }
 
 // Destino pela faixa da fonte (3 dígitos). O CO prevalece: emenda, 1001 (mínimo da educação), 1002 (mínimo da saúde).
-export function destinoFonte(fr3, co) {
-  if (tipoEmenda(co, fr3)) return 'convenios';
+// A emenda é reconhecida como na origem (mesma regra, com a natureza da receita quando houver).
+export function destinoFonte(fr3, co, nr = '') {
+  if (tipoEmenda(co, fr3, nr)) return 'convenios';
   const n = Number(fr3);
   const c = String(co || '');
   if ([574, 634, 754].includes(n)) return 'financiamentos';
@@ -104,9 +105,12 @@ export function resumirMsc(itens) {
   const dest = (g) => (destino[g] ??= { entrou: 0, liquidado: 0, pago: 0, funcoes: {}, fontes: {} });
   const despesa = { empenhada: 0, liquidada: 0, paga: 0, camaraPaga: 0 };
   const emendas = { receita: {}, liquidado: 0, funcoes: {} };
+  // Impostos marcados com o mínimo da educação (CO 1001) e da saúde (CO 1002): receita e gasto com a marca.
+  const minimos = { 1001: { entrou: 0, liquidado: 0 }, 1002: { entrou: 0, liquidado: 0 } };
   const fontes = new Set();
   const cos = new Set();
   for (const i of itens) {
+    if (!i || typeof i !== 'object' || !Number.isFinite(Number(i.valor))) continue; // linha estragada fica de fora
     const c = String(i.conta_contabil);
     const fr3 = fonte3(i);
     const co = i.complemento_fonte ? String(i.complemento_fonte) : '';
@@ -125,9 +129,10 @@ export function resumirMsc(itens) {
       if (g === 'intra') { receita.intra += v; continue; }
       add(origem, g, v);
       if (/^16/.test(nr)) tarifas += v;
-      const d = dest(destinoFonte(fr3, co));
+      const d = dest(destinoFonte(fr3, co, nr));
       d.entrou += v;
       add(d.fontes, fr3, v);
+      if (minimos[co]) minimos[co].entrou += v;
       const t = tipoEmenda(co, fr3, nr);
       if (t) add(emendas.receita, t, v);
       continue;
@@ -143,6 +148,7 @@ export function resumirMsc(itens) {
     const f = String(i.funcao || '');
     d.liquidado += v;
     add(d.funcoes, f, v);
+    if (minimos[co]) minimos[co].liquidado += v;
     if (tipoEmenda(co, fr3)) { emendas.liquidado += v; add(emendas.funcoes, f, v); }
     if (c === PAGA) {
       despesa.paga += v;
@@ -152,7 +158,7 @@ export function resumirMsc(itens) {
   }
   receita.liquida = receita.bruta - receita.deducaoFundeb - receita.outrasDeducoes;
   receita.total = receita.liquida - receita.intra; // sem o que passou de um órgão da cidade para outro
-  return arredondar({ receita, origem, tarifas, destino, despesa, emendas, fontesUsadas: [...fontes].sort(), cosUsados: [...cos].sort() });
+  return arredondar({ receita, origem, tarifas, destino, despesa, emendas, minimos, fontesUsadas: [...fontes].sort(), cosUsados: [...cos].sort() });
 }
 
 // O que fica salvo em data/processado/origem.json: só as contas usadas, somadas pelos campos que as regras leem
@@ -171,7 +177,7 @@ export function compactarMsc(itens) {
   }
   return [...linhas.entries()].sort((a, b) => (a[0] < b[0] ? -1 : 1)).map(([, l]) => { l[CAMPOS.length] = centavos(l[CAMPOS.length]); return l; });
 }
-export const expandirMsc = (linhas) => (linhas || []).map((l) => ({ ...Object.fromEntries(CAMPOS.map((k, j) => [k, l[j]])), valor: l[CAMPOS.length] }));
+export const expandirMsc = (linhas) => (Array.isArray(linhas) ? linhas : []).filter((l) => Array.isArray(l) && l.length > CAMPOS.length).map((l) => ({ ...Object.fromEntries(CAMPOS.map((k, j) => [k, l[j]])), valor: l[CAMPOS.length] }));
 
 // Primeiro mês da lista com linhas na MSC (o mês ainda não publicado vem vazio e cai para o anterior).
 export async function primeiroComDados(meses, buscar) {
@@ -249,62 +255,79 @@ const MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julh
 export const periodoOrigem = (a) => (a.tipo === 'MSCE' ? 'ano fechado' : `até ${MESES[a.mes - 1]}`);
 
 // Estado salvo (data/processado/origem.json) + tabela de fontes + TCE -> dados da página origem.html.
+// Nunca derruba o robô: ano com dado estragado fica de fora; erro inesperado vira linha de manutenção e a página não sai.
+function montarAno(ano, s, nomesFr, ref, receitasMeses, despesasMensais, avisos, manutencao) {
+  const r = resumirMsc(expandirMsc(s.linhas));
+  const semNome = codigosSemNome(r, ref);
+  if (semNome.length) manutencao.push(`Origem do dinheiro (${ano}): código sem nome em data/referencia/fontes-recursos.json (${semNome.join(', ')}); conferir a planilha do Tesouro.`);
+  const origemLista = Object.keys(GRUPOS_ORIGEM)
+    .map((g) => ({ grupo: g, rotulo: GRUPOS_ORIGEM[g], valor: r.origem[g] || 0 }))
+    .filter((x) => x.valor > 0)
+    .sort((a, b) => b.valor - a.valor);
+  const minimoDe = { educacao: r.minimos['1001'], saude: r.minimos['1002'] };
+  const destino = Object.keys(GRUPOS_DESTINO)
+    .filter((g) => r.destino[g] && (r.destino[g].entrou > 0 || r.destino[g].liquidado > 0))
+    .map((g) => {
+      const x = r.destino[g];
+      const principais = Object.entries(x.fontes).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]).slice(0, 3)
+        .map(([codigo, valor]) => ({ codigo, nome: nomesFr[codigo] || `Fonte ${codigo}`, valor }));
+      return { grupo: g, rotulo: GRUPOS_DESTINO[g], entrou: x.entrou, liquidado: x.liquidado, pago: x.pago, areas: maioresAreas(x.funcoes), principais, minimo: minimoDe[g] || null };
+    })
+    .sort((a, b) => b.liquidado - a.liquidado || b.entrou - a.entrou);
+  // Livre + carimbado = total arrecadado (sem intra), mesmo que um grupo fique negativo depois das deduções.
+  const livre = (r.destino.livre && r.destino.livre.entrou) || 0;
+  const carimbado = r.receita.total - livre;
+  const emendasReceita = Object.keys(TIPOS_EMENDA)
+    .filter((t) => r.emendas.receita[t] > 0)
+    .map((t) => ({ tipo: t, rotulo: TIPOS_EMENDA[t], valor: r.emendas.receita[t] }));
+  const tce = totaisTce(receitasMeses, despesasMensais, ano, s.mes);
+  const conferencia = conferir(r, tce);
+  if (conferencia.acimaDoLimite) {
+    const partes = [['arrecadado', conferencia.receita], ['pago', conferencia.pago]].filter(([, x]) => x && x.percentual > LIMITE_CONFERENCIA)
+      .map(([nome, x]) => `${nome} ${(x.percentual * 100).toFixed(1).replace('.', ',')}%`);
+    avisos.push(`Origem do dinheiro (${ano}): os números do Tesouro Nacional e do TCE-SP diferem mais de 3% (${partes.join('; ')}). Os dois aparecem na página, sem ajuste.`);
+    manutencao.push(`Origem do dinheiro (${ano}): MSC × TCE-SP acima de 3% (${partes.join('; ')}); conferir a MSC (${s.tipo}, mês ${s.mes}).`);
+  }
+  return {
+    tipo: s.tipo,
+    mes: s.mes,
+    url: s.url,
+    consultadoEm: s.consultadoEm,
+    receita: r.receita,
+    origem: origemLista,
+    tarifas: r.tarifas,
+    livre: centavos(livre),
+    carimbado: centavos(carimbado),
+    destino,
+    despesa: r.despesa,
+    emendas: { receita: emendasReceita, total: centavos(emendasReceita.reduce((sm, x) => sm + x.valor, 0)), liquidado: r.emendas.liquidado, areas: maioresAreas(r.emendas.funcoes) },
+    conferencia,
+  };
+}
+
+const anoValido = (ano, s) => /^\d{4}$/.test(ano) && s && typeof s === 'object' && (s.tipo === 'MSCE' || s.tipo === 'MSCC')
+  && Number.isInteger(s.mes) && s.mes >= 1 && s.mes <= 12 && Array.isArray(s.linhas) && s.linhas.length > 0;
+
 export function montarOrigem({ origem, ref, receitasMeses, despesasMensais }) {
   const avisos = [];
   const manutencao = [];
-  const anosSalvos = (origem && origem.anos) || {};
-  const nomesFr = Object.fromEntries(((ref && ref.fontes) || []).map((f) => [String(f.codigo), f.nome]));
-  const anos = {};
-  for (const ano of Object.keys(anosSalvos).sort()) {
-    const s = anosSalvos[ano];
-    if (!s || !Array.isArray(s.linhas) || !s.linhas.length) continue;
-    const r = resumirMsc(expandirMsc(s.linhas));
-    const semNome = codigosSemNome(r, ref);
-    if (semNome.length) manutencao.push(`Origem do dinheiro (${ano}): código sem nome em data/referencia/fontes-recursos.json (${semNome.join(', ')}); conferir a planilha do Tesouro.`);
-    const origemLista = Object.keys(GRUPOS_ORIGEM)
-      .map((g) => ({ grupo: g, rotulo: GRUPOS_ORIGEM[g], valor: r.origem[g] || 0 }))
-      .filter((x) => x.valor > 0)
-      .sort((a, b) => b.valor - a.valor);
-    const destino = Object.keys(GRUPOS_DESTINO)
-      .filter((g) => r.destino[g] && (r.destino[g].entrou > 0 || r.destino[g].liquidado > 0))
-      .map((g) => {
-        const x = r.destino[g];
-        const principais = Object.entries(x.fontes).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]).slice(0, 3)
-          .map(([codigo, valor]) => ({ codigo, nome: nomesFr[codigo] || `Fonte ${codigo}`, valor }));
-        return { grupo: g, rotulo: GRUPOS_DESTINO[g], entrou: Math.max(0, x.entrou), liquidado: x.liquidado, pago: x.pago, areas: maioresAreas(x.funcoes), principais };
-      })
-      .sort((a, b) => b.liquidado - a.liquidado || b.entrou - a.entrou);
-    const livre = destino.filter((x) => x.grupo === 'livre').reduce((s, x) => s + x.entrou, 0);
-    const carimbado = destino.filter((x) => x.grupo !== 'livre').reduce((s, x) => s + x.entrou, 0);
-    const emendasReceita = Object.keys(TIPOS_EMENDA)
-      .filter((t) => r.emendas.receita[t] > 0)
-      .map((t) => ({ tipo: t, rotulo: TIPOS_EMENDA[t], valor: r.emendas.receita[t] }));
-    const tce = totaisTce(receitasMeses, despesasMensais, ano, s.mes);
-    const conferencia = conferir(r, tce);
-    if (conferencia.acimaDoLimite) {
-      const partes = [['arrecadado', conferencia.receita], ['pago', conferencia.pago]].filter(([, x]) => x && x.percentual > LIMITE_CONFERENCIA)
-        .map(([nome, x]) => `${nome} ${(x.percentual * 100).toFixed(1).replace('.', ',')}%`);
-      avisos.push(`Origem do dinheiro (${ano}): os números do Tesouro Nacional e do TCE-SP diferem mais de 3% (${partes.join('; ')}). Os dois aparecem na página, sem ajuste.`);
-      manutencao.push(`Origem do dinheiro (${ano}): MSC × TCE-SP acima de 3% (${partes.join('; ')}); conferir a MSC (${s.tipo}, mês ${s.mes}).`);
+  try {
+    const anosSalvos = (origem && origem.anos && typeof origem.anos === 'object') ? origem.anos : {};
+    const nomesFr = Object.fromEntries(((ref && Array.isArray(ref.fontes)) ? ref.fontes : []).map((f) => [String(f.codigo), f.nome]));
+    const anos = {};
+    for (const ano of Object.keys(anosSalvos).sort()) {
+      const s = anosSalvos[ano];
+      if (!anoValido(ano, s)) { manutencao.push(`Origem do dinheiro (${ano}): registro inválido em data/processado/origem.json; o ano ficou de fora da página.`); continue; }
+      try {
+        anos[ano] = montarAno(ano, s, nomesFr, ref, receitasMeses, despesasMensais, avisos, manutencao);
+      } catch (e) {
+        manutencao.push(`Origem do dinheiro (${ano}): erro ao montar o ano (${String(e && e.message).split('\n')[0]}); o ano ficou de fora da página.`);
+      }
     }
-    anos[ano] = {
-      tipo: s.tipo,
-      mes: s.mes,
-      url: s.url,
-      consultadoEm: s.consultadoEm,
-      receita: r.receita,
-      origem: origemLista,
-      tarifas: r.tarifas,
-      livre: centavos(livre),
-      carimbado: centavos(carimbado),
-      destino,
-      despesa: r.despesa,
-      emendas: { receita: emendasReceita, total: centavos(emendasReceita.reduce((sm, x) => sm + x.valor, 0)), liquidado: r.emendas.liquidado, areas: maioresAreas(r.emendas.funcoes) },
-      conferencia,
-    };
+    const urls = (ref && ref.urls) || {};
+    const dados = Object.keys(anos).length ? { anos, planilha: urls.tabela2026 || null, paginaFontes: urls.pagina || null } : null;
+    return { dados, avisos, manutencao };
+  } catch (e) {
+    return { dados: null, avisos: [], manutencao: [...manutencao, `Origem do dinheiro: erro ao montar a página (${String(e && e.message).split('\n')[0]}); a página não foi gerada desta vez.`] };
   }
-  const dados = Object.keys(anos).length
-    ? { anos, planilha: (ref && ref.urls && ref.urls.tabela2026) || null, paginaFontes: (ref && ref.urls && ref.urls.pagina) || null }
-    : null;
-  return { dados, avisos, manutencao };
 }

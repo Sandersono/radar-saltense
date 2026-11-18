@@ -46,31 +46,36 @@ async function matriz(ano, mes, tipo, limite) {
 const registro = (ano, mes, tipo, itens) => ({ tipo, mes, url: urlMsc(ano, mes, tipo), consultadoEm: new Date().toISOString(), linhas: compactarMsc(itens) });
 
 // salvo: data/processado/origem.json. Devolve só os anos novos ({ ano: registro }).
-// Ano fechado: matriz de encerramento (MSCE, mês 12), consultada até aparecer; enquanto não sai, fica o que estava salvo.
 // Ano corrente: uma vez por dia, a última MSC mensal publicada (tenta o mês atual e volta).
-// Erro no meio: o erro leva em `parciais` os anos já prontos.
+// Ano fechado: matriz de encerramento (MSCE, mês 12), consultada até aparecer; enquanto não sai, fica a última mensal salva.
+// Cada ano é independente: erro em um não impede os outros. Com erro, o primeiro é lançado no fim, levando em `parciais` os anos prontos.
 export async function coletarMsc(salvo, hoje, { prazoMs }) {
   const limite = Date.now() + prazoMs;
   const anos = (salvo && salvo.anos) || {};
   const novos = {};
-  try {
-    for (let ano = ANO_INICIO; ano < hoje.ano; ano++) {
+  const erros = [];
+  const tentar = async (passo) => { try { await passo(); } catch (e) { erros.push(e); } };
+  await tentar(async () => {
+    const atual = anos[hoje.ano];
+    if (atual && consultadoHoje(atual.consultadoEm, new Date().toISOString())) return;
+    const meses = Array.from({ length: hoje.mes }, (_, k) => hoje.mes - k);
+    const achado = await primeiroComDados(meses, (m) => matriz(hoje.ano, m, 'MSCC', limite));
+    if (achado) novos[hoje.ano] = registro(hoje.ano, achado.mes, 'MSCC', achado.itens);
+  });
+  for (let ano = ANO_INICIO; ano < hoje.ano; ano++) {
+    await tentar(async () => {
       const s = anos[ano];
-      if (s && s.tipo === 'MSCE') continue;
+      if (s && s.tipo === 'MSCE') return;
       const encerramento = await matriz(ano, 12, 'MSCE', limite);
-      if (encerramento.length) { novos[ano] = registro(ano, 12, 'MSCE', encerramento); continue; }
-      if (s) continue;
+      if (encerramento.length) { novos[ano] = registro(ano, 12, 'MSCE', encerramento); return; }
+      if (s) return;
       // Sem nada salvo: a última mensal até novembro (a de dezembro não é usada; ver a spec).
       const achado = await primeiroComDados([11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1], (m) => matriz(ano, m, 'MSCC', limite));
       if (achado) novos[ano] = registro(ano, achado.mes, 'MSCC', achado.itens);
-    }
-    const atual = anos[hoje.ano];
-    if (!(atual && consultadoHoje(atual.consultadoEm, new Date().toISOString()))) {
-      const meses = Array.from({ length: hoje.mes }, (_, k) => hoje.mes - k);
-      const achado = await primeiroComDados(meses, (m) => matriz(hoje.ano, m, 'MSCC', limite));
-      if (achado) novos[hoje.ano] = registro(hoje.ano, achado.mes, 'MSCC', achado.itens);
-    }
-  } catch (e) {
+    });
+  }
+  if (erros.length) {
+    const e = erros[0];
     e.parciais = novos;
     throw e;
   }

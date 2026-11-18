@@ -100,6 +100,9 @@ assert.equal(destinoFonte('747', '3110'), 'convenios');
 assert.equal(destinoFonte('747'), 'outras');
 assert.equal(destinoFonte('754'), 'financiamentos');
 assert.equal(destinoFonte('753'), 'outras');
+// Mesma detecção de emenda da origem: a natureza da transferência especial vale também no destino.
+assert.equal(destinoFonte('500', null, '17195701'), 'convenios');
+assert.equal(o('17195701', '1500'), 'convenios');
 
 // Último mês: o mês vazio cai para o anterior; nenhum mês com dados = null.
 const publicados = { 9: [1, 2], 8: [1] };
@@ -142,6 +145,33 @@ assert.match(montado.avisos[0], /mais de 3%/);
 assert.equal(montado.manutencao.length, 1);
 assert.deepEqual(montado.dados.anos[2026].origem.map((x) => x.grupo), ['estado', 'impostos', 'fundeb', 'convenios']);
 assert.equal(montado.dados.anos[2026].livre + montado.dados.anos[2026].carimbado, r.receita.total);
+
+// Livre + carimbado = total, mesmo com um grupo negativo depois das deduções (sem cortar em zero).
+const negativo = compactarMsc([rec(100, '11125001', '1500'), rec(10, '17135011', '1600'), ded('621390000', 30, '17135011', '1600')]);
+const mn = montarOrigem({ origem: { anos: { 2026: { tipo: 'MSCC', mes: 1, url: 'u', linhas: negativo } } }, ref: null });
+assert.equal(mn.dados.anos[2026].livre, 100);
+assert.equal(mn.dados.anos[2026].carimbado, -20);
+assert.equal(mn.dados.anos[2026].livre + mn.dados.anos[2026].carimbado, mn.dados.anos[2026].receita.total);
+for (const a of Object.values(montado.dados.anos)) assert.equal(Math.round((a.livre + a.carimbado) * 100), Math.round(a.receita.total * 100));
+// Tabela de fontes ausente: a página sai com "Fonte NNN" e a manutenção pede o nome.
+assert.ok(mn.manutencao.some((x) => /código sem nome/.test(x)));
+assert.equal(mn.dados.anos[2026].destino.find((x) => x.grupo === 'livre').principais[0].nome, 'Fonte 500');
+// Dado estragado nunca derruba o robô.
+assert.deepEqual(montarOrigem({ origem: null, ref: null }), { dados: null, avisos: [], manutencao: [] });
+const estragado = montarOrigem({ origem: { anos: { 2025: null, 2026: { tipo: 'MSCC', mes: 3, linhas: null }, 2027: { tipo: 'MSCC', mes: 2, linhas: [null, ['x'], ['621200000', '1500', '', '11125001', '', '10131', 'C', 'abc']] } } }, ref: null });
+assert.equal(estragado.manutencao.length >= 2, true);
+assert.equal(estragado.dados.anos[2027].receita.total, 0);
+assert.equal(estragado.dados.anos[2025], undefined);
+
+// Nome de fonte hostil sai escapado na página.
+const { paginaOrigem } = await import('../src/site/origem.js');
+const hostil = montarOrigem({
+  origem: { anos: { 2026: { tipo: 'MSCC', mes: 2, url: 'https://apidatalake.tesouro.gov.br/x', linhas: compacto } } },
+  ref: { fontes: [{ codigo: '500', nome: '<script>alert(1)</script>' }] },
+});
+const html = paginaOrigem({ origem: hostil.dados, emendas: null, meta: { atualizadoEm: '2026-11-17T09:00:00Z' } });
+assert.ok(!html.includes('<script>alert(1)'));
+assert.ok(html.includes('&lt;script&gt;alert(1)'));
 
 // Áreas: as 6 maiores e "Outras áreas".
 assert.deepEqual(maioresAreas({ 10: 5, 12: 4, '04': 3, 17: 2, 28: 1.5, '06': 1, 15: 0.5, 26: 0.25 }).map((x) => x.area), ['Saúde', 'Educação', 'Administração', 'Saneamento', 'Encargos Especiais', 'Segurança Pública', 'Outras áreas']);

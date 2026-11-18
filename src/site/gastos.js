@@ -45,7 +45,7 @@ ${pessoasFisicas(a)}
 <section class="secao cartao">
 <h3>Para quais áreas</h3>
 ${areas}
-${comOrigem ? '<p><a href="origem.html#destino">De onde veio o dinheiro gasto →</a></p>' : ''}
+${comOrigem ? '<p><a href="origem.html#destino">Por fonte de recurso (não por empresa) →</a></p><p class="nota">O pagamento a cada empresa não informa de qual fonte saiu.</p>' : ''}
 </section>
 <section class="secao cartao">
 <h3>Empresas e entidades que mais receberam</h3>

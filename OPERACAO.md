@@ -29,7 +29,7 @@ Regra geral: fonte secundária que falha **não trava** o robô. O site mantém 
 | Receitas do TCE-SP | 4 min | Repete o último dado e mostra "Dados do TCE-SP até dd/mm"; acima de 10 dias, também entra na manutenção |
 | Despesas do TCE-SP | 6 min | Igual às receitas |
 | SICONFI (áreas do gasto) | 3 min | Mantém o último dado |
-| MSC do Tesouro (origem do dinheiro, `origem.html`) | 3 min, com nova tentativa | Mantém o último dado salvo em `data/processado/origem.json` e avisa. Ano fechado: matriz de encerramento (MSCE, mês 12), guardada e não consultada de novo. Ano corrente: a última matriz mensal, uma vez por dia |
+| MSC do Tesouro (origem do dinheiro, `origem.html`) | 3 min, com nova tentativa | Mantém o último dado salvo em `data/processado/origem.json` e avisa. Ano corrente: a última matriz mensal, uma vez por dia. Ano fechado: continua com a última matriz mensal salva (a mais recente coletada naquele ano) enquanto a de encerramento (MSCE, mês 12) não sai; o robô tenta a MSCE todo dia e troca sozinho quando ela aparece, e daí em diante não consulta mais aquele ano. Cada ano é consultado à parte: erro em um não impede os outros |
 | Folha da Câmara | — | Mantém o último dado |
 | Respostas a requerimentos (até 150 fichas por dia) | Tempo reservado | Continua no dia seguinte |
 | IEGM e Painel de Obras do TCE | 3 min cada | Mantém o último dado |

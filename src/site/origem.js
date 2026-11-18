@@ -16,11 +16,11 @@ function deOndeVem(ano, a) {
   const pares = a.origem.map((x) => [x.rotulo, x.valor]);
   const intra = r.intra > 0
     ? `<p class="nota">Ficaram fora ${reais(r.intra)} que só passaram de um órgão da cidade para outro (receitas intraorçamentárias), para não contar o mesmo dinheiro duas vezes.</p>`
-    : '<p class="nota">A matriz deste período não separa o que só passa de um órgão da cidade para outro (receitas intraorçamentárias); por isso o total fica um pouco acima do impostômetro. Veja a <a href="#conferencia">conferência</a>.</p>';
+    : a.tipo !== 'MSCC' ? '' : '<p class="nota">A matriz deste período não separa o que só passa de um órgão da cidade para outro (receitas intraorçamentárias); por isso o total fica um pouco acima do impostômetro. Veja a <a href="#conferencia">conferência</a>.</p>';
   const tarifas = a.tarifas > 0 ? `<p class="nota">"Outros" inclui ${reais(a.tarifas)} de tarifas e serviços, quase tudo a conta de água e esgoto paga ao SAAE, além de rendimentos de aplicações, multas e venda de bens.</p>` : '';
   return blocoAno(ano, `${tituloAno(ano, a)}
 <p class="numero-grande">${reais(r.total)}</p>
-<p>Arrecadados pela Prefeitura, pelo SAAE e pela Câmara ${esc(ateMes(a, ano))}.</p>
+<p>Arrecadados pelo conjunto Prefeitura, SAAE e Câmara ${esc(ateMes(a, ano))}.</p>
 ${barras(pares, r.total)}
 <p>Do ICMS, do IPVA, do FPM e do ITR que chegaram a Salto, ${reais(r.deducaoFundeb)} ficaram retidos para o Fundeb, o fundo da educação básica, que devolveu ${reais((a.origem.find((x) => x.grupo === 'fundeb') || { valor: 0 }).valor)} à cidade. As barras já descontam essa retenção: entraram ${reais(r.bruta)} brutos e ficaram ${reais(r.liquida)} depois das deduções.</p>
 ${intra}${tarifas}${fonteMsc(a)}`);
@@ -37,9 +37,19 @@ function cartaoDestino(x) {
     ? `<p class="nota">Principais fontes (nome oficial do Tesouro): ${x.principais.map((f) => `${esc(f.nome)} (${reais(f.valor)})`).join('; ')}.</p>`
     : '';
   const areas = x.liquidado > 0 ? barras(x.areas.map((y) => [y.area, y.valor]), x.liquidado) : '<p>Nada liquidado ainda com este dinheiro.</p>';
+  const valores = x.entrou > 0
+    ? `<p>Entraram <strong>${reais(x.entrou)}</strong>. Foram gastos (liquidado) <strong>${reais(x.liquidado)}</strong>; pagos <strong>${reais(x.pago)}</strong>.</p>`
+    : `<p>Nesta fonte não houve entrada registrada no período; os gastos (${reais(x.liquidado)} liquidado) foram classificados nela pela Prefeitura. Isso costuma acontecer quando o dinheiro entrou em outra fonte ou em ano anterior. Pagos: <strong>${reais(x.pago)}</strong>.</p>`;
+  // Fato tirado dos dados: o gasto com a marca do mínimo constitucional passou da receita com a mesma marca.
+  const co = { saude: ['1002', 'mínimo da saúde'], educacao: ['1001', 'mínimo da educação'] }[x.grupo];
+  const m = x.minimo;
+  const minimo = co && m && x.liquidado > x.entrou && m.liquidado > m.entrou
+    ? `<p class="nota">Com o código de acompanhamento ${co[0]} (${co[1]}), a Prefeitura informou ${reais(m.liquidado)} liquidados e ${reais(m.entrou)} de receita no período.</p>`
+    : '';
   return `<div class="secao cartao">
 <h4>${esc(x.rotulo)}</h4>
-<p>${x.entrou > 0 ? `Entraram <strong>${reais(x.entrou)}</strong>.` : 'Nenhuma receita registrada nestas fontes no período.'} Foram gastos (liquidado) <strong>${reais(x.liquidado)}</strong>; pagos <strong>${reais(x.pago)}</strong>.</p>
+${valores}
+${minimo}
 ${areas}
 ${fontes}
 </div>`;
@@ -105,7 +115,7 @@ ${porAno(livreCarimbado)}
 </section>
 <section id="destino" class="secao" aria-labelledby="t-destino">
 <h2 id="t-destino">Para onde foi cada fonte</h2>
-<p>Cada grupo junta as "fontes de recursos" oficiais do Tesouro Nacional. <strong>Liquidado</strong> quer dizer que o serviço foi feito ou a compra entregue, e a Prefeitura conferiu; <strong>pago</strong> é o dinheiro que já saiu do caixa. O gasto de um grupo pode passar do que entrou por dois motivos: o que entrou num ano pode ser gasto no ano seguinte, e na saúde e na educação a Prefeitura pode gastar com impostos livres mais do que o mínimo que a lei carimba.</p>
+<p>Cada grupo junta as "fontes de recursos" oficiais do Tesouro Nacional. <strong>Liquidado</strong> quer dizer que o serviço foi feito ou a compra entregue, e a Prefeitura conferiu; <strong>pago</strong> é o dinheiro que já saiu do caixa. Em algumas fontes o gasto passa do que entrou no período. A fonte e o código de acompanhamento de cada despesa são informados pela própria Prefeitura ao Tesouro; o gasto pode vir de saldo de anos anteriores ou de recursos próprios classificados nessa finalidade.</p>
 ${aviso('O pagamento a cada empresa não é ligado a uma fonte: a base do TCE-SP usada no Raio-X dos gastos não informa de qual fonte saiu cada pagamento.')}
 ${porAno(paraOnde)}
 </section>
