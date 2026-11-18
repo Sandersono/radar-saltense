@@ -31,8 +31,8 @@
         {
           "titulo": "Quando o vereador perde o mandato",
           "paragrafos": [
-            "O Regimento Interno da Câmara lista os casos. Um deles é faltar a um terço das reuniões ordinárias do ano legislativo, salvo licença ou missão autorizada (art. 101, III).",
-            "No Radar, a presença de cada vereador sai dos PDFs oficiais de presença da Câmara. Ausência justificada aparece separada da ausência sem justificativa."
+            "O Regimento Interno da Câmara lista os casos. Um deles é faltar a um terço das reuniões ordinárias do ano legislativo, salvo licença ou missão autorizada (art. 101, III). Nesse caso, a perda é declarada pela Mesa da Câmara, com direito de defesa (art. 101, § 2º).",
+            "No Radar, a presença de cada vereador sai dos PDFs oficiais de presença da Câmara. Ausência justificada aparece separada da ausência sem justificativa. Falta justificada no PDF não é, necessariamente, licença ou missão autorizada."
           ]
         },
         {
@@ -86,20 +86,20 @@
       "slug": "quanto-custa-a-camara",
       "titulo": "Quanto custa a Câmara de Salto e quanto ganha um vereador",
       "descricao": "Folha de pagamento da Câmara de Salto, salário de vereador e os limites de gasto que a Constituição impõe às câmaras municipais.",
-      "resumo": "A folha de pagamento da Câmara de Salto foi de {{custoCamaraMes}} no último mês publicado. O salário (subsídio) de vereador é de {{salarioVereador}} por mês, antes dos descontos. A Constituição limita quanto a Câmara pode gastar e quanto os vereadores podem ganhar.",
+      "resumo": "A folha de pagamento da Câmara de Salto foi de {{custoCamaraMes}}. O salário (subsídio) de vereador é de {{salarioVereador}} por mês, antes dos descontos. A Constituição limita quanto a Câmara pode gastar e quanto os vereadores podem ganhar.",
       "secoes": [
         {
           "titulo": "O que entra no custo",
           "paragrafos": [
             "A maior parte do gasto da Câmara é a folha de pagamento: salários dos vereadores, dos assessores e dos servidores da Câmara. O Radar soma o valor bruto, antes dos descontos, como está no portal da Transparência da Câmara.",
-            "A folha de pagamento da Câmara de Salto foi de {{custoCamaraMes}} no último mês publicado.",
+            "A folha de pagamento da Câmara de Salto foi de {{custoCamaraMes}}.",
             "Diárias e viagens são publicadas pela Câmara em PDFs separados, com link na página da Câmara no Radar."
           ]
         },
         {
           "titulo": "Quem decide o salário de vereador",
           "paragrafos": [
-            "O salário de vereador se chama subsídio. A Constituição manda que a própria Câmara o fixe em cada legislatura para valer na seguinte (art. 29, VI). Ou seja, os vereadores não aumentam o salário do mandato em curso.",
+            "O salário de vereador se chama subsídio. A Constituição manda que a própria Câmara o fixe em cada legislatura para valer na seguinte (art. 29, VI). Ou seja, o valor de cada mandato é decidido antes de ele começar. A Constituição também prevê uma revisão geral anual, por lei específica, que alcança a remuneração dos servidores e os subsídios (art. 37, X).",
             "Em cidades de 100.001 a 300.000 habitantes, o subsídio não pode passar de 50% do subsídio de deputado estadual (art. 29, VI, d).",
             "O salário de vereador em Salto é de {{salarioVereador}} por mês, antes dos descontos."
           ]
@@ -107,7 +107,7 @@
         {
           "titulo": "Os limites da Constituição",
           "paragrafos": [
-            "O gasto total da Câmara, incluindo os subsídios, tem teto. Ele é um percentual da receita de impostos e de algumas transferências do ano anterior. Para cidades entre 100 mil e 300 mil habitantes, o teto é de 6% (art. 29-A, II).",
+            "O gasto total da Câmara, incluindo os subsídios, tem teto. Ele é um percentual da receita tributária e das transferências constitucionais efetivamente realizadas no ano anterior. Para cidades entre 100 mil e 300 mil habitantes, o teto é de 6% (art. 29-A, II). Desde a legislatura que começou em 2025, a Emenda Constitucional 109/2021 inclui nesse limite os gastos com aposentados e pensionistas.",
             "A Câmara não pode gastar mais de 70% da receita dela com folha de pagamento, incluindo os subsídios dos vereadores (art. 29-A, § 1º).",
             "Somados, os subsídios de todos os vereadores não podem passar de 5% da receita do município (art. 29, VII)."
           ]
@@ -126,21 +126,25 @@
         },
         {
           "pergunta": "Quanto custa a Câmara de Salto por mês?",
-          "resposta": "A folha de pagamento foi de {{custoCamaraMes}} no último mês publicado. A página da Câmara no Radar mostra o valor mês a mês e a divisão entre vereadores, assessores e servidores."
+          "resposta": "A folha de pagamento foi de {{custoCamaraMes}}. A página da Câmara no Radar mostra o valor mês a mês e a divisão entre vereadores, assessores e servidores."
         },
         {
           "pergunta": "Vereador pode aumentar o próprio salário?",
-          "resposta": "Não para o mandato em curso. A Constituição manda fixar o subsídio em uma legislatura para valer na seguinte (art. 29, VI)."
+          "resposta": "A Constituição manda que a Câmara fixe o subsídio em uma legislatura para valer na seguinte (art. 29, VI). Ela também prevê uma revisão geral anual da remuneração dos servidores e dos subsídios, por lei específica, na mesma data e sem distinção de índices (art. 37, X)."
         },
         {
           "pergunta": "Existe limite para o gasto da Câmara?",
-          "resposta": "Sim. Para cidades entre 100 mil e 300 mil habitantes, o gasto total da Câmara não pode passar de 6% da receita de impostos e transferências do ano anterior (Constituição, art. 29-A). A folha não pode passar de 70% do que a Câmara recebe."
+          "resposta": "Sim: para cidades entre 100 mil e 300 mil habitantes, o gasto total da Câmara não pode passar de 6% da receita tributária e das transferências constitucionais efetivamente realizadas no ano anterior (Constituição, art. 29-A). Desde 2025, o limite inclui aposentados e pensionistas (Emenda Constitucional 109/2021). A folha não pode passar de 70% do que a Câmara recebe."
         }
       ],
       "fontes": [
         {
-          "titulo": "Constituição Federal, arts. 29 e 29-A",
+          "titulo": "Constituição Federal, arts. 29, 29-A e 37",
           "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm"
+        },
+        {
+          "titulo": "Emenda Constitucional 109/2021 (art. 29-A e vigência)",
+          "url": "https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc109.htm"
         },
         {
           "titulo": "Lei Complementar 101/2000 (Lei de Responsabilidade Fiscal), art. 20",
@@ -183,7 +187,7 @@
           "titulo": "Moção: a opinião da Câmara",
           "paragrafos": [
             "Moção é a proposta em que se sugere que a Câmara se manifeste sobre um assunto: protesto, repúdio, apoio, pesar por falecimento ou congratulação (Regimento, art. 159).",
-            "A moção passa pela Comissão de Justiça e Redação, é votada e, se aprovada, é enviada ao destinatário (art. 161)."
+            "A moção é votada na Comissão de Justiça e Redação, em turno único, e não no plenário (art. 161). Se aprovada, o resultado é lido em plenário e a moção é enviada ao destinatário (art. 161, § 1º)."
           ]
         },
         {
@@ -205,7 +209,7 @@
         },
         {
           "pergunta": "Para que serve uma moção?",
-          "resposta": "Para registrar a posição da Câmara sobre um assunto, como apoio, protesto, repúdio, pesar ou congratulação. A moção é votada e enviada ao destinatário."
+          "resposta": "Para registrar a posição da Câmara sobre um assunto, como apoio, protesto, repúdio, pesar ou congratulação. A moção é votada na Comissão de Justiça e Redação e, se aprovada, enviada ao destinatário."
         },
         {
           "pergunta": "Onde vejo se um requerimento foi respondido?",
@@ -214,7 +218,7 @@
       ],
       "fontes": [
         {
-          "titulo": "Regimento Interno da Câmara de Salto, arts. 141, 159 a 170",
+          "titulo": "Regimento Interno da Câmara de Salto, arts. 141 e 159 a 170",
           "url": "https://www.camarasalto.sp.gov.br/pdf/regimento-interno/regimento_interno_camara_municipal_salto.pdf"
         },
         {
@@ -241,7 +245,8 @@
             "A Lei Orgânica de Salto torna obrigatória a execução das emendas individuais dos vereadores ao orçamento (art. 112, § 5º). Pelo menos metade do valor vai para ações e serviços de saúde, e o total é dividido de forma igual entre os vereadores.",
             "O percentual da receita usado no cálculo mudou com emendas à Lei Orgânica. Parte da redação aprovada em 2026 está com a vigência suspensa por decisão do Tribunal de Justiça de São Paulo, como informa o próprio texto da Lei Orgânica.",
             "Para 2026, as emendas dos vereadores somam {{emendas2026Total}}.",
-            "Cada vereador indicou {{emendasPorVereador2026}} para 2026."
+            "Em geral, cada vereador indicou {{emendasPorVereador2026}} para 2026.",
+            "Na tabela de 2026 publicada pela Câmara, um dos blocos de saúde aparece com valor maior que os demais."
           ]
         },
         {
@@ -269,7 +274,7 @@
       "perguntas": [
         {
           "pergunta": "Quanto cada vereador de Salto pode indicar em emendas?",
-          "resposta": "Para 2026, cada vereador indicou {{emendasPorVereador2026}}. Pela Lei Orgânica, o valor é dividido de forma igual entre os vereadores, com pelo menos metade para a saúde."
+          "resposta": "Pela Lei Orgânica, o valor é dividido de forma igual entre os vereadores, com pelo menos metade para a saúde. Na tabela de 2026, em geral, cada vereador indicou {{emendasPorVereador2026}}. Um dos blocos de saúde aparece com valor maior na tabela oficial da Câmara."
         },
         {
           "pergunta": "Emenda impositiva é dinheiro do vereador?",
@@ -318,7 +323,7 @@
           "titulo": "Os impostos da cidade",
           "paragrafos": [
             "A Constituição dá aos municípios três impostos: o IPTU, sobre imóveis urbanos; o ITBI, sobre a venda de imóveis; e o ISS, sobre serviços (art. 156). A cidade também cobra taxas.",
-            "Os impostos e taxas pagos à Prefeitura de Salto somam {{arrecadacaoAno}} no ano."
+            "Os impostos e taxas pagos à Prefeitura de Salto somam {{arrecadacaoAno}}."
           ]
         },
         {
@@ -331,8 +336,8 @@
         {
           "titulo": "O que vem da União",
           "paragrafos": [
-            "O Fundo de Participação dos Municípios (FPM) recebe 22,5% de impostos federais, mais três parcelas de 1% entregues em julho, setembro e dezembro (Constituição, art. 159, I).",
-            "O Imposto de Renda que a Prefeitura retém nos pagamentos que faz fica com a cidade (art. 158, I). Metade do ITR, o imposto sobre imóveis rurais, também (art. 158, II)."
+            "O Fundo de Participação dos Municípios (FPM) recebe 22,5% do Imposto de Renda e do IPI arrecadados pela União (Constituição, art. 159, I, b), mais três parcelas de 1% entregues em julho, setembro e dezembro (alíneas d, e, f).",
+            "O Imposto de Renda que a Prefeitura retém nos pagamentos que faz fica com a cidade (art. 158, I). Do ITR, o imposto sobre imóveis rurais, a cidade fica com metade, ou com tudo se assumir a fiscalização e a cobrança (art. 153, § 4º, III, e art. 158, II)."
           ]
         },
         {
@@ -346,14 +351,14 @@
           "titulo": "Convênios, financiamentos e tarifas",
           "paragrafos": [
             "Também entram dinheiro de convênios e de emendas parlamentares, para fins definidos, e de financiamentos.",
-            "A conta de água e esgoto paga ao SAAE entra nas contas da cidade, porque o SAAE é um órgão do município. No Radar, a página De onde vem o dinheiro separa cada origem, com dados do Tesouro Nacional."
+            "A conta de água e esgoto paga ao SAAE entra nas contas da cidade, porque o SAAE é uma autarquia do município. No Radar, a página De onde vem o dinheiro separa cada origem, com dados do Tesouro Nacional."
           ]
         }
       ],
       "perguntas": [
         {
           "pergunta": "Quanto Salto arrecada de impostos?",
-          "resposta": "Os impostos e taxas pagos à Prefeitura somam {{arrecadacaoAno}} no ano. O Impostômetro do Radar mostra o valor mês a mês, com dados do TCE-SP."
+          "resposta": "Os impostos e taxas pagos à Prefeitura somam {{arrecadacaoAno}}. O Impostômetro do Radar mostra o valor mês a mês, com dados do TCE-SP."
         },
         {
           "pergunta": "Quais impostos são da Prefeitura?",
@@ -361,7 +366,7 @@
         },
         {
           "pergunta": "O que é o FPM?",
-          "resposta": "É o Fundo de Participação dos Municípios, formado por impostos federais e dividido entre as cidades. A Constituição fixa a parte do fundo no art. 159, I."
+          "resposta": "É o Fundo de Participação dos Municípios, formado por 22,5% do Imposto de Renda e do IPI, mais três parcelas de 1%, e dividido entre as cidades (Constituição, art. 159, I)."
         },
         {
           "pergunta": "Quanto do ICMS fica com Salto?",
@@ -370,7 +375,7 @@
       ],
       "fontes": [
         {
-          "titulo": "Constituição Federal, arts. 156, 158 e 159",
+          "titulo": "Constituição Federal, arts. 153, 156, 158 e 159",
           "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm"
         },
         {
@@ -380,6 +385,10 @@
         {
           "titulo": "SICONFI, Tesouro Nacional",
           "url": "https://siconfi.tesouro.gov.br/siconfi/index.jsf"
+        },
+        {
+          "titulo": "Lei municipal 3.773 (LDO 2020), art. 7º: SAAE como autarquia municipal",
+          "url": "https://salto.sp.gov.br/wp-content/uploads/2020/01/Lei-3.773-LDO.pdf"
         }
       ],
       "relacionados": [
@@ -489,7 +498,7 @@
           "titulo": "Pagamento: o dinheiro sai do caixa",
           "paragrafos": [
             "O pagamento só pode ser feito depois da liquidação (art. 62), por ordem de pagamento de autoridade competente (art. 64).",
-            "Em {{dataAtualizacao}}, a Prefeitura de Salto tinha pago {{pagoAno}} no ano."
+            "Segundo o TCE-SP, a Prefeitura pagou {{pagoAno}}."
           ]
         },
         {
@@ -515,7 +524,7 @@
         },
         {
           "pergunta": "Onde vejo quanto a Prefeitura de Salto pagou?",
-          "resposta": "No Raio-X dos gastos do Radar, por ano e por empresa. A Prefeitura pagou {{pagoAno}} no ano."
+          "resposta": "No Raio-X dos gastos do Radar, por ano e por empresa. Segundo o TCE-SP, a Prefeitura pagou {{pagoAno}}."
         }
       ],
       "fontes": [
@@ -538,12 +547,12 @@
       "slug": "como-acompanhar-uma-obra",
       "titulo": "Como acompanhar uma obra pública em Salto",
       "descricao": "Onde achar a licitação, o contrato e a situação de uma obra em Salto: PNCP, Painel de Obras do TCE-SP, Obrasgov.br e a página da Prefeitura.",
-      "resumo": "Toda licitação e todo contrato de obra da Prefeitura vão para o Portal Nacional de Contratações Públicas (PNCP). Obras com dinheiro federal aparecem no Obrasgov.br, e o TCE-SP mostra as obras que a Prefeitura declarou ao Tribunal. O Radar junta essas fontes na página de obras.",
+      "resumo": "As licitações e os contratos de obra feitos pela Lei 14.133/2021 vão para o Portal Nacional de Contratações Públicas (PNCP). Obras com dinheiro federal aparecem no Obrasgov.br, e o TCE-SP mostra as obras que a Prefeitura declarou ao Tribunal. O Radar junta essas fontes na página de obras.",
       "secoes": [
         {
           "titulo": "PNCP: licitação e contrato",
           "paragrafos": [
-            "A Lei de Licitações criou o PNCP como site oficial para a divulgação centralizada e obrigatória dos atos que ela exige (Lei 14.133/2021, art. 174, I). Ali estão os editais e os contratos.",
+            "A Lei de Licitações criou o PNCP como site oficial para a divulgação centralizada e obrigatória dos atos que ela exige (Lei 14.133/2021, art. 174, I). As licitações e os contratos feitos por essa lei vão para o PNCP. Contratos antigos, feitos pela lei anterior (Lei 8.666/1993), podem não estar lá.",
             "No contrato dá para ver a empresa, o valor, o prazo e o objeto da obra."
           ]
         },
@@ -586,7 +595,7 @@
         },
         {
           "pergunta": "Onde vejo a licitação de uma obra?",
-          "resposta": "No PNCP, o portal nacional onde a Prefeitura e o SAAE publicam editais e contratos. A página de obras do Radar tem o link de cada uma."
+          "resposta": "No PNCP, o portal nacional onde a Prefeitura e o SAAE publicam editais e contratos feitos pela Lei 14.133/2021. A página de obras do Radar tem o link de cada uma."
         },
         {
           "pergunta": "Como pedir uma obra para o meu bairro?",
@@ -625,12 +634,12 @@
       "slug": "nota-do-tce-iegm",
       "titulo": "O que é a nota do TCE (IEG-M) e qual a nota de Salto",
       "descricao": "O IEG-M é a nota que o Tribunal de Contas de SP dá à gestão de cada cidade, de A a C, em sete áreas. Entenda o índice e a nota de Salto.",
-      "resumo": "O IEG-M é um índice do Tribunal de Contas do Estado de São Paulo (TCE-SP) que mede a qualidade da gestão das prefeituras. A nota vai de A (altamente efetiva) a C (baixo nível de adequação). Salto teve nota {{notaIegm}} no ano-base {{anoIegm}}.",
+      "resumo": "O IEG-M é um índice do Tribunal de Contas do Estado de São Paulo (TCE-SP) que mede a qualidade da gestão das prefeituras. O TCE-SP avalia cada cidade paulista, exceto a capital, que tem tribunal de contas próprio. A nota vai de A (altamente efetiva) a C (baixo nível de adequação). Salto teve nota {{notaIegm}} no ano-base {{anoIegm}}.",
       "secoes": [
         {
           "titulo": "O que o índice mede",
           "paragrafos": [
-            "O Índice de Efetividade da Gestão Municipal (IEG-M) foi criado pelo TCE-SP para medir a qualidade dos gastos municipais e avaliar as políticas públicas das prefeituras.",
+            "O Índice de Efetividade da Gestão Municipal (IEG-M) foi criado pelo TCE-SP para medir a qualidade dos gastos municipais e avaliar as políticas públicas das prefeituras. Ele vale para as cidades paulistas, exceto a capital, que é fiscalizada por um tribunal de contas próprio.",
             "O índice é calculado a partir de um questionário anual do TCE-SP, sobre o ano anterior. Por isso cada nota tem um ano-base e é divulgada no ano seguinte."
           ]
         },
@@ -681,6 +690,10 @@
         {
           "titulo": "Painel do IEG-M (TCE-SP)",
           "url": "https://iegm.tce.sp.gov.br/"
+        },
+        {
+          "titulo": "Cartilha do TCE-SP: fiscaliza os municípios paulistas, exceto a capital",
+          "url": "https://tce.sp.gov.br/sites/default/files/noticias/cartilha_-_tcesp_2016.pdf"
         }
       ],
       "relacionados": [
@@ -776,7 +789,7 @@
     {
       "grupo": "Câmara",
       "pergunta": "Quanto custa a Câmara de Salto?",
-      "resposta": "A folha de pagamento da Câmara foi de {{custoCamaraMes}} no último mês publicado. A página da Câmara mostra o valor mês a mês e a divisão entre vereadores, assessores e servidores.",
+      "resposta": "A folha de pagamento da Câmara foi de {{custoCamaraMes}}. A página da Câmara mostra o valor mês a mês e a divisão entre vereadores, assessores e servidores.",
       "link": "camara.html#custo"
     },
     {
@@ -788,7 +801,7 @@
     {
       "grupo": "Câmara",
       "pergunta": "Como funciona uma sessão da Câmara de Salto?",
-      "resposta": "As reuniões ordinárias são às terças-feiras (Regimento Interno, art. 108). Começam com a leitura da ata e dos documentos, seguem com os discursos dos vereadores e terminam na Ordem do Dia, quando os projetos são votados.",
+      "resposta": "As reuniões ordinárias são às terças-feiras (Regimento Interno, art. 108). Pela ordem dos arts. 123 a 132, começam com a ata e os documentos, seguem com a Tribuna Livre e o Tema Livre, passam à Ordem do Dia, quando os projetos são votados, e terminam com os Recados Finais pelo Presidente.",
       "link": "votacoes.html"
     },
     {
@@ -800,7 +813,7 @@
     {
       "grupo": "Câmara",
       "pergunta": "Existe limite para o gasto da Câmara?",
-      "resposta": "Sim. Para cidades entre 100 mil e 300 mil habitantes, o gasto total da Câmara não pode passar de 6% da receita de impostos e transferências do ano anterior (Constituição, art. 29-A).",
+      "resposta": "Sim. Para cidades entre 100 mil e 300 mil habitantes, o gasto total da Câmara não pode passar de 6% da receita tributária e das transferências constitucionais efetivamente realizadas no ano anterior (Constituição, art. 29-A). Desde 2025, o limite inclui aposentados e pensionistas (Emenda Constitucional 109/2021).",
       "link": "camara.html#custo"
     },
     {
@@ -824,7 +837,7 @@
     {
       "grupo": "Vereadores",
       "pergunta": "Vereador pode perder o mandato por faltar?",
-      "resposta": "Sim. Pelo Regimento Interno, perde o mandato quem faltar a um terço das reuniões ordinárias do ano legislativo, salvo licença ou missão autorizada (art. 101, III).",
+      "resposta": "Sim. Pelo Regimento Interno, perde o mandato quem faltar a um terço das reuniões ordinárias do ano legislativo; só licença ou missão autorizada servem de exceção (art. 101, III). A perda é declarada pela Mesa da Câmara, com direito de defesa (art. 101, § 2º), e falta justificada no PDF de presença não é, necessariamente, licença ou missão autorizada.",
       "link": "fontes.html#presenca"
     },
     {
@@ -872,13 +885,13 @@
     {
       "grupo": "Prefeitura",
       "pergunta": "Como a Prefeitura de Salto faz compras e licitações?",
-      "resposta": "Toda licitação e todo contrato vão para o Portal Nacional de Contratações Públicas (Lei 14.133/2021, art. 174). A página da Prefeitura no Radar mostra as contratações por modalidade, inclusive as feitas sem licitação, que a lei permite em alguns casos.",
+      "resposta": "As licitações e os contratos feitos pela Lei 14.133/2021 vão para o Portal Nacional de Contratações Públicas (art. 174). Contratos antigos, da lei anterior, podem não estar lá. A página da Prefeitura no Radar mostra as contratações por modalidade, inclusive as feitas sem licitação, que a lei permite em alguns casos.",
       "link": "prefeitura.html#compras"
     },
     {
       "grupo": "Dinheiro",
       "pergunta": "Quanto Salto arrecada de impostos?",
-      "resposta": "Os impostos e taxas pagos à Prefeitura somam {{arrecadacaoAno}} no ano. O Impostômetro mostra o valor mês a mês e por imposto.",
+      "resposta": "Os impostos e taxas pagos à Prefeitura somam {{arrecadacaoAno}}. O Impostômetro mostra o valor mês a mês e por imposto.",
       "link": "impostometro.html#impostos-ano"
     },
     {
@@ -896,7 +909,7 @@
     {
       "grupo": "Dinheiro",
       "pergunta": "Quanto a Prefeitura já pagou neste ano?",
-      "resposta": "A Prefeitura de Salto pagou {{pagoAno}} no ano. O Raio-X dos gastos mostra os pagamentos por ano e por empresa.",
+      "resposta": "Segundo o TCE-SP, a Prefeitura de Salto pagou {{pagoAno}}. O Raio-X dos gastos mostra os pagamentos por ano e por empresa.",
       "link": "gastos.html#por-ano"
     },
     {
@@ -908,7 +921,7 @@
     {
       "grupo": "Dinheiro",
       "pergunta": "O que são as emendas impositivas dos vereadores?",
-      "resposta": "É a parte do orçamento da Prefeitura que cada vereador indica para onde vai, com execução obrigatória e pelo menos metade para a saúde. Para 2026, cada vereador indicou {{emendasPorVereador2026}}.",
+      "resposta": "É a parte do orçamento da Prefeitura que cada vereador indica para onde vai, com execução obrigatória e pelo menos metade para a saúde. Na tabela de 2026, em geral, cada vereador indicou {{emendasPorVereador2026}}. Um dos blocos de saúde aparece com valor maior na tabela oficial.",
       "link": "camara.html#emendas"
     },
     {
@@ -926,7 +939,7 @@
     {
       "grupo": "Obras",
       "pergunta": "Onde ver as licitações de obras da Prefeitura?",
-      "resposta": "No Portal Nacional de Contratações Públicas (PNCP), onde a Prefeitura e o SAAE publicam editais e contratos. A página de obras do Radar lista as que estão em licitação.",
+      "resposta": "No Portal Nacional de Contratações Públicas (PNCP), onde a Prefeitura e o SAAE publicam editais e contratos feitos pela Lei 14.133/2021. A página de obras do Radar lista as que estão em licitação.",
       "link": "obras.html#em-licitacao"
     },
     {
