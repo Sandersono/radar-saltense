@@ -6,7 +6,7 @@ import { chaveBairro } from './bairros.js';
 // e "oficial_ligados" (chave -> nomes oficiais ligados, quando o cadastro divide ou junta a área de outro jeito).
 
 export const ROTULO_PGV = 'Planta Genérica de Valores, Lei 3.227/2013';
-export const TEXTO_SEM_OFICIAL = 'Não consta no cadastro oficial de bairros e loteamentos (Lei 3.227/2013, atualizada até 2017, e decretos e leis de loteamento de 2015 a 2021).';
+export const TEXTO_SEM_OFICIAL = 'Este nome não aparece na Lei 3.227/2013 (Planta Genérica de Valores, atualizada até 2017) nem nos decretos e leis de loteamento de 2015 a 2021 consultados.';
 
 // Comparação de grafia: sem acento, sem caixa, "Jd."/"Vl." expandidos, pontuação vira espaço.
 export const chaveOficial = (s) => chaveBairro(s).replace(/[^a-z0-9]+/g, ' ').trim();
