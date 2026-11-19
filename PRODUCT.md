@@ -21,7 +21,7 @@ Portal burocrático de prefeitura (tabelas cruas, menus infinitos). Painel corpo
 - Celular primeiro: tudo cabe e respira numa tela de 320 px.
 - Fato, não opinião: pontos de atenção são escritos como fatos, com explicação neutra.
 - Simples de ler para qualquer idade: frases curtas, números grandes, contraste alto.
-- Privacidade: nomes de pessoas físicas nunca aparecem.
+- Privacidade: nenhum CPF ou RG em lugar nenhum. Nos gastos, contratos e obras só aparecem empresas (com CNPJ); pessoa física entra só nos totais. Os textos oficiais da Câmara (ementas, inclusive homenagens) aparecem como ela publica, sempre sem CPF e RG. Vereadores e prefeito, atuais e anteriores, aparecem pelo nome por serem agentes públicos. (Decisão do dono em 19/11/2026.)
 
 ## Accessibility & Inclusion
 WCAG 2.2 AA: contraste mínimo 4,5:1 no texto, alvos de toque de pelo menos 44 px, foco visível, funciona sem JavaScript e respeita movimento reduzido. Pensado para leitores mais velhos (letra legível, nada de texto miúdo e cinza).

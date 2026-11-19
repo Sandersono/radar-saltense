@@ -6,7 +6,8 @@ import { nomeProprio } from './emendas.js';
 
 // Página "Dados abertos" (dados.html), os arquivos de dist/dados/ e os arquivos para máquinas
 // (llms.txt, .well-known/security.txt, site.webmanifest). Tudo refeito a cada geração do site.
-// Privacidade: nenhum CPF e nenhum nome de pessoa física; empresa só com CNPJ completo.
+// Privacidade: nenhum CPF/RG; empresa só com CNPJ completo (pessoa física só nos totais). Ementas = texto oficial da Câmara
+// (podem citar homenageados, como no site da Câmara), com CPF e RG trocados por [omitido]; atos administrativos ficam de fora.
 
 export const LICENCA = 'https://creativecommons.org/licenses/by/4.0/';
 export const CITACAO = 'Radar Saltense (radarsaltense.com.br)';
@@ -27,7 +28,9 @@ export const FONTES_OFICIAIS = {
 
 // --- CSV: UTF-8 com BOM (o Excel reconhece os acentos), separador ";", aspas quando preciso, fim de linha CRLF. ---
 const celula = (v) => {
-  const s = v === null || v === undefined ? '' : String(v);
+  let s = v === null || v === undefined ? '' : String(v);
+  // Texto que começa com = + - @ seria lido pelo Excel como fórmula: um apóstrofo na frente desarma.
+  if (typeof v === 'string' && /^[=+\-@\t\r]/.test(s)) s = `'${s}`;
   return /[;"\r\n]|^\s|\s$/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 };
 export const BOM = String.fromCharCode(0xfeff);
@@ -150,7 +153,7 @@ export function conjuntosDeDados(d) {
       const propostas = Object.fromEntries(GRUPOS_PUBLICOS.map((g) => [g, (v.porGrupo && v.porGrupo[g]) || 0]));
       return {
         id: v.id, nome: v.nome, apelido: v.apelido || null, partido: v.partido || null,
-        presenca: { P: v.presenca.P, A: v.presenca.A, AJ: v.presenca.AJ, total: v.presenca.total },
+        presenca: { P: v.presenca?.P ?? null, A: v.presenca?.A ?? null, AJ: v.presenca?.AJ ?? null, total: v.presenca?.total ?? null },
         propostas: { ...propostas, total: Object.values(propostas).reduce((s, n) => s + n, 0) },
         votos_contra: v.votosContra, ausencias_votacao: v.ausenciasVotacao ?? null,
         pagina: `${ENDERECO}vereador/${v.id}.html`, pagina_oficial: v.url,

@@ -41,8 +41,8 @@ export function paginaSobre(d) {
 <p>Me chama no Instagram <a href="${esc(insta)}">@${esc(AUTOR.instagram)}</a>. Quando o erro está na fonte oficial, o site se corrige sozinho assim que a fonte corrige. Quando o erro é do site, ele é corrigido e a regra passa a valer para todos.</p>
 </section>
 <section id="seguranca" class="secao cartao">
-<h2>Achou um dado pessoal ou uma falha?</h2>
-<p>O site não mostra CPF nem nome de pessoa física. Se você encontrar um dado pessoal numa página ou num arquivo do site, ou uma falha de segurança, mande uma mensagem no Instagram <a href="${esc(insta)}">@${esc(AUTOR.instagram)}</a> com o endereço da página.</p>
+<h2>Dado pessoal ou falha de segurança</h2>
+<p>O site não mostra CPF nem RG, e nos gastos e contratos só aparecem empresas (pessoa física entra só nos totais). Os textos das propostas são os oficiais da Câmara, como ela publica. Se você encontrar um dado pessoal numa página ou num arquivo do site, ou uma falha de segurança, mande uma mensagem no Instagram <a href="${esc(insta)}">@${esc(AUTOR.instagram)}</a> com o endereço da página.</p>
 <p>O dado pessoal é retirado do site assim que a mensagem é conferida, e a regra que o deixou passar é corrigida para todas as páginas. Ao contar uma falha, não exponha dados de outras pessoas. O mesmo contato está no arquivo <a href=".well-known/security.txt">security.txt</a>.</p>
 </section>
 <section id="cobre" class="secao cartao">
