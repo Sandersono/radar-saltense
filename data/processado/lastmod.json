@@ -125,8 +125,8 @@
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "bairro/jardim-imperial.html": {
-  "hash": "88a7a183663b930d",
-  "quando": "2026-11-18T07:44:24-03:00",
+  "hash": "a144f8ed1f0cd764",
+  "quando": "2026-11-19T03:14:31-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "bairro/jardim-independencia.html": {
@@ -290,8 +290,8 @@
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "bairro/parque-do-lago.html": {
-  "hash": "38fd03665b133bcd",
-  "quando": "2026-11-18T07:44:24-03:00",
+  "hash": "3c95255544589676",
+  "quando": "2026-11-19T03:14:31-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "bairro/parque-imperial.html": {
@@ -410,18 +410,18 @@
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "bairros.html": {
-  "hash": "df0bc67057a3d3ae",
-  "quando": "2026-11-18T07:44:24-03:00",
+  "hash": "a079a135f4d1c905",
+  "quando": "2026-11-19T03:14:31-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "camara.html": {
-  "hash": "972cccbc48ced6ca",
-  "quando": "2026-11-18T07:44:24-03:00",
+  "hash": "bc34b2f1d581840c",
+  "quando": "2026-11-19T03:14:31-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "dados.html": {
-  "hash": "ce957cdb75d83955",
-  "quando": "2026-11-18T07:44:24-03:00",
+  "hash": "3d67f6bb6e694728",
+  "quando": "2026-11-19T03:14:31-03:00",
   "criado": "2026-11-18T07:44:24-03:00"
  },
  "entenda.html": {
@@ -495,8 +495,8 @@
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "index.html": {
-  "hash": "bfff5216a5a05fc2",
-  "quando": "2026-11-18T07:44:24-03:00",
+  "hash": "358794f601f52362",
+  "quando": "2026-11-19T03:14:31-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "obras.html": {
@@ -525,8 +525,8 @@
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "semana.html": {
-  "hash": "d56a3a09442b6fee",
-  "quando": "2026-11-18T07:44:24-03:00",
+  "hash": "163686ac0cced280",
+  "quando": "2026-11-19T03:14:31-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "semana/2024-12-30.html": {
@@ -1000,8 +1000,8 @@
   "criado": "2026-11-15T23:59:59-03:00"
  },
  "semana/2026-11-16.html": {
-  "hash": "1589907687abc9e3",
-  "quando": "2026-11-18T07:44:24-03:00",
+  "hash": "d504135292c6114a",
+  "quando": "2026-11-19T03:14:31-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "sobre.html": {
@@ -1010,63 +1010,63 @@
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "vereador/almir-de-melo-santos.html": {
-  "hash": "86117575dcb5ef84",
-  "quando": "2026-11-17T21:43:00-03:00",
+  "hash": "b477d8f5a9346149",
+  "quando": "2026-11-19T03:14:31-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "vereador/antonio-moreira-sobrinho.html": {
-  "hash": "dce0968e0c89b692",
-  "quando": "2026-11-17T21:43:00-03:00",
+  "hash": "88b26d22215ce1ca",
+  "quando": "2026-11-19T03:14:31-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "vereador/arildo-guadagnini.html": {
-  "hash": "4f8622304c70c8c4",
-  "quando": "2026-11-17T21:43:00-03:00",
+  "hash": "3988db16ad5e0c8b",
+  "quando": "2026-11-19T03:14:31-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "vereador/clayton-aparecido-dos-santos.html": {
-  "hash": "bacf3118fd696958",
-  "quando": "2026-11-17T21:43:00-03:00",
+  "hash": "2dea98af115b7ebe",
+  "quando": "2026-11-19T03:14:31-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "vereador/edemilson-pereira-dos-santos.html": {
-  "hash": "c99b80078a6b9b4f",
-  "quando": "2026-11-17T21:43:00-03:00",
+  "hash": "fa7652127edc0493",
+  "quando": "2026-11-19T03:14:31-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "vereador/edival-pereira-rosa.html": {
-  "hash": "4f840e894215cfc1",
-  "quando": "2026-11-17T21:43:00-03:00",
+  "hash": "5b066dd9e09f818c",
+  "quando": "2026-11-19T03:14:31-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "vereador/graziela-costa-leite.html": {
-  "hash": "812ddef57db24b05",
-  "quando": "2026-11-17T21:43:00-03:00",
+  "hash": "31ce6efb2ea6f650",
+  "quando": "2026-11-19T03:14:31-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "vereador/henrique-balseiros-chamosa-neto.html": {
-  "hash": "d7598d6589030951",
-  "quando": "2026-11-17T21:43:00-03:00",
+  "hash": "84e4ef0bbd9ddd9d",
+  "quando": "2026-11-19T03:14:31-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "vereador/luzia-de-fatima-izidorio-vidal.html": {
-  "hash": "03985ce36c18c5c9",
-  "quando": "2026-11-17T21:43:00-03:00",
+  "hash": "2210bd6985b00dd9",
+  "quando": "2026-11-19T03:14:31-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "vereador/michel-oliveira-rodrigues-da-silva.html": {
-  "hash": "2fac4b9cf8778c54",
-  "quando": "2026-11-18T07:44:24-03:00",
+  "hash": "fa7753fbe972d2e1",
+  "quando": "2026-11-19T03:14:31-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "vereador/rogerio-dos-santos-filho.html": {
-  "hash": "6eb23a88746cf4f8",
-  "quando": "2026-11-17T21:43:00-03:00",
+  "hash": "85bdd5fbf4fe05ea",
+  "quando": "2026-11-19T03:14:31-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "votacoes.html": {
-  "hash": "c7b6357b5b6f30d5",
-  "quando": "2026-11-17T21:43:00-03:00",
+  "hash": "ee658669a062c931",
+  "quando": "2026-11-19T03:14:31-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  }
 }

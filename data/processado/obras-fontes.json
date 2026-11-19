@@ -792,7 +792,7 @@
         "objeto": "PRESTAÇÃO DE SERVIÇOS PROFISSIONAIS DE MANUTENÇÃO MECÂNICA NAS INFRAESTRUTURAS OPERACIONAIS DO SISTEMA DE TRATAMENTO E DISTRIBUIÇÃO DE ÁGUA DO SAAE SALTO",
         "modalidadeId": 4,
         "situacao": "Divulgada no PNCP",
-        "homologado": 0,
+        "homologado": 6150000,
         "estimado": 7107700,
         "encerramento": "2026-09-04",
         "publicacao": "2026-08-21",
@@ -6602,14 +6602,14 @@
       }
     },
     "completoEm": "2026-11-17T14:23:01.093Z",
-    "atualizadoAte": "2026-11-18T10:39:23.158Z",
-    "coletadoEm": "2026-11-18T10:39:23.158Z",
+    "atualizadoAte": "2026-11-19T06:08:52.210Z",
+    "coletadoEm": "2026-11-19T06:08:52.210Z",
     "comprasPendentes": 0,
     "incompleto": false,
     "erro": null
   },
   "obrasgov": {
-    "dataAtualizacao": "2026-11-17T00:00:00",
+    "dataAtualizacao": "2026-11-18T00:00:00",
     "projetos": {
       "102259.35-04": {
         "id": "102259.35-04",
@@ -7906,7 +7906,7 @@
         "execucao": null
       }
     },
-    "coletadoEm": "2026-11-18T10:39:52.964Z",
+    "coletadoEm": "2026-11-19T06:09:42.811Z",
     "falhas": 0,
     "esgotado": false,
     "adiados": 0,
@@ -7927,6 +7927,6 @@
         "paralisada": true
       }
     ],
-    "coletadoEm": "2026-11-18T10:39:57.661Z"
+    "coletadoEm": "2026-11-19T06:09:47.508Z"
   }
 }
