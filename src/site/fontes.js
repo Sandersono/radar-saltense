@@ -35,6 +35,7 @@ ${d.origem ? '<li><strong>De onde vem e para onde vai o dinheiro:</strong> <a hr
 <li><strong>Resumo da semana:</strong> <a href="semana.html">refeito todo dia</a> com os dados desta lista, também como <a href="feed.xml">feed RSS</a>.</li>
 <li><strong>Nome oficial dos bairros:</strong> cadastro da Prefeitura no Anexo I da <a href="https://salto.sp.gov.br/download/leis/Lei_3227_de_2013-PGV-Consolidada.pdf">Planta Genérica de Valores (Lei 3.227/2013, atualizada até 2017)</a>, mais os decretos e leis de loteamento publicados no site da Prefeitura de 2015 a 2021. Não achamos lei de Salto que delimite os bairros, e o IBGE não tem bairros de Salto no Censo 2022.</li>
 <li><strong>Vereadores e partidos:</strong> <a href="https://www.camarasalto.sp.gov.br/">página inicial da Câmara</a>.</li>
+<li><strong>Dados abertos:</strong> os números do site em arquivos JSON e CSV, para baixar e reutilizar com citação, estão na página <a href="dados.html">Dados abertos</a>.</li>
 </ul>
 </section>
 <section id="regras" class="secao cartao">

@@ -6,6 +6,11 @@ import path from 'node:path';
 export const OBRIGATORIAS = ['index.html', 'camara.html', 'prefeitura.html', 'votacoes.html', 'semana.html', 'fontes.html'];
 // Não pega número de processo/protocolo com mais grupos (ex.: 1.234.567.890-12).
 const CPF = /(?<![\d.])\d{3}\.\d{3}\.\d{3}-\d{2}(?![\d-])/;
+// CPF sem pontuação logo depois da palavra "CPF" (a mesma forma que ocultarDocumentos troca). "CPFL" não conta.
+const CPF_CORRIDO = /CPF(?:\/MF)?\s*(?:n[º°o.]*)?\s*:?\s*\d{11}(?!\d)/i;
+// Arquivos para máquinas e dados abertos: faltar um é aviso, não bloqueio.
+export const ARQUIVOS_MAQUINA = ['dados.html', 'llms.txt', '.well-known/security.txt', 'site.webmanifest'];
+export const faltandoMaquina = (arquivos) => ARQUIVOS_MAQUINA.filter((a) => !arquivos.includes(a)).map((a) => `${a}: arquivo para máquinas ou de dados abertos não foi gerado.`);
 const EXTERNO = /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i;
 const FONTE_OFICIAL = /href="https:\/\/[^"/]*(?:\.gov\.br|\.jus\.br|\.leg\.br|sisvetor\.com\.br|obaratec\.com\.br)[/"]/;
 
@@ -41,7 +46,7 @@ export function vistoriar(paginas, arquivos, dados = []) {
   const idsDaPagina = (c) => { if (!idsDe.has(c)) idsDe.set(c, ids(porCaminho.get(c) || '')); return idsDe.get(c); };
   // CPF no arquivo inteiro (texto, atributos, scripts e dados), não só no que aparece na tela.
   for (const { caminho, conteudo } of [...paginas.map((p) => ({ caminho: p.caminho, conteudo: p.html })), ...dados]) {
-    const cpf = conteudo.match(CPF);
+    const cpf = conteudo.match(CPF) || conteudo.match(CPF_CORRIDO);
     if (cpf) bloqueios.push(`${caminho}: número com formato de CPF (${cpf[0].slice(0, 4)}…).`);
   }
   // Placeholder do Entenda que escapou do gerador: nunca publica "{{".
@@ -74,9 +79,11 @@ export async function vistoriarPasta(pasta) {
     .map((e) => path.relative(pasta, path.join(e.parentPath ?? e.path, e.name)).split(path.sep).join('/'));
   const paginas = await Promise.all(arquivos.filter((a) => a.endsWith('.html'))
     .map(async (caminho) => ({ caminho, html: await readFile(path.join(pasta, caminho), 'utf8') })));
-  const dados = await Promise.all(arquivos.filter((a) => /\.(json|xml|txt)$/.test(a))
+  const dados = await Promise.all(arquivos.filter((a) => /\.(json|xml|txt|csv|webmanifest)$/.test(a))
     .map(async (caminho) => ({ caminho, conteudo: await readFile(path.join(pasta, caminho), 'utf8') })));
-  return vistoriar(paginas, arquivos, dados);
+  const resultado = vistoriar(paginas, arquivos, dados);
+  resultado.avisos.push(...faltandoMaquina(arquivos));
+  return resultado;
 }
 
 // Texto para o fim de conferencia.md.

@@ -59,7 +59,7 @@ Quando a barreira barra, o site fica na última versão boa.
 ### Vistoria do site pronto (`src/vistoria.js`)
 
 **Bloqueia** a publicação se:
-- houver número com formato de CPF em qualquer página ou arquivo de dados;
+- houver número com formato de CPF (ou 11 dígitos logo depois de "CPF") em qualquer página ou arquivo publicado (`.html`, `.json`, `.xml`, `.txt`, `.csv`, `.webmanifest`);
 - faltar uma página obrigatória, ou ela estiver vazia;
 - aparecer "{{" em qualquer página (placeholder do Entenda que não foi trocado).
 
@@ -67,7 +67,8 @@ Quando a barreira barra, o site fica na última versão boa.
 - link interno quebrado;
 - "undefined", "NaN" ou "null" aparecendo para o leitor;
 - valor negativo;
-- página sem fonte oficial.
+- página sem fonte oficial;
+- falta de `dados.html`, `llms.txt`, `.well-known/security.txt` ou `site.webmanifest`.
 
 ### Páginas geradas além dos dados
 
@@ -77,6 +78,27 @@ Quando a barreira barra, o site fica na última versão boa.
 - `marca/og/vereador-<id>.png`: prévia de link (1200x630) de cada vereador, com foto e nome. Se falhar, a página usa a prévia geral e a manutenção avisa.
 - `favicon.ico`, gerado de `site/marca/icone-32.png`.
 - Semana sem nenhum dado (0 propostas, 0 votações, 0 respostas, 0 novidades): a página existe, com `noindex`, e fica fora do sitemap.
+
+### Dados abertos e arquivos para máquinas (refeitos a cada geração)
+
+Saem de `src/site/dados-abertos.js`, chamado pelo gerador. Peça que falha não trava: sai desta vez e vira aviso de manutenção; a vistoria avisa (sem bloquear) se faltar `dados.html`, `llms.txt`, `.well-known/security.txt` ou `site.webmanifest`.
+
+| Arquivo | O que é |
+|---|---|
+| `dados.html` | Página "Dados abertos": para cada arquivo, descrição, dicionário de campos, frequência de atualização, fonte oficial, tamanho e licença (uso livre citando "Radar Saltense (radarsaltense.com.br)" e a fonte oficial; compilação em CC BY 4.0). JSON-LD `DataCatalog` com um `Dataset` por arquivo. Está no rodapé, no sitemap, em `fontes.html` e no `llms.txt`. |
+| `dados/vereadores.json` | Partido, presença (P/A/AJ/total), propostas por grupo, votos contra, links do site e da Câmara. |
+| `dados/proposituras.csv` | Propostas desde 2025 (sem os atos administrativos, que citam servidores pelo nome): data, tipo, número, grupo, vereadores autores, ementa com CPF/RG já trocados por [omitido], bairros, ruas e ficha oficial. |
+| `dados/votacoes.csv` | Projeto, ementa, data, turno, resultado, quem votou contra e o PDF. |
+| `dados/gastos-por-ano.json` | Totais por órgão, por tipo de quem recebeu e por área; as maiores empresas, só com CNPJ (pessoa física só nos totais). |
+| `dados/obras.json` | As obras de `obras.html`, com a situação como aparece no site e os links oficiais. Contratado sem CNPJ sai como "pessoa física". |
+| `dados/origem.json`, `dados/emendas.json`, `dados/promessas.json` | O que aparece em `origem.html`, nas emendas (Câmara e vereadores) e em `promessas.html`. |
+| `llms.txt` | Resumo do site para assistentes de IA (formato llmstxt.org), com links absolutos e a data da última atualização. |
+| `.well-known/security.txt` | RFC 9116: contato (Instagram), `Expires` um ano depois da data dos dados, `Policy` aponta para `sobre.html` ("Achou um dado pessoal ou uma falha?"). |
+| `site.webmanifest` | Manifesto do site (ícones de 192 e 512 px; o de 512 é ampliado do de 192 na geração, porque não há fonte vetorial). |
+
+CSV: UTF-8 com BOM, separador `;`, aspas quando preciso, CRLF (abre direto no Excel). Os arquivos `dados/busca.json` e `dados/empresas.json` continuam como eram (uso interno do site).
+
+O GitHub Pages só recebe a pasta `.well-known` porque o `upload-pages-artifact` roda com `include-hidden-files: true` em `atualizar.yml` (sem isso, ele deixa de fora tudo que começa com ponto). O `.nojekyll` continua sendo gerado.
 
 ### Data real de mudança (`data/processado/lastmod.json`)
 
@@ -193,7 +215,7 @@ O nome oficial de um bairro só vem de ato oficial. O OpenStreetMap e o Google M
 
 ## 9. Checagens antes de qualquer mudança
 
-- `npm run checar` roda todas as checagens (node:assert): regras, folha, respostas, campanha, TCE, contratos, emendas, promessas, semana, medição, obras, vistoria, bairros, sentinela, origem do dinheiro, Entenda (contrato do `entenda.json`) e SEO (lastmod, placeholders, trilha, títulos com " | Radar Saltense" e até 70 caracteres, 404) e as regras de comparação com o OpenStreetMap (`check/osm.mjs`, só com dados inventados) e as regras das verificações de manutenção (`check/manutencao.mjs`, só com dados inventados). O robô também as roda antes de começar.
+- `npm run checar` roda todas as checagens (node:assert): regras, folha, respostas, campanha, TCE, contratos, emendas, promessas, semana, medição, obras, vistoria, bairros, sentinela, origem do dinheiro, Entenda (contrato do `entenda.json`) e SEO (lastmod, placeholders, trilha, títulos com " | Radar Saltense" e até 70 caracteres, 404) e as regras de comparação com o OpenStreetMap (`check/osm.mjs`, só com dados inventados) e as regras das verificações de manutenção (`check/manutencao.mjs`, só com dados inventados) e os dados abertos (`check/dados-abertos.mjs`: CSV com BOM, ";" e aspas; `Expires` do security.txt; llms.txt; empresa só com CNPJ; CPF em CSV). O robô também as roda antes de começar.
 - **Processo de mudança:** um revisor separado lê o código; a vistoria e a conferência no navegador cobrem rolagem lateral (320 a 1440 px), âncoras e CPF; e só depois o dono dá o ok para publicar.
 
 ## 10. Acessos e chaves

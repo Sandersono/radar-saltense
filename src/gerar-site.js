@@ -24,6 +24,7 @@ import { indiceOficial, situacoesOficiais, avisosOficiais } from './regras/bairr
 import { hashConteudo, registrarLastmod, diaDe, serializarLastmod } from './regras/lastmod.js';
 import { ENDERECO, isoSP, definirPaginasAusentes } from './site/base.js';
 import { sitemapXml, robotsTxt } from './site/medicao.js';
+import { conjuntosDeDados, paginaDados, llmsTxt, securityTxt, manifesto, paginaExiste } from './site/dados-abertos.js';
 
 // Foto quadrada pequena (240 px, WebP), sem cortar a cabeça.
 async function recortarFoto(entrada, saida) {
@@ -185,6 +186,13 @@ export async function gerarSite(d, destino, semanasSalvas = null, { lastmod: arq
   }
   await tentar('Página Sobre', () => pagina('sobre.html', paginaSobre(d)));
   await tentar('Página 404', () => pagina('404.html', pagina404(d), { sitemap: false }));
+  // Dados abertos: dados.html e os arquivos de dist/dados/ (sem CPF e sem nome de pessoa física), refeitos a cada geração.
+  const conjuntos = (await tentar('Dados abertos', async () => {
+    const lista = conjuntosDeDados(d);
+    for (const c of lista) await writeFile(`${destino}/${c.arquivo}`, c.conteudo);
+    await pagina('dados.html', paginaDados(d, lista));
+    return lista;
+  })) || [];
 
   // Entenda e FAQ. Placeholder sem dado: a frase sai e o aviso vai para a manutenção.
   if (artigos.length) {
@@ -213,6 +221,15 @@ export async function gerarSite(d, destino, semanasSalvas = null, { lastmod: arq
   await writeFile(`${destino}/sitemap.xml`, sitemapXml(paginas, ENDERECO, dataPadrao, Object.fromEntries(Object.entries(lastmod).map(([c, x]) => [c, diaDe(x.quando)]))));
   await writeFile(`${destino}/robots.txt`, robotsTxt(ENDERECO));
   await writeFile(`${destino}/.nojekyll`, '');
+  // Arquivos para máquinas. O .well-known só é publicado com include-hidden-files no upload-pages-artifact (atualizar.yml).
+  await tentar('llms.txt', () => writeFile(`${destino}/llms.txt`, llmsTxt({ atualizadoEm: d.meta.atualizadoEm, conjuntos, existe: paginaExiste })));
+  await tentar('security.txt', async () => {
+    await mkdir(`${destino}/.well-known`, { recursive: true });
+    await writeFile(`${destino}/.well-known/security.txt`, securityTxt(d.meta.atualizadoEm));
+  });
+  await tentar('site.webmanifest', () => writeFile(`${destino}/site.webmanifest`, manifesto()));
+  // Não há fonte vetorial do ícone: o de 512 px é ampliado do de 192 px.
+  await tentar('icone-512.png', () => sharp('site/marca/icone-192.png').resize(512, 512, { kernel: 'lanczos3' }).png().toFile(`${destino}/marca/icone-512.png`));
   if (arquivoLastmod) await tentar('lastmod.json', () => writeFile(arquivoLastmod, serializarLastmod(lastmod)));
   return { manutencao };
 }

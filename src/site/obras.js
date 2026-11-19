@@ -22,7 +22,7 @@ export const idPromessa = (n) => `promessa-${slug(String(n))}`;
 // Título curto para listas (ex.: "Obras ligadas" na página de promessas).
 export const tituloCurto = (o, max = 80) => (o.titulo.length <= max ? o.titulo : `${o.titulo.slice(0, o.titulo.lastIndexOf(' ', max)).replace(/[\s,;.:\-–]+$/, '')}…`);
 
-function situacao(o) {
+export function situacao(o) {
   const tce = o.tce ? `${o.tce.situacao.replace(/\s+-\s+/, ', ').toLowerCase()}, segundo o TCE-SP` : '';
   // Registro do Obrasgov.br de onde veio a situação (o mais grave, quando a obra tem mais de um).
   const og = o.obrasgovSituacao;

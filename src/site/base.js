@@ -135,7 +135,7 @@ const SECOES = [
   ['gastos.html', 'Gastos'], ['origem.html', 'De onde vem o dinheiro'], ['impostometro.html', 'Impostos'], ['promessas.html', 'Promessas'],
   ['votacoes.html', 'Votações'], ['bairros.html', 'Bairros'], ['semana.html', 'Resumo da semana'],
 ];
-const SITE = [['entenda.html', 'Entenda'], ['perguntas-frequentes.html', 'Perguntas frequentes'], ['sobre.html', 'Sobre'], ['fontes.html', 'Fontes']];
+const SITE = [['entenda.html', 'Entenda'], ['perguntas-frequentes.html', 'Perguntas frequentes'], ['sobre.html', 'Sobre'], ['fontes.html', 'Fontes'], ['dados.html', 'Dados abertos']];
 let ausentes = new Set();
 export const definirPaginasAusentes = (lista = []) => { ausentes = new Set(lista); };
 export const paginaAusente = (caminho) => ausentes.has(caminho.split('#')[0]);
@@ -180,6 +180,7 @@ ${robots ? `<meta name="robots" content="${esc(robots)}">\n` : ''}${canonico ? `
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="192x192" href="${prefixo}marca/icone-192.png">
 <link rel="apple-touch-icon" href="${prefixo}marca/icone-180.png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="${prefixo}fontes/inter-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="${prefixo}fontes/nunito-800.woff2" as="font" type="font/woff2" crossorigin>
 <meta property="og:type" content="${artigo ? 'article' : 'website'}">
