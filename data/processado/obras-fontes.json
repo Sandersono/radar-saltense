@@ -6602,14 +6602,14 @@
       }
     },
     "completoEm": "2026-11-17T14:23:01.093Z",
-    "atualizadoAte": "2026-11-19T06:08:52.210Z",
-    "coletadoEm": "2026-11-19T06:08:52.210Z",
+    "atualizadoAte": "2026-11-20T06:08:21.579Z",
+    "coletadoEm": "2026-11-20T06:08:21.579Z",
     "comprasPendentes": 0,
     "incompleto": false,
     "erro": null
   },
   "obrasgov": {
-    "dataAtualizacao": "2026-11-18T00:00:00",
+    "dataAtualizacao": "2026-11-19T00:00:00",
     "projetos": {
       "102259.35-04": {
         "id": "102259.35-04",
@@ -7906,7 +7906,7 @@
         "execucao": null
       }
     },
-    "coletadoEm": "2026-11-19T06:09:42.811Z",
+    "coletadoEm": "2026-11-20T06:09:07.313Z",
     "falhas": 0,
     "esgotado": false,
     "adiados": 0,
@@ -7927,6 +7927,6 @@
         "paralisada": true
       }
     ],
-    "coletadoEm": "2026-11-19T06:09:47.508Z"
+    "coletadoEm": "2026-11-20T06:09:12.196Z"
   }
 }
