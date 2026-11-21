@@ -888,7 +888,7 @@
         "objeto": "Contratação de pessoa jurídica especializada, com exclusividade para ME/EPP, para execução de obras e serviços de melhorias em unidades escolares municipais, com o fornecimento de mão de obra, materiais e equipamentos necessários para execução do objeto, de acordo com anexos integram o Edital, a cargo da Secretaria de Educação.",
         "modalidadeId": 4,
         "situacao": "Divulgada no PNCP",
-        "homologado": 0,
+        "homologado": 110300,
         "estimado": 121000,
         "encerramento": "2026-11-16",
         "publicacao": "2026-10-28",
@@ -6602,14 +6602,14 @@
       }
     },
     "completoEm": "2026-11-17T14:23:01.093Z",
-    "atualizadoAte": "2026-11-20T06:08:21.579Z",
-    "coletadoEm": "2026-11-20T06:08:21.579Z",
+    "atualizadoAte": "2026-11-21T06:06:37.679Z",
+    "coletadoEm": "2026-11-21T06:06:37.679Z",
     "comprasPendentes": 0,
     "incompleto": false,
     "erro": null
   },
   "obrasgov": {
-    "dataAtualizacao": "2026-11-19T00:00:00",
+    "dataAtualizacao": "2026-11-20T00:00:00",
     "projetos": {
       "102259.35-04": {
         "id": "102259.35-04",
@@ -7906,7 +7906,7 @@
         "execucao": null
       }
     },
-    "coletadoEm": "2026-11-20T06:09:07.313Z",
+    "coletadoEm": "2026-11-21T06:07:12.190Z",
     "falhas": 0,
     "esgotado": false,
     "adiados": 0,
@@ -7927,6 +7927,6 @@
         "paralisada": true
       }
     ],
-    "coletadoEm": "2026-11-20T06:09:12.196Z"
+    "coletadoEm": "2026-11-21T06:07:17.013Z"
   }
 }
