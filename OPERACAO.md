@@ -37,7 +37,7 @@ Regra geral: fonte secundária que falha **não trava** o robô. O site mantém 
 | MSC do Tesouro (origem do dinheiro, `origem.html`) | 3 min, com nova tentativa | Mantém o último dado salvo em `data/processado/origem.json` e avisa. Ano corrente: a última matriz mensal, uma vez por dia. Ano fechado: continua com a última matriz mensal salva (a mais recente coletada naquele ano) enquanto a de encerramento (MSCE, mês 12) não sai; o robô tenta a MSCE todo dia e troca sozinho quando ela aparece, e daí em diante não consulta mais aquele ano. Cada ano é consultado à parte: erro em um não impede os outros |
 | Folha da Câmara | — | Mantém o último dado |
 | Respostas a requerimentos (até 150 fichas por dia) | Tempo reservado | Continua no dia seguinte |
-| IEGM e Painel de Obras do TCE | 3 min cada | Mantém o último dado |
+| IEGM e Painel de Obras do TCE | 3 min cada | Mantém o último dado. Se o TCE desviar para a página "indisponibilidade temporária" (desde 20/11/2026 só para acessos de fora do Brasil, como o GitHub), o aviso diz isso |
 | Compras no PNCP | 6 min | Mantém os anos salvos |
 | Obras: PNCP | 6 min | Releitura em partes; nunca apaga o que já estava salvo |
 | Obras: Obrasgov.br | 5 min, até 90 consultas por dia | Mantém o que já estava salvo |

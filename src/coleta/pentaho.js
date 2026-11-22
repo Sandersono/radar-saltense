@@ -19,6 +19,12 @@ async function pedir(url, cookie, limite) {
 async function sessao(painel, renovar, limite) {
   if (!renovar && sessoes.has(painel)) return sessoes.get(painel);
   const r = await pedir(painel, undefined, limite);
+  // O TCE desvia o painel para uma página de aviso quando ele está fora do ar para quem consulta
+  // (desde 20/11/2026 só para acessos de fora do Brasil, como os servidores do GitHub).
+  if (r.redirected && /indisponibilidade/i.test(r.url)) {
+    await r.arrayBuffer();
+    throw new Error(`o TCE informa que os painéis estão temporariamente indisponíveis (aviso em ${r.url})`);
+  }
   if (!r.ok) throw new Error(`HTTP ${r.status} ao abrir o painel ${painel}`);
   const cookie = r.headers.getSetCookie().map((c) => c.split(';')[0]).join('; ');
   await r.arrayBuffer();
