@@ -440,8 +440,8 @@
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "entenda/dinheiro-livre-e-carimbado.html": {
-  "hash": "d40a4a201c3e4ec8",
-  "quando": "2026-11-17T21:43:00-03:00",
+  "hash": "392b3eff418a4dd5",
+  "quando": "2026-11-24T03:23:48-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "entenda/emenda-impositiva-e-emenda-parlamentar.html": {
@@ -480,23 +480,23 @@
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "fontes.html": {
-  "hash": "e9a1889ace67469a",
-  "quando": "2026-11-23T14:49:16-03:00",
+  "hash": "fea7a0e532443c4a",
+  "quando": "2026-11-24T03:23:48-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "gastos.html": {
-  "hash": "643ca614445bea61",
-  "quando": "2026-11-23T14:49:16-03:00",
+  "hash": "2219d2474019af14",
+  "quando": "2026-11-24T03:23:48-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "impostometro.html": {
-  "hash": "e0b34b4447a1b82e",
-  "quando": "2026-11-23T14:49:16-03:00",
+  "hash": "70192a9b6c9b73aa",
+  "quando": "2026-11-24T03:23:48-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "index.html": {
-  "hash": "d6aed44fe39cf32f",
-  "quando": "2026-11-23T03:11:50-03:00",
+  "hash": "6532aec4b9e73c10",
+  "quando": "2026-11-24T03:23:48-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "obras.html": {
@@ -505,8 +505,8 @@
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "origem.html": {
-  "hash": "b55f141e985bc53d",
-  "quando": "2026-11-23T14:49:16-03:00",
+  "hash": "eb8f73a339e0f9ca",
+  "quando": "2026-11-24T03:23:48-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "perguntas-frequentes.html": {
@@ -525,8 +525,8 @@
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "semana.html": {
-  "hash": "a0f55050a230ae14",
-  "quando": "2026-11-23T03:11:50-03:00",
+  "hash": "e474d04ba82a4a13",
+  "quando": "2026-11-24T03:23:48-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "semana/2024-12-30.html": {
@@ -1004,6 +1004,11 @@
   "quando": "2026-11-22T23:59:59-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
+ "semana/2026-11-23.html": {
+  "hash": "8ec17c98eb1af527",
+  "quando": "2026-11-24T03:23:48-03:00",
+  "criado": "2026-11-24T03:23:48-03:00"
+ },
  "sobre.html": {
   "hash": "e41f45ff1cf1e3cb",
   "quando": "2026-11-18T07:44:24-03:00",
@@ -1025,8 +1030,8 @@
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "vereador/clayton-aparecido-dos-santos.html": {
-  "hash": "2dea98af115b7ebe",
-  "quando": "2026-11-19T03:14:31-03:00",
+  "hash": "83696715c6812262",
+  "quando": "2026-11-24T03:23:48-03:00",
   "criado": "2026-11-17T21:43:00-03:00"
  },
  "vereador/edemilson-pereira-dos-santos.html": {
