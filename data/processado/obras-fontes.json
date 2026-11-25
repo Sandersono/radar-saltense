@@ -5463,6 +5463,51 @@
         "valor": 165000,
         "assinatura": "2026-10-19",
         "fimVigencia": "2027-04-18"
+      },
+      "46634507000106-2-001067/2026": {
+        "id": "46634507000106-2-001067/2026",
+        "cnpj": "46634507000106",
+        "compra": "46634507000106-1-000753/2026",
+        "objeto": "Contratação de empresa especializada na troca da válvula reguladora de pressão e troca do diagrama da roda dianteira, destinado ao veículo Ford Cargo 2422E, ano 2009, km 134.102, placa DKI-9705, a cargo da Secretaria de Obras e Serviços Públicos.",
+        "categoriaId": 2,
+        "tipo": "Contrato (termo inicial)",
+        "numero": "7565",
+        "ano": 2026,
+        "fornecedorCnpj": "41430871000122",
+        "empresa": "BRUNO GUSTAVO DE OLIVEIRA OFIINA",
+        "valor": 2200,
+        "assinatura": "2026-11-13",
+        "fimVigencia": "2026-11-24"
+      },
+      "46634507000106-2-001068/2026": {
+        "id": "46634507000106-2-001068/2026",
+        "cnpj": "46634507000106",
+        "compra": "46634507000106-1-000753/2026",
+        "objeto": "Contratação de empresa especializada na troca da válvula reguladora de pressão e troca do diagrama da roda dianteira, destinado ao veículo Ford Cargo 2422E, ano 2009, km 134.102, placa DKI-9705, a cargo da Secretaria de Obras e Serviços Públicos.",
+        "categoriaId": 2,
+        "tipo": "Contrato (termo inicial)",
+        "numero": "7564",
+        "ano": 2026,
+        "fornecedorCnpj": "41430871000122",
+        "empresa": "BRUNO GUSTAVO DE OLIVEIRA OFIINA",
+        "valor": 3185,
+        "assinatura": "2026-11-13",
+        "fimVigencia": "2026-11-24"
+      },
+      "46634507000106-2-001082/2026": {
+        "id": "46634507000106-2-001082/2026",
+        "cnpj": "46634507000106",
+        "compra": "46634507000106-1-000770/2026",
+        "objeto": "Contratação de empresa especializada para o fornecimento de 2.200 (dois mil e duzentos) sacos de massa asfáltica para aplicação a frio, com peso unitário de 25 kg, destinados ao atendimento das necessidades da Secretaria de Obras e Serviços Públicos.",
+        "categoriaId": 2,
+        "tipo": "Contrato (termo inicial)",
+        "numero": "7607",
+        "ano": 2026,
+        "fornecedorCnpj": "60087399000111",
+        "empresa": "STONE ASFALTO RÁPIDO LTDA",
+        "valor": 49302,
+        "assinatura": "2026-11-19",
+        "fimVigencia": "2026-11-27"
       }
     },
     "compras": {
@@ -6599,17 +6644,31 @@
           "codigo": 1,
           "nome": "Lei 14.133/2021, Art. 28, I"
         }
+      },
+      "46634507000106-1-000753/2026": {
+        "modalidadeId": 8,
+        "amparo": {
+          "codigo": 19,
+          "nome": "Lei 14.133/2021, Art. 75, II"
+        }
+      },
+      "46634507000106-1-000770/2026": {
+        "modalidadeId": 8,
+        "amparo": {
+          "codigo": 19,
+          "nome": "Lei 14.133/2021, Art. 75, II"
+        }
       }
     },
     "completoEm": "2026-11-17T14:23:01.093Z",
-    "atualizadoAte": "2026-11-24T06:18:41.565Z",
-    "coletadoEm": "2026-11-24T06:18:41.565Z",
+    "atualizadoAte": "2026-11-25T06:14:56.859Z",
+    "coletadoEm": "2026-11-25T06:14:56.859Z",
     "comprasPendentes": 0,
     "incompleto": false,
     "erro": null
   },
   "obrasgov": {
-    "dataAtualizacao": "2026-11-23T00:00:00",
+    "dataAtualizacao": "2026-11-24T00:00:00",
     "projetos": {
       "102259.35-04": {
         "id": "102259.35-04",
@@ -6627,7 +6686,7 @@
         ],
         "previsto": 497000,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "103811.35-77": {
@@ -6646,7 +6705,7 @@
         ],
         "previsto": 984659,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "106502.35-99": {
@@ -6665,7 +6724,7 @@
         ],
         "previsto": 5000000,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "106527.35-29": {
@@ -6684,7 +6743,7 @@
         ],
         "previsto": 5000000,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "110083.35-09": {
@@ -6703,7 +6762,7 @@
         ],
         "previsto": 2500000,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": {
           "pct": 0,
           "em": "2026-10-21"
@@ -6725,7 +6784,7 @@
         ],
         "previsto": 7807.75,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "116548.35-66": {
@@ -6744,7 +6803,7 @@
         ],
         "previsto": 965000,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": {
           "pct": 0,
           "em": "2026-03-05"
@@ -6766,7 +6825,7 @@
         ],
         "previsto": 1644062.26,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "128305.35-05": {
@@ -6785,7 +6844,7 @@
         ],
         "previsto": 88750,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "129295.35-03": {
@@ -6804,7 +6863,7 @@
         ],
         "previsto": 603619,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "129352.35-19": {
@@ -6823,7 +6882,7 @@
         ],
         "previsto": 4771.77,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "129842.35-89": {
@@ -6842,7 +6901,7 @@
         ],
         "previsto": 2189280.5,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "132118.35-13": {
@@ -6861,7 +6920,7 @@
         ],
         "previsto": 1896068.73,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "133833.35-18": {
@@ -6880,7 +6939,7 @@
         ],
         "previsto": 81150.35,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "136556.35-90": {
@@ -6899,7 +6958,7 @@
         ],
         "previsto": 14542.22,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "137463.35-10": {
@@ -6918,7 +6977,7 @@
         ],
         "previsto": 23519.34,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "153184.35-52": {
@@ -6937,7 +6996,7 @@
         ],
         "previsto": 47371.92,
         "sistema": "SISMOB",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "153185.35-08": {
@@ -6956,7 +7015,7 @@
         ],
         "previsto": 63543.5,
         "sistema": "SISMOB",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "153186.35-43": {
@@ -6975,7 +7034,7 @@
         ],
         "previsto": 84173.02,
         "sistema": "SISMOB",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "162926.35-34": {
@@ -6994,7 +7053,7 @@
         ],
         "previsto": 349550.26,
         "sistema": "SISMOB",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "162927.35-80": {
@@ -7013,7 +7072,7 @@
         ],
         "previsto": 149986.38,
         "sistema": "SISMOB",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "162928.35-25": {
@@ -7032,7 +7091,7 @@
         ],
         "previsto": 199993.35,
         "sistema": "SISMOB",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "162929.35-70": {
@@ -7051,7 +7110,7 @@
         ],
         "previsto": 245486.33,
         "sistema": "SISMOB",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "164021.35-88": {
@@ -7070,7 +7129,7 @@
         ],
         "previsto": 47432.7,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "164280.35-95": {
@@ -7089,7 +7148,7 @@
         ],
         "previsto": 9738.46,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "165284.35-45": {
@@ -7106,7 +7165,7 @@
         ],
         "previsto": 1068674.01,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "2033.35-93": {
@@ -7123,7 +7182,7 @@
         ],
         "previsto": 12764313.95,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "23698.35-02": {
@@ -7140,7 +7199,7 @@
         ],
         "previsto": 2541683.75,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": {
           "pct": 100,
           "em": "2026-01-28"
@@ -7162,7 +7221,7 @@
         ],
         "previsto": 250000,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "31795.35-33": {
@@ -7181,7 +7240,7 @@
         ],
         "previsto": 250000,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "32393.35-17": {
@@ -7200,7 +7259,7 @@
         ],
         "previsto": 9122322.34,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "328.35-98": {
@@ -7217,7 +7276,7 @@
         ],
         "previsto": 8230000,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "35028.43-47": {
@@ -7236,7 +7295,7 @@
         ],
         "previsto": 29356939.21,
         "sistema": "SIMEC-MCID",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": {
           "pct": 100,
           "em": "2026-04-30"
@@ -7258,7 +7317,7 @@
         ],
         "previsto": 5795840.6,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": {
           "pct": 11.92,
           "em": "2026-10-21"
@@ -7280,7 +7339,7 @@
         ],
         "previsto": 11563306.23,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "42457.35-41": {
@@ -7297,7 +7356,7 @@
         ],
         "previsto": 94905,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "42553.35-04": {
@@ -7314,7 +7373,7 @@
         ],
         "previsto": 2406942.58,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": {
           "pct": 100,
           "em": "2026-05-14"
@@ -7336,7 +7395,7 @@
         ],
         "previsto": 7080576.29,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "49933.35-36": {
@@ -7355,7 +7414,7 @@
         ],
         "previsto": 5291345,
         "sistema": "SISMOB",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": {
           "pct": 30,
           "em": "2026-06-02"
@@ -7377,7 +7436,7 @@
         ],
         "previsto": 5291345,
         "sistema": "SISMOB",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": {
           "pct": 30,
           "em": "2026-06-02"
@@ -7399,7 +7458,7 @@
         ],
         "previsto": 6018.25,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "52865.35-89": {
@@ -7418,7 +7477,7 @@
         ],
         "previsto": 470584.84,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "5893.35-55": {
@@ -7435,7 +7494,7 @@
         ],
         "previsto": 1451574.11,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "59464.35-03": {
@@ -7454,7 +7513,7 @@
         ],
         "previsto": 290555.31,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "59644.35-25": {
@@ -7473,7 +7532,7 @@
         ],
         "previsto": 1573556.8,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "59650.35-77": {
@@ -7492,7 +7551,7 @@
         ],
         "previsto": 505055,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "59669.35-21": {
@@ -7511,7 +7570,7 @@
         ],
         "previsto": 597150,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "59731.35-77": {
@@ -7530,7 +7589,7 @@
         ],
         "previsto": 1028640,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "59834.35-04": {
@@ -7549,7 +7608,7 @@
         ],
         "previsto": 209894.04,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "60654.35-40": {
@@ -7568,7 +7627,7 @@
         ],
         "previsto": 1010105,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "60880.35-63": {
@@ -7587,7 +7646,7 @@
         ],
         "previsto": 1401010.83,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "63237.35-30": {
@@ -7606,7 +7665,7 @@
         ],
         "previsto": 149993,
         "sistema": "SISMOB",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": {
           "pct": 100,
           "em": "2026-01-16"
@@ -7628,7 +7687,7 @@
         ],
         "previsto": 16913.85,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "63896.35-06": {
@@ -7647,7 +7706,7 @@
         ],
         "previsto": 17916.19,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "7142.35-33": {
@@ -7666,7 +7725,7 @@
         ],
         "previsto": 485964,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": {
           "pct": 100,
           "em": "2026-10-21"
@@ -7688,7 +7747,7 @@
         ],
         "previsto": 311293.59,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "7149.35-84": {
@@ -7707,7 +7766,7 @@
         ],
         "previsto": 643557.57,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": {
           "pct": 100,
           "em": "2026-10-21"
@@ -7729,7 +7788,7 @@
         ],
         "previsto": 482635,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "78258.35-16": {
@@ -7748,7 +7807,7 @@
         ],
         "previsto": 0.01,
         "sistema": "SIMEC-FNDE",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": {
           "pct": 100,
           "em": "2026-01-22"
@@ -7770,7 +7829,7 @@
         ],
         "previsto": 1010105,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "90635.35-42": {
@@ -7787,7 +7846,7 @@
         ],
         "previsto": 341897.11,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "96400.35-27": {
@@ -7806,7 +7865,7 @@
         ],
         "previsto": 253258.22,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "96879.35-58": {
@@ -7825,7 +7884,7 @@
         ],
         "previsto": 882299.99,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "97133.35-42": {
@@ -7844,7 +7903,7 @@
         ],
         "previsto": 7976.04,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "98936.35-76": {
@@ -7861,7 +7920,7 @@
         ],
         "previsto": 275731.49,
         "sistema": "CIPI",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": {
           "pct": 20,
           "em": "2026-06-23"
@@ -7883,7 +7942,7 @@
         ],
         "previsto": 3700000,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       },
       "99086.35-18": {
@@ -7902,11 +7961,11 @@
         ],
         "previsto": 3700000,
         "sistema": "Transferegov.br",
-        "conferidoEm": "2026-11-17T14:14:35.540Z",
+        "conferidoEm": "2026-11-25T06:16:00.033Z",
         "execucao": null
       }
     },
-    "coletadoEm": "2026-11-24T06:19:13.164Z",
+    "coletadoEm": "2026-11-25T06:16:00.033Z",
     "falhas": 0,
     "esgotado": false,
     "adiados": 0,
@@ -7927,6 +7986,6 @@
         "paralisada": true
       }
     ],
-    "coletadoEm": "2026-11-24T06:19:17.906Z"
+    "coletadoEm": "2026-11-25T06:18:44.399Z"
   }
 }
