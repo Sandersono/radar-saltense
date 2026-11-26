@@ -5508,6 +5508,21 @@
         "valor": 49302,
         "assinatura": "2026-11-19",
         "fimVigencia": "2026-11-27"
+      },
+      "46634507000106-2-001093/2026": {
+        "id": "46634507000106-2-001093/2026",
+        "cnpj": "46634507000106",
+        "compra": "46634507000106-1-000780/2026",
+        "objeto": "Contratação de empresa especializada para o fornecimento de 02 (duas) escadas extensíveis em fibra de vidro com isolamento elétrico, a cargo da Secretaria de Obras e Serviços Públicos.",
+        "categoriaId": 2,
+        "tipo": "Contrato (termo inicial)",
+        "numero": "7652",
+        "ano": 2026,
+        "fornecedorCnpj": "60289432000196",
+        "empresa": "DONADIAS DISTRIBUIDORA DE PRODUTOS",
+        "valor": 1715.1,
+        "assinatura": "2026-11-23",
+        "fimVigencia": "2026-12-01"
       }
     },
     "compras": {
@@ -6658,11 +6673,18 @@
           "codigo": 19,
           "nome": "Lei 14.133/2021, Art. 75, II"
         }
+      },
+      "46634507000106-1-000780/2026": {
+        "modalidadeId": 8,
+        "amparo": {
+          "codigo": 19,
+          "nome": "Lei 14.133/2021, Art. 75, II"
+        }
       }
     },
     "completoEm": "2026-11-17T14:23:01.093Z",
-    "atualizadoAte": "2026-11-25T17:10:08.477Z",
-    "coletadoEm": "2026-11-25T17:10:08.477Z",
+    "atualizadoAte": "2026-11-26T06:13:10.593Z",
+    "coletadoEm": "2026-11-26T06:13:10.593Z",
     "comprasPendentes": 0,
     "incompleto": false,
     "erro": null
@@ -7965,7 +7987,7 @@
         "execucao": null
       }
     },
-    "coletadoEm": "2026-11-25T23:05:09.890Z",
+    "coletadoEm": "2026-11-26T06:13:55.241Z",
     "falhas": 0,
     "esgotado": false,
     "adiados": 0,
@@ -7986,6 +8008,6 @@
         "paralisada": true
       }
     ],
-    "coletadoEm": "2026-11-25T23:05:14.439Z"
+    "coletadoEm": "2026-11-26T06:14:00.085Z"
   }
 }
