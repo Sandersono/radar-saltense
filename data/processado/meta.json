@@ -1,7 +1,7 @@
 {
-  "atualizadoEm": "2026-11-26T06:18:58.273Z",
-  "duracaoPncpMs": 360001,
-  "duracaoObrasMs": 55808,
+  "atualizadoEm": "2026-11-27T06:19:07.609Z",
+  "duracaoPncpMs": 361785,
+  "duracaoObrasMs": 62434,
   "totalProposituras": 6296,
   "semLocal": 950,
   "receitasMensais": {
@@ -25,7 +25,8 @@
     "2026-06": 17794801.27,
     "2026-07": 18731722.17,
     "2026-08": 17584609.61,
-    "2026-09": 19250522.57
+    "2026-09": 19250522.57,
+    "2026-10": 18540591.89
   },
   "despesasMensais": {
     "2025-01": 35962599.08,
@@ -48,7 +49,8 @@
     "2026-06": 80506512.85,
     "2026-07": 70099711.62,
     "2026-08": 75428240.7,
-    "2026-09": 72703416.81
+    "2026-09": 72703416.81,
+    "2026-10": 71530887.01
   },
   "folhaMensal": {
     "2025-01": 383836.58,
@@ -71,8 +73,8 @@
     "2026-10": 465555.62
   },
   "tceColetadoEm": {
-    "receitas": "2026-11-26T06:18:58.273Z",
-    "despesas": "2026-11-26T06:18:58.273Z"
+    "receitas": "2026-11-27T06:19:07.609Z",
+    "despesas": "2026-11-27T06:19:07.609Z"
   },
   "marcosAnteriores": {
     "receitas": "2026-09",
@@ -87,5 +89,14 @@
       "03802330000199|2023|Contratacao de pessoa juridica para execucao de servicos de construcao remanesce": "Em execução - no prazo"
     }
   },
-  "novidadesRecentes": []
+  "novidadesRecentes": [
+    {
+      "data": "2026-11-27",
+      "texto": "Saiu um novo mês de receitas da Prefeitura no TCE-SP: 10/2026."
+    },
+    {
+      "data": "2026-11-27",
+      "texto": "Saiu um novo mês de gastos da Prefeitura no TCE-SP: 10/2026."
+    }
+  ]
 }

@@ -976,6 +976,22 @@
           "codigo": 2,
           "nome": "Lei 14.133/2021, Art. 28, II "
         }
+      },
+      "11065186000183-1-000163/2026": {
+        "id": "11065186000183-1-000163/2026",
+        "cnpj": "11065186000183",
+        "processo": "2026/0001602",
+        "objeto": "ETA BURU- FASE 1 - Contratação semi integrada, para: (i) elaboração de projeto executivo de engenharia; (ii) fornecimento de materiais e equipamentos; e (iii) execução das obras de implantação de uma Estação de Tratamento de Água ETA BURU FASE 2- Fornecimento e instalação de módulos de ultrafiltração por membranas para a ETA BURU capacidade total de 120 L/s), incluindo a realização do comissionamento completo do sistema e a prestação de operação assistida por 12 meses",
+        "modalidadeId": 4,
+        "situacao": "Divulgada no PNCP",
+        "homologado": 0,
+        "estimado": 30195815.97,
+        "encerramento": "2027-01-19",
+        "publicacao": "2026-11-26",
+        "amparo": {
+          "codigo": 2,
+          "nome": "Lei 14.133/2021, Art. 28, II "
+        }
       }
     },
     "contratos": {
@@ -6683,8 +6699,8 @@
       }
     },
     "completoEm": "2026-11-17T14:23:01.093Z",
-    "atualizadoAte": "2026-11-26T06:13:10.593Z",
-    "coletadoEm": "2026-11-26T06:13:10.593Z",
+    "atualizadoAte": "2026-11-27T06:13:10.151Z",
+    "coletadoEm": "2026-11-27T06:13:10.151Z",
     "comprasPendentes": 0,
     "incompleto": false,
     "erro": null
@@ -7987,7 +8003,7 @@
         "execucao": null
       }
     },
-    "coletadoEm": "2026-11-26T06:13:55.241Z",
+    "coletadoEm": "2026-11-27T06:14:02.311Z",
     "falhas": 0,
     "esgotado": false,
     "adiados": 0,
@@ -8008,6 +8024,6 @@
         "paralisada": true
       }
     ],
-    "coletadoEm": "2026-11-26T06:14:00.085Z"
+    "coletadoEm": "2026-11-27T06:14:07.119Z"
   }
 }
