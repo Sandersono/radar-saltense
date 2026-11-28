@@ -807,9 +807,9 @@
         "processo": "3459/2026",
         "objeto": "Contratação de empresa ou consórcio especializado para a elaboração dos projetos básico e executivo, fornecimento de materiais e equipamentos, bem como a execução das obras e instalações que compõem a fase 1 da Estação de Tratamento de Água – ETA Jundiaí, com capacidade nominal de produção de 150Ls, destinado ao abastecimento público da região sudeste do município de Salto/SP, de acordo com os anexos que integram o Edital, a cargo da Secretaria de Desenvolvimento Urbano.",
         "modalidadeId": 4,
-        "situacao": "Divulgada no PNCP",
+        "situacao": "Revogada",
         "homologado": 0,
-        "estimado": 9969068.54,
+        "estimado": 0,
         "encerramento": "2026-12-01",
         "publicacao": "2026-08-28",
         "amparo": {
@@ -6699,8 +6699,8 @@
       }
     },
     "completoEm": "2026-11-17T14:23:01.093Z",
-    "atualizadoAte": "2026-11-27T06:13:10.151Z",
-    "coletadoEm": "2026-11-27T06:13:10.151Z",
+    "atualizadoAte": "2026-11-28T06:12:47.158Z",
+    "coletadoEm": "2026-11-28T06:12:47.158Z",
     "comprasPendentes": 0,
     "incompleto": false,
     "erro": null
@@ -8003,7 +8003,7 @@
         "execucao": null
       }
     },
-    "coletadoEm": "2026-11-27T06:14:02.311Z",
+    "coletadoEm": "2026-11-28T06:14:07.965Z",
     "falhas": 0,
     "esgotado": false,
     "adiados": 0,
@@ -8024,6 +8024,6 @@
         "paralisada": true
       }
     ],
-    "coletadoEm": "2026-11-27T06:14:07.119Z"
+    "coletadoEm": "2026-11-28T06:14:12.911Z"
   }
 }
